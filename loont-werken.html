@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wat verandert er als ik meer ga verdienen? — Solidari</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    :root {
+      --wit:#FAFAF7;--wit-warm:#F5F2EC;
+      --amber:#E8A020;--amber-licht:#FDF3E0;--amber-diep:#C47F10;
+      --groen:#2D5A3D;--groen-licht:#EBF3EE;
+      --tekst:#1A1A18;--tekst-zacht:#5C5C58;--tekst-licht:#9C9C98;
+      --rand:#E8E5DE;--rood:#DC2626;--rood-licht:#FEF2F2;
+      --blauw:#2563EB;--blauw-licht:#EFF6FF;
+      --chat-bg:#EFECE6;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{height:100%;}
+    body{background:var(--chat-bg);color:var(--tekst);font-family:'Source Sans 3',sans-serif;font-weight:400;display:flex;flex-direction:column;}
+
+    .taal-btn{background:none;border:1px solid var(--rand);border-radius:4px;padding:3px 8px;font-size:0.75rem;cursor:pointer;color:var(--tekst-zacht);font-family:'Source Sans 3',sans-serif;transition:all 0.2s;}
+    .taal-btn:hover,.taal-btn.actief{background:var(--amber);border-color:var(--amber);color:white;}
+
+    /* VOORTGANG */
+    .voortgang-strip{height:3px;background:var(--rand);flex-shrink:0;}
+    .voortgang-vul{height:100%;background:var(--amber);transition:width 0.4s ease;}
+
+    /* CHAT */
+    .chat-wrap{flex:1;display:flex;flex-direction:column;max-width:680px;margin:0 auto;width:100%;padding:0 1rem;min-height:0;padding-top:64px;}
+    .berichten{flex:1;overflow-y:auto;padding:1.2rem 0 0.5rem;display:flex;flex-direction:column;gap:0.6rem;scroll-behavior:smooth;}
+    .berichten::-webkit-scrollbar{width:4px;}
+    .berichten::-webkit-scrollbar-thumb{background:var(--rand);border-radius:4px;}
+
+    /* BERICHTEN */
+    .bericht-sol{display:flex;align-items:flex-end;gap:8px;max-width:88%;align-self:flex-start;animation:inSchuiven 0.25s ease both;}
+    .sol-avatar{width:32px;height:32px;background:var(--groen);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;}
+    .bel-sol{background:white;border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:0.92rem;line-height:1.55;color:var(--tekst);box-shadow:0 1px 2px rgba(0,0,0,0.06);}
+    .bel-sol.reactie{background:var(--groen-licht);border:1px solid rgba(45,90,61,0.12);font-size:0.85rem;color:var(--tekst-zacht);}
+    .bel-sol.info{background:var(--blauw-licht);border:1px solid rgba(37,99,235,0.15);font-size:0.82rem;color:var(--blauw);}
+    .bel-sol.waarschuwing{background:var(--rood-licht);border:1px solid rgba(220,38,38,0.15);font-size:0.82rem;color:var(--rood);}
+    .bericht-user{align-self:flex-end;max-width:78%;animation:inSchuiven 0.2s ease both;}
+    .bel-user{background:var(--groen);border-radius:18px 18px 4px 18px;padding:10px 14px;font-size:0.92rem;color:white;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,0.1);}
+
+    /* TYPING */
+    .typing{display:flex;align-items:flex-end;gap:8px;align-self:flex-start;}
+    .typing-dots{background:white;border-radius:18px;padding:12px 16px;display:flex;gap:4px;align-items:center;}
+    .typing-dots span{width:6px;height:6px;background:var(--tekst-licht);border-radius:50%;animation:tikken 1.2s infinite;}
+    .typing-dots span:nth-child(2){animation-delay:0.2s;}
+    .typing-dots span:nth-child(3){animation-delay:0.4s;}
+    @keyframes tikken{0%,60%,100%{transform:translateY(0);opacity:0.4;}30%{transform:translateY(-5px);opacity:1;}}
+    @keyframes inSchuiven{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+    /* INVOER */
+    .invoer-zone{padding:0.8rem 0 1rem;flex-shrink:0;}
+    .keuze-rij{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+    .keuze-btn{background:white;border:1.5px solid var(--rand);border-radius:20px;padding:10px 18px;font-size:0.9rem;font-weight:500;cursor:pointer;color:var(--tekst);font-family:'Source Sans 3',sans-serif;transition:all 0.18s;display:flex;align-items:center;gap:6px;min-height:44px;}
+    .keuze-btn:hover{border-color:var(--groen);background:var(--groen-licht);color:var(--groen);}
+
+    /* GETAL INVOER */
+    .bedrag-rij{display:flex;gap:8px;align-items:stretch;}
+    .bedrag-wrap{flex:1;display:flex;align-items:center;background:white;border:2px solid var(--rand);border-radius:14px;overflow:hidden;transition:border-color 0.2s;}
+    .bedrag-wrap:focus-within{border-color:var(--amber);}
+    .bedrag-prefix{padding:0 14px;font-size:1.2rem;font-weight:600;color:var(--tekst-licht);background:var(--wit-warm);align-self:stretch;display:flex;align-items:center;border-right:1px solid var(--rand);white-space:nowrap;}
+    .bedrag-input{flex:1;padding:14px 12px;font-size:1.3rem;border:none;background:transparent;color:var(--tekst);outline:none;font-family:'Source Sans 3',sans-serif;font-weight:500;min-width:0;width:100%;}
+    .bedrag-input::placeholder{color:var(--tekst-licht);font-weight:300;}
+    /* font-size 16px op mobiel voorkomt iOS-zoom */
+    @media(max-width:480px){.bedrag-input{font-size:1rem;padding:14px 10px;}}
+    .stuur-btn{padding:0 20px;background:var(--groen);border:none;border-radius:14px;cursor:pointer;color:white;font-size:1.2rem;transition:all 0.18s;display:flex;align-items:center;min-height:54px;min-width:54px;justify-content:center;}
+    .stuur-btn:hover{background:#234830;}
+    .overslaan-link{text-align:center;font-size:0.78rem;color:var(--tekst-licht);margin-top:6px;cursor:pointer;background:none;border:none;font-family:'Source Sans 3',sans-serif;width:100%;display:block;padding:6px 0;transition:color 0.2s;}
+    .overslaan-link:hover{color:var(--tekst-zacht);}
+    .invoer-hint{font-size:0.75rem;color:var(--tekst-licht);margin-top:5px;line-height:1.4;}
+
+    /* RESULTAATKAART */
+    .res-kaart{background:white;border-radius:18px 18px 18px 4px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);width:100%;}
+
+    /* Financieel blok */
+    .res-fin-header{background:var(--groen);padding:1rem 1.2rem;color:white;}
+    .res-fin-titel{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:2px;}
+    .res-fin-sub{font-size:0.75rem;opacity:0.75;}
+    .res-vergelijk{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rand);}
+    .res-kol{padding:0.9rem 1rem;text-align:center;}
+    .res-kol+.res-kol{border-left:1px solid var(--rand);}
+    .res-kol-lbl{font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--tekst-licht);margin-bottom:4px;}
+    .res-kol.nieuw .res-kol-lbl{color:var(--groen);}
+    .res-kol-getal{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;line-height:1;color:var(--tekst);}
+    .res-kol.nieuw .res-kol-getal{color:var(--groen);}
+    .res-kol-sub{font-size:0.72rem;color:var(--tekst-licht);margin-top:3px;}
+    .res-verschil-rij{display:flex;align-items:center;justify-content:center;gap:8px;padding:0.7rem 1.2rem;border-bottom:1px solid var(--rand);font-size:0.88rem;font-weight:600;}
+    .res-verschil-rij.pos{color:var(--groen);}
+    .res-verschil-rij.neg{color:var(--rood);}
+    .res-verschil-rij.neutr{color:var(--amber-diep);}
+
+    /* Uitsplitsing */
+    .res-uitsp{padding:0.4rem 1.2rem 0.8rem;}
+    .uitsp-hdr{display:flex;justify-content:space-between;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--tekst-licht);padding:6px 0 4px;border-bottom:1px solid var(--rand);}
+    .uitsp-hdr-bed{display:flex;gap:14px;}
+    .uitsp-rij{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--rand);font-size:0.82rem;}
+    .uitsp-rij:last-child{border-bottom:none;}
+    .uitsp-naam{color:var(--tekst-zacht);display:flex;align-items:center;gap:6px;flex:1;}
+    .uitsp-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+    .uitsp-bed{display:flex;gap:14px;flex-shrink:0;}
+    .uitsp-oud{color:var(--tekst-licht);font-size:0.78rem;width:64px;text-align:right;}
+    .uitsp-nw{font-weight:600;width:64px;text-align:right;}
+    .uitsp-rij.totaal .uitsp-naam{font-weight:700;color:var(--tekst);}
+    .uitsp-rij.totaal .uitsp-nw{color:var(--groen);}
+
+    /* Scenario-knoppen */
+    .res-scenario{padding:0.6rem 1.2rem;border-top:1px solid var(--rand);display:flex;gap:8px;flex-wrap:wrap;}
+    .scenario-btn{flex:1;min-width:120px;padding:8px 12px;background:var(--wit-warm);border:1.5px solid var(--rand);border-radius:10px;font-size:0.8rem;font-weight:600;cursor:pointer;color:var(--tekst-zacht);font-family:'Source Sans 3',sans-serif;transition:all 0.18s;text-align:center;min-height:44px;}
+    .scenario-btn:hover{border-color:var(--groen);color:var(--groen);background:var(--groen-licht);}
+
+    /* De vier blokken */
+    .res-blok{border-top:1px solid var(--rand);}
+    .res-blok-header{padding:0.8rem 1.2rem;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;}
+    .res-blok-icoon{font-size:1.2rem;flex-shrink:0;width:28px;text-align:center;}
+    .res-blok-titel{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:600;flex:1;}
+    .res-blok-chevron{font-size:0.75rem;color:var(--tekst-licht);transition:transform 0.2s;}
+    .res-blok-body{padding:0 1.2rem 1rem;font-size:0.84rem;color:var(--tekst-zacht);line-height:1.65;display:none;}
+    .res-blok-body.open{display:block;}
+    .res-blok-body ul{margin:0.4rem 0 0 1rem;}
+    .res-blok-body li{margin-bottom:4px;}
+    .res-blok-body strong{color:var(--tekst);}
+
+    /* Disclaimer + opnieuw */
+    .res-disc{padding:0.6rem 1.2rem;font-size:0.7rem;color:var(--tekst-licht);line-height:1.5;border-top:1px solid var(--rand);}
+    .res-opnieuw{width:calc(100% - 2.4rem);margin:0.6rem 1.2rem 0.8rem;padding:10px;background:none;border:1px solid var(--rand);border-radius:10px;font-size:0.82rem;cursor:pointer;font-family:'Source Sans 3',sans-serif;color:var(--tekst-licht);transition:all 0.2s;display:block;}
+    .res-opnieuw:hover{color:var(--tekst-zacht);border-color:var(--tekst-licht);}
+
+    @media(max-width:480px){
+      nav{padding:0 1rem;}
+      .nav-links{display:none;}
+      .chat-wrap{padding:0 0.6rem;padding-top:64px;}
+    }
+    @media print{nav,.invoer-zone{display:none;}}
+  </style>
+</head>
+<body>
+
+<div id="solidari-nav"></div>
+
+<div class="voortgang-strip"><div class="voortgang-vul" id="voortgang" style="width:0%"></div></div>
+
+<div class="chat-wrap">
+  <div class="berichten" id="berichten"></div>
+  <div class="invoer-zone" id="invoer-zone"></div>
+</div>
+
+<script src="i18n.js"></script>
+<script>
+// ─── VERTALINGEN ──────────────────────────────────────────────────────────────
+const T = {
+  nl: {
+    welkom: 'Hallo! 👋 Ik help je uitrekenen <strong>wat er verandert als je meer gaat verdienen</strong>. Denk aan toeslagen, uitkering, en wat je netto overhoudt. Ik stel je een paar vragen.',
+    q_situatie: 'Wat is je situatie op dit moment?',
+    sit: ['Ik heb een bijstandsuitkering','Ik werk al en overweeg meer uren','Ik heb een andere uitkering (WW, ziektewet, …)','Ik heb (bijna) geen inkomen'],
+    q_partner: 'Woon je samen met een partner?',
+    q_huisgenoten: 'Wonen er naast jij (en je partner) nog andere mensen bij jou in huis?',
+    hg_ja: 'Ja',
+    hg_nee: 'Nee',
+    q_huisgenoot_leeftijd: 'Hoe oud is huisgenoot {n}?',
+    huisgenoot_hint: 'Leeftijd in jaren — dit bepaalt of de kostendelersnorm geldt',
+    q_nog_iemand: 'Woont er nog iemand anders bij jou?',
+    hg_kind: 'kind',
+    hg_jongvolw: 'jongvolwassene (18–26)',
+    hg_volwassene: 'volwassene (27+)',
+    hg_kd_melding: 'Met {n} personen van 27+ in huis geldt de kostendelersnorm. Je bijstandsnorm is dan ongeveer <strong>{norm}/mnd</strong>.',
+    hg_kind_melding: 'Ik tel {n} kind(eren) jonger dan 18 mee voor toeslagen.',
+    leeftijd_fout: 'Vul een leeftijd in tussen 0 en 100 jaar.',
+    partner: ['Nee, ik woon alleen','Ja, ik woon samen met een partner'],
+    q_kinderen: 'Heb je kinderen jonger dan 18 jaar die bij jou wonen?',
+    kind: ['Geen kinderen','1 kind','2 kinderen','3 of meer kinderen'],
+    q_leeftijd: 'Hoe oud ben je?',
+    leeftijd_hint: 'Vul je leeftijd in (in jaren)',
+    leeftijd_placeholder: 'bijv. 34',
+    aow_bericht: 'Boven de AOW-leeftijd (67 jaar) gelden andere regels. Ik kan die situatie niet goed berekenen. Neem contact op met je gemeente of het Sociaal Wijkteam voor persoonlijk advies.',
+    jong_bericht: 'Tussen 18 en 21 jaar geldt een lagere bijstandsnorm. Je ouders hebben dan een onderhoudsplicht en de gemeente kijkt of zij kunnen bijdragen. Ik reken verder met jouw situatie, maar bespreek de details ook met je gemeente.',
+    q_huur: 'Hoeveel huur betaal je per maand?',
+    huur_hint: 'Kale huur, zonder servicekosten. Weet je het niet precies? Vul dan een schatting in.',
+    huur_placeholder: 'bijv. 650',
+    huur_skip: 'Ik huur niet of weet het niet',
+    q_huidig: 'Wat verdien je nu per maand — inclusief eventuele uitkering?',
+    huidig_hint: 'Vul je totale netto maandinkomen in. Heb je bijstand? Vul dan de bijstandsnorm in. Weet je het niet precies? Geef een schatting.',
+    huidig_placeholder: 'bijv. 1400',
+    q_nieuw: 'Wat zou je gaan verdienen — bruto per maand?',
+    nieuw_hint: 'Het wettelijk minimumloon 2026 is € 1.995 bruto per maand bij voltijd (40 uur).',
+    nieuw_placeholder: 'bijv. 1800',
+    q_uren: 'Hoeveel uur per week ga je werken?',
+    uren_hint: 'Vul het aantal uren in — dan vul ik automatisch het minimumloon in als startpunt.',
+    uren_prefix: 'uur',
+    uren_placeholder: 'bijv. 32',
+    uren_label: 'uur/week',
+    uren_fout: 'Vul een aantal uren in tussen 1 en 60.',
+    rekenen: 'Even rekenen…',
+    res_titel: 'Wat verandert er?',
+    res_oud_lbl: 'Nu',
+    res_nw_lbl: 'Met meer inkomen',
+    res_mnd: 'netto per maand',
+    verschil_pos: '↑ {x} meer per maand netto',
+    verschil_neg: '↓ {x} minder per maand netto',
+    verschil_neutr: '↔ Vrijwel geen verschil netto',
+    uitsp_bron: 'Inkomstenbron',
+    uitsp_oud: 'Nu',
+    uitsp_nw: 'Straks',
+    netto_sal: 'Netto salaris',
+    vakantiegeld_lbl: 'Vakantiegeld',
+    vakantiegeld_noot: '8% van bruto',
+    bijstand_lbl: 'Bijstandsaanvulling',
+    zt_lbl: 'Zorgtoeslag',
+    ht_lbl: 'Huurtoeslag',
+    kgb_lbl: 'Kindgebonden budget',
+    akw_lbl: 'Kinderbijslag (AKW)',
+    ongewijzigd: 'ongewijzigd',
+    huur_buiten: 'buiten bereik',
+    scenario_meer: '+ Meer uren',
+    scenario_minder: '− Minder uren',
+    scenario_opnieuw: '↩ Opnieuw',
+    // Vier blokken
+    blok1_titel: '💶 In je portemonnee',
+    blok2_titel: '📋 Rechten die je opbouwt',
+    blok3_titel: '⏱️ Wat verandert in je leven',
+    blok4_titel: '🚀 Kansen die dit biedt',
+    blok2_basis: 'Zodra je werkt, bouw je rechten op die je bij een uitkering niet hebt:',
+    blok2_ww: '<strong>WW-recht:</strong> na 26 gewerkte weken heb je recht op een werkloosheidsuitkering als je je baan verliest.',
+    blok2_pensioen: '<strong>Pensioen:</strong> via je werkgever bouw je elke maand pensioen op. Bij bijstand bouw je niets op.',
+    blok2_ziekte: '<strong>Doorbetaling bij ziekte:</strong> als werknemer heb je recht op minimaal 70% van je loon bij ziekte, gedurende maximaal 2 jaar.',
+    blok2_loopbaan: '<strong>Loopbaanbudget:</strong> via het UWV kun je aanspraak maken op scholing en begeleiding naar ander werk.',
+    blok3_basis: 'Werken verandert meer dan alleen je inkomen:',
+    blok3_structuur: '<strong>Structuur:</strong> een vaste werkweek geeft ritme en overzicht in je dagen.',
+    blok3_contact: '<strong>Sociale contacten:</strong> collega\'s, klanten en een werkplek zijn een sociaal netwerk op zich.',
+    blok3_zelf: '<strong>Zelfstandigheid:</strong> een eigen inkomen geeft meer controle over je eigen leven.',
+    blok4_basis: 'Elk jaar werkervaring telt mee:',
+    blok4_cv: '<strong>Op je cv:</strong> werkervaring vergroot je kansen bij volgende sollicitaties, ook buiten je huidige sector.',
+    blok4_loon: '<strong>Loonsverhoging:</strong> na een jaar werk stijgt je salaris bij veel werkgevers automatisch, of kun je dat bespreekbaar maken.',
+    blok4_doorgroei: '<strong>Doorgroeimogelijkheden:</strong> meer uren, een hogere functie of een opleiding — de eerste stap maakt de volgende makkelijker.',
+    advies: 'Wil je weten wat dit precies betekent voor jóuw situatie? Neem contact op met je <strong>Sociaal Wijkteam</strong> of de <strong>vrijwillige formulierenbrigade</strong> — zij kunnen je gratis helpen.',
+    disclaimer: 'Indicatieve berekening op basis van normen 2026. Bijstandsnormen per 1-1-2026, toeslagen Belastingdienst 2026. Zorgtoeslag max €128/mnd (alleenstaand) / €244/mnd (met partner). Kinderbijslag (AKW) is een vaste schatting. Kinderopvangtoeslag is een benadering — het exacte bedrag hangt af van het uurtarief, aantal uren en of beide ouders werken of een erkend traject volgen. Netto salaris en toeslagen zijn benaderingen — jouw situatie kan afwijken.',
+    opnieuw: '↩ Opnieuw beginnen',
+    q_kot: 'Maken je kinderen gebruik van kinderopvang? (dagopvang, BSO of gastouder)',
+    kot_ja: 'Ja, ze gaan naar de opvang',
+    kot_nee: 'Nee, geen kinderopvang',
+    q_kot_soort: 'Welk soort opvang?',
+    kot_dag: '🏠 Dagopvang (0–4 jaar)',
+    kot_bso: '🎒 Buitenschoolse opvang (4–12 jaar)',
+    kot_go: '👩 Gastouderopvang',
+    q_kot_uren: 'Hoeveel uur per maand gaan de kinderen naar de opvang?',
+    kot_uren_placeholder: 'bijv. 100',
+    kot_uren_hint: 'Max 230 uur per kind per maand. Kijk op je contract of factuur.',
+    kot_uren_fout: 'Vul een aantal uren in tussen 1 en 230.',
+    kot_uren_label: 'uur/mnd',
+    kot_bevestiging: 'Bij dit inkomen krijg je waarschijnlijk tot <strong>{max}/mnd</strong> kinderopvangtoeslag. Let op: dit geldt alleen als je (gaat) werken, studeert of een inburgeringstraject volgt.',
+    kot_lbl: 'Kinderopvangtoeslag',
+    kot_noot: 'indicatief',
+  },
+  en: {
+    welkom: 'Hello! 👋 I help you see <strong>what changes when you earn more</strong>. Think about allowances, benefits, and what you keep net. I\'ll ask you a few questions.',
+    q_situatie: 'What is your current situation?',
+    sit: ['I receive social assistance (bijstand)','I already work and am considering more hours','I receive another benefit (unemployment, sick leave, …)','I have little or no income'],
+    q_partner: 'Do you live together with a partner?',
+    q_huisgenoten: 'Besides yourself (and your partner), do other people live in your home?',
+    hg_ja: 'Yes',
+    hg_nee: 'No',
+    q_huisgenoot_leeftijd: 'How old is housemate {n}?',
+    huisgenoot_hint: 'Age in years — this determines whether the cost-sharing norm applies',
+    q_nog_iemand: 'Does anyone else live with you?',
+    hg_kind: 'child',
+    hg_jongvolw: 'young adult (18–26)',
+    hg_volwassene: 'adult (27+)',
+    hg_kd_melding: 'With {n} people aged 27+ in the household, the cost-sharing norm applies. Your benefit norm is approximately <strong>{norm}/month</strong>.',
+    hg_kind_melding: 'I count {n} child(ren) under 18 for allowances.',
+    leeftijd_fout: 'Please enter an age between 0 and 100.',
+    partner: ['No, I live alone','Yes, I live with a partner'],
+    q_kinderen: 'Do you have children under 18 living with you?',
+    kind: ['No children','1 child','2 children','3 or more children'],
+    q_leeftijd: 'How old are you?',
+    leeftijd_hint: 'Enter your age in years',
+    leeftijd_placeholder: 'e.g. 34',
+    aow_bericht: 'Above state pension age (67), different rules apply. I cannot calculate that situation well. Please contact your municipality or Social Neighbourhood Team for personal advice.',
+    jong_bericht: 'Between 18 and 21, a lower benefit norm applies. Your parents have a maintenance obligation and the municipality checks if they can contribute. I will continue with your situation, but discuss the details with your municipality too.',
+    q_huur: 'How much rent do you pay per month?',
+    huur_hint: 'Bare rent, without service costs. Not sure? Enter an estimate.',
+    huur_placeholder: 'e.g. 650',
+    huur_skip: 'I don\'t rent or don\'t know',
+    q_huidig: 'What do you earn now per month — including any benefit?',
+    huidig_hint: 'Enter your total net monthly income. On social assistance? Enter the benefit norm. Not sure? Give an estimate.',
+    huidig_placeholder: 'e.g. 1400',
+    q_nieuw: 'What would you earn — gross per month?',
+    nieuw_hint: 'The statutory minimum wage 2026 is € 1,995 gross per month full-time (40 hours).',
+    nieuw_placeholder: 'e.g. 1800',
+    q_uren: 'How many hours per week will you work?',
+    uren_hint: 'Enter the number of hours — I\'ll automatically fill in the minimum wage as a starting point.',
+    uren_prefix: 'hrs',
+    uren_placeholder: 'e.g. 32',
+    uren_label: 'hrs/week',
+    uren_fout: 'Please enter a number of hours between 1 and 60.',
+    rekenen: 'Calculating…',
+    res_titel: 'What changes?',
+    res_oud_lbl: 'Now',
+    res_nw_lbl: 'With more income',
+    res_mnd: 'net per month',
+    verschil_pos: '↑ {x} more per month net',
+    verschil_neg: '↓ {x} less per month net',
+    verschil_neutr: '↔ Virtually no difference net',
+    uitsp_bron: 'Income source',
+    uitsp_oud: 'Now',
+    uitsp_nw: 'Then',
+    netto_sal: 'Net salary',
+    vakantiegeld_lbl: 'Holiday allowance',
+    vakantiegeld_noot: '8% of gross',
+    bijstand_lbl: 'Benefit top-up',
+    zt_lbl: 'Healthcare allowance',
+    ht_lbl: 'Rent allowance',
+    kgb_lbl: 'Child-related budget',
+    akw_lbl: 'Child benefit (AKW)',
+    ongewijzigd: 'unchanged',
+    huur_buiten: 'outside range',
+    scenario_meer: '+ More hours',
+    scenario_minder: '− Fewer hours',
+    scenario_opnieuw: '↩ Start over',
+    blok1_titel: '💶 In your wallet',
+    blok2_titel: '📋 Rights you build up',
+    blok3_titel: '⏱️ What changes in your life',
+    blok4_titel: '🚀 Opportunities this creates',
+    blok2_basis: 'Once you work, you build up rights that you don\'t have on benefits:',
+    blok2_ww: '<strong>Unemployment benefit:</strong> after 26 worked weeks you are entitled to unemployment benefit if you lose your job.',
+    blok2_pensioen: '<strong>Pension:</strong> through your employer you build up pension every month. On social assistance you build up nothing.',
+    blok2_ziekte: '<strong>Sick pay:</strong> as an employee you are entitled to at least 70% of your salary when sick, for up to 2 years.',
+    blok2_loopbaan: '<strong>Career budget:</strong> through UWV you can access training and guidance to other work.',
+    blok3_basis: 'Working changes more than just your income:',
+    blok3_structuur: '<strong>Structure:</strong> a regular working week gives rhythm and overview to your days.',
+    blok3_contact: '<strong>Social contacts:</strong> colleagues, clients and a workplace are a social network in themselves.',
+    blok3_zelf: '<strong>Independence:</strong> your own income gives you more control over your own life.',
+    blok4_basis: 'Every year of work experience counts:',
+    blok4_cv: '<strong>On your CV:</strong> work experience increases your chances with future employers, even outside your current sector.',
+    blok4_loon: '<strong>Pay rise:</strong> after a year, your salary often increases automatically, or you can raise the subject.',
+    blok4_doorgroei: '<strong>Growth opportunities:</strong> more hours, a higher position or training — the first step makes the next one easier.',
+    advies: 'Want to know exactly what this means for your situation? Contact your <strong>Social Neighbourhood Team</strong> or <strong>VluchtelingenWerk</strong> — they can help you for free.',
+    disclaimer: 'Indicative calculation based on 2026 norms. Social assistance as of 1-1-2026, Tax Authority allowances 2026. Healthcare allowance max €128/month (single) / €244/month (with partner). Child benefit (AKW) is a fixed estimate. Net salary and allowances are approximations.',
+    opnieuw: '↩ Start over',
+    q_kot: 'Do your children use childcare? (daycare, after-school care or childminder)',
+    kot_ja: 'Yes, they go to childcare',
+    kot_nee: 'No childcare',
+    q_kot_soort: 'What type of childcare?',
+    kot_dag: '🏠 Daycare (0–4 years)',
+    kot_bso: '🎒 After-school care (4–12 years)',
+    kot_go: '👩 Childminder',
+    q_kot_uren: 'How many hours per month do the children go to childcare?',
+    kot_uren_placeholder: 'e.g. 100',
+    kot_uren_hint: 'Max 230 hours per child per month. Check your contract or invoice.',
+    kot_uren_fout: 'Enter a number of hours between 1 and 230.',
+    kot_uren_label: 'hrs/month',
+    kot_bevestiging: 'At this income you will probably receive up to <strong>{max}/month</strong> in childcare benefit. Note: this only applies if you (are going to) work, study or follow an integration programme.',
+    kot_lbl: 'Childcare benefit',
+    kot_noot: 'indicative',
+  },
+  ar: {
+    welkom: 'مرحباً! 👋 أساعدك في معرفة <strong>ما الذي يتغير عندما تكسب أكثر</strong>. سأطرح عليك بعض الأسئلة.',
+    q_situatie: 'ما هو وضعك الحالي؟',
+    sit: ['أتلقى إعانة اجتماعية (bijstand)','أعمل بالفعل وأفكر في ساعات أكثر','أتلقى إعانة أخرى (بطالة، إجازة مرضية…)','ليس لدي دخل يذكر'],
+    q_partner: 'هل تعيش مع شريك؟',
+    q_huisgenoten: 'هل يعيش معك أشخاص آخرون في المنزل غيرك (وشريكك)؟',
+    hg_ja: 'نعم',
+    hg_nee: 'لا',
+    q_huisgenoot_leeftijd: 'كم عمر الساكن {n}؟',
+    huisgenoot_hint: 'العمر بالسنوات — هذا يحدد ما إذا كانت قاعدة تقاسم التكاليف تنطبق',
+    q_nog_iemand: 'هل يعيش معك شخص آخر؟',
+    hg_kind: 'طفل',
+    hg_jongvolw: 'شاب (18–26)',
+    hg_volwassene: 'بالغ (27+)',
+    hg_kd_melding: 'مع {n} أشخاص فوق 27 في المنزل تنطبق قاعدة تقاسم التكاليف. معدل إعانتك تقريباً <strong>{norm}/شهر</strong>.',
+    hg_kind_melding: 'أحسب {n} طفل/أطفال دون 18 للإعانات.',
+    leeftijd_fout: 'أدخل عمراً بين 0 و100.',
+    partner: ['لا، أعيش وحدي','نعم، أعيش مع شريك'],
+    q_kinderen: 'هل لديك أطفال دون 18 عاماً يعيشون معك؟',
+    kind: ['لا أطفال','طفل واحد','طفلان','3 أطفال أو أكثر'],
+    q_leeftijd: 'كم عمرك؟',
+    leeftijd_hint: 'أدخل عمرك بالسنوات',
+    leeftijd_placeholder: 'مثال: 34',
+    aow_bericht: 'فوق سن التقاعد (67 عاماً) تسري قواعد مختلفة. تواصل مع بلديتك للحصول على مشورة شخصية.',
+    jong_bericht: 'بين 18 و21 عاماً تسري نورم أقل. سأكمل الحساب لكن ناقش التفاصيل مع بلديتك.',
+    q_huur: 'كم تدفع إيجاراً شهرياً؟',
+    huur_hint: 'الإيجار الأساسي بدون تكاليف الخدمات. غير متأكد؟ أدخل تقديراً.',
+    huur_placeholder: 'مثال: 650',
+    huur_skip: 'لا أستأجر أو لا أعلم',
+    q_huidig: 'ما هو دخلك الحالي شهرياً — بما في ذلك الإعانات؟',
+    huidig_hint: 'أدخل إجمالي دخلك الشهري الصافي. في البيجستاند؟ أدخل مبلغ الإعانة.',
+    huidig_placeholder: 'مثال: 1400',
+    q_nieuw: 'كم ستكسب — إجمالياً في الشهر؟',
+    nieuw_hint: 'الحد الأدنى للأجور 2026 هو €1,995 إجمالي شهرياً (دوام كامل، 40 ساعة).',
+    nieuw_placeholder: 'مثال: 1800',
+    q_uren: 'كم ساعة في الأسبوع ستعمل؟',
+    uren_hint: 'أدخل عدد الساعات — سأملأ الحد الأدنى للأجر تلقائياً.',
+    uren_prefix: 'ساعة',
+    uren_placeholder: 'مثال: 32',
+    uren_label: 'ساعة/أسبوع',
+    uren_fout: 'أدخل عدد ساعات بين 1 و60.',
+    rekenen: 'جاري الحساب…',
+    res_titel: 'ما الذي يتغير؟',
+    res_oud_lbl: 'الآن',
+    res_nw_lbl: 'مع دخل أكثر',
+    res_mnd: 'صافي شهرياً',
+    verschil_pos: '↑ {x} أكثر شهرياً صافي',
+    verschil_neg: '↓ {x} أقل شهرياً صافي',
+    verschil_neutr: '↔ لا فرق يُذكر صافياً',
+    uitsp_bron: 'مصدر الدخل',
+    uitsp_oud: 'الآن',
+    uitsp_nw: 'لاحقاً',
+    netto_sal: 'الراتب الصافي',
+    vakantiegeld_lbl: 'بدل الإجازة',
+    vakantiegeld_noot: '8% من الإجمالي',
+    bijstand_lbl: 'تكملة الإعانة',
+    zt_lbl: 'إعانة الرعاية الصحية',
+    ht_lbl: 'إعانة الإيجار',
+    kgb_lbl: 'ميزانية الأطفال',
+    akw_lbl: 'علاوة الأطفال (AKW)',
+    ongewijzigd: 'ثابت',
+    huur_buiten: 'خارج النطاق',
+    scenario_meer: '+ ساعات أكثر',
+    scenario_minder: '− ساعات أقل',
+    scenario_opnieuw: '↩ من جديد',
+    blok1_titel: '💶 في محفظتك',
+    blok2_titel: '📋 حقوق تبنيها',
+    blok3_titel: '⏱️ ما يتغير في حياتك',
+    blok4_titel: '🚀 الفرص التي يخلقها هذا',
+    blok2_basis: 'بمجرد العمل، تبني حقوقاً لا تملكها عند الإعانة:',
+    blok2_ww: '<strong>حق البطالة:</strong> بعد 26 أسبوع عمل يحق لك الحصول على إعانة البطالة عند فقدان عملك.',
+    blok2_pensioen: '<strong>المعاش:</strong> من خلال صاحب العمل تراكم معاشاً شهرياً. عند الإعانة لا تراكم شيئاً.',
+    blok2_ziekte: '<strong>الراتب عند المرض:</strong> كموظف يحق لك الحصول على 70% على الأقل من راتبك عند المرض لمدة سنتين.',
+    blok2_loopbaan: '<strong>ميزانية المسيرة المهنية:</strong> عبر UWV يمكنك الوصول إلى تدريب وتوجيه مهني.',
+    blok3_basis: 'العمل يغير أكثر من مجرد دخلك:',
+    blok3_structuur: '<strong>النظام:</strong> أسبوع عمل منتظم يعطي إيقاعاً ووضوحاً ليومياتك.',
+    blok3_contact: '<strong>العلاقات الاجتماعية:</strong> الزملاء ومكان العمل شبكة اجتماعية في حد ذاتها.',
+    blok3_zelf: '<strong>الاستقلالية:</strong> دخل خاص يمنحك سيطرة أكبر على حياتك.',
+    blok4_basis: 'كل سنة خبرة عمل تُحسب:',
+    blok4_cv: '<strong>في سيرتك الذاتية:</strong> الخبرة تزيد فرصك في الوظائف القادمة.',
+    blok4_loon: '<strong>زيادة الراتب:</strong> بعد سنة، كثيراً ما يرتفع راتبك تلقائياً أو يمكنك مناقشته.',
+    blok4_doorgroei: '<strong>التطور المهني:</strong> المزيد من الساعات أو منصب أعلى — الخطوة الأولى تُيسّر التالية.',
+    advies: 'تريد معرفة ما يعنيه هذا لوضعك تحديداً؟ تواصل مع <strong>الفريق الاجتماعي</strong> أو <strong>VluchtelingenWerk</strong> — يمكنهم مساعدتك مجاناً.',
+    disclaimer: 'حساب تقريبي وفق معايير 2026. الأرقام تقريبية ووضعك قد يختلف.',
+    opnieuw: '↩ البدء من جديد',
+    q_kot: 'هل يستخدم أطفالك رعاية الأطفال؟ (حضانة، رعاية بعد المدرسة أو حاضنة)',
+    kot_ja: 'نعم، يذهبون إلى الحضانة',
+    kot_nee: 'لا، لا توجد رعاية أطفال',
+    q_kot_soort: 'ما نوع الرعاية؟',
+    kot_dag: '🏠 حضانة نهارية (0–4 سنوات)',
+    kot_bso: '🎒 رعاية بعد المدرسة (4–12 سنة)',
+    kot_go: '👩 حاضنة منزلية',
+    q_kot_uren: 'كم ساعة في الشهر يذهب الأطفال إلى الرعاية؟',
+    kot_uren_placeholder: 'مثال: 100',
+    kot_uren_hint: 'الحد الأقصى 230 ساعة لكل طفل في الشهر.',
+    kot_uren_fout: 'أدخل عدد ساعات بين 1 و230.',
+    kot_uren_label: 'ساعة/شهر',
+    kot_bevestiging: 'بهذا الدخل ستحصل على ما يصل إلى <strong>{max}/شهر</strong> من إعانة رعاية الأطفال. ملاحظة: يُشترط أن تعمل أو تتابع دراسة أو برنامج اندماج.',
+    kot_lbl: 'إعانة رعاية الأطفال',
+    kot_noot: 'تقريبي',
+  },
+  tr: {
+    welkom: 'Merhaba! 👋 <strong>Daha fazla kazandığınızda ne değiştiğini</strong> hesaplamanıza yardımcı olacağım. Birkaç soru soracağım.',
+    q_situatie: 'Şu anki durumunuz nedir?',
+    sit: ['Sosyal yardım (bijstand) alıyorum','Zaten çalışıyorum, daha fazla saat düşünüyorum','Başka bir yardım alıyorum (işsizlik, hastalık…)','Gelirim yok ya da çok az'],
+    q_partner: 'Bir partnerle birlikte mi yaşıyorsunuz?',
+    q_huisgenoten: 'Sizin (ve partnerinizin) dışında evde başka kişiler de yaşıyor mu?',
+    hg_ja: 'Evet',
+    hg_nee: 'Hayır',
+    q_huisgenoot_leeftijd: '{n}. ev arkadaşı kaç yaşında?',
+    huisgenoot_hint: 'Yaşı yıl olarak girin — maliyet paylaşım normunun geçerli olup olmadığını belirler',
+    q_nog_iemand: 'Evde başka biri daha var mı?',
+    hg_kind: 'çocuk',
+    hg_jongvolw: 'genç yetişkin (18–26)',
+    hg_volwassene: 'yetişkin (27+)',
+    hg_kd_melding: 'Evde 27 yaş üstü {n} kişiyle maliyet paylaşım normu geçerlidir. Yardım normunuz yaklaşık <strong>{norm}/ay</strong>.',
+    hg_kind_melding: 'Yardımlar için 18 yaş altı {n} çocuğu hesaba katıyorum.',
+    leeftijd_fout: '0 ile 100 arasında bir yaş girin.',
+    partner: ['Hayır, yalnız yaşıyorum','Evet, partnerimle yaşıyorum'],
+    q_kinderen: 'Sizinle yaşayan 18 yaşından küçük çocuğunuz var mı?',
+    kind: ['Çocuk yok','1 çocuk','2 çocuk','3 veya daha fazla çocuk'],
+    q_leeftijd: 'Kaç yaşındasınız?',
+    leeftijd_hint: 'Yaşınızı yıl olarak girin',
+    leeftijd_placeholder: 'örn. 34',
+    aow_bericht: 'Emeklilik yaşı üzerinde (67) farklı kurallar geçerlidir. Belediyenizle iletişime geçin.',
+    jong_bericht: '18-21 yaş arasında daha düşük norm geçerlidir. Hesaplamaya devam ediyorum, ama ayrıntıları belediyenizle de görüşün.',
+    q_huur: 'Aylık kira ne kadar ödüyorsunuz?',
+    huur_hint: 'Hizmet bedeli hariç çıplak kira. Emin değilseniz tahmin girin.',
+    huur_placeholder: 'örn. 650',
+    huur_skip: 'Kiracı değilim veya bilmiyorum',
+    q_huidig: 'Şu an aylık ne kadar kazanıyorsunuz — yardımlar dahil?',
+    huidig_hint: 'Toplam net aylık gelirinizi girin. Sosyal yardım alıyorsanız o miktarı girin.',
+    huidig_placeholder: 'örn. 1400',
+    q_nieuw: 'Aylık brüt ne kadar kazanacaksınız?',
+    nieuw_hint: 'Yasal asgari ücret 2026: tam zamanlı (40 saat) aylık brüt €1.995.',
+    nieuw_placeholder: 'örn. 1800',
+    q_uren: 'Haftada kaç saat çalışacaksınız?',
+    uren_hint: 'Saat sayısını girin — başlangıç noktası olarak asgari ücreti otomatik dolduracağım.',
+    uren_prefix: 'saat',
+    uren_placeholder: 'örn. 32',
+    uren_label: 'saat/hafta',
+    uren_fout: 'Lütfen 1 ile 60 arasında bir saat sayısı girin.',
+    rekenen: 'Hesaplanıyor…',
+    res_titel: 'Ne değişiyor?',
+    res_oud_lbl: 'Şimdi',
+    res_nw_lbl: 'Daha fazla gelirle',
+    res_mnd: 'aylık net',
+    verschil_pos: '↑ Aylık {x} fazla net',
+    verschil_neg: '↓ Aylık {x} az net',
+    verschil_neutr: '↔ Net olarak neredeyse fark yok',
+    uitsp_bron: 'Gelir kaynağı',
+    uitsp_oud: 'Şimdi',
+    uitsp_nw: 'Sonra',
+    netto_sal: 'Net maaş',
+    vakantiegeld_lbl: 'Tatil ücreti',
+    vakantiegeld_noot: "Brütün %8'i",
+    bijstand_lbl: 'Yardım tamamlama',
+    zt_lbl: 'Sağlık yardımı',
+    ht_lbl: 'Kira yardımı',
+    kgb_lbl: 'Çocuğa bağlı bütçe',
+    akw_lbl: 'Çocuk parası (AKW)',
+    ongewijzigd: 'değişmez',
+    huur_buiten: 'aralık dışında',
+    scenario_meer: '+ Daha fazla saat',
+    scenario_minder: '− Daha az saat',
+    scenario_opnieuw: '↩ Yeniden başla',
+    blok1_titel: '💶 Cüzdanınızda',
+    blok2_titel: '📋 Kazandığınız haklar',
+    blok3_titel: '⏱️ Hayatınızda ne değişir',
+    blok4_titel: '🚀 Bu hangi fırsatları yaratır',
+    blok2_basis: 'Çalışmaya başladığınızda, yardımda olmayan haklar kazanırsınız:',
+    blok2_ww: '<strong>İşsizlik hakkı:</strong> 26 hafta çalıştıktan sonra işinizi kaybederseniz işsizlik ödeneği hakkı kazanırsınız.',
+    blok2_pensioen: '<strong>Emeklilik:</strong> işvereniniz aracılığıyla her ay emeklilik biriktirilir. Yardımda hiçbir şey birikmez.',
+    blok2_ziekte: '<strong>Hastalık ödemesi:</strong> çalışan olarak hastalık durumunda 2 yıla kadar maaşınızın en az %70\'ini alırsınız.',
+    blok2_loopbaan: '<strong>Kariyer bütçesi:</strong> UWV aracılığıyla eğitim ve kariyer rehberliğine erişebilirsiniz.',
+    blok3_basis: 'Çalışmak sadece gelirinizden fazlasını değiştirir:',
+    blok3_structuur: '<strong>Düzen:</strong> düzenli bir çalışma haftası günlerinize ritim ve netlik katar.',
+    blok3_contact: '<strong>Sosyal ilişkiler:</strong> iş arkadaşları ve işyeri kendi başına bir sosyal ağdır.',
+    blok3_zelf: '<strong>Bağımsızlık:</strong> kendi geliriniz hayatınız üzerinde daha fazla kontrol sağlar.',
+    blok4_basis: 'Her yıl iş deneyimi sayılır:',
+    blok4_cv: '<strong>Özgeçmişinizde:</strong> iş deneyimi gelecekteki başvurularda şansınızı artırır.',
+    blok4_loon: '<strong>Maaş artışı:</strong> bir yılın ardından maaşınız genellikle otomatik artar veya müzakere edebilirsiniz.',
+    blok4_doorgroei: '<strong>Kariyer gelişimi:</strong> daha fazla saat, daha yüksek pozisyon — ilk adım sonrakini kolaylaştırır.',
+    advies: 'Kendi durumunuz için ne anlama geldiğini bilmek ister misiniz? <strong>Sociaal Wijkteam</strong> veya <strong>VluchtelingenWerk</strong> ile ücretsiz iletişime geçin.',
+    disclaimer: '2026 normlarına göre gösterge niteliğinde hesaplama. Rakamlar tahminidir.',
+    opnieuw: '↩ Yeniden başla',
+    q_kot: 'Çocuklarınız çocuk bakımından yararlanıyor mu? (kreş, okul sonrası bakım veya aile kreşi)',
+    kot_ja: 'Evet, bakıma gidiyorlar',
+    kot_nee: 'Hayır, çocuk bakımı yok',
+    q_kot_soort: 'Bakım türü nedir?',
+    kot_dag: '🏠 Kreş (0–4 yaş)',
+    kot_bso: '🎒 Okul sonrası bakım (4–12 yaş)',
+    kot_go: '👩 Aile kreşi',
+    q_kot_uren: 'Çocuklar ayda kaç saat bakıma gidiyor?',
+    kot_uren_placeholder: 'örn. 100',
+    kot_uren_hint: 'Her çocuk için ayda en fazla 230 saat.',
+    kot_uren_fout: '1 ile 230 arasında bir saat sayısı girin.',
+    kot_uren_label: 'saat/ay',
+    kot_bevestiging: 'Bu gelirle muhtemelen aylık <strong>{max}</strong> çocuk bakım desteği alırsınız. Not: çalışıyorsanız, öğrenciyseniz veya bir entegrasyon programı izliyorsanız geçerlidir.',
+    kot_lbl: 'Çocuk bakım desteği',
+    kot_noot: 'gösterge',
+  },
+  ti: {
+    welkom: 'ሰላም! 👋 <strong>ዝያዳ ምስ እትረክብ እንታይ ይቕየር</strong> ክሕሉ እሕግዘካ። ቁሩብ ሕቶ ክሓተካ እየ።',
+    q_situatie: 'ናይ ሕጂ ኩነታትካ እንታይ እዩ?',
+    sit: ['ናይ ሕብረተሰብ ሓገዝ (bijstand) ይቅበል','ሰሪሐ ኣለኹ — ዝያዳ ሰዓት ክሰርሕ ይሓስብ','ካልእ ሓገዝ ይቅበል','ኣይረክብን ወይ ቁሩብ ጥራሕ'],
+    q_partner: 'ምስ ሓዳር ትነብር ዲኻ?',
+    q_huisgenoten: 'ካብኻ (ካብ ሓዳርካ) ወጻኢ ካልኦት ሰባት ኣብ ገዛ ይነብሩ ዶ?',
+    hg_ja: 'እወ',
+    hg_nee: 'ኣይፋል',
+    q_huisgenoot_leeftijd: 'ናይ {n}ይ ናይ ገዛ ብጻይ ክንደይ ዕድሚ ኣለዎ?',
+    huisgenoot_hint: 'ዕድሚ ብዓመት',
+    q_nog_iemand: 'ካልእ ሰብ ምሳኻ ይነብር ዶ?',
+    hg_kind: 'ቆልዓ',
+    hg_jongvolw: 'መንእሰይ (18–26)',
+    hg_volwassene: 'ዓቢ (27+)',
+    hg_kd_melding: '{n} ሰባት 27+ ኣብ ገዛ ምስ ዘለዉ ናይ ሓባር ወጻኢ ሕጊ ይምልከት። ናይ ሓገዝ ደረጃ ብምምሳል <strong>{norm}/ወርሒ</strong>.',
+    hg_kind_melding: '{n} ቆልዑ ትሕቲ 18 ን ሓገዝ ይሕሰቡ።',
+    leeftijd_fout: 'ካብ 0 ክሳብ 100 ዕድሚ ኣእቱ።',
+    partner: ['ኣይፋል፣ ወልቀ ይነብር','እወ፣ ምስ ሓዳር ይነብር'],
+    q_kinderen: 'ትሕቲ 18 ዕድሜ ቆልዑ ምሳኻ ይነብሩ ዶ?',
+    kind: ['ቆልዑ የለውን','1 ቆልዓ','2 ቆልዑ','3 ወይ ዝያዳ'],
+    q_leeftijd: 'ክንደይ ዕድሚ ኣለካ?',
+    leeftijd_hint: 'ዕድሚኻ ብዓመት ኣእቱ',
+    leeftijd_placeholder: 'ንኣብነት 34',
+    aow_bericht: 'ልዕሊ 67 ዕድሜ ካልእ ሕጊ ይምልከት። ምስ ኮምዩን ዘተ።',
+    jong_bericht: '18–21 ዕድሜ ዝነኣሰ ደረጃ ይምልከት። ክቕጽል እየ — ምስ ኮምዩን ምዝታይ ኣይትረስዕ።',
+    q_huur: 'ወርሓዊ ክንደይ ካርታ ትኸፍል?',
+    huur_hint: 'ዝሕቆፍ ካርታ ብዘይ ናይ ኣገልግሎት ክፍሊት።',
+    huur_placeholder: 'ንኣብነት 650',
+    huur_skip: 'ኣይካረይን ወይ ኣይፈልጥን',
+    q_huidig: 'ሕጂ ወርሓዊ ክንደይ ናይ ኢድ ትረክብ — ሓገዝ ሓቚፉ?',
+    huidig_hint: 'ጠቕላላ ናይ ኢድ ወርሓዊ ኣታዊኻ ኣእቱ।',
+    huidig_placeholder: 'ንኣብነት 1400',
+    q_nieuw: 'ክንደይ ጥሬ ወርሓዊ ትረክብ?',
+    nieuw_hint: 'ዝተሓተ ሕጋዊ ደሞዝ 2026: €1,995 ጥሬ/ወርሒ (40 ሰዓት).',
+    nieuw_placeholder: 'ንኣብነት 1800',
+    q_uren: 'ሰሙናዊ ክንደይ ሰዓት ትሰርሕ?',
+    uren_hint: 'ቁጽሪ ሰዓት ኣእቱ — ዝተሓተ ደሞዝ ሙሉእ ብሙሉእ ይምልኦ።',
+    uren_prefix: 'ሰዓት',
+    uren_placeholder: 'ንኣብነት 32',
+    uren_label: 'ሰዓት/ሰሙን',
+    uren_fout: 'ካብ 1 ክሳብ 60 ዝኾነ ሰዓት ኣእቱ።',
+    rekenen: 'ይሕሰብ ኣሎ…',
+    res_titel: 'እንታይ ይቕየር?',
+    res_oud_lbl: 'ሕጂ',
+    res_nw_lbl: 'ዝያዳ ምስ እትረክብ',
+    res_mnd: 'ናይ ኢድ ወርሓዊ',
+    verschil_pos: '↑ ወርሓዊ {x} ዝያዳ ናይ ኢድ',
+    verschil_neg: '↓ ወርሓዊ {x} ውሑድ ናይ ኢድ',
+    verschil_neutr: '↔ ብምምሳል ዝቐየረ የልቦን',
+    uitsp_bron: 'ምንጪ ኣታዊ',
+    uitsp_oud: 'ሕጂ',
+    uitsp_nw: 'ጸኒሑ',
+    netto_sal: 'ናይ ኢድ ደሞዝ',
+    vakantiegeld_lbl: 'ናይ ዕረፍቲ ወሃብ',
+    vakantiegeld_noot: '8% ካብ ጃምላ',
+    bijstand_lbl: 'ናይ ሓገዝ ምምላእ',
+    zt_lbl: 'ሕክምና ሓገዝ',
+    ht_lbl: 'ካርታ ሓገዝ',
+    kgb_lbl: 'ናይ ቆልዑ ባጀት',
+    akw_lbl: 'ናይ ቆልዑ ሓገዝ (AKW)',
+    ongewijzigd: 'ዘይቕየር',
+    huur_buiten: 'ወጻኢ ዶብ',
+    scenario_meer: '+ ዝያዳ ሰዓት',
+    scenario_minder: '− ውሑድ ሰዓት',
+    scenario_opnieuw: '↩ ካብ መጀመሪያ',
+    blok1_titel: '💶 ኣብ ጀባኻ',
+    blok2_titel: '📋 ዝሃኒጾ መሰላት',
+    blok3_titel: '⏱️ ኣብ ህይወትካ ዝቕየር',
+    blok4_titel: '🚀 ዝፈጥሮ ዕድላት',
+    blok2_basis: 'ምስ ጀመርካ ምስራሕ፣ ኣብ ሓገዝ ዘይህልዉ መሰላት ትሃኒጽ:',
+    blok2_ww: '<strong>ናይ ስራሕ-ኣልቦ ሓገዝ:</strong> 26 ሰሙን ምስ ሰራሕካ ስራሕ ምስ ጠፍኣካ ሓገዝ ይግብኣካ።',
+    blok2_pensioen: '<strong>ጡረታ:</strong> ብሓጋዚ ዋና ወርሓዊ ጡረታ ትሃኒጽ። ኣብ ሓገዝ ዘሃኒጾ ዋላ ሓደ የሎን።',
+    blok2_ziekte: '<strong>ደሞዝ ኣብ ሕማም:</strong> 2 ዓመት ክሳብ 70% ደሞዝ ይግብኣካ።',
+    blok2_loopbaan: '<strong>ናይ ስራሕ ባጀት:</strong> ብUWV ስልጠናን ምምሕዳርን ይግብኣካ።',
+    blok3_basis: 'ምስራሕ ካብ ኣታዊ ዝያዳ የቕይር:',
+    blok3_structuur: '<strong>ስርዓት:</strong> ሰሙናዊ ስራሕ ምትሕሓዝ ይህብ።',
+    blok3_contact: '<strong>ማሕበራዊ ምትሕሓዝ:</strong> ብሰደቓን ቦታ ስራሕን ዝፍጠር ማሕበር።',
+    blok3_zelf: '<strong>ናጽነት:</strong> ናትካ ኣታዊ ዝያዳ ናጽነት ይህብ።',
+    blok4_basis: 'ዓመታዊ ናይ ስራሕ ተሞክሮ ይቑጸር:',
+    blok4_cv: '<strong>ኣብ CV:</strong> ናይ ስራሕ ተሞክሮ ኣብ ቀጻሊ ዕድላት ይሕግዝ።',
+    blok4_loon: '<strong>ደሞዝ ምስ ዕብዮ:</strong> ድሕሪ ሓደ ዓመት ደሞዝካ ሙሉእ ብሙሉእ ይዓቢ ወይ ክትዛረብ ትኽእል።',
+    blok4_doorgroei: '<strong>ምዕባለ:</strong> ቀዳማይ ስጉምቲ ንቀጻሊ ይኸፍት።',
+    advies: 'ናይ ውልቂ ሓበሬታ ትደሊ ዲኻ? ምስ <strong>Sociaal Wijkteam</strong> ወይ <strong>VluchtelingenWerk</strong> ሓልዮም ይሕግዙካ።',
+    disclaimer: 'ብሕጊ 2026 ዝተሓሰበ ዝምልከቶ ሓበሬታ እዩ። ኣሃዛት ዝምልከቱ ኢዮም።',
+    opnieuw: '↩ ካብ መጀመሪያ ጀምር',
+    q_kot: 'ቆልዑኻ ናይ ቆልዑ ክንክን ይጥቀሙ ዶ?',
+    kot_ja: 'እወ፣ ናብ ክንክን ይኸዱ',
+    kot_nee: 'ኣይፋል፣ ናይ ቆልዑ ክንክን የለን',
+    q_kot_soort: 'ዓይነት ክንክን እንታይ እዩ?',
+    kot_dag: '🏠 ናይ ቀን ክንክን (0–4 ዓመት)',
+    kot_bso: '🎒 ድሕሪ ቤት-ትምህርቲ (4–12 ዓመት)',
+    kot_go: '👩 ናይ ቤት ክንክን',
+    q_kot_uren: 'ቆልዑ ወርሓዊ ክንደይ ሰዓት ናብ ክንክን ይኸዱ?',
+    kot_uren_placeholder: 'ንኣብነት 100',
+    kot_uren_hint: 'ንነፍሲ ወከፍ ቆልዓ ብዘይበዝሕ 230 ሰዓት ወርሓዊ።',
+    kot_uren_fout: 'ካብ 1 ክሳብ 230 ሰዓት ኣእቱ።',
+    kot_uren_label: 'ሰዓት/ወርሒ',
+    kot_bevestiging: 'ብዙሕ ክሳብ <strong>{max}/ወርሒ</strong> ናይ ቆልዑ ክንክን ሓገዝ ክትረክብ ትኽእል። ናይ ስራሕ ወይ ናይ ትምህርቲ ሰዓታት ዘለዎ ምስ ዝህሉ።',
+    kot_lbl: 'ናይ ቆልዑ ክንክን ሓገዝ',
+    kot_noot: 'ዝምልከቶ',
+  },
+  uk: {
+    welkom: 'Привіт! 👋 Я допоможу вам побачити <strong>що змінюється, коли ви заробляєте більше</strong>. Задам кілька запитань.',
+    q_situatie: 'Яка ваша поточна ситуація?',
+    sit: ['Я отримую соціальну допомогу (bijstand)','Я вже працюю і розглядаю більше годин','Я отримую іншу допомогу (безробіття, лікарняний…)','У мене майже немає доходу'],
+    q_partner: 'Ви живете разом з партнером?',
+    q_huisgenoten: 'Чи живуть у вашому будинку інші люди, крім вас (і вашого партнера)?',
+    hg_ja: 'Так',
+    hg_nee: 'Ні',
+    q_huisgenoot_leeftijd: 'Скільки років співмешканцю {n}?',
+    huisgenoot_hint: 'Вік у роках — це визначає чи застосовується норма спільних витрат',
+    q_nog_iemand: 'Чи живе з вами ще хтось?',
+    hg_kind: 'дитина',
+    hg_jongvolw: 'молодий дорослий (18–26)',
+    hg_volwassene: 'дорослий (27+)',
+    hg_kd_melding: 'З {n} особами віком 27+ у домогосподарстві застосовується норма спільних витрат. Ваша норма допомоги приблизно <strong>{norm}/міс</strong>.',
+    hg_kind_melding: 'Я враховую {n} дитину/дітей до 18 років для субсидій.',
+    leeftijd_fout: 'Введіть вік від 0 до 100 років.',
+    partner: ['Ні, я живу сам/сама','Так, я живу з партнером'],
+    q_kinderen: 'У вас є діти до 18 років, які живуть з вами?',
+    kind: ['Немає дітей','1 дитина','2 дітей','3 або більше дітей'],
+    q_leeftijd: 'Скільки вам років?',
+    leeftijd_hint: 'Введіть ваш вік у роках',
+    leeftijd_placeholder: 'напр. 34',
+    aow_bericht: 'Після 67 років діють інші правила. Зверніться до вашого муніципалітету.',
+    jong_bericht: 'У 18–21 рік діє нижча норма. Я продовжу розрахунок, але обговоріть деталі з муніципалітетом.',
+    q_huur: 'Скільки орендної плати ви сплачуєте на місяць?',
+    huur_hint: 'Базова оренда без сервісних витрат. Не впевнені? Введіть приблизну суму.',
+    huur_placeholder: 'напр. 650',
+    huur_skip: 'Я не орендую або не знаю',
+    q_huidig: 'Скільки ви заробляєте зараз на місяць — включаючи допомогу?',
+    huidig_hint: 'Введіть загальний чистий місячний дохід. Маєте соціальну допомогу? Введіть її суму.',
+    huidig_placeholder: 'напр. 1400',
+    q_nieuw: 'Скільки ви будете заробляти — брутто на місяць?',
+    nieuw_hint: 'Мінімальна зарплата 2026: €1 995 брутто на місяць повний день (40 годин).',
+    nieuw_placeholder: 'напр. 1800',
+    q_uren: 'Скільки годин на тиждень ви будете працювати?',
+    uren_hint: 'Введіть кількість годин — я автоматично заповню мінімальну зарплату як відправну точку.',
+    uren_prefix: 'год',
+    uren_placeholder: 'напр. 32',
+    uren_label: 'год/тиждень',
+    uren_fout: 'Будь ласка, введіть кількість годин від 1 до 60.',
+    rekenen: 'Розраховую…',
+    res_titel: 'Що змінюється?',
+    res_oud_lbl: 'Зараз',
+    res_nw_lbl: 'З більшим доходом',
+    res_mnd: 'нетто на місяць',
+    verschil_pos: '↑ {x} більше на місяць нетто',
+    verschil_neg: '↓ {x} менше на місяць нетто',
+    verschil_neutr: '↔ Практично без різниці нетто',
+    uitsp_bron: 'Джерело доходу',
+    uitsp_oud: 'Зараз',
+    uitsp_nw: 'Потім',
+    netto_sal: 'Нетто зарплата',
+    vakantiegeld_lbl: 'Відпускні',
+    vakantiegeld_noot: '8% від брутто',
+    bijstand_lbl: 'Доплата допомоги',
+    zt_lbl: 'Медична субсидія',
+    ht_lbl: 'Субсидія на оренду',
+    kgb_lbl: 'Дитячий бюджет',
+    akw_lbl: 'Дитячі виплати (AKW)',
+    ongewijzigd: 'незмінно',
+    huur_buiten: 'поза діапазоном',
+    scenario_meer: '+ Більше годин',
+    scenario_minder: '− Менше годин',
+    scenario_opnieuw: '↩ Почати знову',
+    blok1_titel: '💶 У вашому гаманці',
+    blok2_titel: '📋 Права, які ви накопичуєте',
+    blok3_titel: '⏱️ Що змінюється у вашому житті',
+    blok4_titel: '🚀 Можливості, які це створює',
+    blok2_basis: 'Як тільки ви починаєте працювати, ви накопичуєте права, яких немає при допомозі:',
+    blok2_ww: '<strong>Право на безробіття:</strong> після 26 тижнів роботи ви маєте право на допомогу по безробіттю.',
+    blok2_pensioen: '<strong>Пенсія:</strong> через роботодавця ви щомісяця накопичуєте пенсію. При допомозі нічого не накопичується.',
+    blok2_ziekte: '<strong>Оплата лікарняного:</strong> як працівник ви маєте право на щонайменше 70% зарплати при хворобі до 2 років.',
+    blok2_loopbaan: '<strong>Кар\'єрний бюджет:</strong> через UWV ви можете отримати доступ до навчання та профорієнтації.',
+    blok3_basis: 'Робота змінює більше, ніж просто дохід:',
+    blok3_structuur: '<strong>Структура:</strong> регулярний робочий тиждень дає ритм і порядок у вашому житті.',
+    blok3_contact: '<strong>Соціальні контакти:</strong> колеги та робоче місце самі по собі є соціальною мережею.',
+    blok3_zelf: '<strong>Незалежність:</strong> власний дохід дає більший контроль над своїм життям.',
+    blok4_basis: 'Кожен рік досвіду роботи має значення:',
+    blok4_cv: '<strong>У вашому резюме:</strong> досвід роботи підвищує ваші шанси при майбутніх зверненнях.',
+    blok4_loon: '<strong>Підвищення зарплати:</strong> після року роботи зарплата часто зростає автоматично.',
+    blok4_doorgroei: '<strong>Можливості росту:</strong> більше годин, вища посада — перший крок полегшує наступний.',
+    advies: 'Хочете знати що це означає для вашої ситуації? Зверніться до <strong>Sociaal Wijkteam</strong> або <strong>VluchtelingenWerk</strong> — вони допоможуть безкоштовно.',
+    disclaimer: 'Орієнтовний розрахунок на основі норм 2026. Цифри є наближеними.',
+    opnieuw: '↩ Почати знову',
+    q_kot: 'Чи користуються ваші діти дитячим садком? (ясла, продовжений день або домашній вихователь)',
+    kot_ja: 'Так, вони ходять до садка',
+    kot_nee: 'Ні, без дитячого садка',
+    q_kot_soort: 'Який тип догляду?',
+    kot_dag: '🏠 Ясла / садок (0–4 роки)',
+    kot_bso: '🎒 Продовжений день (4–12 років)',
+    kot_go: '👩 Домашній вихователь',
+    q_kot_uren: 'Скільки годин на місяць діти проводять у садку?',
+    kot_uren_placeholder: 'напр. 100',
+    kot_uren_hint: 'Макс. 230 годин на дитину на місяць.',
+    kot_uren_fout: 'Введіть кількість годин від 1 до 230.',
+    kot_uren_label: 'год/міс',
+    kot_bevestiging: 'При цьому доході ви, мабуть, отримаєте до <strong>{max}/міс</strong> субсидії на дитячий садок. Примітка: тільки якщо ви працюєте, навчаєтесь або проходите програму інтеграції.',
+    kot_lbl: 'Субсидія на дитячий садок',
+    kot_noot: 'орієнтовно',
+  },
+  fa: {
+    welkom: 'سلام! 👋 به شما کمک می‌کنم ببینید <strong>با درآمد بیشتر چه چیزی تغییر می‌کند</strong>. چند سوال می‌پرسم.',
+    q_situatie: 'وضعیت فعلی شما چیست؟',
+    sit: ['کمک معیشتی (bijstand) دریافت می‌کنم','الان کار می‌کنم و ساعات بیشتر را در نظر دارم','کمک دیگری دریافت می‌کنم (بیکاری، مرخصی استعلاجی…)','درآمدم خیلی کم است یا ندارم'],
+    q_partner: 'با شریک زندگی می‌کنید؟',
+    q_huisgenoten: 'آیا افراد دیگری غیر از شما (و شریکتان) در خانه زندگی می‌کنند؟',
+    hg_ja: 'بله',
+    hg_nee: 'خیر',
+    q_huisgenoot_leeftijd: 'هم‌خانه {n} چند سال دارد؟',
+    huisgenoot_hint: 'سن به سال — این تعیین می‌کند آیا نرم تقسیم هزینه اعمال می‌شود',
+    q_nog_iemand: 'آیا کس دیگری هم با شما زندگی می‌کند؟',
+    hg_kind: 'فرزند',
+    hg_jongvolw: 'جوان (18–26)',
+    hg_volwassene: 'بزرگسال (27+)',
+    hg_kd_melding: 'با {n} نفر بالای 27 سال در خانه، نرم تقسیم هزینه اعمال می‌شود. نرم کمک معیشتی شما تقریباً <strong>{norm}/ماه</strong> است.',
+    hg_kind_melding: 'برای کمک‌هزینه‌ها {n} فرزند زیر 18 سال را حساب می‌کنم.',
+    leeftijd_fout: 'لطفاً سنی بین 0 تا 100 وارد کنید.',
+    partner: ['نه، تنها زندگی می‌کنم','بله، با شریک زندگی می‌کنم'],
+    q_kinderen: 'فرزند زیر 18 سال دارید که با شما زندگی می‌کند؟',
+    kind: ['بدون فرزند','1 فرزند','2 فرزند','3 فرزند یا بیشتر'],
+    q_leeftijd: 'چند سال دارید؟',
+    leeftijd_hint: 'سن خود را به سال وارد کنید',
+    leeftijd_placeholder: 'مثال: 34',
+    aow_bericht: 'بالای 67 سال قوانین دیگری اعمال می‌شود. با شهرداری تماس بگیرید.',
+    jong_bericht: 'بین 18 تا 21 سال نرم پایین‌تری اعمال می‌شود. محاسبه را ادامه می‌دهم اما جزئیات را با شهرداری هم بررسی کنید.',
+    q_huur: 'ماهانه چقدر اجاره می‌پردازید؟',
+    huur_hint: 'اجاره خالص بدون هزینه‌های خدمات. مطمئن نیستید؟ تخمین بزنید.',
+    huur_placeholder: 'مثال: 650',
+    huur_skip: 'اجاره نمی‌دهم یا نمی‌دانم',
+    q_huidig: 'الان ماهانه چقدر درآمد دارید — شامل کمک‌هزینه؟',
+    huidig_hint: 'کل درآمد خالص ماهانه‌تان را وارد کنید.',
+    huidig_placeholder: 'مثال: 1400',
+    q_nieuw: 'ماهانه چقدر ناخالص درآمد خواهید داشت؟',
+    nieuw_hint: 'حداقل دستمزد 2026: ماهانه €1,995 ناخالص تمام‌وقت (40 ساعت).',
+    nieuw_placeholder: 'مثال: 1800',
+    q_uren: 'در هفته چند ساعت کار خواهید کرد؟',
+    uren_hint: 'تعداد ساعات را وارد کنید — حداقل دستمزد را به صورت خودکار پر می‌کنم.',
+    uren_prefix: 'ساعت',
+    uren_placeholder: 'مثلاً ۳۲',
+    uren_label: 'ساعت/هفته',
+    uren_fout: 'لطفاً عددی بین ۱ تا ۶۰ وارد کنید.',
+    rekenen: 'در حال محاسبه…',
+    res_titel: 'چه تغییر می‌کند؟',
+    res_oud_lbl: 'اکنون',
+    res_nw_lbl: 'با درآمد بیشتر',
+    res_mnd: 'خالص در ماه',
+    verschil_pos: '↑ ماهانه {x} بیشتر خالص',
+    verschil_neg: '↓ ماهانه {x} کمتر خالص',
+    verschil_neutr: '↔ تفاوت خالص ناچیز است',
+    uitsp_bron: 'منبع درآمد',
+    uitsp_oud: 'اکنون',
+    uitsp_nw: 'بعداً',
+    netto_sal: 'حقوق خالص',
+    vakantiegeld_lbl: 'حق مرخصی',
+    vakantiegeld_noot: '۸٪ از ناخالص',
+    bijstand_lbl: 'تکمیل کمک معیشتی',
+    zt_lbl: 'یارانه بهداشتی',
+    ht_lbl: 'یارانه اجاره',
+    kgb_lbl: 'بودجه مرتبط با کودک',
+    akw_lbl: 'کمک هزینه کودک (AKW)',
+    ongewijzigd: 'ثابت',
+    huur_buiten: 'خارج از محدوده',
+    scenario_meer: '+ ساعات بیشتر',
+    scenario_minder: '− ساعات کمتر',
+    scenario_opnieuw: '↩ شروع مجدد',
+    blok1_titel: '💶 در کیف پول شما',
+    blok2_titel: '📋 حقوقی که می‌سازید',
+    blok3_titel: '⏱️ چه چیزی در زندگی‌تان تغییر می‌کند',
+    blok4_titel: '🚀 فرصت‌هایی که این ایجاد می‌کند',
+    blok2_basis: 'با شروع کار، حقوقی می‌سازید که در کمک معیشتی ندارید:',
+    blok2_ww: '<strong>حق بیمه بیکاری:</strong> پس از 26 هفته کار در صورت از دست دادن شغل حق بیمه بیکاری دارید.',
+    blok2_pensioen: '<strong>بازنشستگی:</strong> از طریق کارفرما هر ماه بازنشستگی جمع می‌کنید. در کمک معیشتی چیزی جمع نمی‌شود.',
+    blok2_ziekte: '<strong>حقوق در بیماری:</strong> به عنوان کارمند تا 2 سال حداقل 70٪ حقوق در بیماری دارید.',
+    blok2_loopbaan: '<strong>بودجه شغلی:</strong> از طریق UWV می‌توانید به آموزش و راهنمایی شغلی دسترسی داشته باشید.',
+    blok3_basis: 'کار بیشتر از درآمد را تغییر می‌دهد:',
+    blok3_structuur: '<strong>نظم:</strong> هفته کاری منظم به روزهایتان ریتم و شفافیت می‌دهد.',
+    blok3_contact: '<strong>روابط اجتماعی:</strong> همکاران و محل کار شبکه اجتماعی در خود هستند.',
+    blok3_zelf: '<strong>استقلال:</strong> درآمد خودتان کنترل بیشتری بر زندگی‌تان می‌دهد.',
+    blok4_basis: 'هر سال تجربه کاری اهمیت دارد:',
+    blok4_cv: '<strong>در رزومه‌تان:</strong> تجربه کاری شانس‌تان را در درخواست‌های آینده افزایش می‌دهد.',
+    blok4_loon: '<strong>افزایش حقوق:</strong> بعد از یک سال، حقوق اغلب به طور خودکار افزایش می‌یابد.',
+    blok4_doorgroei: '<strong>پیشرفت:</strong> ساعات بیشتر، موقعیت بالاتر — اولین قدم بعدی را آسان‌تر می‌کند.',
+    advies: 'می‌خواهید بدانید این برای وضعیت شما چه معنایی دارد؟ با <strong>Sociaal Wijkteam</strong> یا <strong>VluchtelingenWerk</strong> تماس بگیرید — رایگان کمک می‌کنند.',
+    disclaimer: 'محاسبه تقریبی بر اساس نرم‌های 2026. ارقام تقریبی هستند.',
+    opnieuw: '↩ شروع مجدد',
+    q_kot: 'آیا فرزندانتان از مراقبت کودک استفاده می‌کنند؟ (مهدکودک، مراقبت بعد از مدرسه یا پرستار)',
+    kot_ja: 'بله، به مراقبت می‌روند',
+    kot_nee: 'خیر، مراقبت کودک نداریم',
+    q_kot_soort: 'نوع مراقبت چیست؟',
+    kot_dag: '🏠 مهدکودک (0–4 سال)',
+    kot_bso: '🎒 مراقبت بعد از مدرسه (4–12 سال)',
+    kot_go: '👩 پرستار خانگی',
+    q_kot_uren: 'فرزندانتان ماهانه چند ساعت به مراقبت می‌روند؟',
+    kot_uren_placeholder: 'مثال: 100',
+    kot_uren_hint: 'حداکثر 230 ساعت در ماه به ازای هر فرزند.',
+    kot_uren_fout: 'بین 1 تا 230 ساعت وارد کنید.',
+    kot_uren_label: 'ساعت/ماه',
+    kot_bevestiging: 'با این درآمد احتمالاً تا <strong>{max}/ماه</strong> کمک هزینه مراقبت کودک دریافت می‌کنید. توجه: فقط در صورت کار، تحصیل یا دوره یکپارچه‌سازی معتبر است.',
+    kot_lbl: 'کمک هزینه مراقبت کودک',
+    kot_noot: 'تقریبی',
+  },
+};
+
+// ─── NORMEN 2026 ──────────────────────────────────────────────────────────────
+const N = {
+  zt: { dr_s:40857, dr_p:51407, mx_s:128, mx_p:244 },
+  // Huurtoeslag 2026 — nieuw stelsel per 1-1-2026 (lineaire afbouw)
+  // Bron: Volkshuisvesting NL / Dienst Toeslagen / huurgeschil.nl
+  ht: {
+    kwal_grens:  498.20,   // kwaliteitskortingsgrens (ook jongerengrens)
+    aftop_12:    713.02,   // aftoppingsgrens 1–2 personen
+    aftop_3plus: 764.14,   // aftoppingsgrens 3+ personen
+    max_huur:    932.32,   // maximale huurgrens
+    basishuur_s: 202.52,   // vaste eigen bijdrage alleenstaand
+    basishuur_p: 200.71,   // vaste eigen bijdrage meerpersoonshuishouden
+    min_ink_s:   23425,    // minimuminkomen alleenstaand (onder = volle toeslag)
+    min_ink_p:   31500,    // minimuminkomen meerpersoonshuishouden
+    max_ink_s:   31875,    // maximuminkomen alleenstaand (boven = geen toeslag)
+    max_ink_p:   43675,    // maximuminkomen meerpersoonshuishouden
+    afbouw_s:    0.27,     // €0,27 toeslag minder per euro boven minimuminkomen
+    afbouw_p:    0.22,     // €0,22 toeslag minder per euro boven minimuminkomen
+  },
+  kgb: { k1:1530, k2:1019, k3:376, grens:24557, afbouw:0.0683 },
+  lh: { s1g:38441, s1t:.3597, s2t:.4950,
+        ahk:3099, ahk_s:24813, ahk_e:75518,
+        ak:5052, ak_oe:24813, ak_as:43071, ak_ae:124935 },
+  bijstand: {
+    s21: 1401.50, p21: 2002.13,
+    saow: 1564.69, paow: 2144.16,
+    s18: 345.99, p18: 691.98,
+    jong_aanv: 746.45,
+    kd_pct: {2:.50, 3:.4333, 4:.40, 5:.38},
+  },
+  wml: 14.71,  // uurloon per 1-1-2026
+  akw: 105,    // ~€315 per kwartaal per kind / 3 maanden
+  // Kinderopvangtoeslag 2026 — bron: Rijksoverheid / Dienst Toeslagen
+  kot: {
+    max_uur_dag:  11.23,  // dagopvang
+    max_uur_bso:   9.98,  // buitenschoolse opvang
+    max_uur_go:    8.49,  // gastouderopvang
+    max_uren_mnd: 230,    // max uren per kind per maand
+    // Opzoektabel: [toetsingsinkomen_t/m, pct_1e_kind, pct_volgend]
+    // Bron: officiële tabel Rijksoverheid 2026
+    tabel: [
+      [56412,  96.0, 96.0],
+      [58184,  95.5, 95.6],
+      [59957,  94.8, 95.6],
+      [61895,  93.9, 95.6],
+      [65695,  92.4, 95.6],
+      [69492,  91.6, 95.2],
+      [73292,  90.5, 94.6],
+      [77094,  88.2, 94.2],
+      [80891,  85.9, 93.9],
+      [84693,  83.7, 93.2],
+      [88491,  81.2, 92.7],
+      [92291,  78.9, 92.2],
+      [96091,  76.7, 91.5],
+      [99889,  74.3, 90.9],
+      [103694, 72.1, 90.5],
+      [107492, 69.6, 90.2],
+      [111290, 67.3, 89.5],
+      [115090, 65.1, 89.1],
+      [118963, 62.7, 88.6],
+      [122857, 60.6, 87.9],
+      [126747, 58.5, 87.4],
+      [130638, 56.4, 87.0],
+      [134527, 54.2, 86.7],
+      [138420, 52.3, 86.0],
+      [142312, 50.4, 85.4],
+      [146205, 48.5, 85.0],
+      [150092, 46.5, 84.4],
+      [153982, 44.5, 84.0],
+      [157877, 42.5, 83.3],
+      [161766, 40.5, 82.7],
+      [165657, 38.5, 81.7],
+      [169547, 36.5, 81.4],
+      [Infinity, 36.5, 68.2],
+    ],
+  },
+};
+
+// ─── STAAT ────────────────────────────────────────────────────────────────────
+let taal = 'nl';
+const S = { situatie:null, partner:false, huisgenoten:[], leeftijd:null,
+            huur:0, huidigNetto:0, nieuwBruto:0, uren:40,
+            kotActief:false, kotSoort:'dag', kotUrenMnd:0, kotKinderen:0 };
+
+// Afgeleide groepen uit S.huisgenoten
+function kinderenOnder18()   { return S.huisgenoten.filter(l => l < 18).length; }
+function kinderenOnder12()   { return S.huisgenoten.filter(l => l < 12).length; }
+function volwassenen27plus()  { return S.huisgenoten.filter(l => l >= 27).length; }
+// Kostendelers: gebruiker zelf (1) + huisgenoten van 27+. Partner telt niet apart mee.
+function aantalKostendelers() { return 1 + volwassenen27plus(); }
+
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+const s = k => (T[taal]||T.nl)[k] ?? T.nl[k] ?? k;
+const fmt = n => '€' + Math.round(n).toLocaleString('nl-NL');
+const B = () => document.getElementById('berichten');
+const IZ = () => document.getElementById('invoer-zone');
+const vrtg = p => document.getElementById('voortgang').style.width = p + '%';
+
+function scrollNaar() {
+  setTimeout(() => B().scrollTo({top:B().scrollHeight, behavior:'smooth'}), 80);
+}
+function solBericht(tekst, klasse='') {
+  const d = document.createElement('div');
+  d.className = 'bericht-sol';
+  d.innerHTML = `<div class="sol-avatar">☀️</div><div class="bel-sol ${klasse}">${tekst}</div>`;
+  B().appendChild(d); scrollNaar(); return d;
+}
+function userBericht(tekst) {
+  const d = document.createElement('div');
+  d.className = 'bericht-user';
+  d.innerHTML = `<div class="bel-user">${tekst}</div>`;
+  B().appendChild(d); scrollNaar();
+}
+async function sol(tekst, ms=320, klasse='') {
+  const ty = document.createElement('div');
+  ty.className = 'typing';
+  ty.innerHTML = `<div class="sol-avatar">☀️</div><div class="typing-dots"><span></span><span></span><span></span></div>`;
+  B().appendChild(ty); scrollNaar();
+  await new Promise(r => setTimeout(r, ms));
+  ty.remove();
+  return solBericht(tekst, klasse);
+}
+function toonKeuzes(opties, onKlik) {
+  IZ().innerHTML = '';
+  const rij = document.createElement('div'); rij.className = 'keuze-rij';
+  opties.forEach(o => {
+    const b = document.createElement('button'); b.className = 'keuze-btn';
+    b.innerHTML = o.label;
+    b.onclick = () => { IZ().innerHTML = ''; onKlik(o); };
+    rij.appendChild(b);
+  });
+  IZ().appendChild(rij); scrollNaar();
+}
+function toonGetalInvoer({prefix='€', placeholder='', hint='', skipLabel='', prefill='', onKlik}) {
+  IZ().innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.innerHTML = `
+    <div class="bedrag-rij">
+      <div class="bedrag-wrap">
+        <div class="bedrag-prefix">${prefix}</div>
+        <input type="number" inputmode="numeric" class="bedrag-input" id="g-inp"
+          placeholder="${placeholder}" value="${prefill}" min="0" max="9999" autocomplete="off">
+      </div>
+      <button class="stuur-btn" id="g-stuur">→</button>
+    </div>
+    ${hint ? `<div class="invoer-hint">${hint}</div>` : ''}
+    ${skipLabel ? `<button class="overslaan-link" id="g-skip">${skipLabel}</button>` : ''}`;
+  IZ().appendChild(wrap);
+  const inp = document.getElementById('g-inp');
+  const go = () => { const v = parseFloat(inp.value)||0; IZ().innerHTML=''; onKlik(v, false); };
+  document.getElementById('g-stuur').onclick = go;
+  inp.onkeydown = e => { if(e.key==='Enter') go(); };
+  if(skipLabel) document.getElementById('g-skip').onclick = () => { IZ().innerHTML=''; onKlik(0, true); };
+  setTimeout(() => { inp.focus(); }, 100);
+  scrollNaar();
+}
+
+// ─── BEREKENINGEN ─────────────────────────────────────────────────────────────
+function bijstandNorm() {
+  const l = S.leeftijd, p = S.partner;
+  if (l < 21) return p ? N.bijstand.p18 : N.bijstand.s18;
+  // Kostendelersnorm: alleen bij bijstand, alleen als er 27+-huisgenoten zijn
+  const kd = aantalKostendelers();
+  if (!p && kd >= 2) {
+    // Kostendelersnorm per persoon = percentage van gehuwdennorm
+    const pct = N.bijstand.kd_pct[Math.min(kd, 5)] || N.bijstand.kd_pct[5];
+    return Math.round(N.bijstand.p21 * pct * 100) / 100;
+  }
+  return p ? N.bijstand.p21 : N.bijstand.s21;
+}
+// Netto maandloon EXCLUSIEF vakantiegeld — gebruikt voor bijstandsaanvulling
+function berekenNettoExclVG(bruto) {
+  if (bruto <= 0) return 0;
+  const bj = bruto * 12, L = N.lh;
+  let bel = bj <= L.s1g ? bj*L.s1t : L.s1g*L.s1t + (bj-L.s1g)*L.s2t;
+  let ahk = L.ahk;
+  if (bj > L.ahk_s) ahk = Math.max(0, L.ahk - (Math.min(bj,L.ahk_e)-L.ahk_s)/(L.ahk_e-L.ahk_s)*L.ahk);
+  let ak = 0;
+  if (bj <= L.ak_oe) ak = bj/L.ak_oe*L.ak;
+  else if (bj <= L.ak_as) ak = L.ak;
+  else if (bj <= L.ak_ae) ak = Math.max(0, L.ak*(1-(bj-L.ak_as)/(L.ak_ae-L.ak_as)));
+  return Math.round(Math.max(0, bj - bel + ahk + ak) / 12);
+}
+// Netto maandloon INCLUSIEF vakantiegeld — voor weergave en totaalberekening
+function berekenNetto(bruto) {
+  if (bruto <= 0) return 0;
+  const bj = bruto * 12, L = N.lh;
+  const margTarief = bj <= L.s1g ? L.s1t : L.s2t;
+  return berekenNettoExclVG(bruto) + Math.round(bruto * 0.08 * (1 - margTarief));
+}
+function berekenZt(ji) {
+  const Z = N.zt, dr = S.partner?Z.dr_p:Z.dr_s, mx = S.partner?Z.mx_p:Z.mx_s;
+  return ji >= dr ? 0 : Math.round(mx * (1 - ji/dr));
+}
+function berekenHt(ji) {
+  const H = N.ht, huur = S.huur;
+  if (huur <= 0) return 0;
+
+  // Jongeren (<21) krijgen toeslag alleen over deel tot kwaliteitskortingsgrens
+  const isJong = S.leeftijd !== null && S.leeftijd < 21;
+  const maxHuurVoorRecht = isJong ? H.kwal_grens : H.max_huur;
+  if (huur > maxHuurVoorRecht) {
+    // Boven jongerengrens: alleen recht over deel t/m kwal_grens, maar alleen als huur <= max_huur
+    // (vanaf 2026 vervalt huurgrens als voorwaarde, maar berekening stopt bij max_huur)
+    if (!isJong) return 0; // huur boven 932,32 → geen toeslag
+  }
+
+  const minInk = S.partner ? H.min_ink_p : H.min_ink_s;
+  const maxInk = S.partner ? H.max_ink_p : H.max_ink_s;
+  if (ji > maxInk) return 0;
+
+  // Basishuur (vaste eigen bijdrage)
+  const basishuur = S.partner ? H.basishuur_p : H.basishuur_s;
+
+  // Rekenhuur = kale huur, maar maximaal begrensd per tier
+  const rekenhuur = isJong ? Math.min(huur, H.kwal_grens) : huur;
+  const aftop = kinderenOnder18() >= 3 ? H.aftop_3plus : H.aftop_12;
+
+  // Drietraps vergoeding (100% / 65% / 40%)
+  // Deel A: basishuur → kwaliteitskortingsgrens: 100% vergoed
+  const deelA = Math.max(0, Math.min(rekenhuur, H.kwal_grens) - basishuur);
+  // Deel B: kwaliteitskortingsgrens → aftoppingsgrens: 65% vergoed
+  const deelB = Math.max(0, Math.min(rekenhuur, aftop) - H.kwal_grens) * 0.65;
+  // Deel C: aftoppingsgrens → max_huur: 40% vergoed (niet voor jongeren)
+  const deelC = isJong ? 0 : Math.max(0, Math.min(rekenhuur, H.max_huur) - aftop) * 0.40;
+
+  const maxToeslag = Math.max(0, deelA + deelB + deelC);
+
+  // Lineaire inkomensafbouw boven minimuminkomen
+  if (ji <= minInk) return Math.round(maxToeslag);
+  const afbouw = (S.partner ? H.afbouw_p : H.afbouw_s) * (ji - minInk) / 12; // per maand
+  return Math.round(Math.max(0, maxToeslag - afbouw));
+}
+function berekenKgb(ji) {
+  const kind = kinderenOnder18();
+  if (kind === 0) return 0;
+  const K = N.kgb;
+  let b = 0;
+  if (kind >= 1) b += K.k1;
+  if (kind >= 2) b += K.k2;
+  if (kind >= 3) b += K.k3;
+  return Math.round(Math.max(0, b - (ji>K.grens ? (ji-K.grens)*K.afbouw : 0)) / 12);
+}
+function berekenKot(jaarinkomen) {
+  if (!S.kotActief || S.kotKinderen === 0 || S.kotUrenMnd === 0) return 0;
+  const K = N.kot;
+  // Max uurtarief per soort opvang
+  const maxUur = S.kotSoort === 'bso' ? K.max_uur_bso
+               : S.kotSoort === 'go'  ? K.max_uur_go
+               : K.max_uur_dag;
+  // Vergoedingspercentage uit tabel op basis van toetsingsinkomen
+  const pctRij = K.tabel.find(r => jaarinkomen <= r[0]);
+  const pct1 = pctRij ? pctRij[1] / 100 : 0.365;
+  const pct2 = pctRij ? pctRij[2] / 100 : 0.682;
+  // Uren per maand begrenzen op maximum
+  const uren = Math.min(S.kotUrenMnd, K.max_uren_mnd);
+  // Eerste kind: pct1, volgende kinderen: pct2
+  let totaal = uren * maxUur * pct1;
+  if (S.kotKinderen >= 2) totaal += uren * maxUur * pct2 * (S.kotKinderen - 1);
+  return Math.round(totaal);
+}
+
+// ─── STAPPEN ──────────────────────────────────────────────────────────────────
+let _bezig = false;
+async function start() {
+  if (_bezig) return;
+  _bezig = true;
+  B().innerHTML = ''; IZ().innerHTML = ''; vrtg(0);
+  Object.assign(S, {situatie:null,partner:false,huisgenoten:[],leeftijd:null,huur:0,huidigNetto:0,nieuwBruto:0,uren:40,
+                    kotActief:false,kotSoort:'dag',kotUrenMnd:0,kotKinderen:0});
+  await sol(s('welkom'), 200);
+  _bezig = false;
+  stap_situatie();
+}
+
+async function stap_situatie() {
+  vrtg(10);
+  await sol(s('q_situatie'), 300);
+  toonKeuzes(s('sit').map((l,i) => ({label:l, val:i})), async o => {
+    S.situatie = o.val; userBericht(o.label); stap_partner();
+  });
+}
+
+async function stap_partner() {
+  vrtg(18);
+  await sol(s('q_partner'), 300);
+  toonKeuzes(s('partner').map((l,i) => ({label:l, val:i===1})), async o => {
+    S.partner = o.val; userBericht(o.label); stap_huisgenoten_intro();
+  });
+}
+
+async function stap_huisgenoten_intro() {
+  vrtg(28);
+  await sol(s('q_huisgenoten'), 300);
+  toonKeuzes([
+    {label: s('hg_nee'), val: false},
+    {label: s('hg_ja'),  val: true},
+  ], async o => {
+    userBericht(o.label);
+    if (!o.val) {
+      stap_leeftijd();
+    } else {
+      stap_huisgenoot_leeftijd();
+    }
+  });
+}
+
+async function stap_huisgenoot_leeftijd() {
+  const nr = S.huisgenoten.length + 1;
+  const vraag = s('q_huisgenoot_leeftijd').replace('{n}', nr);
+  await sol(vraag, 250);
+  toonGetalInvoer({
+    prefix: '🎂',
+    placeholder: s('leeftijd_placeholder'),
+    hint: s('huisgenoot_hint'),
+    onKlik: async (v) => {
+      if (v < 0 || v > 100) {
+        await sol(s('leeftijd_fout'), 200, 'waarschuwing');
+        stap_huisgenoot_leeftijd(); return;
+      }
+      S.huisgenoten.push(v);
+      // Bevestigingsbericht met samenvatting
+      const omschr = v < 18 ? s('hg_kind') : v < 27 ? s('hg_jongvolw') : s('hg_volwassene');
+      userBericht(`${v} jaar — ${omschr}`);
+      // Nog iemand?
+      await sol(s('q_nog_iemand'), 250);
+      toonKeuzes([
+        {label: s('hg_ja'),  val: true},
+        {label: s('hg_nee'), val: false},
+      ], async o => {
+        userBericht(o.label);
+        if (o.val) {
+          stap_huisgenoot_leeftijd();
+        } else {
+          // Geef samenvatting als er huisgenoten zijn
+          const kd = aantalKostendelers();
+          const k18 = kinderenOnder18();
+          const v27 = volwassenen27plus();
+          if (S.situatie === 0 && kd >= 2) {
+            await sol(s('hg_kd_melding').replace('{n}', kd).replace('{norm}', fmt(bijstandNorm())), 350, 'reactie');
+          } else if (k18 > 0) {
+            await sol(s('hg_kind_melding').replace('{n}', k18), 300, 'reactie');
+          }
+          stap_leeftijd();
+        }
+      });
+    }
+  });
+}
+
+async function stap_leeftijd() {
+  vrtg(42);
+  await sol(s('q_leeftijd'), 300);
+  toonGetalInvoer({
+    prefix: '🎂',
+    placeholder: s('leeftijd_placeholder'),
+    hint: s('leeftijd_hint'),
+    onKlik: async (v) => {
+      if (v < 16 || v > 110) {
+        await sol(s('leeftijd_fout'), 200, 'waarschuwing');
+        stap_leeftijd(); return;
+      }
+      S.leeftijd = v;
+      userBericht(v + ' jaar');
+      if (v >= 67) {
+        await sol(s('aow_bericht'), 400, 'info');
+        vrtg(100); IZ().innerHTML = `<button class="overslaan-link" onclick="start()">↩ ${s('opnieuw')}</button>`;
+        return;
+      }
+      if (v >= 18 && v < 21) await sol(s('jong_bericht'), 400, 'reactie');
+      stap_huur();
+    }
+  });
+}
+
+async function stap_huur() {
+  vrtg(54);
+  await sol(s('q_huur'), 300);
+  toonGetalInvoer({
+    placeholder: s('huur_placeholder'),
+    hint: s('huur_hint'),
+    skipLabel: s('huur_skip'),
+    onKlik: async (v, skip) => {
+      S.huur = skip ? 0 : v;
+      userBericht(skip ? s('huur_skip') : fmt(v));
+      // Kinderopvang vragen als er kinderen onder 12 zijn
+      if (kinderenOnder12() > 0) stap_kinderopvang();
+      else stap_huidig();
+    }
+  });
+}
+
+async function stap_kinderopvang() {
+  vrtg(60);
+  await sol(s('q_kot'), 300);
+  toonKeuzes([
+    { label: s('kot_nee'), val: false },
+    { label: s('kot_ja'),  val: true  },
+  ], async o => {
+    userBericht(o.label);
+    if (!o.val) {
+      S.kotActief = false;
+      stap_huidig();
+    } else {
+      S.kotActief = true;
+      stap_kot_soort();
+    }
+  });
+}
+
+async function stap_kot_soort() {
+  await sol(s('q_kot_soort'), 250);
+  toonKeuzes([
+    { label: s('kot_dag'), val: 'dag' },
+    { label: s('kot_bso'), val: 'bso' },
+    { label: s('kot_go'),  val: 'go'  },
+  ], async o => {
+    S.kotSoort = o.val; userBericht(o.label);
+    stap_kot_uren();
+  });
+}
+
+async function stap_kot_uren() {
+  await sol(s('q_kot_uren'), 250);
+  // Aantal kinderen onder 12 als prefill voor kotKinderen
+  S.kotKinderen = kinderenOnder12();
+  toonGetalInvoer({
+    prefix: '🕐',
+    placeholder: s('kot_uren_placeholder'),
+    hint: s('kot_uren_hint'),
+    onKlik: async (v) => {
+      if (v <= 0 || v > 230) {
+        await sol(s('kot_uren_fout'), 200, 'waarschuwing');
+        stap_kot_uren(); return;
+      }
+      S.kotUrenMnd = v;
+      userBericht(v + ' ' + s('kot_uren_label'));
+      // Korte bevestiging met schatting
+      const maxUur = S.kotSoort === 'bso' ? N.kot.max_uur_bso
+                   : S.kotSoort === 'go'  ? N.kot.max_uur_go
+                   : N.kot.max_uur_dag;
+      const schattingMax = Math.round(v * maxUur * 0.96 * S.kotKinderen);
+      await sol(s('kot_bevestiging').replace('{max}', fmt(schattingMax)), 300, 'reactie');
+      stap_huidig();
+    }
+  });
+}
+
+async function stap_huidig() {
+  vrtg(66);
+  // Als bijstand: geef bijstandsnorm als suggestie
+  const norm = bijstandNorm();
+  const prefill = S.situatie === 0 ? Math.round(norm) : '';
+  if (S.situatie === 0) {
+    await sol(`Je bijstandsnorm is waarschijnlijk ongeveer <strong>${fmt(norm)}/mnd</strong>. Klopt dat? Pas het aan als je situatie anders is.`, 350, 'reactie');
+  }
+  await sol(s('q_huidig'), 250);
+  toonGetalInvoer({
+    placeholder: s('huidig_placeholder'),
+    hint: s('huidig_hint'),
+    prefill: prefill,
+    onKlik: async (v) => {
+      S.huidigNetto = v;
+      userBericht(fmt(v) + '/mnd');
+      stap_uren();
+    }
+  });
+}
+
+async function stap_uren() {
+  vrtg(78);
+  await sol(s('q_uren'), 300);
+  await sol(s('uren_hint'), 200, 'reactie');
+  toonGetalInvoer({
+    prefix: s('uren_prefix') || 'uur',
+    placeholder: s('uren_placeholder') || '0',
+    hint: '',
+    onKlik: async (v) => {
+      if (v <= 0 || v > 60) {
+        await sol(s('uren_fout') || 'Vul een aantal uren in tussen 1 en 60.', 200, 'waarschuwing');
+        stap_uren();
+        return;
+      }
+      S.uren = v;
+      userBericht(v + ' ' + (s('uren_label') || 'uur/week'));
+      S.nieuwBruto = Math.round(N.wml * v * (52/12));
+      stap_bruto();
+    }
+  });
+}
+
+async function stap_bruto() {
+  vrtg(88);
+  await sol(s('q_nieuw'), 300);
+  toonGetalInvoer({
+    placeholder: s('nieuw_placeholder'),
+    hint: s('nieuw_hint'),
+    prefill: S.nieuwBruto,
+    onKlik: async (v) => {
+      if (v <= 0) { await sol('Vul een bedrag in groter dan 0.', 200, 'waarschuwing'); stap_bruto(); return; }
+      S.nieuwBruto = v;
+      userBericht(fmt(v) + ' bruto/mnd');
+      stap_berekenen();
+    }
+  });
+}
+
+// ─── BEREKENEN + RESULTAAT ────────────────────────────────────────────────────
+async function stap_berekenen() {
+  vrtg(95);
+  await sol(s('rekenen'), 500);
+  toonResultaat();
+}
+
+function toonResultaat(extra=0) {
+  // Huidig totaal = wat de gebruiker opgaf + toeslagen op basis van huidig inkomen
+  const huidigJaar = S.huidigNetto * 12 / 1.08;
+  const kotOudVal = berekenKot(huidigJaar);
+  const totOud = S.huidigNetto
+    + berekenZt(huidigJaar)
+    + berekenHt(huidigJaar)
+    + berekenKgb(huidigJaar)
+    + kotOudVal
+    + (kinderenOnder18()>0 ? kinderenOnder18()*N.akw : 0);
+
+  // Nieuw: netto salaris + eventuele bijstandsaanvulling + toeslagen
+  const nettoNw = berekenNetto(S.nieuwBruto + extra);
+  const brutoNwJaar = (S.nieuwBruto + extra) * 12;
+  const norm = bijstandNorm();
+  // Bijstand vult maandelijks aan op basis van netto EXCL. vakantiegeld (VG wordt apart verrekend)
+  const nettoNwExclVG = berekenNettoExclVG(S.nieuwBruto + extra);
+  const bijstandAanv = S.situatie === 0 ? Math.max(0, norm - nettoNwExclVG) : 0;
+  const vgNw = nettoNw - nettoNwExclVG; // vakantiegeld netto per maand
+  const totNw = nettoNw + bijstandAanv
+    + berekenZt(brutoNwJaar)
+    + berekenHt(brutoNwJaar)
+    + berekenKgb(brutoNwJaar)
+    + berekenKot(brutoNwJaar)
+    + (kinderenOnder18()>0 ? kinderenOnder18()*N.akw : 0);
+
+  // Toeslagen huidig (op basis van opgegeven netto, terugrekenen naar jaarinkomen)
+  // We benaderen huidig jaarinkomen als netto * 12 / 1.08 (excl. VG) voor toeslagenberekening
+  const ztOud = berekenZt(huidigJaar);
+  const htOud = berekenHt(huidigJaar);
+  const kgbOud = berekenKgb(huidigJaar);
+  const akw = kinderenOnder18()>0 ? kinderenOnder18()*N.akw : 0;
+
+  const ztNw = berekenZt(brutoNwJaar);
+  const htNw = berekenHt(brutoNwJaar);
+  const kgbNw = berekenKgb(brutoNwJaar);
+  const kotOud = kotOudVal;
+  const kotNw  = berekenKot(brutoNwJaar);
+
+  const verschil = totNw - totOud;
+
+  // Bandbreedte: ±10% marge wegens benaderingsfouten in toeslagen en belasting
+  // Breedte groter als huur in het gevoelige aftoppingsgebied zit
+  const htGevoelig = S.huur > 0 && S.huur > N.ht.kwal_grens && S.huur < N.ht.aftop_12 + 100;
+  const marge = htGevoelig ? 0.12 : 0.08;
+  const bandLaag = Math.round(totNw * (1 - marge));
+  const bandHoog = Math.round(totNw * (1 + marge));
+
+  let vKls, vTxt;
+  if (verschil > 30) { vKls='pos'; vTxt=s('verschil_pos').replace('{x}', fmt(verschil)); }
+  else if (verschil < -30) { vKls='neg'; vTxt=s('verschil_neg').replace('{x}', fmt(Math.abs(verschil))); }
+  else { vKls='neutr'; vTxt=s('verschil_neutr'); }
+
+  // Uitsplitsing rijen
+  function rij(kleur, naam, oud, nw, noot='') {
+    const nwKleur = nw>oud ? 'color:var(--groen)' : nw<oud ? 'color:var(--rood)' : '';
+    return `<div class="uitsp-rij">
+      <div class="uitsp-naam"><div class="uitsp-dot" style="background:${kleur};border:1px solid var(--rand)"></div>
+      ${naam}${noot?`<span style="font-size:.68rem;color:var(--tekst-licht);margin-left:4px">(${noot})</span>`:''}</div>
+      <div class="uitsp-bed">
+        <div class="uitsp-oud">${oud>0?fmt(oud):'—'}</div>
+        <div class="uitsp-nw" style="${nwKleur}">${nw>0?fmt(nw):'—'}</div>
+      </div></div>`;
+  }
+  function rijVast(kleur, naam, bed) {
+    return `<div class="uitsp-rij">
+      <div class="uitsp-naam"><div class="uitsp-dot" style="background:${kleur};border:1px solid var(--rand)"></div>
+      ${naam}<span style="font-size:.68rem;color:var(--tekst-licht);margin-left:4px">(${s('ongewijzigd')})</span></div>
+      <div class="uitsp-bed"><div class="uitsp-oud">${bed>0?fmt(bed):'—'}</div><div class="uitsp-nw">${bed>0?fmt(bed):'—'}</div></div>
+    </div>`;
+  }
+
+  const huurNoot = S.huur > N.ht.max_huur ? s('huur_buiten') : '';
+
+  // Vier blokken (inklapbaar)
+  function blok(id, titel, inhoud) {
+    return `<div class="res-blok">
+      <div class="res-blok-header" onclick="toggleBlok('${id}')">
+        <div class="res-blok-titel">${titel}</div>
+        <div class="res-blok-chevron" id="chev-${id}">▸</div>
+      </div>
+      <div class="res-blok-body" id="blok-${id}">${inhoud}</div>
+    </div>`;
+  }
+
+  const blok1 = `<p>Hierboven zie je het volledige overzicht: wat je nu ontvangt en wat er verandert in elke inkomstenbron.</p>
+    ${verschil < -30 ? `<p style="margin-top:8px">Het netto-effect is tijdelijk negatief — dat heet de armoedeval. Vraag bij je gemeente naar de <strong>vrijlating van arbeidsinkomen</strong>: de eerste 6 maanden mag je een deel van je verdiensten houden bovenop je bijstandsaanvulling. Ook de <strong>Participatietoeslag</strong> kan van toepassing zijn.</p>` : ''}`;
+
+  const blok2 = `<p>${s('blok2_basis')}</p><ul>
+    <li>${s('blok2_ww')}</li>
+    <li>${s('blok2_pensioen')}</li>
+    <li>${s('blok2_ziekte')}</li>
+    <li>${s('blok2_loopbaan')}</li></ul>`;
+
+  const blok3 = `<p>${s('blok3_basis')}</p><ul>
+    <li>${s('blok3_structuur')}</li>
+    <li>${s('blok3_contact')}</li>
+    <li>${s('blok3_zelf')}</li></ul>`;
+
+  const blok4 = `<p>${s('blok4_basis')}</p><ul>
+    <li>${s('blok4_cv')}</li>
+    <li>${s('blok4_loon')}</li>
+    <li>${s('blok4_doorgroei')}</li></ul>`;
+
+  // Scenario-knoppen
+  const uren = S.uren;
+  const minUren = uren <= 12;
+  const maxUren = uren >= 40;
+  const stapGrote = Math.round(N.wml * 8 * (52/12)); // 8 uur meer/minder
+
+  const kaart = document.createElement('div');
+  kaart.className = 'bericht-sol'; kaart.style.maxWidth = '100%';
+  kaart.innerHTML = `<div class="sol-avatar">☀️</div>
+  <div class="res-kaart">
+    <div class="res-fin-header">
+      <div class="res-fin-titel">💶 ${s('res_titel')}</div>
+      <div class="res-fin-sub">${s('res_mnd')}</div>
+    </div>
+    <div class="res-vergelijk">
+      <div class="res-kol">
+        <div class="res-kol-lbl">${s('res_oud_lbl')}</div>
+        <div class="res-kol-getal">${fmt(totOud)}</div>
+        <div class="res-kol-sub">${s('res_mnd')}</div>
+      </div>
+      <div class="res-kol nieuw">
+        <div class="res-kol-lbl">${s('res_nw_lbl')}</div>
+        <div class="res-kol-getal">${fmt(totNw)}</div>
+        <div class="res-kol-sub">${s('res_mnd')}</div>
+      </div>
+    </div>
+    <div class="res-verschil-rij ${vKls}">${vTxt}</div>
+    <div style="text-align:center;padding:6px 1.2rem 10px;font-size:0.75rem;color:var(--tekst-licht);border-bottom:1px solid var(--rand);">
+      Waarschijnlijk tussen <strong style="color:var(--tekst-zacht)">${fmt(bandLaag)}</strong> en <strong style="color:var(--tekst-zacht)">${fmt(bandHoog)}</strong> per maand — afhankelijk van uw exacte situatie
+    </div>
+    <div class="res-uitsp">
+      <div class="uitsp-hdr">
+        <span>${s('uitsp_bron')}</span>
+        <div class="uitsp-hdr-bed"><span style="width:64px;text-align:right">${s('uitsp_oud')}</span><span style="width:64px;text-align:right">${s('uitsp_nw')}</span></div>
+      </div>
+      ${rij('#EBF3EE', s('netto_sal'), 0, nettoNwExclVG)}
+      ${vgNw > 0 ? rij('#EBF3EE', s('vakantiegeld_lbl'), 0, vgNw, s('vakantiegeld_noot')) : ''}
+      ${S.situatie===0 ? rij('#F5F2EC', s('bijstand_lbl'), Math.max(0,norm-S.huidigNetto), bijstandAanv) : ''}
+      ${rij('#FDF3E0', s('zt_lbl'), ztOud, ztNw)}
+      ${S.huur>0 ? rij('#EFF6FF', s('ht_lbl'), htOud, htNw, huurNoot) : ''}
+      ${kinderenOnder18()>0 ? rij('#F5F3FF', s('kgb_lbl'), kgbOud, kgbNw) : ''}
+      ${S.kotActief ? rij('#E8F5E9', s('kot_lbl'), kotOud, kotNw, s('kot_noot')) : ''}
+      ${kinderenOnder18()>0 ? rijVast('#FFE4F0', s('akw_lbl'), akw) : ''}
+      <div class="uitsp-rij totaal">
+        <div class="uitsp-naam"><strong>Totaal</strong></div>
+        <div class="uitsp-bed">
+          <div class="uitsp-oud"><strong>${fmt(totOud)}</strong></div>
+          <div class="uitsp-nw">${fmt(totNw)}</div>
+        </div>
+      </div>
+    </div>
+    <div class="res-scenario">
+      ${!minUren ? `<button class="scenario-btn" onclick="scenarioUren(-8)">${s('scenario_minder')}</button>` : ''}
+      ${!maxUren ? `<button class="scenario-btn" onclick="scenarioUren(8)">${s('scenario_meer')}</button>` : ''}
+      <button class="scenario-btn" onclick="start()">${s('scenario_opnieuw')}</button>
+    </div>
+    ${blok('fin', s('blok1_titel'), blok1)}
+    ${blok('recht', s('blok2_titel'), blok2)}
+    ${blok('leven', s('blok3_titel'), blok3)}
+    ${blok('toekomst', s('blok4_titel'), blok4)}
+    <div class="res-disc">${s('disclaimer')}</div>
+  </div>`;
+  B().appendChild(kaart);
+
+  sol(s('advies'), 600, 'reactie');
+  vrtg(100);
+  IZ().innerHTML = `<div style="text-align:center;padding:.5rem 0"><button class="overslaan-link" onclick="start()">↩ ${s('opnieuw')}</button></div>`;
+  scrollNaar();
+}
+
+// Scenario: meer/minder uren — herbereken zonder opnieuw vragen
+function scenarioUren(delta) {
+  const nieuweUren = Math.max(8, Math.min(40, S.uren + delta));
+  S.uren = nieuweUren;
+  S.nieuwBruto = Math.round(N.wml * nieuweUren * (52/12));
+  // Verwijder vorige resultaatkaart
+  const kaarten = B().querySelectorAll('.bericht-sol');
+  if (kaarten.length > 0) kaarten[kaarten.length-1].remove();
+  // Verwijder advies-bericht
+  const berichten = B().querySelectorAll('.bericht-sol');
+  if (berichten.length > 0) berichten[berichten.length-1].remove();
+  toonResultaat();
+}
+
+// Inklapbare blokken
+function toggleBlok(id) {
+  const body = document.getElementById('blok-' + id);
+  const chev = document.getElementById('chev-' + id);
+  if (body.classList.contains('open')) {
+    body.classList.remove('open'); chev.textContent = '▸';
+  } else {
+    body.classList.add('open'); chev.textContent = '▾';
+    setTimeout(() => B().scrollTo({top:B().scrollHeight, behavior:'smooth'}), 50);
+  }
+}
+
+// ─── TAAL ─────────────────────────────────────────────────────────────────────
+function setTaal(code, btn) {
+  taal = code.toLowerCase();
+  document.querySelectorAll('.taal-btn').forEach(b => b.classList.remove('actief'));
+  if (btn) btn.classList.add('actief');
+  if (window.Solidari && Solidari.i18n) Solidari.i18n.passToe(code.toUpperCase());
+  if (_gestart) start();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+let _gestart = false;
+function _init() {
+  if (_gestart) return;
+  _gestart = true;
+  if (window.Solidari && Solidari.i18n) Solidari.i18n.init();
+  start();
+}
+document.addEventListener('DOMContentLoaded', _init);
+_init();
+
+try { const op = localStorage.getItem('solidari-taal'); if(op){ taal=op.toLowerCase(); document.querySelectorAll('.taal-btn').forEach(b=>b.classList.toggle('actief',b.textContent.trim().toLowerCase()===taal)); }} catch(e){}
+</script>
+<script src="components.js"></script>
+</body>
+</html>
