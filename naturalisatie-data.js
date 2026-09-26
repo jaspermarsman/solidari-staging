@@ -21,9 +21,11 @@ window._NAT = {
       "badge": "🇳🇱 Naturalisatie Checker",
       "titel": "Kom ik in aanmerking voor een Nederlands paspoort?",
       "sub": "Beantwoord een paar vragen en zie of je Nederlander kunt worden. Op basis van de regels van 2026, ook de nieuwe asielregels sinds 12 juni 2026.",
-      "disclaimer": "⚠️ Deze checker geeft een indicatie, geen besluit. Gecontroleerd in september 2026 (IND, Stimulansz). Sinds 12 juni 2026 is er geen asielvergunning voor onbepaalde tijd meer. Nieuwe statushouders moeten daarom eerst EU-langdurig ingezetene worden voordat ze kunnen naturaliseren. Aangekondigde plannen van het kabinet zijn nog geen wet. Vraag altijd advies aan de gemeente of VluchtelingenWerk.",
+      "disclaimer": "⚠️ Deze checker geeft een indicatie, geen besluit. Gecontroleerd in september 2026 (IND, Stimulansz). Sinds 12 juni 2026 is er geen asielvergunning voor onbepaalde tijd meer. Statushouders met een asielvergunning voor bepaalde tijd moeten daarom eerst EU-langdurig ingezetene worden voordat ze kunnen naturaliseren. Aangekondigde plannen van het kabinet zijn nog geen wet. Vraag altijd advies aan de gemeente of VluchtelingenWerk.",
       "vwnLabel": "Twijfel je over jouw situatie?",
-      "vwnTekst": "Naturalisatieregels veranderen snel en jouw situatie kan anders liggen dan de checker aangeeft. VluchtelingenWerk heeft spreekuren en begeleiding bij naturalisatie — kijk op <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a> voor een locatie bij jou in de buurt."
+      "vwnTekst": "Naturalisatieregels veranderen snel en jouw situatie kan anders liggen dan de checker aangeeft. VluchtelingenWerk heeft spreekuren en begeleiding bij naturalisatie — kijk op <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a> voor een locatie bij jou in de buurt.",
+      "hulpRegulierLabel": "Twijfel je over jouw situatie?",
+      "hulpRegulierTekst": "Het Juridisch Loket geeft gratis advies over je verblijfsvergunning en naturalisatie. Kijk op <a href=\"https://www.juridischloket.nl\" target=\"_blank\" style=\"color:inherit;\">juridischloket.nl</a> of vraag het bij je gemeente."
     },
     "ui": {
       "volgendeStappen": "Volgende stappen",
@@ -63,14 +65,16 @@ window._NAT = {
             "tekst": "Ik heb een asielvergunning (statushouder)",
             "icoon": "🛡️",
             "klasse": "ja",
-            "volgende": "v_asiel"
+            "volgende": "v_asiel",
+            "pad": "asiel"
           },
           {
             "tekst": "Ik heb een andere verblijfsvergunning",
             "sub": "Bijvoorbeeld voor gezin, werk of studie",
             "icoon": "📄",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "v_regulier",
+            "pad": "regulier"
           },
           {
             "tekst": "Ik ben EU-burger",
@@ -89,27 +93,21 @@ window._NAT = {
       },
       "v_asiel": {
         "tekst": "Welke asielvergunning heb je nu?",
-        "uitleg": "Sinds 12 juni 2026 zijn de regels veranderd. Voor naturalisatie maakt het uit wanneer je je huidige vergunning hebt gekregen.",
+        "uitleg": "Kijk op je verblijfspas: staat er 'onbepaalde tijd', of een einddatum?",
         "antwoorden": [
           {
             "tekst": "Asiel voor onbepaalde tijd",
-            "sub": "Gekregen vóór 12 juni 2026",
+            "sub": "Op je pas staat geen einddatum voor je verblijfsrecht",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v2"
           },
           {
-            "tekst": "Asiel voor 5 jaar, gekregen vóór 12 juni 2026",
+            "tekst": "Asiel voor bepaalde tijd",
+            "sub": "3 of 5 jaar geldig, ook als je hem vóór 12 juni 2026 kreeg",
             "icoon": "📅",
-            "klasse": "ja",
-            "volgende": "v_asiel5"
-          },
-          {
-            "tekst": "Asiel gekregen of verlengd op of na 12 juni 2026",
-            "sub": "Meestal 3 jaar geldig",
-            "icoon": "🆕",
             "klasse": "anders",
-            "volgende": "e1"
+            "volgende": "v_asiel5"
           },
           {
             "tekst": "Ik ben al EU-langdurig ingezetene",
@@ -126,20 +124,20 @@ window._NAT = {
         ]
       },
       "v_asiel5": {
-        "tekst": "Goed nieuws: jouw vergunning valt onder de oude regels",
-        "uitleg": "Je hebt je asielvergunning van 5 jaar gekregen vóór 12 juni 2026. Daarmee kun je nog naturaliseren op de oude manier.<br><br>⚠️ <strong>Let op:</strong> verlengt de IND je vergunning na 12 juni 2026, dan krijg je een vergunning volgens de nieuwe regels. Dan moet je eerst EU-langdurig ingezetene worden. <strong>Voldoe je aan de voorwaarden? Vraag naturalisatie dan aan terwijl je huidige pas nog geldig is.</strong>",
+        "tekst": "Je vergunning blijft geldig — maar Nederlander worden gaat via een tussenstap",
+        "uitleg": "Je asielvergunning blijft geldig tot de datum op je pas. Maar met een asielvergunning voor bepaalde tijd kun je geen naturalisatie aanvragen. Dat geldt ook als je de vergunning vóór 12 juni 2026 kreeg. Sinds 12 juni 2026 bestaat de asielvergunning voor onbepaalde tijd niet meer.<br><br>Daarom moet je eerst <strong>EU-langdurig ingezetene</strong> worden. Daarna kun je naturalisatie aanvragen. De volgende vragen laten zien of dat voor jou al kan.",
         "antwoorden": [
           {
             "tekst": "Ik begrijp het — ga verder",
             "icoon": "→",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "e1"
           }
         ]
       },
       "v_asiel_wn": {
         "tekst": "Zo zie je welke vergunning je hebt",
-        "uitleg": "Kijk op je verblijfspas, bij 'Type document en bijzonderheden' (het typenummer en de tekst ernaast), of in de brief van de IND. Let op twee dingen:<br><br>1. Staat er <strong>asiel</strong> of een ander doel (zoals gezin of werk)?<br>2. Wanneer heb je deze pas gekregen: <strong>vóór of na 12 juni 2026</strong>? En hoe lang is hij geldig?<br><br>Kom je er niet uit? Vraag het je begeleider bij de gemeente of VluchtelingenWerk.",
+        "uitleg": "Kijk op je verblijfspas, bij 'Type document en bijzonderheden' (het typenummer en de tekst ernaast), of in de brief van de IND. Let op twee dingen:<br><br>1. Staat er <strong>asiel</strong> of een ander doel (zoals gezin of werk)?<br>2. Staat er '<strong>onbepaalde tijd</strong>', of staat er een <strong>einddatum</strong>?<br><br>Kom je er niet uit? Vraag het je begeleider bij de gemeente of VluchtelingenWerk.",
         "antwoorden": [
           {
             "tekst": "Ik heb het gevonden — terug naar de vraag",
@@ -155,9 +153,40 @@ window._NAT = {
           }
         ]
       },
+      "v_regulier": {
+        "tekst": "Wat voor verblijfsvergunning heb je?",
+        "uitleg": "Voor naturalisatie heb je een vergunning nodig voor onbepaalde tijd, of voor een doel dat niet tijdelijk is, zoals wonen bij je partner of werk. Op je verblijfspas staat het doel en of er een einddatum is.",
+        "antwoorden": [
+          {
+            "tekst": "Voor onbepaalde tijd",
+            "icoon": "✓",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "Voor bepaalde tijd — voor gezin, partner of werk",
+            "icoon": "👨‍👩‍👧",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "Voor bepaalde tijd — voor studie of ander tijdelijk verblijf",
+            "sub": "Bijvoorbeeld seizoenarbeid, medische behandeling, uitwisseling of het zoekjaar voor hoogopgeleiden",
+            "icoon": "🎓",
+            "klasse": "nee",
+            "volgende": "r_regulier_tijdelijk"
+          },
+          {
+            "tekst": "Ik weet het niet",
+            "icoon": "❓",
+            "klasse": "anders",
+            "volgende": "v_asiel_wn"
+          }
+        ]
+      },
       "e1": {
         "tekst": "Woon je al 5 jaar of langer achter elkaar in Nederland met een geldige vergunning?",
-        "uitleg": "Met een nieuwe asielvergunning kun je pas Nederlander worden als je eerst EU-langdurig ingezetene bent. Daarvoor moet je minstens 5 jaar achter elkaar in Nederland wonen met een geldige vergunning. De jaren met een asielvergunning tellen mee. Of de tijd in de asielprocedure meetelt, bepaalt de IND.",
+        "uitleg": "Met een asielvergunning voor bepaalde tijd kun je pas Nederlander worden als je eerst EU-langdurig ingezetene bent. Daarvoor moet je minstens 5 jaar achter elkaar in Nederland wonen met een geldige vergunning. De jaren met een asielvergunning tellen mee. Of de tijd in de asielprocedure meetelt, bepaalt de IND.",
         "antwoorden": [
           {
             "tekst": "Ja, 5 jaar of langer",
@@ -246,18 +275,17 @@ window._NAT = {
         ]
       },
       "v2": {
-        "tekst": "Heb je een geldige verblijfsvergunning?",
-        "uitleg": "Je hebt een geldige verblijfsvergunning nodig die niet tijdelijk is. Denk aan een vergunning voor onbepaalde tijd, EU-langdurig ingezetene, of een asielvergunning van vóór 12 juni 2026. Verleng je vergunning altijd op tijd, zodat je verblijf ononderbroken blijft.",
+        "tekst": "Is je verblijfsvergunning nu geldig?",
+        "uitleg": "Je vergunning moet geldig zijn als je naturalisatie aanvraagt, en blijven gelden tot de beslissing. Verleng hem altijd op tijd, zodat je verblijf ononderbroken blijft.",
         "antwoorden": [
           {
-            "tekst": "Ja, ik heb een geldige verblijfsvergunning",
-            "sub": "Of een asielstatus (IND type III, IV of V)",
+            "tekst": "Ja, mijn vergunning is geldig",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v3"
           },
           {
-            "tekst": "Nee, ik heb geen geldige verblijfsvergunning",
+            "tekst": "Nee, mijn vergunning is verlopen of ik heb er geen",
             "icoon": "✗",
             "klasse": "nee",
             "volgende": "r_geen_vergunning"
@@ -326,7 +354,7 @@ window._NAT = {
       },
       "v4a_z": {
         "tekst": "Je hebt de Z-route afgerond — er is nog één extra stap nodig voor naturalisatie",
-        "uitleg": "De Z-route sluit af met een eindgesprek en certificaat, maar voor naturalisatie gelden aanvullende taaleisen vanuit de IND. Er zijn drie paden om toch te kunnen naturaliseren:<br><br><strong>Pad A — Alsnog examen halen op A2-niveau</strong><br>Haal alle taalexamens op A2 (lezen, luisteren, schrijven, spreken) én het KNM-examen. Let op: nu de Z-route is afgerond zijn examenpogingen niet langer kosteloos.<br><br><strong>Pad B — 600 uur taalles + minimaal 3 pogingen per onderdeel</strong><br>Minstens 600 uur taalles op A2-niveau bij een Blik op Werk instelling én 3 pogingen per onderdeel? Dan kan DUO een ontheffingsadvies geven.<br><br><strong>Pad C — 600 uur alfabetisering + DUO-toets (€150)</strong><br>Minstens 600 uur alfabetisering en blijkt A2 niet haalbaar? Dan volgt een ontheffing via DUO-toets (€150).<br><br><em>Mogelijk in de toekomst:</em> het kabinet wil de taaleis voor naturalisatie verhogen van A2 naar B1. Dit is nog niet aangenomen — op dit moment geldt nog A2.<br><br>💡 Overleg met jouw gemeente of VluchtelingenWerk welk pad het beste past.",
+        "uitleg": "De Z-route sluit af met een eindgesprek en certificaat, maar voor naturalisatie gelden aanvullende taaleisen vanuit de IND. Er zijn drie paden om toch te kunnen naturaliseren:<br><br><strong>Pad A — Alsnog examen halen op A2-niveau</strong><br>Haal alle taalexamens op A2 (lezen, luisteren, schrijven, spreken) én het KNM-examen. Let op: nu de Z-route is afgerond zijn examenpogingen niet langer kosteloos.<br><br><strong>Pad B — 600 uur taalles + minimaal 3 pogingen per onderdeel</strong><br>Minstens 600 uur taalles op A2-niveau bij een Blik op Werk instelling én 3 pogingen per onderdeel? Dan kan DUO een ontheffingsadvies geven.<br><br><strong>Pad C — 600 uur alfabetisering + DUO-toets (€150)</strong><br>Minstens 600 uur alfabetisering en blijkt A2 niet haalbaar? Dan volgt een ontheffing via DUO-toets (€150).<br><br><em>Mogelijk in de toekomst:</em> het kabinet wil de taaleis voor naturalisatie verhogen van A2 naar B1. Dit is nog niet aangenomen — op dit moment geldt nog A2.<br><br>💡 Overleg met jouw gemeente welk pad het beste past.",
         "antwoorden": [
           {
             "tekst": "Ik begrijp dit — ga verder met de overige voorwaarden",
@@ -433,7 +461,7 @@ window._NAT = {
       },
       "v7": {
         "tekst": "Ben je bereid afstand te doen van je huidige nationaliteit?",
-        "uitleg": "Nederland staat in principe geen dubbele nationaliteit toe. Uitzondering: erkende vluchtelingen (statushouders) mogen beide nationaliteiten houden.",
+        "uitleg": "Nederland staat in principe geen dubbele nationaliteit toe. Er zijn uitzonderingen, bijvoorbeeld voor erkende vluchtelingen.",
         "antwoorden": [
           {
             "tekst": "Ja, ik doe afstand van mijn nationaliteit",
@@ -446,7 +474,8 @@ window._NAT = {
             "sub": "Statushouders mogen dubbele nationaliteit houden",
             "icoon": "✓",
             "klasse": "ja",
-            "volgende": "v8"
+            "volgende": "v8",
+            "alleenPad": "asiel"
           },
           {
             "tekst": "Nee, ik wil mijn nationaliteit houden",
@@ -481,7 +510,8 @@ window._NAT = {
         "icoon": "🎉",
         "titel": "Je komt waarschijnlijk in aanmerking!",
         "sub": "Op basis van jouw antwoorden voldoe je aan de belangrijkste voorwaarden voor naturalisatie. De volgende stap is een officiële aanvraag bij jouw gemeente.",
-        "info": "💡 Statushouders (erkende vluchtelingen) hoeven in de meeste gevallen geen afstand te doen van hun oorspronkelijke nationaliteit.",
+        "info": "💡 Ben je erkend vluchteling? Dan hoef je meestal geen afstand te doen van je oorspronkelijke nationaliteit.",
+        "infoAlleenPad": "asiel",
         "stappen": [
           {
             "nr": 1,
@@ -573,7 +603,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Asielaanvraag",
-            "tekst": "Als je bescherming nodig hebt, kun je een asielaanvraag indienen bij de IND."
+            "tekst": "Als je bescherming nodig hebt, kun je een asielaanvraag indienen bij de IND.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Reguliere vergunning",
@@ -581,29 +612,26 @@ window._NAT = {
           },
           {
             "naam": "Juridische hulp",
-            "tekst": "Neem contact op met een vluchtelingenorganisatie of advocaat."
+            "tekst": "Neem contact op met een advocaat of het Juridisch Loket."
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Gratis juridische ondersteuning voor asielzoekers en statushouders."
+            "tekst": "Gratis juridische ondersteuning voor asielzoekers en statushouders.",
+            "alleenPad": "asiel"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Neem contact op met VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Hulp via het Juridisch Loket"
       },
       "r_te_kort": {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Nog niet lang genoeg in Nederland",
-        "sub": "Je moet nu minimaal 5 jaar aaneengesloten in Nederland wonen. Sinds de nieuwe asielregels van 2026 zijn er een paar dingen waar je tijdens het wachten op moet letten. Je kunt de wachttijd goed benutten.",
+        "sub": "Je moet minimaal 5 jaar aaneengesloten in Nederland wonen. Je kunt de wachttijd goed benutten.",
         "alternatieven": [
           {
             "naam": "Verleng je vergunning op tijd",
-            "tekst": "Nieuwe asielvergunningen gelden nog maximaal 3 jaar; verleng dus op tijd. Komt er een \"verblijfsgat\" — een periode tussen twee vergunningen waarin je geen geldige vergunning hebt — dan telt die tijd niet als rechtmatig verblijf, en kan de 5-jaarstelling voor naturalisatie opnieuw gaan lopen. Vraag verlenging daarom uiterlijk binnen 4 weken na afloop aan: dan ziet de IND het niet als verblijfsgat."
-          },
-          {
-            "naam": "Verloopt je asielvergunning eerder?",
-            "tekst": "Heb je een asielvergunning van 5 jaar van vóór 12 juni 2026, en verloopt die voordat je 5 jaar in Nederland woont? Dan krijg je bij verlenging een vergunning volgens de nieuwe regels. Dan loopt je route via EU-langdurig ingezetene, en daarvoor geldt een inkomenseis."
+            "tekst": "Komt er een periode zonder geldige vergunning (een \"verblijfsgat\"), dan telt die tijd niet mee. De 5 jaar kunnen dan opnieuw gaan tellen. Vraag verlenging daarom op tijd aan. Vraag verlenging daarom uiterlijk binnen 4 weken na afloop aan: dan ziet de IND het niet als verblijfsgat."
           },
           {
             "naam": "Naturalisatietermijn: mogelijk 10 jaar",
@@ -623,15 +651,38 @@ window._NAT = {
           },
           {
             "naam": "Plan van het kabinet (nog geen wet)",
-            "tekst": "statushouders die twee keer een tijdelijke asielvergunning hebben gekregen en Nederlands op niveau B1 halen, zouden na 6 jaar Nederlander kunnen worden, ook zonder EU-langdurig ingezetene. Voor wie B1 niet kan halen komt een uitzondering. Er is nog geen wetsvoorstel. Tot die wet er is, gelden de regels hierboven."
+            "tekst": "statushouders die twee keer een tijdelijke asielvergunning hebben gekregen en Nederlands op niveau B1 halen, zouden na 6 jaar Nederlander kunnen worden, ook zonder EU-langdurig ingezetene. Voor wie B1 niet kan halen komt een uitzondering. Er is nog geen wetsvoorstel. Tot die wet er is, gelden de regels hierboven.",
+            "alleenPad": "asiel"
           }
         ],
         "interneLink": {
           "naar": "r_eu_langdurig",
           "tekst": "🇪🇺 Bekijk: EU-langdurig ingezetene (permanent verblijf na 5 jaar)"
         },
-        "link": "https://ind.nl/nl/asiel-en-nareis-het-migratiepact-en-andere-ontwikkelingen/nieuwe-wetten-en-regels-asiel-en-nareis",
-        "linkTekst": "→ Bekijk de nieuwe asielregels 2026 op ind.nl"
+        "link": "https://ind.nl/nl/nederlanderschap/nederlander-worden-door-naturalisatie",
+        "linkTekst": "→ Meer informatie op ind.nl"
+      },
+      "r_regulier_tijdelijk": {
+        "type": "wacht",
+        "icoon": "🎓",
+        "titel": "Met deze vergunning kun je nog geen Nederlander worden",
+        "sub": "Voor naturalisatie heb je een vergunning nodig voor onbepaalde tijd, of voor een doel dat niet tijdelijk is. Een vergunning voor studie of ander tijdelijk verblijf telt niet.",
+        "alternatieven": [
+          {
+            "naam": "Verandert je situatie?",
+            "tekst": "Ga je bijvoorbeeld werken, of wonen bij je partner? Dan kun je een andere vergunning aanvragen. Doe daarna deze check opnieuw."
+          },
+          {
+            "naam": "Hoe telt je verblijf mee?",
+            "tekst": "Of de jaren met je huidige vergunning meetellen voor de 5 jaar, hangt af van je situatie. Laat dit checken."
+          },
+          {
+            "naam": "Werk alvast aan je Nederlands",
+            "tekst": "Voor naturalisatie moet je later ingeburgerd zijn. Een taalcursus helpt nu al."
+          }
+        ],
+        "link": "https://ind.nl/nl/nederlanderschap/nederlander-worden-door-naturalisatie",
+        "linkTekst": "→ Meer informatie op ind.nl"
       },
       "r_bezig_b1": {
         "type": "route",
@@ -730,9 +781,9 @@ window._NAT = {
             "tekst": "Minstens 600 uur alfabetisering gevolgd bij een Blik op Werk instelling en blijkt uit een DUO-toets dat A2 niet haalbaar is? Dan volgt een ontheffing. De DUO-toets kost €150."
           }
         ],
-        "info": "📞 <strong>Advies:</strong> Overleg met jouw gemeente of VluchtelingenWerk welk pad het beste bij jouw situatie past.",
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Hulp via VluchtelingenWerk"
+        "info": "📞 <strong>Advies:</strong> Overleg met jouw gemeente welk pad het beste bij jouw situatie past.",
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Hulp via het Juridisch Loket"
       },
       "r_geen_inburgering": {
         "type": "wacht",
@@ -772,7 +823,8 @@ window._NAT = {
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Gratis juridische hulp voor statushouders."
+            "tekst": "Gratis juridische hulp voor statushouders.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Wachttijd",
@@ -783,8 +835,8 @@ window._NAT = {
             "tekst": "Verkeersboetes en kleine overtredingen tellen in de meeste gevallen NIET mee."
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Neem contact op met VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Hulp via het Juridisch Loket"
       },
       "r_strafblad_check": {
         "type": "wacht",
@@ -806,7 +858,7 @@ window._NAT = {
           },
           {
             "naam": "Juridisch advies",
-            "tekst": "Bij twijfel: raadpleeg een juridisch adviseur of VluchtelingenWerk."
+            "tekst": "Bij twijfel: raadpleeg een juridisch adviseur of het Juridisch Loket."
           }
         ],
         "link": "https://www.justis.nl/producten/vog",
@@ -846,7 +898,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Uitzondering statushouders",
-            "tekst": "Als erkend vluchteling hoef je GEEN afstand te doen van je nationaliteit."
+            "tekst": "Als erkend vluchteling hoef je GEEN afstand te doen van je nationaliteit.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Uitzondering: onmogelijk",
@@ -884,7 +937,7 @@ window._NAT = {
           },
           {
             "type": "amber",
-            "tekst": "⚠️ <strong>Inkomenseis:</strong> je moet genoeg eigen, duurzaam inkomen hebben en een zorgverzekering. Met een uitkering lukt dat meestal niet. Let op: heb je een nieuwe asielvergunning (na 12 juni 2026), dan heb je EU-langdurig ingezetene nodig om later te kunnen naturaliseren. De inkomenseis geldt dan dus ook voor jouw weg naar het Nederlanderschap."
+            "tekst": "⚠️ <strong>Inkomenseis:</strong> je moet genoeg eigen, duurzaam inkomen hebben en een zorgverzekering. Met een uitkering lukt dat meestal niet. Heb je een asielvergunning voor bepaalde tijd, dan heb je EU-langdurig ingezetene nodig om later te kunnen naturaliseren. De inkomenseis geldt dan dus ook voor jouw weg naar het Nederlanderschap."
           },
           {
             "type": "info",
@@ -898,7 +951,7 @@ window._NAT = {
           },
           {
             "nr": 2,
-            "tekst": "<strong>Nieuwe asielvergunning?</strong> Dan is dit de enige weg naar een blijvende vergunning, en daarna naar naturalisatie."
+            "tekst": "<strong>Asielvergunning voor bepaalde tijd?</strong> Dan is dit de enige weg naar een blijvende vergunning, en daarna naar naturalisatie."
           },
           {
             "nr": 3,
@@ -942,7 +995,7 @@ window._NAT = {
         "type": "route",
         "icoon": "🪜",
         "titel": "Je kunt Nederlander worden — in twee stappen",
-        "sub": "Met een nieuwe asielvergunning moet je eerst EU-langdurig ingezetene worden. Daarna kun je naturalisatie aanvragen.",
+        "sub": "Met een asielvergunning voor bepaalde tijd moet je eerst EU-langdurig ingezetene worden. Daarna kun je naturalisatie aanvragen.",
         "infoBoxen": [
           {
             "type": "amber",
@@ -1070,7 +1123,7 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🧭",
         "titel": "Je inkomen is nu de drempel",
-        "sub": "Met een asielvergunning van na 12 juni 2026 kun je alleen Nederlander worden als je eerst EU-langdurig ingezetene bent. Daarvoor heb je genoeg eigen inkomen nodig. Met een uitkering lukt dat nu nog niet. Dit is eerlijk gezegd een grote verandering.",
+        "sub": "Met een asielvergunning voor bepaalde tijd kun je alleen Nederlander worden als je eerst EU-langdurig ingezetene bent. Daarvoor heb je genoeg eigen inkomen nodig. Met een uitkering lukt dat nu nog niet. Dit is eerlijk gezegd een grote verandering.",
         "alternatieven": [
           {
             "naam": "Werk of meer uren",
@@ -1126,11 +1179,11 @@ window._NAT = {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Nog niet lang genoeg in Nederland",
-        "sub": "Met een nieuwe asielvergunning moet je eerst 5 jaar in Nederland wonen. Daarna kun je EU-langdurig ingezetene worden, en dan pas Nederlander. Je kunt de tijd tot dan goed gebruiken.",
+        "sub": "Met een asielvergunning voor bepaalde tijd moet je eerst 5 jaar in Nederland wonen. Daarna kun je EU-langdurig ingezetene worden, en dan pas Nederlander. Je kunt de tijd tot dan goed gebruiken.",
         "alternatieven": [
           {
             "naam": "Verleng op tijd",
-            "tekst": "Nieuwe asielvergunningen gelden nog maximaal 3 jaar; verleng dus op tijd. Komt er een \"verblijfsgat\" — een periode tussen twee vergunningen waarin je geen geldige vergunning hebt — dan telt die tijd niet als rechtmatig verblijf, en kan de 5-jaarstelling voor naturalisatie opnieuw gaan lopen. Vraag verlenging daarom uiterlijk binnen 4 weken na afloop aan: dan ziet de IND het niet als verblijfsgat."
+            "tekst": "Asielvergunningen voor bepaalde tijd gelden nog maximaal 3 jaar; verleng dus op tijd. Komt er een \"verblijfsgat\" — een periode tussen twee vergunningen waarin je geen geldige vergunning hebt — dan telt die tijd niet als rechtmatig verblijf, en kan de 5-jaarstelling voor naturalisatie opnieuw gaan lopen. Vraag verlenging daarom uiterlijk binnen 4 weken na afloop aan: dan ziet de IND het niet als verblijfsgat."
           },
           {
             "naam": "Werk aan je inkomen",
@@ -1158,19 +1211,19 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🔍",
         "titel": "Laat eerst checken welke vergunning je hebt",
-        "sub": "Je route naar het Nederlanderschap hangt af van je vergunning. Met een asielvergunning van vóór 12 juni 2026 is die korter dan met een nieuwe.",
+        "sub": "Je route naar het Nederlanderschap hangt af van je vergunning.",
         "alternatieven": [
           {
-            "naam": "Oude asielvergunning",
-            "tekst": "Onbepaalde tijd, of 5 jaar gekregen vóór 12 juni 2026: je kunt naturaliseren op de oude manier."
+            "naam": "Asiel voor onbepaalde tijd",
+            "tekst": "Je kunt naturaliseren als je aan de andere voorwaarden voldoet."
           },
           {
-            "naam": "Nieuwe asielvergunning",
-            "tekst": "Gekregen of verlengd op of na 12 juni 2026: eerst EU-langdurig ingezetene (met inkomenseis), daarna naturalisatie."
+            "naam": "Asiel voor bepaalde tijd (3 of 5 jaar)",
+            "tekst": "Eerst EU-langdurig ingezetene (met inkomenseis), daarna naturalisatie. Ook als je de vergunning vóór 12 juni 2026 kreeg."
           },
           {
             "naam": "Andere vergunning",
-            "tekst": "Voor gezin, werk of studie: de oude regels gelden nog."
+            "tekst": "Voor gezin, partner of werk: naturaliseren kan meestal na 5 jaar. Voor studie of ander tijdelijk verblijf nog niet."
           },
           {
             "naam": "Wie kan helpen?",
@@ -1187,9 +1240,11 @@ window._NAT = {
       "badge": "🇳🇱 Naturalisation Checker",
       "titel": "Am I eligible for a Dutch passport?",
       "sub": "Answer a few questions and see whether you can become Dutch. Based on the 2026 rules, including the new asylum rules since 12 June 2026.",
-      "disclaimer": "⚠️ This checker gives an indication, not a decision. Checked in September 2026 (IND, Stimulansz). Since 12 June 2026 there is no longer an asylum permit for an indefinite period. New status holders must therefore first become an EU long-term resident (EU-langdurig ingezetene) before they can naturalise (naturalisatie). Announced government plans are not yet law. Always ask the municipality or VluchtelingenWerk for advice.",
+      "disclaimer": "⚠️ This checker gives an indication, not a decision. Checked in September 2026 (IND, Stimulansz). Since 12 June 2026 there is no longer an asylum permit for an indefinite period. Status holders with an asylum residence permit (verblijfsvergunning asiel) for a fixed period must therefore first become an EU long-term resident (EU-langdurig ingezetene) before they can naturalise (naturalisatie). Announced government plans are not yet law. Always ask the municipality or VluchtelingenWerk for advice.",
       "vwnLabel": "Not sure about your situation?",
-      "vwnTekst": "Naturalisation rules change quickly and your situation may differ from what the checker indicates. VluchtelingenWerk offers drop-in sessions and guidance on naturalisation — find a location near you at <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>."
+      "vwnTekst": "Naturalisation rules change quickly and your situation may differ from what the checker indicates. VluchtelingenWerk offers drop-in sessions and guidance on naturalisation — find a location near you at <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>.",
+      "hulpRegulierLabel": "Not sure about your situation?",
+      "hulpRegulierTekst": "The Legal Services Counter (Juridisch Loket) gives free advice about your residence permit and naturalisation (naturalisatie). Go to <a href=\"https://www.juridischloket.nl\" target=\"_blank\" style=\"color:inherit;\">juridischloket.nl</a> or ask your municipality."
     },
     "ui": {
       "volgendeStappen": "Next steps",
@@ -1229,14 +1284,16 @@ window._NAT = {
             "tekst": "I have an asylum residence permit (status holder)",
             "icoon": "🛡️",
             "klasse": "ja",
-            "volgende": "v_asiel"
+            "volgende": "v_asiel",
+            "pad": "asiel"
           },
           {
             "tekst": "I have another residence permit",
             "sub": "For example for family, work or study",
             "icoon": "📄",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "v_regulier",
+            "pad": "regulier"
           },
           {
             "tekst": "I am an EU citizen",
@@ -1255,27 +1312,21 @@ window._NAT = {
       },
       "v_asiel": {
         "tekst": "Which asylum permit do you have now?",
-        "uitleg": "The rules changed on 12 June 2026. For naturalisation (naturalisatie) it matters when you got your current permit.",
+        "uitleg": "Look at your residence card: does it say 'indefinite period' (onbepaalde tijd), or is there an end date?",
         "antwoorden": [
           {
             "tekst": "Asylum for an indefinite period",
-            "sub": "Received before 12 June 2026",
+            "sub": "Your card shows no end date for your right of residence",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v2"
           },
           {
-            "tekst": "Asylum for 5 years, received before 12 June 2026",
+            "tekst": "Asylum for a fixed period",
+            "sub": "Valid for 3 or 5 years, also if you got it before 12 June 2026",
             "icoon": "📅",
-            "klasse": "ja",
-            "volgende": "v_asiel5"
-          },
-          {
-            "tekst": "Asylum received or renewed on or after 12 June 2026",
-            "sub": "Usually valid for 3 years",
-            "icoon": "🆕",
             "klasse": "anders",
-            "volgende": "e1"
+            "volgende": "v_asiel5"
           },
           {
             "tekst": "I am already an EU long-term resident",
@@ -1292,20 +1343,20 @@ window._NAT = {
         ]
       },
       "v_asiel5": {
-        "tekst": "Good news: your permit falls under the old rules",
-        "uitleg": "You received your 5-year asylum permit before 12 June 2026. With it you can still naturalise (naturalisatie) the old way.<br><br>⚠️ <strong>Please note:</strong> if the IND renews your permit after 12 June 2026, you will get a permit under the new rules. Then you must first become an EU long-term resident (EU-langdurig ingezetene). <strong>Do you meet the conditions? Then apply for naturalisation while your current residence card is still valid.</strong>",
+        "tekst": "Your permit stays valid — but becoming Dutch involves an extra step",
+        "uitleg": "Your asylum permit stays valid until the date on your card. But with an asylum residence permit (verblijfsvergunning asiel) for a fixed period you cannot apply for naturalisation (naturalisatie). This also applies if you got the permit before 12 June 2026. Since 12 June 2026 the asylum permit for an indefinite period no longer exists.<br><br>That is why you must first become an <strong>EU long-term resident</strong> (EU-langdurig ingezetene). After that you can apply for naturalisation. The next questions show whether that is already possible for you.",
         "antwoorden": [
           {
             "tekst": "I understand — continue",
             "icoon": "→",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "e1"
           }
         ]
       },
       "v_asiel_wn": {
         "tekst": "How to see which permit you have",
-        "uitleg": "Look on your residence card, under 'Type document en bijzonderheden' (type of document and remarks: the type number and the text next to it), or in the letter from the IND. Check two things:<br><br>1. Does it say <strong>asylum</strong> (asiel) or another purpose (such as family or work)?<br>2. When did you get this card: <strong>before or after 12 June 2026</strong>? And how long is it valid?<br><br>Can't work it out? Ask your support worker at the municipality or VluchtelingenWerk.",
+        "uitleg": "Look on your residence card, under 'Type document en bijzonderheden' (type of document and remarks: the type number and the text next to it), or in the letter from the IND. Check two things:<br><br>1. Does it say <strong>asylum</strong> (asiel) or another purpose (such as family or work)?<br>2. Does it say '<strong>indefinite period</strong>' (onbepaalde tijd), or is there an <strong>end date</strong>?<br><br>Can't work it out? Ask your support worker at the municipality or VluchtelingenWerk.",
         "antwoorden": [
           {
             "tekst": "I found it — back to the question",
@@ -1321,9 +1372,40 @@ window._NAT = {
           }
         ]
       },
+      "v_regulier": {
+        "tekst": "What kind of residence permit do you have?",
+        "uitleg": "For naturalisation (naturalisatie) you need a permit for an indefinite period, or for a purpose that is not temporary, such as living with your partner or work. Your residence card shows the purpose and whether there is an end date.",
+        "antwoorden": [
+          {
+            "tekst": "For an indefinite period",
+            "icoon": "✓",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "For a fixed period — for family, partner or work",
+            "icoon": "👨‍👩‍👧",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "For a fixed period — for study or another temporary stay",
+            "sub": "For example seasonal work, medical treatment, exchange or the orientation year for highly educated persons",
+            "icoon": "🎓",
+            "klasse": "nee",
+            "volgende": "r_regulier_tijdelijk"
+          },
+          {
+            "tekst": "I don't know",
+            "icoon": "❓",
+            "klasse": "anders",
+            "volgende": "v_asiel_wn"
+          }
+        ]
+      },
       "e1": {
         "tekst": "Have you lived in the Netherlands for 5 years or longer in a row with a valid permit?",
-        "uitleg": "With a new asylum residence permit (verblijfsvergunning asiel) you can only become Dutch after you have first become an EU long-term resident (EU-langdurig ingezetene). For that you must have lived in the Netherlands for at least 5 years in a row with a valid permit. The years with an asylum permit count. Whether the time in the asylum procedure counts is decided by the IND.",
+        "uitleg": "With an asylum residence permit (verblijfsvergunning asiel) for a fixed period you can only become Dutch after you have first become an EU long-term resident (EU-langdurig ingezetene). For that you must have lived in the Netherlands for at least 5 years in a row with a valid permit. The years with an asylum permit count. Whether the time in the asylum procedure counts is decided by the IND.",
         "antwoorden": [
           {
             "tekst": "Yes, 5 years or longer",
@@ -1412,18 +1494,17 @@ window._NAT = {
         ]
       },
       "v2": {
-        "tekst": "Do you have a valid residence permit?",
-        "uitleg": "You need a valid residence permit that is not temporary. For example a permit for an indefinite period, EU long-term resident (EU-langdurig ingezetene), or an asylum permit from before 12 June 2026. Always renew your permit on time, so that your residence stays uninterrupted.",
+        "tekst": "Is your residence permit valid now?",
+        "uitleg": "Your permit must be valid when you apply for naturalisation (naturalisatie), and stay valid until the decision. Always renew it on time, so that your residence stays uninterrupted.",
         "antwoorden": [
           {
-            "tekst": "Yes, I have a valid residence permit",
-            "sub": "Or an asylum status (IND type III, IV or V)",
+            "tekst": "Yes, my permit is valid",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v3"
           },
           {
-            "tekst": "No, I do not have a valid residence permit",
+            "tekst": "No, my permit has expired or I don't have one",
             "icoon": "✗",
             "klasse": "nee",
             "volgende": "r_geen_vergunning"
@@ -1492,7 +1573,7 @@ window._NAT = {
       },
       "v4a_z": {
         "tekst": "You have completed the Z-route — one extra step is needed for naturalisation",
-        "uitleg": "The Z-route ends with a final interview and a certificate, but for naturalisation the IND applies additional language requirements. There are three paths to still be able to naturalise:<br><br><strong>Path A — Still pass the exam at A2 level</strong><br>Pass all language exams at A2 (reading, listening, writing, speaking) and the KNM exam. Note: now that the Z-route is finished, exam attempts are no longer free.<br><br><strong>Path B — 600 hours of language lessons + at least 3 attempts per component</strong><br>At least 600 hours of A2-level lessons at a Blik op Werk certified provider and 3 attempts per component? Then DUO can issue a dispensation recommendation.<br><br><strong>Path C — 600 hours of literacy + DUO test (€150)</strong><br>At least 600 hours of literacy training and it turns out A2 is not achievable? Then a dispensation follows via a DUO test (€150).<br><br><em>Possible in the future:</em> the government wants to raise the language requirement for naturalisation from A2 to B1. This has not yet been adopted — at the moment A2 still applies.<br><br>💡 Discuss with your municipality or VluchtelingenWerk which path suits you best.",
+        "uitleg": "The Z-route ends with a final interview and a certificate, but for naturalisation the IND applies additional language requirements. There are three paths to still be able to naturalise:<br><br><strong>Path A — Still pass the exam at A2 level</strong><br>Pass all language exams at A2 (reading, listening, writing, speaking) and the KNM exam. Note: now that the Z-route is finished, exam attempts are no longer free.<br><br><strong>Path B — 600 hours of language lessons + at least 3 attempts per component</strong><br>At least 600 hours of A2-level lessons at a Blik op Werk certified provider and 3 attempts per component? Then DUO can issue a dispensation recommendation.<br><br><strong>Path C — 600 hours of literacy + DUO test (€150)</strong><br>At least 600 hours of literacy training and it turns out A2 is not achievable? Then a dispensation follows via a DUO test (€150).<br><br><em>Possible in the future:</em> the government wants to raise the language requirement for naturalisation from A2 to B1. This has not yet been adopted — at the moment A2 still applies.<br><br>💡 Discuss with your municipality which path suits you best.",
         "antwoorden": [
           {
             "tekst": "I understand — continue to the remaining requirements",
@@ -1599,7 +1680,7 @@ window._NAT = {
       },
       "v7": {
         "tekst": "Are you willing to renounce your current nationality?",
-        "uitleg": "The Netherlands generally does not allow dual nationality. Exception: recognised refugees (status holders) may keep both nationalities.",
+        "uitleg": "The Netherlands generally does not allow dual nationality. There are exceptions, for example for recognised refugees.",
         "antwoorden": [
           {
             "tekst": "Yes, I will renounce my nationality",
@@ -1612,7 +1693,8 @@ window._NAT = {
             "sub": "Status holders may keep dual nationality",
             "icoon": "✓",
             "klasse": "ja",
-            "volgende": "v8"
+            "volgende": "v8",
+            "alleenPad": "asiel"
           },
           {
             "tekst": "No, I want to keep my nationality",
@@ -1647,7 +1729,8 @@ window._NAT = {
         "icoon": "🎉",
         "titel": "You are likely eligible!",
         "sub": "Based on your answers you meet the main requirements for naturalisation. The next step is an official application at your municipality.",
-        "info": "💡 Status holders (recognised refugees) generally do not have to renounce their original nationality.",
+        "info": "💡 Are you a recognised refugee? Then you usually do not have to give up your original nationality.",
+        "infoAlleenPad": "asiel",
         "stappen": [
           {
             "nr": 1,
@@ -1739,7 +1822,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Asylum application",
-            "tekst": "If you need protection, you can submit an asylum application to the IND."
+            "tekst": "If you need protection, you can submit an asylum application to the IND.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Regular permit",
@@ -1747,29 +1831,26 @@ window._NAT = {
           },
           {
             "naam": "Legal help",
-            "tekst": "Contact a refugee organisation or lawyer."
+            "tekst": "Contact a lawyer or the Legal Services Counter (Juridisch Loket)."
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Free legal support for asylum seekers and status holders."
+            "tekst": "Free legal support for asylum seekers and status holders.",
+            "alleenPad": "asiel"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Contact VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Help from the Juridisch Loket"
       },
       "r_te_kort": {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Not long enough in the Netherlands yet",
-        "sub": "Right now you must have lived in the Netherlands for at least 5 consecutive years with valid residence. Since the new 2026 asylum rules there are a few things to watch during the wait. You can put the waiting time to good use.",
+        "sub": "You must live in the Netherlands for at least 5 consecutive years. You can put the waiting time to good use.",
         "alternatieven": [
           {
             "naam": "Renew your permit on time",
-            "tekst": "New asylum permits are valid for a maximum of 3 years; so renew on time. If a \"residence gap\" (verblijfsgat) arises — a period between two permits in which you have no valid permit — that time does not count as lawful residence, and the 5-year count for naturalisation may restart. So apply for renewal within 4 weeks of expiry at the latest: then the IND does not treat it as a residence gap."
-          },
-          {
-            "naam": "Does your asylum permit expire earlier?",
-            "tekst": "Do you have a 5-year asylum residence permit (verblijfsvergunning asiel) from before 12 June 2026, and does it expire before you have lived in the Netherlands for 5 years? Then on renewal you will get a permit under the new rules. Your route then goes via EU long-term residence (EU-langdurig ingezetene), and that has an income requirement."
+            "tekst": "If there is a period without a valid permit — a \"residence gap\" (verblijfsgat) — that time does not count. The 5 years may then start counting again. So apply for renewal on time, at the latest within 4 weeks of expiry: then the IND does not treat it as a residence gap."
           },
           {
             "naam": "Naturalisation term: possibly 10 years",
@@ -1789,15 +1870,38 @@ window._NAT = {
           },
           {
             "naam": "Government plan (not yet law)",
-            "tekst": "Status holders who have been granted a temporary asylum permit twice and reach Dutch at level B1 could become Dutch after 6 years, even without EU long-term residence (EU-langdurig ingezetene). There will be an exception for people who cannot reach B1. There is no bill yet. Until that law exists, the rules above apply."
+            "tekst": "Status holders who have been granted a temporary asylum permit twice and reach Dutch at level B1 could become Dutch after 6 years, even without EU long-term residence (EU-langdurig ingezetene). There will be an exception for people who cannot reach B1. There is no bill yet. Until that law exists, the rules above apply.",
+            "alleenPad": "asiel"
           }
         ],
         "interneLink": {
           "naar": "r_eu_langdurig",
           "tekst": "🇪🇺 View: EU long-term resident (permanent residence after 5 years)"
         },
-        "link": "https://ind.nl/en/asylum-and-family-reunification-the-migration-pact-and-other-developments/new-laws-and-regulations-for-asylum-and-family-reunification",
-        "linkTekst": "→ See the new 2026 asylum rules on ind.nl"
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ More information at ind.nl"
+      },
+      "r_regulier_tijdelijk": {
+        "type": "wacht",
+        "icoon": "🎓",
+        "titel": "With this permit you cannot become Dutch yet",
+        "sub": "For naturalisation (naturalisatie) you need a permit for an indefinite period, or for a purpose that is not temporary. A permit for study or another temporary stay does not count.",
+        "alternatieven": [
+          {
+            "naam": "Is your situation changing?",
+            "tekst": "Are you going to work, for example, or live with your partner? Then you can apply for a different permit. After that, do this check again."
+          },
+          {
+            "naam": "How does your stay count?",
+            "tekst": "Whether the years with your current permit count towards the 5 years depends on your situation. Have this checked."
+          },
+          {
+            "naam": "Start working on your Dutch now",
+            "tekst": "For naturalisation (naturalisatie) you will later need to have completed civic integration (inburgering). A language course already helps now."
+          }
+        ],
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ More information at ind.nl"
       },
       "r_bezig_b1": {
         "type": "route",
@@ -1896,9 +2000,9 @@ window._NAT = {
             "tekst": "At least 600 hours of literacy training at a Blik op Werk certified institution and a DUO test showing A2 is not achievable? An exemption follows. The DUO test costs €150."
           }
         ],
-        "info": "📞 <strong>Advice:</strong> Consult your municipality or VluchtelingenWerk about which path best suits your situation.",
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Help via VluchtelingenWerk"
+        "info": "📞 <strong>Advice:</strong> Consult your municipality about which path best suits your situation.",
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Help from the Juridisch Loket"
       },
       "r_geen_inburgering": {
         "type": "wacht",
@@ -1938,7 +2042,8 @@ window._NAT = {
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Free legal help for status holders."
+            "tekst": "Free legal help for status holders.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Waiting period",
@@ -1949,8 +2054,8 @@ window._NAT = {
             "tekst": "Traffic fines and minor offences generally do NOT count."
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Contact VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Help from the Juridisch Loket"
       },
       "r_strafblad_check": {
         "type": "wacht",
@@ -1972,7 +2077,7 @@ window._NAT = {
           },
           {
             "naam": "Legal advice",
-            "tekst": "If in doubt: consult a legal adviser or VluchtelingenWerk."
+            "tekst": "If in doubt: consult a legal adviser or the Legal Services Counter (Juridisch Loket)."
           }
         ],
         "link": "https://www.justis.nl/producten/vog",
@@ -2012,7 +2117,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Exception for status holders",
-            "tekst": "As a recognised refugee you do NOT have to renounce your nationality."
+            "tekst": "As a recognised refugee you do NOT have to renounce your nationality.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Exception: impossible",
@@ -2050,7 +2156,7 @@ window._NAT = {
           },
           {
             "type": "amber",
-            "tekst": "⚠️ <strong>Income requirement:</strong> you must have enough lasting income of your own, plus health insurance. With benefits this is usually not possible. Please note: if you have a new asylum residence permit (verblijfsvergunning asiel) from after 12 June 2026, you need EU long-term residence (EU-langdurig ingezetene) to be able to naturalise later. So the income requirement then also applies to your path to Dutch citizenship."
+            "tekst": "⚠️ <strong>Income requirement:</strong> you must have enough lasting income of your own, plus health insurance. With benefits this is usually not possible. If you have an asylum residence permit (verblijfsvergunning asiel) for a fixed period, you need EU long-term residence (EU-langdurig ingezetene) to be able to naturalise later. So the income requirement then also applies to your path to Dutch citizenship."
           },
           {
             "type": "info",
@@ -2064,7 +2170,7 @@ window._NAT = {
           },
           {
             "nr": 2,
-            "tekst": "<strong>New asylum permit?</strong> Then this is the only way to a permanent permit, and after that to naturalisation (naturalisatie)."
+            "tekst": "<strong>Asylum permit for a fixed period?</strong> Then this is the only way to a permanent permit, and after that to naturalisation (naturalisatie)."
           },
           {
             "nr": 3,
@@ -2108,7 +2214,7 @@ window._NAT = {
         "type": "route",
         "icoon": "🪜",
         "titel": "You can become Dutch — in two steps",
-        "sub": "With a new asylum residence permit (verblijfsvergunning asiel) you must first become an EU long-term resident (EU-langdurig ingezetene). After that you can apply for naturalisation (naturalisatie).",
+        "sub": "With an asylum residence permit (verblijfsvergunning asiel) for a fixed period you must first become an EU long-term resident (EU-langdurig ingezetene). After that you can apply for naturalisation (naturalisatie).",
         "infoBoxen": [
           {
             "type": "amber",
@@ -2236,7 +2342,7 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🧭",
         "titel": "Your income is now the obstacle",
-        "sub": "With an asylum residence permit (verblijfsvergunning asiel) from after 12 June 2026 you can only become Dutch if you first become an EU long-term resident (EU-langdurig ingezetene). For that you need enough income of your own. With benefits that is not possible right now. To be honest, this is a big change.",
+        "sub": "With an asylum residence permit (verblijfsvergunning asiel) for a fixed period you can only become Dutch if you first become an EU long-term resident (EU-langdurig ingezetene). For that you need enough income of your own. With benefits that is not possible yet. To be honest, this is a big change.",
         "alternatieven": [
           {
             "naam": "Work or more hours",
@@ -2292,11 +2398,11 @@ window._NAT = {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Not long enough in the Netherlands yet",
-        "sub": "With a new asylum residence permit (verblijfsvergunning asiel) you must first live in the Netherlands for 5 years. After that you can become an EU long-term resident (EU-langdurig ingezetene), and only then Dutch. You can make good use of the time until then.",
+        "sub": "With an asylum residence permit (verblijfsvergunning asiel) for a fixed period you must first live in the Netherlands for 5 years. After that you can become an EU long-term resident (EU-langdurig ingezetene), and only then Dutch. You can make good use of the time until then.",
         "alternatieven": [
           {
             "naam": "Renew on time",
-            "tekst": "New asylum permits are valid for a maximum of 3 years; so renew on time. If a \"residence gap\" (verblijfsgat) arises — a period between two permits in which you have no valid permit — that time does not count as lawful residence, and the 5-year count for naturalisation may restart. So apply for renewal within 4 weeks of expiry at the latest: then the IND does not treat it as a residence gap."
+            "tekst": "Asylum permits for a fixed period are valid for a maximum of 3 years; so renew on time. If a \"residence gap\" (verblijfsgat) arises — a period between two permits in which you have no valid permit — that time does not count as lawful residence, and the 5-year count for naturalisation may restart. So apply for renewal within 4 weeks of expiry at the latest: then the IND does not treat it as a residence gap."
           },
           {
             "naam": "Work on your income",
@@ -2324,19 +2430,19 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🔍",
         "titel": "First have your permit type checked",
-        "sub": "Your route to Dutch citizenship depends on your permit. With an asylum permit from before 12 June 2026 it is shorter than with a new one.",
+        "sub": "Your route to Dutch citizenship depends on your permit.",
         "alternatieven": [
           {
-            "naam": "Old asylum permit",
-            "tekst": "Indefinite period, or 5 years received before 12 June 2026: you can naturalise (naturalisatie) the old way."
+            "naam": "Asylum for an indefinite period",
+            "tekst": "You can naturalise (naturalisatie) if you meet the other conditions."
           },
           {
-            "naam": "New asylum permit",
-            "tekst": "Received or renewed on or after 12 June 2026: first EU long-term residence (EU-langdurig ingezetene), with an income requirement, then naturalisation (naturalisatie)."
+            "naam": "Asylum for a fixed period (3 or 5 years)",
+            "tekst": "First EU long-term resident (EU-langdurig ingezetene), with an income requirement, then naturalisation (naturalisatie). Also if you got the permit before 12 June 2026."
           },
           {
             "naam": "Another permit",
-            "tekst": "For family, work or study: the old rules still apply."
+            "tekst": "For family, partner or work: naturalisation is usually possible after 5 years. For study or another temporary stay, not yet."
           },
           {
             "naam": "Who can help?",
@@ -2353,9 +2459,11 @@ window._NAT = {
       "badge": "🇳🇱 فاحص التجنيس",
       "titel": "هل أنا مؤهل للحصول على جواز سفر هولندي؟",
       "sub": "أجب عن بعض الأسئلة واعرف ما إذا كان بإمكانك أن تصبح هولندياً. استناداً إلى قواعد عام 2026، بما فيها قواعد اللجوء الجديدة منذ 12 يونيو 2026.",
-      "disclaimer": "⚠️ هذه الأداة تعطي مؤشراً، وليست قراراً. تم التحقق في سبتمبر 2026 (IND، Stimulansz). منذ 12 يونيو 2026 لم يعد هناك تصريح لجوء لأجل غير محدّد. لذلك يجب على حاملي تصريح اللجوء الجدد أن يصبحوا أولاً مقيمين طويلي الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene) قبل أن يتمكنوا من التجنيس (naturalisatie). الخطط التي أعلنتها الحكومة ليست قانوناً بعد. اطلب دائماً المشورة من البلدية أو من VluchtelingenWerk.",
+      "disclaimer": "⚠️ هذه الأداة تعطي مؤشراً، وليست قراراً. تم التحقق في سبتمبر 2026 (IND، Stimulansz). منذ 12 يونيو 2026 لم يعد هناك تصريح لجوء لأجل غير محدّد. لذلك يجب على حاملي تصريح إقامة اللجوء لمدة محدّدة (verblijfsvergunning asiel) أن يصبحوا أولاً مقيمين طويلي الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene) قبل أن يتمكنوا من التجنيس (naturalisatie). الخطط التي أعلنتها الحكومة ليست قانوناً بعد. اطلب دائماً المشورة من البلدية أو من VluchtelingenWerk.",
       "vwnLabel": "هل تتردد في أمر وضعك؟",
-      "vwnTekst": "قواعد التجنيس تتغير بسرعة وقد تختلف حالتك عما تُظهره الأداة. تُقدّم منظمة VluchtelingenWerk Nederland جلسات إرشادية ومساعدة مجانية في التجنيس — ابحث عن موقع قريب منك على <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>."
+      "vwnTekst": "قواعد التجنيس تتغير بسرعة وقد تختلف حالتك عما تُظهره الأداة. تُقدّم منظمة VluchtelingenWerk Nederland جلسات إرشادية ومساعدة مجانية في التجنيس — ابحث عن موقع قريب منك على <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>.",
+      "hulpRegulierLabel": "هل تتردد في أمر وضعك؟",
+      "hulpRegulierTekst": "يقدّم مكتب الاستشارات القانونية (Juridisch Loket) مشورة مجانية حول تصريح إقامتك والتجنيس (naturalisatie). انظر في <a href=\"https://www.juridischloket.nl\" target=\"_blank\" style=\"color:inherit;\">juridischloket.nl</a> أو اسأل بلديتك."
     },
     "ui": {
       "volgendeStappen": "الخطوات التالية",
@@ -2395,14 +2503,16 @@ window._NAT = {
             "tekst": "لديّ تصريح إقامة لجوء (حامل تصريح لجوء)",
             "icoon": "🛡️",
             "klasse": "ja",
-            "volgende": "v_asiel"
+            "volgende": "v_asiel",
+            "pad": "asiel"
           },
           {
             "tekst": "لديّ تصريح إقامة آخر",
             "sub": "مثلاً للعائلة أو العمل أو الدراسة",
             "icoon": "📄",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "v_regulier",
+            "pad": "regulier"
           },
           {
             "tekst": "أنا مواطن في الاتحاد الأوروبي",
@@ -2421,27 +2531,21 @@ window._NAT = {
       },
       "v_asiel": {
         "tekst": "ما هو تصريح اللجوء الذي لديك الآن؟",
-        "uitleg": "تغيّرت القواعد منذ 12 يونيو 2026. بالنسبة للتجنيس (naturalisatie)، يهمّ متى حصلت على تصريحك الحالي.",
+        "uitleg": "انظر إلى بطاقة إقامتك: هل مكتوب عليها 'لأجل غير محدّد' (onbepaalde tijd)، أم يوجد تاريخ انتهاء؟",
         "antwoorden": [
           {
             "tekst": "لجوء لأجل غير محدّد",
-            "sub": "حصلت عليه قبل 12 يونيو 2026",
+            "sub": "لا يوجد على بطاقتك تاريخ انتهاء لحق إقامتك",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v2"
           },
           {
-            "tekst": "لجوء لمدة 5 سنوات، حصلت عليه قبل 12 يونيو 2026",
+            "tekst": "لجوء لمدة محدّدة",
+            "sub": "صالح لمدة 3 أو 5 سنوات، حتى لو حصلت عليه قبل 12 يونيو 2026",
             "icoon": "📅",
-            "klasse": "ja",
-            "volgende": "v_asiel5"
-          },
-          {
-            "tekst": "لجوء حصلت عليه أو جُدّد في 12 يونيو 2026 أو بعده",
-            "sub": "صالح عادةً لمدة 3 سنوات",
-            "icoon": "🆕",
             "klasse": "anders",
-            "volgende": "e1"
+            "volgende": "v_asiel5"
           },
           {
             "tekst": "أنا بالفعل مقيم طويل الأمد في الاتحاد الأوروبي",
@@ -2458,20 +2562,20 @@ window._NAT = {
         ]
       },
       "v_asiel5": {
-        "tekst": "خبر سار: تصريحك يخضع للقواعد القديمة",
-        "uitleg": "حصلت على تصريح اللجوء لمدة 5 سنوات قبل 12 يونيو 2026. بهذا التصريح لا يزال بإمكانك التجنيس (naturalisatie) بالطريقة القديمة.<br><br>⚠️ <strong>انتبه:</strong> إذا جدّدت دائرة الهجرة (IND) تصريحك بعد 12 يونيو 2026، فستحصل على تصريح وفق القواعد الجديدة. عندها يجب أن تصبح أولاً مقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene). <strong>هل تستوفي الشروط؟ إذاً قدّم طلب التجنيس ما دامت بطاقة إقامتك الحالية سارية.</strong>",
+        "tekst": "تصريحك يبقى سارياً — لكن الحصول على الجنسية الهولندية يمرّ بخطوة وسيطة",
+        "uitleg": "يبقى تصريح اللجوء الخاص بك سارياً حتى التاريخ المكتوب على بطاقتك. لكن مع تصريح إقامة لجوء لمدة محدّدة (verblijfsvergunning asiel) لا يمكنك تقديم طلب التجنيس (naturalisatie). وهذا ينطبق أيضاً إذا حصلت على التصريح قبل 12 يونيو 2026. منذ 12 يونيو 2026 لم يعد تصريح اللجوء لأجل غير محدّد موجوداً.<br><br>لذلك يجب أن تصبح أولاً <strong>مقيماً طويل الأمد في الاتحاد الأوروبي</strong> (EU-langdurig ingezetene). بعد ذلك يمكنك تقديم طلب التجنيس. الأسئلة التالية تبيّن ما إذا كان ذلك ممكناً لك الآن.",
         "antwoorden": [
           {
             "tekst": "فهمت — تابع",
             "icoon": "→",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "e1"
           }
         ]
       },
       "v_asiel_wn": {
         "tekst": "هكذا تعرف أي تصريح لديك",
-        "uitleg": "انظر إلى بطاقة إقامتك، في خانة 'Type document en bijzonderheden' (نوع الوثيقة والملاحظات: رقم النوع والنص المجاور له)، أو في رسالة دائرة الهجرة (IND). انتبه إلى أمرين:<br><br>1. هل مكتوب <strong>لجوء</strong> (asiel) أم غرض آخر (مثل العائلة أو العمل)؟<br>2. متى حصلت على هذه البطاقة: <strong>قبل 12 يونيو 2026 أم بعده</strong>؟ وما مدة صلاحيتها؟<br><br>لم تستطع معرفة ذلك؟ اسأل مرشدك في البلدية أو VluchtelingenWerk.",
+        "uitleg": "انظر إلى بطاقة إقامتك، في خانة 'Type document en bijzonderheden' (نوع الوثيقة والملاحظات: رقم النوع والنص المجاور له)، أو في رسالة دائرة الهجرة (IND). انتبه إلى أمرين:<br><br>1. هل مكتوب <strong>لجوء</strong> (asiel) أم غرض آخر (مثل العائلة أو العمل)؟<br>2. هل مكتوب '<strong>لأجل غير محدّد</strong>' (onbepaalde tijd)، أم يوجد <strong>تاريخ انتهاء</strong>؟<br><br>لم تستطع معرفة ذلك؟ اسأل مرشدك في البلدية أو VluchtelingenWerk.",
         "antwoorden": [
           {
             "tekst": "وجدته — العودة إلى السؤال",
@@ -2487,9 +2591,40 @@ window._NAT = {
           }
         ]
       },
+      "v_regulier": {
+        "tekst": "ما نوع تصريح الإقامة الذي لديك؟",
+        "uitleg": "للتجنيس (naturalisatie) تحتاج إلى تصريح لأجل غير محدّد، أو لغرض غير مؤقت، مثل العيش مع شريكك أو العمل. على بطاقة إقامتك مكتوب الغرض وما إذا كان هناك تاريخ انتهاء.",
+        "antwoorden": [
+          {
+            "tekst": "لأجل غير محدّد",
+            "icoon": "✓",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "لمدة محدّدة — للعائلة أو الشريك أو العمل",
+            "icoon": "👨‍👩‍👧",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "لمدة محدّدة — للدراسة أو إقامة مؤقتة أخرى",
+            "sub": "مثلاً العمل الموسمي، أو العلاج الطبي، أو التبادل، أو سنة البحث عن عمل لذوي التعليم العالي",
+            "icoon": "🎓",
+            "klasse": "nee",
+            "volgende": "r_regulier_tijdelijk"
+          },
+          {
+            "tekst": "لا أعرف",
+            "icoon": "❓",
+            "klasse": "anders",
+            "volgende": "v_asiel_wn"
+          }
+        ]
+      },
       "e1": {
         "tekst": "هل تقيم في هولندا منذ 5 سنوات أو أكثر بشكل متواصل بتصريح سارٍ؟",
-        "uitleg": "مع تصريح إقامة لجوء جديد (verblijfsvergunning asiel) لا يمكنك أن تصبح هولندياً إلا بعد أن تصبح أولاً مقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene). لذلك يجب أن تكون قد أقمت في هولندا 5 سنوات متواصلة على الأقل بتصريح سارٍ. سنوات تصريح اللجوء تُحتسب. أما هل تُحتسب مدة إجراءات اللجوء، فهذا تقرّره دائرة الهجرة (IND).",
+        "uitleg": "مع تصريح إقامة لجوء لمدة محدّدة (verblijfsvergunning asiel) لا يمكنك أن تصبح هولندياً إلا بعد أن تصبح أولاً مقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene). لذلك يجب أن تكون قد أقمت في هولندا 5 سنوات متواصلة على الأقل بتصريح سارٍ. سنوات تصريح اللجوء تُحتسب. أما هل تُحتسب مدة إجراءات اللجوء، فهذا تقرّره دائرة الهجرة (IND).",
         "antwoorden": [
           {
             "tekst": "نعم، 5 سنوات أو أكثر",
@@ -2578,18 +2713,17 @@ window._NAT = {
         ]
       },
       "v2": {
-        "tekst": "هل لديك تصريح إقامة سارٍ؟",
-        "uitleg": "تحتاج إلى تصريح إقامة سارٍ وغير مؤقت. مثلاً تصريح لأجل غير محدّد، أو صفة المقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene)، أو تصريح لجوء صادر قبل 12 يونيو 2026. جدّد تصريحك دائماً في الوقت المناسب، حتى تبقى إقامتك متواصلة.",
+        "tekst": "هل تصريح إقامتك ساري المفعول الآن؟",
+        "uitleg": "يجب أن يكون تصريحك سارياً عندما تقدّم طلب التجنيس (naturalisatie)، وأن يبقى سارياً حتى صدور القرار. جدّده دائماً في الوقت المناسب، حتى تبقى إقامتك متواصلة.",
         "antwoorden": [
           {
-            "tekst": "نعم، لديّ تصريح إقامة سارٍ",
-            "sub": "أو وضع لجوء (IND نوع III أو IV أو V)",
+            "tekst": "نعم، تصريحي ساري المفعول",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v3"
           },
           {
-            "tekst": "لا، ليس لديّ تصريح إقامة سارٍ",
+            "tekst": "لا، انتهت صلاحية تصريحي أو ليس لديّ تصريح",
             "icoon": "✗",
             "klasse": "nee",
             "volgende": "r_geen_vergunning"
@@ -2658,7 +2792,7 @@ window._NAT = {
       },
       "v4a_z": {
         "tekst": "أتممت مسار Z — هناك خطوة إضافية مطلوبة للتجنيس",
-        "uitleg": "ينتهي مسار Z بمقابلة ختامية وشهادة، لكن للتجنيس تطبّق دائرة الهجرة شروطاً لغوية إضافية. هناك ثلاثة مسارات لتتمكّن مع ذلك من التجنيس:<br><br><strong>المسار A — اجتياز الامتحان مع ذلك بمستوى A2</strong><br>اجتز جميع الامتحانات اللغوية بمستوى A2 (قراءة، استماع، كتابة، محادثة) وامتحان KNM. انتبه: بعد إنهاء مسار Z لم تعد محاولات الامتحان مجانية.<br><br><strong>المسار B — 600 ساعة دروس لغة + 3 محاولات على الأقل لكل جزء</strong><br>600 ساعة على الأقل من دروس مستوى A2 في مؤسسة معتمدة من Blik op Werk و3 محاولات لكل جزء؟ عندئذٍ يمكن لدائرة DUO إصدار توصية بالإعفاء.<br><br><strong>المسار C — 600 ساعة محو أمية + اختبار DUO (€150)</strong><br>600 ساعة على الأقل من محو الأمية وتبيّن أن A2 غير قابل للتحقيق؟ عندئذٍ يُمنح إعفاء عبر اختبار DUO (€150).<br><br><em>محتمل في المستقبل:</em> تريد الحكومة رفع شرط اللغة للتجنيس من A2 إلى B1. لم يُعتمد هذا بعد — حالياً لا يزال A2 سارياً.<br><br>💡 ناقش مع بلديتك أو مع VluchtelingenWerk أيُّ مسار يناسبك أكثر.",
+        "uitleg": "ينتهي مسار Z بمقابلة ختامية وشهادة، لكن للتجنيس تطبّق دائرة الهجرة شروطاً لغوية إضافية. هناك ثلاثة مسارات لتتمكّن مع ذلك من التجنيس:<br><br><strong>المسار A — اجتياز الامتحان مع ذلك بمستوى A2</strong><br>اجتز جميع الامتحانات اللغوية بمستوى A2 (قراءة، استماع، كتابة، محادثة) وامتحان KNM. انتبه: بعد إنهاء مسار Z لم تعد محاولات الامتحان مجانية.<br><br><strong>المسار B — 600 ساعة دروس لغة + 3 محاولات على الأقل لكل جزء</strong><br>600 ساعة على الأقل من دروس مستوى A2 في مؤسسة معتمدة من Blik op Werk و3 محاولات لكل جزء؟ عندئذٍ يمكن لدائرة DUO إصدار توصية بالإعفاء.<br><br><strong>المسار C — 600 ساعة محو أمية + اختبار DUO (€150)</strong><br>600 ساعة على الأقل من محو الأمية وتبيّن أن A2 غير قابل للتحقيق؟ عندئذٍ يُمنح إعفاء عبر اختبار DUO (€150).<br><br><em>محتمل في المستقبل:</em> تريد الحكومة رفع شرط اللغة للتجنيس من A2 إلى B1. لم يُعتمد هذا بعد — حالياً لا يزال A2 سارياً.<br><br>💡 ناقش مع بلديتك أيُّ مسار يناسبك أكثر.",
         "antwoorden": [
           {
             "tekst": "فهمت — المضي قدماً في الشروط الأخرى",
@@ -2765,7 +2899,7 @@ window._NAT = {
       },
       "v7": {
         "tekst": "هل أنت مستعد للتنازل عن جنسيتك الحالية؟",
-        "uitleg": "لا تسمح هولندا في الغالب بازدواجية الجنسية. استثناء: اللاجئون المعترف بهم (أصحاب وضع اللاجئ) يمكنهم الاحتفاظ بكلتا الجنسيتين.",
+        "uitleg": "لا تسمح هولندا في الغالب بازدواجية الجنسية. هناك استثناءات، مثلاً للاجئين المعترف بهم.",
         "antwoorden": [
           {
             "tekst": "نعم، سأتنازل عن جنسيتي",
@@ -2778,7 +2912,8 @@ window._NAT = {
             "sub": "أصحاب وضع اللجوء يمكنهم الاحتفاظ بازدواجية الجنسية",
             "icoon": "✓",
             "klasse": "ja",
-            "volgende": "v8"
+            "volgende": "v8",
+            "alleenPad": "asiel"
           },
           {
             "tekst": "لا، أريد الاحتفاظ بجنسيتي",
@@ -2813,7 +2948,8 @@ window._NAT = {
         "icoon": "🎉",
         "titel": "على الأرجح أنت مؤهل!",
         "sub": "بناءً على إجاباتك تستوفي الشروط الرئيسية للتجنيس. الخطوة التالية هي تقديم طلب رسمي في بلديتك.",
-        "info": "💡 أصحاب وضع اللجوء (اللاجئون المعترف بهم) في معظم الحالات لا يحتاجون للتنازل عن جنسيتهم الأصلية.",
+        "info": "💡 هل أنت لاجئ معترف به؟ إذاً في الغالب لا تحتاج إلى التنازل عن جنسيتك الأصلية.",
+        "infoAlleenPad": "asiel",
         "stappen": [
           {
             "nr": 1,
@@ -2905,7 +3041,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "طلب اللجوء",
-            "tekst": "إذا كنت بحاجة إلى حماية يمكنك تقديم طلب لجوء إلى IND."
+            "tekst": "إذا كنت بحاجة إلى حماية يمكنك تقديم طلب لجوء إلى IND.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "تصريح منتظم",
@@ -2913,29 +3050,26 @@ window._NAT = {
           },
           {
             "naam": "مساعدة قانونية",
-            "tekst": "تواصل مع منظمة لاجئين أو محامٍ."
+            "tekst": "تواصل مع محامٍ أو مع مكتب الاستشارات القانونية (Juridisch Loket)."
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "دعم قانوني مجاني لطالبي اللجوء وأصحاب وضع اللجوء."
+            "tekst": "دعم قانوني مجاني لطالبي اللجوء وأصحاب وضع اللجوء.",
+            "alleenPad": "asiel"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ تواصل مع VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ مساعدة عبر Juridisch Loket"
       },
       "r_te_kort": {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "لم تُقم في هولندا مدة كافية بعد",
-        "sub": "يجب حالياً أن تكون قد أقمت في هولندا 5 سنوات متتالية على الأقل بإقامة سارية. منذ قواعد اللجوء الجديدة لعام 2026 هناك بضعة أمور ينبغي الانتباه إليها أثناء الانتظار. يمكنك استثمار فترة الانتظار جيداً.",
+        "sub": "يجب أن تكون قد أقمت في هولندا 5 سنوات متتالية على الأقل. يمكنك استثمار فترة الانتظار جيداً.",
         "alternatieven": [
           {
             "naam": "جدّد تصريحك في الوقت المناسب",
-            "tekst": "تصاريح اللجوء الجديدة سارية لمدة 3 سنوات كحدّ أقصى؛ لذا جدّد في الوقت المناسب. إذا نشأت \"فجوة إقامة\" (verblijfsgat) — فترة بين تصريحين لا يكون لديك فيها تصريح ساري — فلا تُحتسب تلك الفترة كإقامة قانونية، وقد يبدأ عدّ الـ 5 سنوات للتجنيس من جديد. لذا قدّم طلب التجديد خلال 4 أسابيع كحدّ أقصى من انتهاء الصلاحية: عندئذٍ لا تعتبرها دائرة الهجرة فجوة إقامة."
-          },
-          {
-            "naam": "هل ينتهي تصريح لجوئك قبل ذلك؟",
-            "tekst": "هل لديك تصريح إقامة لجوء (verblijfsvergunning asiel) لمدة 5 سنوات صادر قبل 12 يونيو 2026، وينتهي قبل أن تكمل 5 سنوات في هولندا؟ عندها ستحصل عند التجديد على تصريح وفق القواعد الجديدة. ويمرّ طريقك حينئذٍ عبر صفة المقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene)، ولها شرط دخل."
+            "tekst": "إذا مرّت فترة بدون تصريح ساري — \"فجوة إقامة\" (verblijfsgat) — فلا تُحتسب تلك الفترة. وقد يبدأ عدّ الـ 5 سنوات عندها من جديد. لذا قدّم طلب التجديد في الوقت المناسب، وخلال 4 أسابيع كحدّ أقصى من انتهاء الصلاحية: عندئذٍ لا تعتبرها دائرة الهجرة (IND) فجوة إقامة."
           },
           {
             "naam": "مدة التجنيس: ربما 10 سنوات",
@@ -2955,15 +3089,38 @@ window._NAT = {
           },
           {
             "naam": "خطة الحكومة (ليست قانوناً بعد)",
-            "tekst": "حاملو تصريح اللجوء الذين حصلوا مرتين على تصريح لجوء مؤقت ووصلوا في اللغة الهولندية إلى المستوى B1، قد يصبحون هولنديين بعد 6 سنوات، حتى بدون صفة المقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene). وسيكون هناك استثناء لمن لا يستطيع الوصول إلى المستوى B1. لا يوجد بعد مشروع قانون. وإلى أن يصدر هذا القانون، تسري القواعد المذكورة أعلاه."
+            "tekst": "حاملو تصريح اللجوء الذين حصلوا مرتين على تصريح لجوء مؤقت ووصلوا في اللغة الهولندية إلى المستوى B1، قد يصبحون هولنديين بعد 6 سنوات، حتى بدون صفة المقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene). وسيكون هناك استثناء لمن لا يستطيع الوصول إلى المستوى B1. لا يوجد بعد مشروع قانون. وإلى أن يصدر هذا القانون، تسري القواعد المذكورة أعلاه.",
+            "alleenPad": "asiel"
           }
         ],
         "interneLink": {
           "naar": "r_eu_langdurig",
           "tekst": "🇪🇺 اطّلع: مقيم طويل الأمد في الاتحاد الأوروبي (إقامة دائمة بعد 5 سنوات)"
         },
-        "link": "https://ind.nl/en/asylum-and-family-reunification-the-migration-pact-and-other-developments/new-laws-and-regulations-for-asylum-and-family-reunification",
-        "linkTekst": "→ اطّلع على قواعد اللجوء الجديدة 2026 على ind.nl"
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ مزيد من المعلومات على ind.nl"
+      },
+      "r_regulier_tijdelijk": {
+        "type": "wacht",
+        "icoon": "🎓",
+        "titel": "بهذا التصريح لا يمكنك أن تصبح هولندياً بعد",
+        "sub": "للتجنيس (naturalisatie) تحتاج إلى تصريح لأجل غير محدّد، أو لغرض غير مؤقت. تصريح الدراسة أو الإقامة المؤقتة الأخرى لا يُحتسب.",
+        "alternatieven": [
+          {
+            "naam": "هل يتغيّر وضعك؟",
+            "tekst": "هل ستبدأ العمل مثلاً، أو ستعيش مع شريكك؟ عندها يمكنك تقديم طلب لتصريح آخر. بعد ذلك أعد هذا الفحص."
+          },
+          {
+            "naam": "كيف تُحتسب إقامتك؟",
+            "tekst": "هل تُحتسب السنوات مع تصريحك الحالي ضمن الـ 5 سنوات؟ هذا يعتمد على وضعك. اطلب التحقق من ذلك."
+          },
+          {
+            "naam": "ابدأ من الآن بتعلّم الهولندية",
+            "tekst": "للتجنيس (naturalisatie) يجب لاحقاً أن تكون قد أتممت الاندماج (inburgering). دورة لغة تساعدك من الآن."
+          }
+        ],
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ مزيد من المعلومات على ind.nl"
       },
       "r_bezig_b1": {
         "type": "route",
@@ -3062,9 +3219,9 @@ window._NAT = {
             "tekst": "600 ساعة على الأقل من محو الأمية في مؤسسة معتمدة من Blik op Werk ويُثبت اختبار DUO عدم إمكانية تحقيق A2؟ يتبع الإعفاء. يكلف اختبار DUO 150 يورو."
           }
         ],
-        "info": "📞 <strong>استشارة:</strong> تشاور مع بلديتك أو VluchtelingenWerk لمعرفة أنسب مسار لوضعك.",
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ مساعدة عبر VluchtelingenWerk"
+        "info": "📞 <strong>استشارة:</strong> تشاور مع بلديتك لمعرفة أنسب مسار لوضعك.",
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ مساعدة عبر Juridisch Loket"
       },
       "r_geen_inburgering": {
         "type": "wacht",
@@ -3104,7 +3261,8 @@ window._NAT = {
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "مساعدة قانونية مجانية لأصحاب وضع اللجوء."
+            "tekst": "مساعدة قانونية مجانية لأصحاب وضع اللجوء.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "مدة الانتظار",
@@ -3115,8 +3273,8 @@ window._NAT = {
             "tekst": "المخالفات المرورية والمخالفات الصغيرة لا تُحتسب في الغالب."
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ تواصل مع VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ مساعدة عبر Juridisch Loket"
       },
       "r_strafblad_check": {
         "type": "wacht",
@@ -3138,7 +3296,7 @@ window._NAT = {
           },
           {
             "naam": "استشارة قانونية",
-            "tekst": "عند الشك: استشر مستشاراً قانونياً أو VluchtelingenWerk."
+            "tekst": "عند الشك: استشر مستشاراً قانونياً أو مكتب الاستشارات القانونية (Juridisch Loket)."
           }
         ],
         "link": "https://www.justis.nl/producten/vog",
@@ -3178,7 +3336,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "استثناء لحاملي وضع اللجوء",
-            "tekst": "بصفتك لاجئاً معترفاً به، لست مُلزماً بالتخلّي عن جنسيتك."
+            "tekst": "بصفتك لاجئاً معترفاً به، لست مُلزماً بالتخلّي عن جنسيتك.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "استثناء: غير ممكن",
@@ -3216,7 +3375,7 @@ window._NAT = {
           },
           {
             "type": "amber",
-            "tekst": "⚠️ <strong>شرط الدخل:</strong> يجب أن يكون لديك دخل خاص كافٍ ودائم، وتأمين صحي. مع الإعانة لا ينجح ذلك غالباً. انتبه: إذا كان لديك تصريح إقامة لجوء جديد (verblijfsvergunning asiel) صادر بعد 12 يونيو 2026، فأنت تحتاج إلى صفة المقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene) لكي تتمكن لاحقاً من التجنيس. إذاً شرط الدخل ينطبق أيضاً على طريقك إلى الجنسية الهولندية."
+            "tekst": "⚠️ <strong>شرط الدخل:</strong> يجب أن يكون لديك دخل خاص كافٍ ودائم، وتأمين صحي. مع الإعانة لا ينجح ذلك غالباً. إذا كان لديك تصريح إقامة لجوء لمدة محدّدة (verblijfsvergunning asiel)، فأنت تحتاج إلى صفة المقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene) لكي تتمكن لاحقاً من التجنيس. إذاً شرط الدخل ينطبق أيضاً على طريقك إلى الجنسية الهولندية."
           },
           {
             "type": "info",
@@ -3230,7 +3389,7 @@ window._NAT = {
           },
           {
             "nr": 2,
-            "tekst": "<strong>تصريح لجوء جديد؟</strong> إذاً هذا هو الطريق الوحيد إلى تصريح دائم، ثم إلى التجنيس (naturalisatie)."
+            "tekst": "<strong>تصريح لجوء لمدة محدّدة؟</strong> إذاً هذا هو الطريق الوحيد إلى تصريح دائم، ثم إلى التجنيس (naturalisatie)."
           },
           {
             "nr": 3,
@@ -3274,7 +3433,7 @@ window._NAT = {
         "type": "route",
         "icoon": "🪜",
         "titel": "يمكنك أن تصبح هولندياً — على خطوتين",
-        "sub": "مع تصريح إقامة لجوء جديد (verblijfsvergunning asiel) يجب أن تصبح أولاً مقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene). بعد ذلك يمكنك تقديم طلب التجنيس (naturalisatie).",
+        "sub": "مع تصريح إقامة لجوء لمدة محدّدة (verblijfsvergunning asiel) يجب أن تصبح أولاً مقيماً طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene). بعد ذلك يمكنك تقديم طلب التجنيس (naturalisatie).",
         "infoBoxen": [
           {
             "type": "amber",
@@ -3402,7 +3561,7 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🧭",
         "titel": "دخلك هو العائق الآن",
-        "sub": "مع تصريح إقامة لجوء (verblijfsvergunning asiel) صادر بعد 12 يونيو 2026 لا يمكنك أن تصبح هولندياً إلا إذا أصبحت أولاً مقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene). ولهذا تحتاج إلى دخل خاص كافٍ. مع الإعانة لا ينجح ذلك حالياً. بصراحة، هذا تغيير كبير.",
+        "sub": "مع تصريح إقامة لجوء لمدة محدّدة (verblijfsvergunning asiel) لا يمكنك أن تصبح هولندياً إلا إذا أصبحت أولاً مقيماً طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene). ولهذا تحتاج إلى دخل خاص كافٍ. مع الإعانة لا ينجح ذلك بعد في الوقت الحالي. بصراحة، هذا تغيير كبير.",
         "alternatieven": [
           {
             "naam": "العمل أو ساعات أكثر",
@@ -3458,11 +3617,11 @@ window._NAT = {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "لم تُقم في هولندا مدة كافية بعد",
-        "sub": "مع تصريح إقامة لجوء جديد (verblijfsvergunning asiel) يجب أن تقيم أولاً 5 سنوات في هولندا. بعد ذلك يمكنك أن تصبح مقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene)، وعندها فقط هولندياً. يمكنك استثمار الوقت حتى ذلك الحين جيداً.",
+        "sub": "مع تصريح إقامة لجوء لمدة محدّدة (verblijfsvergunning asiel) يجب أن تقيم أولاً 5 سنوات في هولندا. بعد ذلك يمكنك أن تصبح مقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene)، وعندها فقط هولندياً. يمكنك استثمار الوقت حتى ذلك الحين جيداً.",
         "alternatieven": [
           {
             "naam": "جدّد في الوقت المناسب",
-            "tekst": "تصاريح اللجوء الجديدة سارية لمدة 3 سنوات كحدّ أقصى؛ لذا جدّد في الوقت المناسب. إذا نشأت \"فجوة إقامة\" (verblijfsgat) — فترة بين تصريحين لا يكون لديك فيها تصريح ساري — فلا تُحتسب تلك الفترة كإقامة قانونية، وقد يبدأ عدّ الـ 5 سنوات للتجنيس من جديد. لذا قدّم طلب التجديد خلال 4 أسابيع كحدّ أقصى من انتهاء الصلاحية: عندئذٍ لا تعتبرها دائرة الهجرة فجوة إقامة."
+            "tekst": "تصاريح اللجوء لمدة محدّدة سارية لمدة 3 سنوات كحدّ أقصى؛ لذا جدّد في الوقت المناسب. إذا نشأت \"فجوة إقامة\" (verblijfsgat) — فترة بين تصريحين لا يكون لديك فيها تصريح ساري — فلا تُحتسب تلك الفترة كإقامة قانونية، وقد يبدأ عدّ الـ 5 سنوات للتجنيس من جديد. لذا قدّم طلب التجديد خلال 4 أسابيع كحدّ أقصى من انتهاء الصلاحية: عندئذٍ لا تعتبرها دائرة الهجرة فجوة إقامة."
           },
           {
             "naam": "اعمل على دخلك",
@@ -3490,19 +3649,19 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🔍",
         "titel": "اطلب أولاً التحقق من نوع تصريحك",
-        "sub": "طريقك إلى الجنسية الهولندية يعتمد على تصريحك. مع تصريح لجوء صادر قبل 12 يونيو 2026 يكون الطريق أقصر منه مع تصريح جديد.",
+        "sub": "طريقك إلى الجنسية الهولندية يعتمد على تصريحك.",
         "alternatieven": [
           {
-            "naam": "تصريح لجوء قديم",
-            "tekst": "لأجل غير محدّد، أو لمدة 5 سنوات صادر قبل 12 يونيو 2026: يمكنك التجنيس (naturalisatie) بالطريقة القديمة."
+            "naam": "لجوء لأجل غير محدّد",
+            "tekst": "يمكنك التجنيس (naturalisatie) إذا استوفيت الشروط الأخرى."
           },
           {
-            "naam": "تصريح لجوء جديد",
-            "tekst": "صادر أو مجدّد في 12 يونيو 2026 أو بعده: أولاً صفة المقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene)، مع شرط الدخل، ثم التجنيس (naturalisatie)."
+            "naam": "لجوء لمدة محدّدة (3 أو 5 سنوات)",
+            "tekst": "أولاً صفة المقيم طويل الأمد في الاتحاد الأوروبي (EU-langdurig ingezetene)، مع شرط الدخل، ثم التجنيس (naturalisatie). حتى لو حصلت على التصريح قبل 12 يونيو 2026."
           },
           {
             "naam": "تصريح آخر",
-            "tekst": "للعائلة أو العمل أو الدراسة: القواعد القديمة لا تزال سارية."
+            "tekst": "للعائلة أو الشريك أو العمل: التجنيس ممكن عادةً بعد 5 سنوات. للدراسة أو إقامة مؤقتة أخرى: ليس بعد."
           },
           {
             "naam": "من يمكنه المساعدة؟",
@@ -3519,9 +3678,11 @@ window._NAT = {
       "badge": "🇳🇱 Vatandaşlık Denetleyicisi",
       "titel": "Hollanda pasaportu için uygun muyum?",
       "sub": "Birkaç soruyu yanıtlayın ve Hollanda vatandaşı olup olamayacağınızı görün. 2026 kurallarına dayanır; 12 Haziran 2026'dan bu yana geçerli yeni iltica kuralları da dahildir.",
-      "disclaimer": "⚠️ Bu araç bir fikir verir, karar değildir. Eylül 2026'da kontrol edildi (IND, Stimulansz). 12 Haziran 2026'dan bu yana süresiz iltica oturma izni artık yok. Bu nedenle yeni statü sahipleri, vatandaşlığa geçebilmek (naturalisatie) için önce AB uzun süreli mukimi (EU-langdurig ingezetene) olmalıdır. Hükümetin açıkladığı planlar henüz yasa değil. Her zaman belediyeden veya VluchtelingenWerk'ten tavsiye isteyin.",
+      "disclaimer": "⚠️ Bu araç bir fikir verir, karar değildir. Eylül 2026'da kontrol edildi (IND, Stimulansz). 12 Haziran 2026'dan bu yana süresiz iltica oturma izni artık yok. Bu nedenle süreli iltica oturma iznine (verblijfsvergunning asiel) sahip statü sahipleri, vatandaşlığa geçebilmek (naturalisatie) için önce AB uzun süreli mukimi (EU-langdurig ingezetene) olmalıdır. Hükümetin açıkladığı planlar henüz yasa değil. Her zaman belediyeden veya VluchtelingenWerk'ten tavsiye isteyin.",
       "vwnLabel": "Durumunuzdan emin değil misiniz?",
-      "vwnTekst": "Vatandaşlık kuralları hızla değişmektedir ve durumunuz aracın gösterdiğinden farklı olabilir. VluchtelingenWerk Nederland, vatandaşlık konusunda ücretsiz danışma saatleri ve rehberlik sunmaktadır — <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a> adresinden size yakın bir merkezi bulun."
+      "vwnTekst": "Vatandaşlık kuralları hızla değişmektedir ve durumunuz aracın gösterdiğinden farklı olabilir. VluchtelingenWerk Nederland, vatandaşlık konusunda ücretsiz danışma saatleri ve rehberlik sunmaktadır — <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a> adresinden size yakın bir merkezi bulun.",
+      "hulpRegulierLabel": "Durumunuzdan emin değil misiniz?",
+      "hulpRegulierTekst": "Hukuki Danışma Bürosu (Juridisch Loket), oturma izniniz ve vatandaşlığa geçiş (naturalisatie) hakkında ücretsiz tavsiye verir. <a href=\"https://www.juridischloket.nl\" target=\"_blank\" style=\"color:inherit;\">juridischloket.nl</a> adresine bakın veya belediyenize sorun."
     },
     "ui": {
       "volgendeStappen": "Sonraki adımlar",
@@ -3561,14 +3722,16 @@ window._NAT = {
             "tekst": "İltica oturma iznim var (statü sahibi)",
             "icoon": "🛡️",
             "klasse": "ja",
-            "volgende": "v_asiel"
+            "volgende": "v_asiel",
+            "pad": "asiel"
           },
           {
             "tekst": "Başka bir oturma iznim var",
             "sub": "Örneğin aile, iş veya öğrenim için",
             "icoon": "📄",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "v_regulier",
+            "pad": "regulier"
           },
           {
             "tekst": "AB vatandaşıyım",
@@ -3587,27 +3750,21 @@ window._NAT = {
       },
       "v_asiel": {
         "tekst": "Şu anda hangi iltica izniniz var?",
-        "uitleg": "12 Haziran 2026'dan bu yana kurallar değişti. Vatandaşlığa geçiş (naturalisatie) için mevcut izninizi ne zaman aldığınız önemlidir.",
+        "uitleg": "Oturma kartınıza bakın: 'süresiz' (onbepaalde tijd) mi yazıyor, yoksa bir bitiş tarihi mi var?",
         "antwoorden": [
           {
             "tekst": "Süresiz iltica",
-            "sub": "12 Haziran 2026'dan önce alındı",
+            "sub": "Kartınızda oturma hakkınız için bir bitiş tarihi yok",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v2"
           },
           {
-            "tekst": "5 yıllık iltica, 12 Haziran 2026'dan önce alındı",
+            "tekst": "Süreli iltica",
+            "sub": "3 veya 5 yıl geçerli, 12 Haziran 2026'dan önce almış olsanız bile",
             "icoon": "📅",
-            "klasse": "ja",
-            "volgende": "v_asiel5"
-          },
-          {
-            "tekst": "12 Haziran 2026'da veya sonrasında alınan ya da uzatılan iltica",
-            "sub": "Genellikle 3 yıl geçerli",
-            "icoon": "🆕",
             "klasse": "anders",
-            "volgende": "e1"
+            "volgende": "v_asiel5"
           },
           {
             "tekst": "Zaten AB uzun süreli mukimiyim",
@@ -3624,20 +3781,20 @@ window._NAT = {
         ]
       },
       "v_asiel5": {
-        "tekst": "İyi haber: izniniz eski kurallara tabi",
-        "uitleg": "5 yıllık iltica izninizi 12 Haziran 2026'dan önce aldınız. Bununla hâlâ eski yoldan vatandaşlığa geçebilirsiniz (naturalisatie).<br><br>⚠️ <strong>Dikkat:</strong> IND izninizi 12 Haziran 2026'dan sonra uzatırsa, yeni kurallara göre bir izin alırsınız. O zaman önce AB uzun süreli mukimi (EU-langdurig ingezetene) olmanız gerekir. <strong>Şartları karşılıyor musunuz? O hâlde mevcut kartınız hâlâ geçerliyken vatandaşlık başvurusu yapın.</strong>",
+        "tekst": "İzniniz geçerli kalır — ama Hollanda vatandaşı olmak bir ara adımdan geçer",
+        "uitleg": "İltica izniniz kartınızdaki tarihe kadar geçerli kalır. Ancak süreli bir iltica oturma izniyle (verblijfsvergunning asiel) vatandaşlığa geçiş (naturalisatie) başvurusu yapamazsınız. Bu, izni 12 Haziran 2026'dan önce almış olsanız da geçerlidir. 12 Haziran 2026'dan bu yana süresiz iltica izni artık yok.<br><br>Bu yüzden önce <strong>AB uzun süreli mukimi</strong> (EU-langdurig ingezetene) olmanız gerekir. Ardından vatandaşlığa geçiş başvurusu yapabilirsiniz. Sonraki sorular bunun sizin için şimdiden mümkün olup olmadığını gösterir.",
         "antwoorden": [
           {
             "tekst": "Anladım — devam et",
             "icoon": "→",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "e1"
           }
         ]
       },
       "v_asiel_wn": {
         "tekst": "Hangi izne sahip olduğunuzu böyle görürsünüz",
-        "uitleg": "Oturma kartınızda 'Type document en bijzonderheden' (belge türü ve özel notlar: tip numarası ve yanındaki metin) alanına veya IND'nin mektubuna bakın. İki şeye dikkat edin:<br><br>1. Orada <strong>iltica</strong> (asiel) mı yazıyor, yoksa başka bir amaç mı (aile veya iş gibi)?<br>2. Bu kartı ne zaman aldınız: <strong>12 Haziran 2026'dan önce mi, sonra mı</strong>? Ve ne kadar süre geçerli?<br><br>Anlayamadınız mı? Belediyedeki danışmanınıza veya VluchtelingenWerk'e sorun.",
+        "uitleg": "Oturma kartınızda 'Type document en bijzonderheden' (belge türü ve özel notlar: tip numarası ve yanındaki metin) alanına veya IND'nin mektubuna bakın. İki şeye dikkat edin:<br><br>1. Orada <strong>iltica</strong> (asiel) mı yazıyor, yoksa başka bir amaç mı (aile veya iş gibi)?<br>2. '<strong>Süresiz</strong>' (onbepaalde tijd) mi yazıyor, yoksa bir <strong>bitiş tarihi</strong> mi var?<br><br>Anlayamadınız mı? Belediyedeki danışmanınıza veya VluchtelingenWerk'e sorun.",
         "antwoorden": [
           {
             "tekst": "Buldum — soruya geri dön",
@@ -3653,9 +3810,40 @@ window._NAT = {
           }
         ]
       },
+      "v_regulier": {
+        "tekst": "Ne tür bir oturma izniniz var?",
+        "uitleg": "Vatandaşlığa geçiş (naturalisatie) için süresiz bir izne veya geçici olmayan bir amaç için verilmiş bir izne ihtiyacınız var; örneğin partnerinizle birlikte yaşamak veya çalışmak. Oturma kartınızda amaç ve bir bitiş tarihi olup olmadığı yazar.",
+        "antwoorden": [
+          {
+            "tekst": "Süresiz",
+            "icoon": "✓",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "Süreli — aile, partner veya iş için",
+            "icoon": "👨‍👩‍👧",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "Süreli — öğrenim veya başka bir geçici kalış için",
+            "sub": "Örneğin mevsimlik iş, tıbbi tedavi, değişim programı veya yüksek eğitimliler için iş arama yılı",
+            "icoon": "🎓",
+            "klasse": "nee",
+            "volgende": "r_regulier_tijdelijk"
+          },
+          {
+            "tekst": "Bilmiyorum",
+            "icoon": "❓",
+            "klasse": "anders",
+            "volgende": "v_asiel_wn"
+          }
+        ]
+      },
       "e1": {
         "tekst": "Hollanda'da geçerli bir izinle 5 yıl veya daha uzun süredir aralıksız mı yaşıyorsunuz?",
-        "uitleg": "Yeni bir iltica oturma izniyle (verblijfsvergunning asiel) ancak önce AB uzun süreli mukimi (EU-langdurig ingezetene) olursanız Hollanda vatandaşı olabilirsiniz. Bunun için Hollanda'da geçerli bir izinle en az 5 yıl aralıksız yaşamış olmanız gerekir. İltica izniyle geçen yıllar sayılır. İltica sürecinde geçen sürenin sayılıp sayılmadığına IND karar verir.",
+        "uitleg": "Süreli bir iltica oturma izniyle (verblijfsvergunning asiel) ancak önce AB uzun süreli mukimi (EU-langdurig ingezetene) olursanız Hollanda vatandaşı olabilirsiniz. Bunun için Hollanda'da geçerli bir izinle en az 5 yıl aralıksız yaşamış olmanız gerekir. İltica izniyle geçen yıllar sayılır. İltica sürecinde geçen sürenin sayılıp sayılmadığına IND karar verir.",
         "antwoorden": [
           {
             "tekst": "Evet, 5 yıl veya daha uzun",
@@ -3744,18 +3932,17 @@ window._NAT = {
         ]
       },
       "v2": {
-        "tekst": "Geçerli bir ikamet izniniz var mı?",
-        "uitleg": "Geçici olmayan, geçerli bir oturma izniniz olmalıdır. Örneğin süresiz bir izin, AB uzun süreli mukimi (EU-langdurig ingezetene) statüsü veya 12 Haziran 2026'dan önce alınmış bir iltica izni. İzninizi her zaman zamanında yenileyin, böylece ikametiniz kesintisiz kalır.",
+        "tekst": "Oturma izniniz şu anda geçerli mi?",
+        "uitleg": "Vatandaşlığa geçiş (naturalisatie) başvurusu yaptığınızda izniniz geçerli olmalı ve karar verilene kadar geçerli kalmalıdır. Oturmanızın kesintisiz kalması için izninizi her zaman zamanında uzatın.",
         "antwoorden": [
           {
-            "tekst": "Evet, geçerli bir ikamet iznim var",
-            "sub": "Ya da sığınmacı statüsü (IND tip III, IV veya V)",
+            "tekst": "Evet, iznim geçerli",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v3"
           },
           {
-            "tekst": "Hayır, geçerli ikamet iznim yok",
+            "tekst": "Hayır, iznimin süresi doldu veya iznim yok",
             "icoon": "✗",
             "klasse": "nee",
             "volgende": "r_geen_vergunning"
@@ -3824,7 +4011,7 @@ window._NAT = {
       },
       "v4a_z": {
         "tekst": "Z-rotasını tamamladınız — vatandaşlık için bir ek adım gerekiyor",
-        "uitleg": "Z-rotası bir kapanış görüşmesi ve sertifika ile sona erer, ancak vatandaşlık için IND ek dil koşulları uygular. Yine de vatandaşlık alabilmek için üç yol vardır:<br><br><strong>Yol A — A2 seviyesinde sınavı yine de geçmek</strong><br>Tüm dil sınavlarını A2 seviyesinde (okuma, dinleme, yazma, konuşma) ve KNM sınavını geçin. Dikkat: Z-rotası tamamlandığı için sınav denemeleri artık ücretsiz değildir.<br><br><strong>Yol B — 600 saat dil dersi + her bölümde en az 3 deneme</strong><br>Blik op Werk belgeli bir kurumda en az 600 saat A2 seviyesinde dil dersi ve her bölümde 3 deneme? O zaman DUO bir muafiyet tavsiyesi verebilir.<br><br><strong>Yol C — 600 saat okuma-yazma + DUO testi (€150)</strong><br>En az 600 saat okuma-yazma eğitimi ve A2'nin ulaşılamaz olduğu anlaşılırsa? O zaman DUO testi (€150) ile muafiyet verilir.<br><br><em>Gelecekte mümkün:</em> hükümet vatandaşlık için dil koşulunu A2'den B1'e yükseltmek istiyor. Bu henüz kabul edilmedi — şu anda hâlâ A2 geçerli.<br><br>💡 Hangi yolun size en uygun olduğunu belediyenizle veya VluchtelingenWerk ile görüşün.",
+        "uitleg": "Z-rotası bir kapanış görüşmesi ve sertifika ile sona erer, ancak vatandaşlık için IND ek dil koşulları uygular. Yine de vatandaşlık alabilmek için üç yol vardır:<br><br><strong>Yol A — A2 seviyesinde sınavı yine de geçmek</strong><br>Tüm dil sınavlarını A2 seviyesinde (okuma, dinleme, yazma, konuşma) ve KNM sınavını geçin. Dikkat: Z-rotası tamamlandığı için sınav denemeleri artık ücretsiz değildir.<br><br><strong>Yol B — 600 saat dil dersi + her bölümde en az 3 deneme</strong><br>Blik op Werk belgeli bir kurumda en az 600 saat A2 seviyesinde dil dersi ve her bölümde 3 deneme? O zaman DUO bir muafiyet tavsiyesi verebilir.<br><br><strong>Yol C — 600 saat okuma-yazma + DUO testi (€150)</strong><br>En az 600 saat okuma-yazma eğitimi ve A2'nin ulaşılamaz olduğu anlaşılırsa? O zaman DUO testi (€150) ile muafiyet verilir.<br><br><em>Gelecekte mümkün:</em> hükümet vatandaşlık için dil koşulunu A2'den B1'e yükseltmek istiyor. Bu henüz kabul edilmedi — şu anda hâlâ A2 geçerli.<br><br>💡 Hangi yolun size en uygun olduğunu belediyenizle görüşün.",
         "antwoorden": [
           {
             "tekst": "Anladım — diğer koşullara devam et",
@@ -3931,7 +4118,7 @@ window._NAT = {
       },
       "v7": {
         "tekst": "Mevcut vatandaşlığınızdan vazgeçmeye hazır mısınız?",
-        "uitleg": "Hollanda kural olarak çifte vatandaşlığa izin vermez. İstisna: tanınmış mülteciler (statü sahipleri) her iki vatandaşlığı koruyabilir.",
+        "uitleg": "Hollanda kural olarak çifte vatandaşlığa izin vermez. İstisnalar vardır, örneğin tanınmış mülteciler için.",
         "antwoorden": [
           {
             "tekst": "Evet, vatandaşlığımdan vazgeçeceğim",
@@ -3944,7 +4131,8 @@ window._NAT = {
             "sub": "Statü sahipleri çifte vatandaşlığı koruyabilir",
             "icoon": "✓",
             "klasse": "ja",
-            "volgende": "v8"
+            "volgende": "v8",
+            "alleenPad": "asiel"
           },
           {
             "tekst": "Hayır, vatandaşlığımı korumak istiyorum",
@@ -3979,7 +4167,8 @@ window._NAT = {
         "icoon": "🎉",
         "titel": "Muhtemelen uygunsunuz!",
         "sub": "Yanıtlarınıza göre vatandaşlık için temel koşulları karşılıyorsunuz. Sonraki adım, belediyenize resmi başvuru yapmak!",
-        "info": "💡 Statü sahipleri (tanınmış mülteciler) çoğu durumda orijinal vatandaşlıklarından vazgeçmek zorunda değildir.",
+        "info": "💡 Tanınmış bir mülteci misiniz? O hâlde genellikle orijinal vatandaşlığınızdan vazgeçmeniz gerekmez.",
+        "infoAlleenPad": "asiel",
         "stappen": [
           {
             "nr": 1,
@@ -4071,7 +4260,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Sığınma başvurusu",
-            "tekst": "Korumaya ihtiyaç duyuyorsanız IND'ye sığınma başvurusu yapabilirsiniz."
+            "tekst": "Korumaya ihtiyaç duyuyorsanız IND'ye sığınma başvurusu yapabilirsiniz.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Normal izin",
@@ -4079,29 +4269,26 @@ window._NAT = {
           },
           {
             "naam": "Hukuki yardım",
-            "tekst": "Bir mülteci kuruluşu veya avukatla iletişime geçin."
+            "tekst": "Bir avukatla veya Hukuki Danışma Bürosu (Juridisch Loket) ile iletişime geçin."
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Sığınmacılar ve statü sahipleri için ücretsiz hukuki destek."
+            "tekst": "Sığınmacılar ve statü sahipleri için ücretsiz hukuki destek.",
+            "alleenPad": "asiel"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ VluchtelingenWerk ile iletişime geçin"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Juridisch Loket üzerinden yardım"
       },
       "r_te_kort": {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Hollanda'da henüz yeterince uzun değil",
-        "sub": "Şu anda Hollanda'da geçerli ikametle en az 5 yıl aralıksız yaşamış olmanız gerekir. 2026 yeni iltica kurallarından bu yana beklerken dikkat etmeniz gereken birkaç şey var. Bekleme süresini iyi değerlendirebilirsiniz.",
+        "sub": "Hollanda'da en az 5 yıl aralıksız yaşamanız gerekir. Bekleme süresini iyi değerlendirebilirsiniz.",
         "alternatieven": [
           {
             "naam": "İzninizi zamanında yenileyin",
-            "tekst": "Yeni iltica izinleri en fazla 3 yıl geçerlidir; bu yüzden zamanında yenileyin. İki izin arasında geçerli izniniz olmayan bir \"ikamet boşluğu\" (verblijfsgat) oluşursa, o süre yasal ikamet sayılmaz ve vatandaşlık için 5 yıl sayacı yeniden başlayabilir. Bu yüzden yenilemeyi en geç bitiş tarihinden sonraki 4 hafta içinde yapın: o zaman IND bunu ikamet boşluğu saymaz."
-          },
-          {
-            "naam": "İltica izninizin süresi daha önce mi doluyor?",
-            "tekst": "12 Haziran 2026'dan önce alınmış 5 yıllık bir iltica oturma izniniz (verblijfsvergunning asiel) var ve Hollanda'da 5 yılınızı doldurmadan süresi mi doluyor? O zaman uzatmada yeni kurallara göre bir izin alırsınız. Yolunuz bu durumda AB uzun süreli mukimi (EU-langdurig ingezetene) statüsünden geçer ve bunun için gelir şartı vardır."
+            "tekst": "Geçerli izniniz olmayan bir dönem olursa — bir \"ikamet boşluğu\" (verblijfsgat) — o süre sayılmaz. 5 yıl o zaman yeniden saymaya başlayabilir. Bu yüzden uzatmayı zamanında, en geç bitiş tarihinden sonraki 4 hafta içinde isteyin: o zaman IND bunu ikamet boşluğu saymaz."
           },
           {
             "naam": "Vatandaşlık süresi: muhtemelen 10 yıl",
@@ -4121,15 +4308,38 @@ window._NAT = {
           },
           {
             "naam": "Hükümet planı (henüz yasa değil)",
-            "tekst": "İki kez geçici iltica izni almış ve Hollandacada B1 seviyesine ulaşmış statü sahipleri, AB uzun süreli mukimi (EU-langdurig ingezetene) olmadan da 6 yıl sonra Hollanda vatandaşı olabilecek. B1'e ulaşamayanlar için bir istisna gelecek. Henüz bir yasa tasarısı yok. Bu yasa çıkana kadar yukarıdaki kurallar geçerlidir."
+            "tekst": "İki kez geçici iltica izni almış ve Hollandacada B1 seviyesine ulaşmış statü sahipleri, AB uzun süreli mukimi (EU-langdurig ingezetene) olmadan da 6 yıl sonra Hollanda vatandaşı olabilecek. B1'e ulaşamayanlar için bir istisna gelecek. Henüz bir yasa tasarısı yok. Bu yasa çıkana kadar yukarıdaki kurallar geçerlidir.",
+            "alleenPad": "asiel"
           }
         ],
         "interneLink": {
           "naar": "r_eu_langdurig",
           "tekst": "🇪🇺 İncele: AB uzun süreli mukimi (5 yıldan sonra kalıcı ikamet)"
         },
-        "link": "https://ind.nl/en/asylum-and-family-reunification-the-migration-pact-and-other-developments/new-laws-and-regulations-for-asylum-and-family-reunification",
-        "linkTekst": "→ 2026 yeni iltica kurallarını ind.nl üzerinde görün"
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ ind.nl'de daha fazla bilgi"
+      },
+      "r_regulier_tijdelijk": {
+        "type": "wacht",
+        "icoon": "🎓",
+        "titel": "Bu izinle henüz Hollanda vatandaşı olamazsınız",
+        "sub": "Vatandaşlığa geçiş (naturalisatie) için süresiz bir izne veya geçici olmayan bir amaç için verilmiş bir izne ihtiyacınız var. Öğrenim veya başka bir geçici kalış için verilen izin sayılmaz.",
+        "alternatieven": [
+          {
+            "naam": "Durumunuz değişiyor mu?",
+            "tekst": "Örneğin çalışmaya mı başlayacaksınız, yoksa partnerinizle birlikte mi yaşayacaksınız? O zaman başka bir izin için başvurabilirsiniz. Ardından bu kontrolü yeniden yapın."
+          },
+          {
+            "naam": "Kalışınız nasıl sayılır?",
+            "tekst": "Mevcut izninizle geçen yılların 5 yıla sayılıp sayılmadığı durumunuza bağlıdır. Bunu kontrol ettirin."
+          },
+          {
+            "naam": "Hollandacanız üzerinde şimdiden çalışın",
+            "tekst": "Vatandaşlığa geçiş (naturalisatie) için ileride uyum sürecini (inburgering) tamamlamış olmanız gerekir. Bir dil kursu şimdiden yardımcı olur."
+          }
+        ],
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ ind.nl'de daha fazla bilgi"
       },
       "r_bezig_b1": {
         "type": "route",
@@ -4228,9 +4438,9 @@ window._NAT = {
             "tekst": "Blik op Werk onaylı bir kurumda en az 600 saatlik okuryazarlık eğitimi ve DUO testinin A2'nin ulaşılamaz olduğunu göstermesi? Muafiyet verilir. DUO testi 150 € tutar."
           }
         ],
-        "info": "📞 <strong>Tavsiye:</strong> Durumunuza en uygun yolu belirlemek için belediyenize veya VluchtelingenWerk'e danışın.",
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ VluchtelingenWerk aracılığıyla yardım"
+        "info": "📞 <strong>Tavsiye:</strong> Durumunuza en uygun yolu belirlemek için belediyenize danışın.",
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Juridisch Loket üzerinden yardım"
       },
       "r_geen_inburgering": {
         "type": "wacht",
@@ -4270,7 +4480,8 @@ window._NAT = {
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Statü sahipleri için ücretsiz hukuki yardım."
+            "tekst": "Statü sahipleri için ücretsiz hukuki yardım.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Bekleme süresi",
@@ -4281,8 +4492,8 @@ window._NAT = {
             "tekst": "Trafik cezaları ve küçük ihlaller çoğunlukla SAYILMAZ."
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ VluchtelingenWerk ile iletişime geçin"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Juridisch Loket üzerinden yardım"
       },
       "r_strafblad_check": {
         "type": "wacht",
@@ -4304,7 +4515,7 @@ window._NAT = {
           },
           {
             "naam": "Hukuki tavsiye",
-            "tekst": "Şüphe durumunda: bir hukuk danışmanına veya VluchtelingenWerk'e başvurun."
+            "tekst": "Şüphe durumunda: bir hukuk danışmanına veya Hukuki Danışma Bürosu'na (Juridisch Loket) başvurun."
           }
         ],
         "link": "https://www.justis.nl/producten/vog",
@@ -4344,7 +4555,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Statü sahipleri için istisna",
-            "tekst": "Tanınmış bir mülteci olarak vatandaşlığınızdan vazgeçmek ZORUNDA DEĞİLSİNİZ."
+            "tekst": "Tanınmış bir mülteci olarak vatandaşlığınızdan vazgeçmek ZORUNDA DEĞİLSİNİZ.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "İstisna: imkânsız",
@@ -4382,7 +4594,7 @@ window._NAT = {
           },
           {
             "type": "amber",
-            "tekst": "⚠️ <strong>Gelir şartı:</strong> yeterli ve sürekli kendi gelirinizin ve sağlık sigortanızın olması gerekir. Sosyal yardımla bu genellikle mümkün olmaz. Dikkat: 12 Haziran 2026'dan sonra alınmış yeni bir iltica oturma izniniz (verblijfsvergunning asiel) varsa, ileride vatandaşlığa geçebilmek için AB uzun süreli mukimi (EU-langdurig ingezetene) statüsüne ihtiyacınız var. Yani gelir şartı Hollanda vatandaşlığına giden yolunuz için de geçerlidir."
+            "tekst": "⚠️ <strong>Gelir şartı:</strong> yeterli ve sürekli kendi gelirinizin ve sağlık sigortanızın olması gerekir. Sosyal yardımla bu genellikle mümkün olmaz. Süreli bir iltica oturma izniniz (verblijfsvergunning asiel) varsa, ileride vatandaşlığa geçebilmek için AB uzun süreli mukimi (EU-langdurig ingezetene) statüsüne ihtiyacınız var. Yani gelir şartı Hollanda vatandaşlığına giden yolunuz için de geçerlidir."
           },
           {
             "type": "info",
@@ -4396,7 +4608,7 @@ window._NAT = {
           },
           {
             "nr": 2,
-            "tekst": "<strong>Yeni iltica izni mi?</strong> O hâlde kalıcı bir izne ve ardından vatandaşlığa (naturalisatie) giden tek yol budur."
+            "tekst": "<strong>Süreli iltica izni mi?</strong> O hâlde kalıcı bir izne ve ardından vatandaşlığa (naturalisatie) giden tek yol budur."
           },
           {
             "nr": 3,
@@ -4440,7 +4652,7 @@ window._NAT = {
         "type": "route",
         "icoon": "🪜",
         "titel": "Hollanda vatandaşı olabilirsiniz — iki adımda",
-        "sub": "Yeni bir iltica oturma izniyle (verblijfsvergunning asiel) önce AB uzun süreli mukimi (EU-langdurig ingezetene) olmanız gerekir. Ardından vatandaşlığa geçiş (naturalisatie) başvurusu yapabilirsiniz.",
+        "sub": "Süreli bir iltica oturma izniyle (verblijfsvergunning asiel) önce AB uzun süreli mukimi (EU-langdurig ingezetene) olmanız gerekir. Ardından vatandaşlığa geçiş (naturalisatie) başvurusu yapabilirsiniz.",
         "infoBoxen": [
           {
             "type": "amber",
@@ -4568,7 +4780,7 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🧭",
         "titel": "Şu anda engel geliriniz",
-        "sub": "12 Haziran 2026'dan sonra alınmış bir iltica oturma izniyle (verblijfsvergunning asiel) ancak önce AB uzun süreli mukimi (EU-langdurig ingezetene) olursanız Hollanda vatandaşı olabilirsiniz. Bunun için yeterli kendi gelirinizin olması gerekir. Sosyal yardımla bu şu anda mümkün değil. Açıkçası bu büyük bir değişiklik.",
+        "sub": "Süreli bir iltica oturma izniyle (verblijfsvergunning asiel) ancak önce AB uzun süreli mukimi (EU-langdurig ingezetene) olursanız Hollanda vatandaşı olabilirsiniz. Bunun için yeterli kendi gelirinizin olması gerekir. Sosyal yardımla bu şu anda henüz mümkün değil. Açıkçası bu büyük bir değişiklik.",
         "alternatieven": [
           {
             "naam": "İş veya daha fazla saat",
@@ -4624,11 +4836,11 @@ window._NAT = {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Hollanda'da henüz yeterince uzun değil",
-        "sub": "Yeni bir iltica oturma izniyle (verblijfsvergunning asiel) önce Hollanda'da 5 yıl yaşamanız gerekir. Ardından AB uzun süreli mukimi (EU-langdurig ingezetene) olabilirsiniz ve ancak o zaman Hollanda vatandaşı. O zamana kadarki süreyi iyi değerlendirebilirsiniz.",
+        "sub": "Süreli bir iltica oturma izniyle (verblijfsvergunning asiel) önce Hollanda'da 5 yıl yaşamanız gerekir. Ardından AB uzun süreli mukimi (EU-langdurig ingezetene) olabilirsiniz ve ancak o zaman Hollanda vatandaşı. O zamana kadarki süreyi iyi değerlendirebilirsiniz.",
         "alternatieven": [
           {
             "naam": "Zamanında uzatın",
-            "tekst": "Yeni iltica izinleri en fazla 3 yıl geçerlidir; bu yüzden zamanında yenileyin. İki izin arasında geçerli izniniz olmayan bir \"ikamet boşluğu\" (verblijfsgat) oluşursa, o süre yasal ikamet sayılmaz ve vatandaşlık için 5 yıl sayacı yeniden başlayabilir. Bu yüzden yenilemeyi en geç bitiş tarihinden sonraki 4 hafta içinde yapın: o zaman IND bunu ikamet boşluğu saymaz."
+            "tekst": "Süreli iltica izinleri en fazla 3 yıl geçerlidir; bu yüzden zamanında yenileyin. İki izin arasında geçerli izniniz olmayan bir \"ikamet boşluğu\" (verblijfsgat) oluşursa, o süre yasal ikamet sayılmaz ve vatandaşlık için 5 yıl sayacı yeniden başlayabilir. Bu yüzden yenilemeyi en geç bitiş tarihinden sonraki 4 hafta içinde yapın: o zaman IND bunu ikamet boşluğu saymaz."
           },
           {
             "naam": "Gelirinizi geliştirin",
@@ -4656,19 +4868,19 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🔍",
         "titel": "Önce hangi izne sahip olduğunuzu kontrol ettirin",
-        "sub": "Hollanda vatandaşlığına giden yolunuz izninize bağlıdır. 12 Haziran 2026'dan önceki bir iltica izniyle bu yol, yeni bir izne göre daha kısadır.",
+        "sub": "Hollanda vatandaşlığına giden yolunuz izninize bağlıdır.",
         "alternatieven": [
           {
-            "naam": "Eski iltica izni",
-            "tekst": "Süresiz veya 12 Haziran 2026'dan önce alınmış 5 yıllık: eski yoldan vatandaşlığa geçebilirsiniz (naturalisatie)."
+            "naam": "Süresiz iltica",
+            "tekst": "Diğer şartları karşılıyorsanız vatandaşlığa geçebilirsiniz (naturalisatie)."
           },
           {
-            "naam": "Yeni iltica izni",
-            "tekst": "12 Haziran 2026'da veya sonrasında alınmış ya da uzatılmış: önce AB uzun süreli mukimi (EU-langdurig ingezetene), gelir şartıyla, ardından vatandaşlığa geçiş (naturalisatie)."
+            "naam": "Süreli iltica (3 veya 5 yıl)",
+            "tekst": "Önce AB uzun süreli mukimi (EU-langdurig ingezetene), gelir şartıyla, ardından vatandaşlığa geçiş (naturalisatie). İzni 12 Haziran 2026'dan önce almış olsanız da."
           },
           {
             "naam": "Başka bir izin",
-            "tekst": "Aile, iş veya öğrenim için: eski kurallar hâlâ geçerlidir."
+            "tekst": "Aile, partner veya iş için: vatandaşlığa geçiş genellikle 5 yıl sonra mümkündür. Öğrenim veya başka bir geçici kalış için henüz değil."
           },
           {
             "naam": "Kim yardım edebilir?",
@@ -4685,9 +4897,11 @@ window._NAT = {
       "badge": "🇳🇱 Перевірка натуралізації",
       "titel": "Чи маю я право на нідерландський паспорт?",
       "sub": "Дайте відповідь на кілька запитань і дізнайтеся, чи можете ви стати громадянином Нідерландів. На основі правил 2026 року, зокрема нових правил щодо притулку з 12 червня 2026 року.",
-      "disclaimer": "⚠️ Цей інструмент дає орієнтир, а не рішення. Перевірено у вересні 2026 року (IND, Stimulansz). З 12 червня 2026 року безстрокового дозволу на притулок більше немає. Тому нові власники статусу спершу мають стати довгостроковими резидентами ЄС (EU-langdurig ingezetene), перш ніж зможуть пройти натуралізацію (naturalisatie). Оголошені плани уряду — ще не закон. Завжди звертайтеся по пораду до муніципалітету або VluchtelingenWerk.",
+      "disclaimer": "⚠️ Цей інструмент дає орієнтир, а не рішення. Перевірено у вересні 2026 року (IND, Stimulansz). З 12 червня 2026 року безстрокового дозволу на притулок більше немає. Тому власники статусу з дозволом на проживання у зв'язку з притулком на певний строк (verblijfsvergunning asiel) спершу мають стати довгостроковими резидентами ЄС (EU-langdurig ingezetene), перш ніж зможуть пройти натуралізацію (naturalisatie). Оголошені плани уряду — ще не закон. Завжди звертайтеся по пораду до муніципалітету або VluchtelingenWerk.",
       "vwnLabel": "Не впевнені у своїй ситуації?",
-      "vwnTekst": "Правила натуралізації швидко змінюються, і ваша ситуація може відрізнятися від того, що показує інструмент. VluchtelingenWerk Nederland пропонує безкоштовні консультації та підтримку щодо натуралізації — знайдіть найближче місце на <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>."
+      "vwnTekst": "Правила натуралізації швидко змінюються, і ваша ситуація може відрізнятися від того, що показує інструмент. VluchtelingenWerk Nederland пропонує безкоштовні консультації та підтримку щодо натуралізації — знайдіть найближче місце на <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>.",
+      "hulpRegulierLabel": "Не впевнені у своїй ситуації?",
+      "hulpRegulierTekst": "Юридична консультація (Juridisch Loket) безкоштовно консультує щодо вашого дозволу на проживання та натуралізації (naturalisatie). Дивіться <a href=\"https://www.juridischloket.nl\" target=\"_blank\" style=\"color:inherit;\">juridischloket.nl</a> або запитайте у своєму муніципалітеті."
     },
     "ui": {
       "volgendeStappen": "Наступні кроки",
@@ -4727,14 +4941,16 @@ window._NAT = {
             "tekst": "Я маю дозвіл на проживання у зв'язку з притулком (власник статусу)",
             "icoon": "🛡️",
             "klasse": "ja",
-            "volgende": "v_asiel"
+            "volgende": "v_asiel",
+            "pad": "asiel"
           },
           {
             "tekst": "Я маю інший дозвіл на проживання",
             "sub": "Наприклад, для сім'ї, роботи або навчання",
             "icoon": "📄",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "v_regulier",
+            "pad": "regulier"
           },
           {
             "tekst": "Я громадянин(-ка) ЄС",
@@ -4753,27 +4969,21 @@ window._NAT = {
       },
       "v_asiel": {
         "tekst": "Який дозвіл на притулок у вас зараз?",
-        "uitleg": "З 12 червня 2026 року правила змінилися. Для натуралізації (naturalisatie) важливо, коли ви отримали свій теперішній дозвіл.",
+        "uitleg": "Подивіться на свою картку на проживання: там написано 'безстроково' (onbepaalde tijd) чи вказано дату закінчення?",
         "antwoorden": [
           {
             "tekst": "Безстроковий притулок",
-            "sub": "Отримано до 12 червня 2026 року",
+            "sub": "На вашій картці немає дати закінчення права на проживання",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v2"
           },
           {
-            "tekst": "Притулок на 5 років, отримано до 12 червня 2026 року",
+            "tekst": "Притулок на певний строк",
+            "sub": "Дійсний 3 або 5 років, навіть якщо ви отримали його до 12 червня 2026 року",
             "icoon": "📅",
-            "klasse": "ja",
-            "volgende": "v_asiel5"
-          },
-          {
-            "tekst": "Притулок отримано або подовжено 12 червня 2026 року чи пізніше",
-            "sub": "Зазвичай дійсний 3 роки",
-            "icoon": "🆕",
             "klasse": "anders",
-            "volgende": "e1"
+            "volgende": "v_asiel5"
           },
           {
             "tekst": "Я вже довгостроковий резидент ЄС",
@@ -4790,20 +5000,20 @@ window._NAT = {
         ]
       },
       "v_asiel5": {
-        "tekst": "Добра новина: ваш дозвіл підпадає під старі правила",
-        "uitleg": "Ви отримали дозвіл на притулок на 5 років до 12 червня 2026 року. З ним ви ще можете пройти натуралізацію (naturalisatie) за старими правилами.<br><br>⚠️ <strong>Увага:</strong> якщо IND подовжить ваш дозвіл після 12 червня 2026 року, ви отримаєте дозвіл за новими правилами. Тоді вам спершу потрібно стати довгостроковим резидентом ЄС (EU-langdurig ingezetene). <strong>Ви відповідаєте умовам? Тоді подайте заяву на натуралізацію, поки ваша теперішня картка ще дійсна.</strong>",
+        "tekst": "Ваш дозвіл залишається дійсним — але шлях до громадянства Нідерландів іде через проміжний крок",
+        "uitleg": "Ваш дозвіл на притулок залишається дійсним до дати, вказаної на картці. Але з дозволом на проживання у зв'язку з притулком на певний строк (verblijfsvergunning asiel) ви не можете подати заяву на натуралізацію (naturalisatie). Це стосується і тих, хто отримав дозвіл до 12 червня 2026 року. З 12 червня 2026 року безстрокового дозволу на притулок більше не існує.<br><br>Тому спершу вам потрібно стати <strong>довгостроковим резидентом ЄС</strong> (EU-langdurig ingezetene). Після цього ви можете подати заяву на натуралізацію. Наступні запитання покажуть, чи це вже можливо для вас.",
         "antwoorden": [
           {
             "tekst": "Зрозуміло — далі",
             "icoon": "→",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "e1"
           }
         ]
       },
       "v_asiel_wn": {
         "tekst": "Як дізнатися, який у вас дозвіл",
-        "uitleg": "Подивіться на свою картку на проживання, у поле 'Type document en bijzonderheden' (тип документа й особливості: номер типу та текст поруч), або в лист від IND. Зверніть увагу на дві речі:<br><br>1. Там написано <strong>притулок</strong> (asiel) чи інша мета (наприклад, сім'я або робота)?<br>2. Коли ви отримали цю картку: <strong>до чи після 12 червня 2026 року</strong>? І на який строк вона дійсна?<br><br>Не можете розібратися? Запитайте свого консультанта в муніципалітеті або VluchtelingenWerk.",
+        "uitleg": "Подивіться на свою картку на проживання, у поле 'Type document en bijzonderheden' (тип документа й особливості: номер типу та текст поруч), або в лист від IND. Зверніть увагу на дві речі:<br><br>1. Там написано <strong>притулок</strong> (asiel) чи інша мета (наприклад, сім'я або робота)?<br>2. Там написано '<strong>безстроково</strong>' (onbepaalde tijd) чи вказано <strong>дату закінчення</strong>?<br><br>Не можете розібратися? Запитайте свого консультанта в муніципалітеті або VluchtelingenWerk.",
         "antwoorden": [
           {
             "tekst": "Я знайшов(-ла) — назад до запитання",
@@ -4819,9 +5029,40 @@ window._NAT = {
           }
         ]
       },
+      "v_regulier": {
+        "tekst": "Який у вас дозвіл на проживання?",
+        "uitleg": "Для натуралізації (naturalisatie) потрібен безстроковий дозвіл або дозвіл з метою, яка не є тимчасовою, наприклад проживання з партнером або робота. На вашій картці на проживання вказано мету і чи є дата закінчення.",
+        "antwoorden": [
+          {
+            "tekst": "Безстроковий",
+            "icoon": "✓",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "На певний строк — для сім'ї, партнера або роботи",
+            "icoon": "👨‍👩‍👧",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "На певний строк — для навчання або іншого тимчасового перебування",
+            "sub": "Наприклад, сезонна робота, лікування, обмін або рік пошуку роботи для високоосвічених осіб",
+            "icoon": "🎓",
+            "klasse": "nee",
+            "volgende": "r_regulier_tijdelijk"
+          },
+          {
+            "tekst": "Я не знаю",
+            "icoon": "❓",
+            "klasse": "anders",
+            "volgende": "v_asiel_wn"
+          }
+        ]
+      },
       "e1": {
         "tekst": "Чи живете ви в Нідерландах 5 років або довше без перерви з дійсним дозволом?",
-        "uitleg": "З новим дозволом на проживання у зв'язку з притулком (verblijfsvergunning asiel) ви можете стати громадянином Нідерландів, лише якщо спершу станете довгостроковим резидентом ЄС (EU-langdurig ingezetene). Для цього потрібно щонайменше 5 років поспіль жити в Нідерландах із дійсним дозволом. Роки з дозволом на притулок зараховуються. Чи зараховується час процедури притулку, вирішує IND.",
+        "uitleg": "З дозволом на проживання у зв'язку з притулком на певний строк (verblijfsvergunning asiel) ви можете стати громадянином Нідерландів, лише якщо спершу станете довгостроковим резидентом ЄС (EU-langdurig ingezetene). Для цього потрібно щонайменше 5 років поспіль жити в Нідерландах із дійсним дозволом. Роки з дозволом на притулок зараховуються. Чи зараховується час процедури притулку, вирішує IND.",
         "antwoorden": [
           {
             "tekst": "Так, 5 років або довше",
@@ -4910,18 +5151,17 @@ window._NAT = {
         ]
       },
       "v2": {
-        "tekst": "Чи маєте ви дійсний дозвіл на проживання?",
-        "uitleg": "Вам потрібен дійсний дозвіл на проживання, який не є тимчасовим. Наприклад, безстроковий дозвіл, статус довгострокового резидента ЄС (EU-langdurig ingezetene) або дозвіл на притулок, виданий до 12 червня 2026 року. Завжди вчасно подовжуйте дозвіл, щоб ваше проживання залишалося безперервним.",
+        "tekst": "Чи дійсний ваш дозвіл на проживання зараз?",
+        "uitleg": "Ваш дозвіл має бути дійсним, коли ви подаєте заяву на натуралізацію (naturalisatie), і залишатися дійсним до ухвалення рішення. Завжди вчасно подовжуйте його, щоб ваше проживання залишалося безперервним.",
         "antwoorden": [
           {
-            "tekst": "Так, я маю дійсний дозвіл на проживання",
-            "sub": "Або статус притулку (IND тип III, IV або V)",
+            "tekst": "Так, мій дозвіл дійсний",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v3"
           },
           {
-            "tekst": "Ні, у мене немає дійсного дозволу на проживання",
+            "tekst": "Ні, строк дії мого дозволу закінчився або в мене його немає",
             "icoon": "✗",
             "klasse": "nee",
             "volgende": "r_geen_vergunning"
@@ -4990,7 +5230,7 @@ window._NAT = {
       },
       "v4a_z": {
         "tekst": "Ви завершили Z-маршрут — для натуралізації потрібен ще один крок",
-        "uitleg": "Z-маршрут завершується підсумковою співбесідою та сертифікатом, але для натуралізації IND застосовує додаткові мовні вимоги. Є три шляхи, щоб усе ж натуралізуватися:<br><br><strong>Шлях A — Усе ж скласти іспит на рівні A2</strong><br>Складіть усі мовні іспити на рівні A2 (читання, аудіювання, письмо, говоріння) та іспит KNM. Увага: оскільки Z-маршрут завершено, спроби іспиту більше не безкоштовні.<br><br><strong>Шлях B — 600 годин мовних занять + щонайменше 3 спроби на компонент</strong><br>Щонайменше 600 годин занять рівня A2 в установі із сертифікатом Blik op Werk і 3 спроби на компонент? Тоді DUO може надати рекомендацію про звільнення.<br><br><strong>Шлях C — 600 годин грамотності + тест DUO (€150)</strong><br>Щонайменше 600 годин навчання грамотності, і виявляється, що A2 недосяжний? Тоді звільнення надається через тест DUO (€150).<br><br><em>Можливо в майбутньому:</em> уряд хоче підвищити мовну вимогу для натуралізації з A2 до B1. Це ще не прийнято — наразі діє ще A2.<br><br>💡 Обговоріть зі своїм муніципалітетом або VluchtelingenWerk, який шлях вам найкраще підходить.",
+        "uitleg": "Z-маршрут завершується підсумковою співбесідою та сертифікатом, але для натуралізації IND застосовує додаткові мовні вимоги. Є три шляхи, щоб усе ж натуралізуватися:<br><br><strong>Шлях A — Усе ж скласти іспит на рівні A2</strong><br>Складіть усі мовні іспити на рівні A2 (читання, аудіювання, письмо, говоріння) та іспит KNM. Увага: оскільки Z-маршрут завершено, спроби іспиту більше не безкоштовні.<br><br><strong>Шлях B — 600 годин мовних занять + щонайменше 3 спроби на компонент</strong><br>Щонайменше 600 годин занять рівня A2 в установі із сертифікатом Blik op Werk і 3 спроби на компонент? Тоді DUO може надати рекомендацію про звільнення.<br><br><strong>Шлях C — 600 годин грамотності + тест DUO (€150)</strong><br>Щонайменше 600 годин навчання грамотності, і виявляється, що A2 недосяжний? Тоді звільнення надається через тест DUO (€150).<br><br><em>Можливо в майбутньому:</em> уряд хоче підвищити мовну вимогу для натуралізації з A2 до B1. Це ще не прийнято — наразі діє ще A2.<br><br>💡 Обговоріть зі своїм муніципалітетом, який шлях вам найкраще підходить.",
         "antwoorden": [
           {
             "tekst": "Зрозуміло — перейти до решти вимог",
@@ -5097,7 +5337,7 @@ window._NAT = {
       },
       "v7": {
         "tekst": "Чи готові ви відмовитися від вашого поточного громадянства?",
-        "uitleg": "Нідерланди, як правило, не дозволяють подвійне громадянство. Виняток: визнані біженці (власники статусу) можуть зберігати обидва громадянства.",
+        "uitleg": "Нідерланди, як правило, не дозволяють подвійне громадянство. Є винятки, наприклад для визнаних біженців.",
         "antwoorden": [
           {
             "tekst": "Так, я відмовлюся від свого громадянства",
@@ -5110,7 +5350,8 @@ window._NAT = {
             "sub": "Власники статусу можуть зберігати подвійне громадянство",
             "icoon": "✓",
             "klasse": "ja",
-            "volgende": "v8"
+            "volgende": "v8",
+            "alleenPad": "asiel"
           },
           {
             "tekst": "Ні, я хочу зберегти своє громадянство",
@@ -5145,7 +5386,8 @@ window._NAT = {
         "icoon": "🎉",
         "titel": "Ймовірно, ви маєте право!",
         "sub": "Виходячи з ваших відповідей, ви відповідаєте основним вимогам для натуралізації. Наступний крок — офіційна заява у вашому муніципалітеті.",
-        "info": "💡 Власники статусу (визнані біженці) в більшості випадків не зобов'язані відмовлятися від початкового громадянства.",
+        "info": "💡 Ви визнаний(-а) біженець? Тоді вам зазвичай не потрібно відмовлятися від свого початкового громадянства.",
+        "infoAlleenPad": "asiel",
         "stappen": [
           {
             "nr": 1,
@@ -5237,7 +5479,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Заява про притулок",
-            "tekst": "Якщо вам потрібен захист, ви можете подати заяву про притулок до IND."
+            "tekst": "Якщо вам потрібен захист, ви можете подати заяву про притулок до IND.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Звичайний дозвіл",
@@ -5245,29 +5488,26 @@ window._NAT = {
           },
           {
             "naam": "Юридична допомога",
-            "tekst": "Зверніться до організації у справах біженців або адвоката."
+            "tekst": "Зверніться до адвоката або до Юридичної консультації (Juridisch Loket)."
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Безкоштовна юридична підтримка для шукачів притулку та власників статусу."
+            "tekst": "Безкоштовна юридична підтримка для шукачів притулку та власників статусу.",
+            "alleenPad": "asiel"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Зв'яжіться з VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Допомога через Juridisch Loket"
       },
       "r_te_kort": {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Ви ще недостатньо довго в Нідерландах",
-        "sub": "Наразі ви повинні прожити в Нідерландах щонайменше 5 років поспіль із дійсним проживанням. Після нових правил щодо притулку 2026 року є кілька речей, на які варто звернути увагу під час очікування. Час очікування можна використати з користю.",
+        "sub": "Ви повинні прожити в Нідерландах щонайменше 5 років поспіль. Час очікування можна використати з користю.",
         "alternatieven": [
           {
             "naam": "Вчасно подовжуйте посвідку",
-            "tekst": "Нові дозволи на притулок дійсні максимум 3 роки; тому подовжуйте вчасно. Якщо виникне \"пробіл у проживанні\" (verblijfsgat) — період між двома дозволами, коли у вас немає дійсного дозволу — цей час не зараховується як законне проживання, і відлік 5 років для натуралізації може початися заново. Тому подавайте на подовження щонайпізніше протягом 4 тижнів після закінчення: тоді IND не вважатиме це пробілом."
-          },
-          {
-            "naam": "Ваш дозвіл на притулок закінчується раніше?",
-            "tekst": "Ви маєте дозвіл на проживання у зв'язку з притулком (verblijfsvergunning asiel) на 5 років, виданий до 12 червня 2026 року, і він закінчується раніше, ніж ви проживете в Нідерландах 5 років? Тоді під час подовження ви отримаєте дозвіл за новими правилами. Тоді ваш шлях проходить через статус довгострокового резидента ЄС (EU-langdurig ingezetene), а для нього діє вимога щодо доходу."
+            "tekst": "Якщо буде період без дійсного дозволу — \"пробіл у проживанні\" (verblijfsgat) — цей час не зараховується. Тоді відлік 5 років може початися заново. Тому подавайте на подовження вчасно, щонайпізніше протягом 4 тижнів після закінчення: тоді IND не вважатиме це пробілом."
           },
           {
             "naam": "Строк натуралізації: можливо 10 років",
@@ -5287,15 +5527,38 @@ window._NAT = {
           },
           {
             "naam": "План уряду (ще не закон)",
-            "tekst": "Власники статусу, які двічі отримали тимчасовий дозвіл на притулок і складуть нідерландську на рівні B1, могли б стати громадянами Нідерландів через 6 років, навіть без статусу довгострокового резидента ЄС (EU-langdurig ingezetene). Для тих, хто не може досягти B1, буде виняток. Законопроєкту ще немає. Доки такого закону немає, діють наведені вище правила."
+            "tekst": "Власники статусу, які двічі отримали тимчасовий дозвіл на притулок і складуть нідерландську на рівні B1, могли б стати громадянами Нідерландів через 6 років, навіть без статусу довгострокового резидента ЄС (EU-langdurig ingezetene). Для тих, хто не може досягти B1, буде виняток. Законопроєкту ще немає. Доки такого закону немає, діють наведені вище правила.",
+            "alleenPad": "asiel"
           }
         ],
         "interneLink": {
           "naar": "r_eu_langdurig",
           "tekst": "🇪🇺 Переглянути: довгостроковий резидент ЄС (постійне проживання після 5 років)"
         },
-        "link": "https://ind.nl/en/asylum-and-family-reunification-the-migration-pact-and-other-developments/new-laws-and-regulations-for-asylum-and-family-reunification",
-        "linkTekst": "→ Переглянути нові правила щодо притулку 2026 на ind.nl"
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ Більше інформації на ind.nl"
+      },
+      "r_regulier_tijdelijk": {
+        "type": "wacht",
+        "icoon": "🎓",
+        "titel": "З цим дозволом ви поки що не можете стати громадянином Нідерландів",
+        "sub": "Для натуралізації (naturalisatie) потрібен безстроковий дозвіл або дозвіл з метою, яка не є тимчасовою. Дозвіл для навчання або іншого тимчасового перебування не зараховується.",
+        "alternatieven": [
+          {
+            "naam": "Ваша ситуація змінюється?",
+            "tekst": "Наприклад, ви почнете працювати або житимете з партнером? Тоді ви можете подати заяву на інший дозвіл. Після цього пройдіть цю перевірку ще раз."
+          },
+          {
+            "naam": "Як зараховується ваше перебування?",
+            "tekst": "Чи зараховуються роки з вашим теперішнім дозволом до 5 років, залежить від вашої ситуації. Попросіть це перевірити."
+          },
+          {
+            "naam": "Уже зараз працюйте над нідерландською",
+            "tekst": "Для натуралізації (naturalisatie) згодом потрібно буде завершити інтеграцію (inburgering). Мовний курс допоможе вже зараз."
+          }
+        ],
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ Більше інформації на ind.nl"
       },
       "r_bezig_b1": {
         "type": "route",
@@ -5394,9 +5657,9 @@ window._NAT = {
             "tekst": "Щонайменше 600 годин навчання грамоти у сертифікованому закладі Blik op Werk і тест DUO показує, що A2 недосяжний? Надається звільнення. Тест DUO коштує €150."
           }
         ],
-        "info": "📞 <strong>Порада:</strong> Проконсультуйтеся з вашим муніципалітетом або VluchtelingenWerk щодо найкращого шляху для вашої ситуації.",
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Допомога через VluchtelingenWerk"
+        "info": "📞 <strong>Порада:</strong> Проконсультуйтеся з вашим муніципалітетом щодо найкращого шляху для вашої ситуації.",
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Допомога через Juridisch Loket"
       },
       "r_geen_inburgering": {
         "type": "wacht",
@@ -5436,7 +5699,8 @@ window._NAT = {
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Безкоштовна юридична допомога для власників статусу."
+            "tekst": "Безкоштовна юридична допомога для власників статусу.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Термін очікування",
@@ -5447,8 +5711,8 @@ window._NAT = {
             "tekst": "Штрафи за порушення ПДР та незначні правопорушення, як правило, НЕ зараховуються."
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Зв'яжіться з VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Допомога через Juridisch Loket"
       },
       "r_strafblad_check": {
         "type": "wacht",
@@ -5470,7 +5734,7 @@ window._NAT = {
           },
           {
             "naam": "Юридична консультація",
-            "tekst": "У разі сумніву: зверніться до юридичного консультанта або VluchtelingenWerk."
+            "tekst": "У разі сумніву: зверніться до юридичного радника або до Юридичної консультації (Juridisch Loket)."
           }
         ],
         "link": "https://www.justis.nl/producten/vog",
@@ -5510,7 +5774,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Виняток для власників статусу",
-            "tekst": "Як визнаний біженець ви НЕ зобов'язані відмовлятися від свого громадянства."
+            "tekst": "Як визнаний біженець ви НЕ зобов'язані відмовлятися від свого громадянства.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Виняток: неможливо",
@@ -5548,7 +5813,7 @@ window._NAT = {
           },
           {
             "type": "amber",
-            "tekst": "⚠️ <strong>Вимога щодо доходу:</strong> вам потрібен достатній, стабільний власний дохід і медичне страхування. З допомогою це зазвичай не вдається. Увага: якщо у вас новий дозвіл на проживання у зв'язку з притулком (verblijfsvergunning asiel), виданий після 12 червня 2026 року, вам потрібен статус довгострокового резидента ЄС (EU-langdurig ingezetene), щоб згодом пройти натуралізацію. Отже, вимога щодо доходу діє і для вашого шляху до нідерландського громадянства."
+            "tekst": "⚠️ <strong>Вимога щодо доходу:</strong> вам потрібен достатній, стабільний власний дохід і медичне страхування. З допомогою це зазвичай не вдається. Якщо у вас дозвіл на проживання у зв'язку з притулком на певний строк (verblijfsvergunning asiel), вам потрібен статус довгострокового резидента ЄС (EU-langdurig ingezetene), щоб згодом пройти натуралізацію. Отже, вимога щодо доходу діє і для вашого шляху до нідерландського громадянства."
           },
           {
             "type": "info",
@@ -5562,7 +5827,7 @@ window._NAT = {
           },
           {
             "nr": 2,
-            "tekst": "<strong>Новий дозвіл на притулок?</strong> Тоді це єдиний шлях до постійної посвідки, а після неї — до натуралізації (naturalisatie)."
+            "tekst": "<strong>Дозвіл на притулок на певний строк?</strong> Тоді це єдиний шлях до постійної посвідки, а після неї — до натуралізації (naturalisatie)."
           },
           {
             "nr": 3,
@@ -5606,7 +5871,7 @@ window._NAT = {
         "type": "route",
         "icoon": "🪜",
         "titel": "Ви можете стати громадянином Нідерландів — у два кроки",
-        "sub": "З новим дозволом на проживання у зв'язку з притулком (verblijfsvergunning asiel) ви спершу маєте стати довгостроковим резидентом ЄС (EU-langdurig ingezetene). Після цього ви можете подати заяву на натуралізацію (naturalisatie).",
+        "sub": "З дозволом на проживання у зв'язку з притулком на певний строк (verblijfsvergunning asiel) ви спершу маєте стати довгостроковим резидентом ЄС (EU-langdurig ingezetene). Після цього ви можете подати заяву на натуралізацію (naturalisatie).",
         "infoBoxen": [
           {
             "type": "amber",
@@ -5734,7 +5999,7 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🧭",
         "titel": "Зараз перешкода — ваш дохід",
-        "sub": "З дозволом на проживання у зв'язку з притулком (verblijfsvergunning asiel), виданим після 12 червня 2026 року, ви можете стати громадянином Нідерландів, лише якщо спершу станете довгостроковим резидентом ЄС (EU-langdurig ingezetene). Для цього потрібен достатній власний дохід. З допомогою це поки що не вдається. Чесно кажучи, це велика зміна.",
+        "sub": "З дозволом на проживання у зв'язку з притулком на певний строк (verblijfsvergunning asiel) ви можете стати громадянином Нідерландів, лише якщо спершу станете довгостроковим резидентом ЄС (EU-langdurig ingezetene). Для цього потрібен достатній власний дохід. З допомогою це поки що не вдається. Чесно кажучи, це велика зміна.",
         "alternatieven": [
           {
             "naam": "Робота або більше годин",
@@ -5790,11 +6055,11 @@ window._NAT = {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Ви ще недостатньо довго в Нідерландах",
-        "sub": "З новим дозволом на проживання у зв'язку з притулком (verblijfsvergunning asiel) ви спершу маєте прожити в Нідерландах 5 років. Після цього ви можете стати довгостроковим резидентом ЄС (EU-langdurig ingezetene), і лише тоді — громадянином Нідерландів. Час до того можна використати з користю.",
+        "sub": "З дозволом на проживання у зв'язку з притулком на певний строк (verblijfsvergunning asiel) ви спершу маєте прожити в Нідерландах 5 років. Після цього ви можете стати довгостроковим резидентом ЄС (EU-langdurig ingezetene), і лише тоді — громадянином Нідерландів. Час до того можна використати з користю.",
         "alternatieven": [
           {
             "naam": "Вчасно подовжуйте",
-            "tekst": "Нові дозволи на притулок дійсні максимум 3 роки; тому подовжуйте вчасно. Якщо виникне \"пробіл у проживанні\" (verblijfsgat) — період між двома дозволами, коли у вас немає дійсного дозволу — цей час не зараховується як законне проживання, і відлік 5 років для натуралізації може початися заново. Тому подавайте на подовження щонайпізніше протягом 4 тижнів після закінчення: тоді IND не вважатиме це пробілом."
+            "tekst": "Дозволи на притулок на певний строк дійсні максимум 3 роки; тому подовжуйте вчасно. Якщо виникне \"пробіл у проживанні\" (verblijfsgat) — період між двома дозволами, коли у вас немає дійсного дозволу — цей час не зараховується як законне проживання, і відлік 5 років для натуралізації може початися заново. Тому подавайте на подовження щонайпізніше протягом 4 тижнів після закінчення: тоді IND не вважатиме це пробілом."
           },
           {
             "naam": "Працюйте над доходом",
@@ -5822,19 +6087,19 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🔍",
         "titel": "Спершу попросіть перевірити, який у вас дозвіл",
-        "sub": "Ваш шлях до нідерландського громадянства залежить від вашого дозволу. З дозволом на притулок, виданим до 12 червня 2026 року, він коротший, ніж із новим.",
+        "sub": "Ваш шлях до нідерландського громадянства залежить від вашого дозволу.",
         "alternatieven": [
           {
-            "naam": "Старий дозвіл на притулок",
-            "tekst": "Безстроковий або на 5 років, отриманий до 12 червня 2026 року: ви можете пройти натуралізацію (naturalisatie) за старими правилами."
+            "naam": "Безстроковий притулок",
+            "tekst": "Ви можете пройти натуралізацію (naturalisatie), якщо відповідаєте іншим умовам."
           },
           {
-            "naam": "Новий дозвіл на притулок",
-            "tekst": "Отриманий або подовжений 12 червня 2026 року чи пізніше: спершу статус довгострокового резидента ЄС (EU-langdurig ingezetene), з вимогою щодо доходу, потім натуралізація (naturalisatie)."
+            "naam": "Притулок на певний строк (3 або 5 років)",
+            "tekst": "Спершу статус довгострокового резидента ЄС (EU-langdurig ingezetene), з вимогою щодо доходу, потім натуралізація (naturalisatie). Навіть якщо ви отримали дозвіл до 12 червня 2026 року."
           },
           {
             "naam": "Інший дозвіл",
-            "tekst": "Для сім'ї, роботи або навчання: старі правила ще діють."
+            "tekst": "Для сім'ї, партнера або роботи: натуралізація зазвичай можлива після 5 років. Для навчання або іншого тимчасового перебування — поки що ні."
           },
           {
             "naam": "Хто може допомогти?",
@@ -5851,9 +6116,11 @@ window._NAT = {
       "badge": "🇳🇱 بررسی تابعیت",
       "titel": "آیا واجد شرایط پاسپورت هلندی هستم؟",
       "sub": "به چند سؤال پاسخ دهید و ببینید آیا می‌توانید تابعیت هلند را بگیرید. بر اساس قوانین سال 2026، از جمله قوانین جدید پناهندگی از 12 جون 2026.",
-      "disclaimer": "⚠️ این ابزار یک برآورد می‌دهد، نه یک تصمیم. بررسی‌شده در سپتمبر 2026 (IND، Stimulansz). از 12 جون 2026 دیگر اجازه اقامت پناهندگی با مدت نامعین وجود ندارد. به همین دلیل دارندگان جدید وضعیت پناهندگی باید اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شوند، پیش از آنکه بتوانند تابعیت (naturalisatie) بگیرند. برنامه‌های اعلام‌شده دولت هنوز قانون نیست. همیشه از شهرداری یا VluchtelingenWerk مشوره بخواهید.",
+      "disclaimer": "⚠️ این ابزار یک برآورد می‌دهد، نه یک تصمیم. بررسی‌شده در سپتمبر 2026 (IND، Stimulansz). از 12 جون 2026 دیگر اجازه اقامت پناهندگی با مدت نامعین وجود ندارد. به همین دلیل دارندگان اجازه اقامت پناهندگی با مدت معین (verblijfsvergunning asiel) باید اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شوند، پیش از آنکه بتوانند تابعیت (naturalisatie) بگیرند. برنامه‌های اعلام‌شده دولت هنوز قانون نیست. همیشه از شهرداری یا VluchtelingenWerk مشوره بخواهید.",
       "vwnLabel": "در مورد وضعیت خود مطمئن نیستید؟",
-      "vwnTekst": "قوانین تابعیت به سرعت تغییر می‌کنند و وضعیت شما ممکن است با آنچه این ابزار نشان می‌دهد متفاوت باشد. VluchtelingenWerk Nederland ساعات مشاوره رایگان و راهنمایی در زمینه تابعیت ارائه می‌دهد — محلی نزدیک به خود را در <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a> پیدا کنید."
+      "vwnTekst": "قوانین تابعیت به سرعت تغییر می‌کنند و وضعیت شما ممکن است با آنچه این ابزار نشان می‌دهد متفاوت باشد. VluchtelingenWerk Nederland ساعات مشاوره رایگان و راهنمایی در زمینه تابعیت ارائه می‌دهد — محلی نزدیک به خود را در <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a> پیدا کنید.",
+      "hulpRegulierLabel": "در مورد وضعیت خود مطمئن نیستید؟",
+      "hulpRegulierTekst": "دفتر مشوره حقوقی (Juridisch Loket) در مورد اجازه اقامت شما و تابعیت (naturalisatie) مشوره رایگان می‌دهد. به <a href=\"https://www.juridischloket.nl\" target=\"_blank\" style=\"color:inherit;\">juridischloket.nl</a> سر بزنید یا از شهرداری خود بپرسید."
     },
     "ui": {
       "volgendeStappen": "مراحل بعدی",
@@ -5893,14 +6160,16 @@ window._NAT = {
             "tekst": "اجازه اقامت پناهندگی دارم (دارنده وضعیت پناهندگی)",
             "icoon": "🛡️",
             "klasse": "ja",
-            "volgende": "v_asiel"
+            "volgende": "v_asiel",
+            "pad": "asiel"
           },
           {
             "tekst": "اجازه اقامت دیگری دارم",
             "sub": "مثلاً برای خانواده، کار یا تحصیل",
             "icoon": "📄",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "v_regulier",
+            "pad": "regulier"
           },
           {
             "tekst": "شهروند اتحادیه اروپا هستم",
@@ -5919,27 +6188,21 @@ window._NAT = {
       },
       "v_asiel": {
         "tekst": "اکنون کدام اجازه اقامت پناهندگی را دارید؟",
-        "uitleg": "از 12 جون 2026 قوانین تغییر کرده‌اند. برای تابعیت (naturalisatie) مهم است که اجازه اقامت فعلی خود را چه زمانی گرفته‌اید.",
+        "uitleg": "به کارت اقامت خود نگاه کنید: آیا نوشته شده 'مدت نامعین' (onbepaalde tijd)، یا تاریخ پایان دارد؟",
         "antwoorden": [
           {
             "tekst": "پناهندگی با مدت نامعین",
-            "sub": "گرفته‌شده پیش از 12 جون 2026",
+            "sub": "روی کارت شما تاریخ پایانی برای حق اقامت‌تان نیست",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v2"
           },
           {
-            "tekst": "پناهندگی 5 ساله، گرفته‌شده پیش از 12 جون 2026",
+            "tekst": "پناهندگی با مدت معین",
+            "sub": "3 یا 5 سال معتبر، حتی اگر آن را پیش از 12 جون 2026 گرفته باشید",
             "icoon": "📅",
-            "klasse": "ja",
-            "volgende": "v_asiel5"
-          },
-          {
-            "tekst": "پناهندگی گرفته‌شده یا تمدیدشده در 12 جون 2026 یا پس از آن",
-            "sub": "معمولاً 3 سال معتبر است",
-            "icoon": "🆕",
             "klasse": "anders",
-            "volgende": "e1"
+            "volgende": "v_asiel5"
           },
           {
             "tekst": "من از قبل مقیم بلندمدت اتحادیه اروپا هستم",
@@ -5956,20 +6219,20 @@ window._NAT = {
         ]
       },
       "v_asiel5": {
-        "tekst": "خبر خوب: اجازه اقامت شما تحت قوانین قدیم است",
-        "uitleg": "شما اجازه اقامت پناهندگی 5 ساله خود را پیش از 12 جون 2026 گرفته‌اید. با آن هنوز می‌توانید به روش قدیم تابعیت (naturalisatie) بگیرید.<br><br>⚠️ <strong>توجه:</strong> اگر IND اجازه اقامت شما را پس از 12 جون 2026 تمدید کند، اجازه‌ای طبق قوانین جدید می‌گیرید. در آن صورت باید اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شوید. <strong>آیا شرایط را دارید؟ پس درخواست تابعیت را تا زمانی که کارت اقامت فعلی شما هنوز معتبر است ارائه دهید.</strong>",
+        "tekst": "اجازه اقامت شما معتبر می‌ماند — اما گرفتن تابعیت هلند از یک مرحله میانی می‌گذرد",
+        "uitleg": "اجازه اقامت پناهندگی شما تا تاریخی که روی کارت‌تان نوشته شده معتبر می‌ماند. اما با اجازه اقامت پناهندگی با مدت معین (verblijfsvergunning asiel) نمی‌توانید درخواست تابعیت (naturalisatie) بدهید. این حتی اگر اجازه را پیش از 12 جون 2026 گرفته باشید هم صدق می‌کند. از 12 جون 2026 اجازه اقامت پناهندگی با مدت نامعین دیگر وجود ندارد.<br><br>به همین دلیل باید اول <strong>مقیم بلندمدت اتحادیه اروپا</strong> (EU-langdurig ingezetene) شوید. پس از آن می‌توانید درخواست تابعیت بدهید. سؤال‌های بعدی نشان می‌دهند که آیا این برای شما همین حالا ممکن است یا نه.",
         "antwoorden": [
           {
             "tekst": "فهمیدم — ادامه",
             "icoon": "→",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "e1"
           }
         ]
       },
       "v_asiel_wn": {
         "tekst": "این‌طور می‌بینید که کدام اجازه اقامت را دارید",
-        "uitleg": "به کارت اقامت خود، در قسمت 'Type document en bijzonderheden' (نوع سند و جزئیات: شماره نوع و متن کنار آن)، یا به نامه IND نگاه کنید. به دو چیز توجه کنید:<br><br>1. آیا نوشته شده <strong>پناهندگی</strong> (asiel) یا هدف دیگری (مانند خانواده یا کار)؟<br>2. این کارت را چه زمانی گرفته‌اید: <strong>پیش یا پس از 12 جون 2026</strong>؟ و تا چه مدت معتبر است؟<br><br>نمی‌توانید بفهمید؟ از راهنمای خود در شهرداری یا از VluchtelingenWerk بپرسید.",
+        "uitleg": "به کارت اقامت خود، در قسمت 'Type document en bijzonderheden' (نوع سند و جزئیات: شماره نوع و متن کنار آن)، یا به نامه IND نگاه کنید. به دو چیز توجه کنید:<br><br>1. آیا نوشته شده <strong>پناهندگی</strong> (asiel) یا هدف دیگری (مانند خانواده یا کار)؟<br>2. آیا نوشته شده '<strong>مدت نامعین</strong>' (onbepaalde tijd)، یا <strong>تاریخ پایان</strong> دارد؟<br><br>نمی‌توانید بفهمید؟ از راهنمای خود در شهرداری یا از VluchtelingenWerk بپرسید.",
         "antwoorden": [
           {
             "tekst": "پیدا کردم — بازگشت به سؤال",
@@ -5985,9 +6248,40 @@ window._NAT = {
           }
         ]
       },
+      "v_regulier": {
+        "tekst": "چه نوع اجازه اقامتی دارید؟",
+        "uitleg": "برای تابعیت (naturalisatie) به اجازه اقامت با مدت نامعین نیاز دارید، یا به اجازه‌ای برای هدفی که موقت نیست، مانند زندگی با همسر یا کار. روی کارت اقامت شما هدف نوشته شده و اینکه تاریخ پایان دارد یا نه.",
+        "antwoorden": [
+          {
+            "tekst": "با مدت نامعین",
+            "icoon": "✓",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "با مدت معین — برای خانواده، همسر یا کار",
+            "icoon": "👨‍👩‍👧",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "با مدت معین — برای تحصیل یا اقامت موقت دیگر",
+            "sub": "مثلاً کار فصلی، تداوی، برنامه تبادله یا سال جست‌وجوی کار برای افراد دارای تحصیلات عالی",
+            "icoon": "🎓",
+            "klasse": "nee",
+            "volgende": "r_regulier_tijdelijk"
+          },
+          {
+            "tekst": "نمی‌دانم",
+            "icoon": "❓",
+            "klasse": "anders",
+            "volgende": "v_asiel_wn"
+          }
+        ]
+      },
       "e1": {
         "tekst": "آیا 5 سال یا بیشتر به‌طور پیوسته با اجازه اقامت معتبر در هلند زندگی می‌کنید؟",
-        "uitleg": "با یک اجازه اقامت پناهندگی (verblijfsvergunning asiel) جدید فقط وقتی می‌توانید تابعیت هلند را بگیرید که اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شده باشید. برای این کار باید دست‌کم 5 سال پیوسته با اجازه اقامت معتبر در هلند زندگی کرده باشید. سال‌های اجازه اقامت پناهندگی حساب می‌شوند. اینکه مدت روند پناهندگی حساب می‌شود یا نه، را IND تعیین می‌کند.",
+        "uitleg": "با یک اجازه اقامت پناهندگی با مدت معین (verblijfsvergunning asiel) فقط وقتی می‌توانید تابعیت هلند را بگیرید که اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شده باشید. برای این کار باید دست‌کم 5 سال پیوسته با اجازه اقامت معتبر در هلند زندگی کرده باشید. سال‌های اجازه اقامت پناهندگی حساب می‌شوند. اینکه مدت روند پناهندگی حساب می‌شود یا نه، را IND تعیین می‌کند.",
         "antwoorden": [
           {
             "tekst": "بله، 5 سال یا بیشتر",
@@ -6076,18 +6370,17 @@ window._NAT = {
         ]
       },
       "v2": {
-        "tekst": "آیا مجوز اقامت معتبر دارید؟",
-        "uitleg": "شما به یک اجازه اقامت معتبر نیاز دارید که موقت نباشد. مثلاً اجازه اقامت با مدت نامعین، وضعیت مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene)، یا اجازه اقامت پناهندگی که پیش از 12 جون 2026 گرفته‌اید. اجازه اقامت خود را همیشه به‌موقع تمدید کنید تا اقامت شما بدون وقفه بماند.",
+        "tekst": "آیا اجازه اقامت شما اکنون معتبر است؟",
+        "uitleg": "اجازه اقامت شما باید هنگام درخواست تابعیت (naturalisatie) معتبر باشد و تا زمان تصمیم معتبر بماند. همیشه آن را به‌موقع تمدید کنید تا اقامت شما بدون وقفه بماند.",
         "antwoorden": [
           {
-            "tekst": "بله، مجوز اقامت معتبر دارم",
-            "sub": "یا وضعیت پناهندگی (IND نوع III، IV یا V)",
+            "tekst": "بله، اجازه اقامت من معتبر است",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v3"
           },
           {
-            "tekst": "خیر، مجوز اقامت معتبر ندارم",
+            "tekst": "خیر، اجازه اقامت من منقضی شده یا اجازه اقامت ندارم",
             "icoon": "✗",
             "klasse": "nee",
             "volgende": "r_geen_vergunning"
@@ -6156,7 +6449,7 @@ window._NAT = {
       },
       "v4a_z": {
         "tekst": "مسیر Z را تکمیل کرده‌اید — یک قدم اضافی برای تابعیت لازم است",
-        "uitleg": "مسیر Z با یک مصاحبه پایانی و یک گواهی به پایان می‌رسد، اما برای تابعیت، IND شرایط زبانی اضافی اعمال می‌کند. سه راه وجود دارد تا با این حال بتوانید تابعیت بگیرید:<br><br><strong>راه A — با این حال قبولی در آزمون در سطح A2</strong><br>همه آزمون‌های زبان را در سطح A2 (خواندن، شنیدن، نوشتن، صحبت‌کردن) و آزمون KNM را قبول شوید. توجه: اکنون که مسیر Z به پایان رسیده، تلاش‌های آزمون دیگر رایگان نیستند.<br><br><strong>راه B — 600 ساعت کلاس زبان + دست‌کم 3 بار تلاش برای هر بخش</strong><br>دست‌کم 600 ساعت کلاس سطح A2 در یک مؤسسه دارای گواهی Blik op Werk و 3 بار تلاش برای هر بخش؟ در این صورت DUO می‌تواند توصیه معافیت صادر کند.<br><br><strong>راه C — 600 ساعت سوادآموزی + آزمون DUO (€150)</strong><br>دست‌کم 600 ساعت سوادآموزی و مشخص شود که A2 دست‌یافتنی نیست؟ در این صورت معافیت از طریق آزمون DUO (€150) داده می‌شود.<br><br><em>احتمالاً در آینده:</em> دولت می‌خواهد شرط زبان برای تابعیت را از A2 به B1 افزایش دهد. این هنوز تصویب نشده است — در حال حاضر هنوز A2 اعمال می‌شود.<br><br>💡 با شهرداری خود یا VluchtelingenWerk مشورت کنید که کدام راه بهتر مناسب شماست.",
+        "uitleg": "مسیر Z با یک مصاحبه پایانی و یک گواهی به پایان می‌رسد، اما برای تابعیت، IND شرایط زبانی اضافی اعمال می‌کند. سه راه وجود دارد تا با این حال بتوانید تابعیت بگیرید:<br><br><strong>راه A — با این حال قبولی در آزمون در سطح A2</strong><br>همه آزمون‌های زبان را در سطح A2 (خواندن، شنیدن، نوشتن، صحبت‌کردن) و آزمون KNM را قبول شوید. توجه: اکنون که مسیر Z به پایان رسیده، تلاش‌های آزمون دیگر رایگان نیستند.<br><br><strong>راه B — 600 ساعت کلاس زبان + دست‌کم 3 بار تلاش برای هر بخش</strong><br>دست‌کم 600 ساعت کلاس سطح A2 در یک مؤسسه دارای گواهی Blik op Werk و 3 بار تلاش برای هر بخش؟ در این صورت DUO می‌تواند توصیه معافیت صادر کند.<br><br><strong>راه C — 600 ساعت سوادآموزی + آزمون DUO (€150)</strong><br>دست‌کم 600 ساعت سوادآموزی و مشخص شود که A2 دست‌یافتنی نیست؟ در این صورت معافیت از طریق آزمون DUO (€150) داده می‌شود.<br><br><em>احتمالاً در آینده:</em> دولت می‌خواهد شرط زبان برای تابعیت را از A2 به B1 افزایش دهد. این هنوز تصویب نشده است — در حال حاضر هنوز A2 اعمال می‌شود.<br><br>💡 با شهرداری خود مشورت کنید که کدام راه بهتر مناسب شماست.",
         "antwoorden": [
           {
             "tekst": "متوجه شدم — ادامه به شرایط بقیه",
@@ -6263,7 +6556,7 @@ window._NAT = {
       },
       "v7": {
         "tekst": "آیا حاضرید از تابعیت فعلی خود صرف‌نظر کنید؟",
-        "uitleg": "هلند معمولاً تابعیت مضاعف را اجازه نمی‌دهد. استثنا: پناهندگان شناخته‌شده (دارندگان وضعیت) می‌توانند هر دو تابعیت را نگه دارند.",
+        "uitleg": "هلند معمولاً تابعیت مضاعف را اجازه نمی‌دهد. استثناهایی وجود دارد، مثلاً برای پناهندگان شناخته‌شده.",
         "antwoorden": [
           {
             "tekst": "بله، از تابعیتم صرف‌نظر می‌کنم",
@@ -6276,7 +6569,8 @@ window._NAT = {
             "sub": "دارندگان وضعیت می‌توانند تابعیت مضاعف نگه دارند",
             "icoon": "✓",
             "klasse": "ja",
-            "volgende": "v8"
+            "volgende": "v8",
+            "alleenPad": "asiel"
           },
           {
             "tekst": "خیر، می‌خواهم تابعیتم را نگه دارم",
@@ -6311,7 +6605,8 @@ window._NAT = {
         "icoon": "🎉",
         "titel": "احتمالاً واجد شرایط هستید!",
         "sub": "بر اساس پاسخ‌های شما، شرایط اصلی تابعیت را دارید. قدم بعدی ارائه درخواست رسمی در شهرداری شماست.",
-        "info": "💡 دارندگان وضعیت (پناهندگان شناخته‌شده) در اکثر موارد مجبور نیستند از تابعیت اصلی خود صرف‌نظر کنند.",
+        "info": "💡 آیا پناهنده شناخته‌شده هستید؟ پس معمولاً لازم نیست از تابعیت اصلی خود صرف‌نظر کنید.",
+        "infoAlleenPad": "asiel",
         "stappen": [
           {
             "nr": 1,
@@ -6403,7 +6698,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "درخواست پناهندگی",
-            "tekst": "اگر به حمایت نیاز دارید می‌توانید به IND درخواست پناهندگی بدهید."
+            "tekst": "اگر به حمایت نیاز دارید می‌توانید به IND درخواست پناهندگی بدهید.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "مجوز معمولی",
@@ -6411,29 +6707,26 @@ window._NAT = {
           },
           {
             "naam": "کمک حقوقی",
-            "tekst": "با سازمان پناهندگان یا وکیل تماس بگیرید."
+            "tekst": "با یک وکیل یا دفتر مشوره حقوقی (Juridisch Loket) تماس بگیرید."
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "پشتیبانی حقوقی رایگان برای پناهجویان و دارندگان وضعیت."
+            "tekst": "پشتیبانی حقوقی رایگان برای پناهجویان و دارندگان وضعیت.",
+            "alleenPad": "asiel"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ با VluchtelingenWerk تماس بگیرید"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ کمک از طریق Juridisch Loket"
       },
       "r_te_kort": {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "هنوز به‌اندازه کافی در هلند زندگی نکرده‌اید",
-        "sub": "در حال حاضر باید دست‌کم 5 سال متوالی با اقامت معتبر در هلند زندگی کرده باشید. از زمان قوانین جدید پناهندگی 2026 چند نکته وجود دارد که باید در دوران انتظار به آن‌ها توجه کنید. می‌توانید از دوران انتظار به‌خوبی استفاده کنید.",
+        "sub": "باید دست‌کم 5 سال پیوسته در هلند زندگی کنید. می‌توانید از دوران انتظار به‌خوبی استفاده کنید.",
         "alternatieven": [
           {
             "naam": "اجازه خود را به‌موقع تمدید کنید",
-            "tekst": "اجازه‌های پناهندگی جدید حداکثر 3 سال معتبرند؛ بنابراین به‌موقع تمدید کنید. اگر یک \"شکاف اقامت\" (verblijfsgat) ایجاد شود — دوره‌ای بین دو اجازه که در آن اجازه معتبری ندارید — آن زمان به‌عنوان اقامت قانونی محسوب نمی‌شود و شمارش 5 ساله برای تابعیت ممکن است از نو آغاز شود. بنابراین درخواست تمدید را حداکثر تا 4 هفته پس از انقضا ارائه دهید: در این صورت IND آن را شکاف اقامت تلقی نمی‌کند."
-          },
-          {
-            "naam": "آیا اجازه اقامت پناهندگی شما زودتر تمام می‌شود؟",
-            "tekst": "آیا یک اجازه اقامت پناهندگی (verblijfsvergunning asiel) 5 ساله از پیش از 12 جون 2026 دارید که پیش از آنکه 5 سال در هلند زندگی کنید تمام می‌شود؟ در این صورت هنگام تمدید، اجازه‌ای طبق قوانین جدید می‌گیرید. آنگاه مسیر شما از مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) می‌گذرد و برای آن شرط درآمد وجود دارد."
+            "tekst": "اگر دوره‌ای بدون اجازه اقامت معتبر پیش بیاید — یک \"شکاف اقامت\" (verblijfsgat) — آن زمان حساب نمی‌شود. در این صورت شمارش 5 سال ممکن است از نو آغاز شود. بنابراین درخواست تمدید را به‌موقع ارائه دهید، حداکثر تا 4 هفته پس از انقضا: در این صورت IND آن را شکاف اقامت تلقی نمی‌کند."
           },
           {
             "naam": "مدت تابعیت: احتمالاً 10 سال",
@@ -6453,15 +6746,38 @@ window._NAT = {
           },
           {
             "naam": "برنامه دولت (هنوز قانون نیست)",
-            "tekst": "دارندگان وضعیت پناهندگی که دو بار اجازه اقامت پناهندگی موقت گرفته‌اند و زبان هلندی را در سطح B1 قبول شوند، ممکن است پس از 6 سال تابعیت هلند را بگیرند، حتی بدون مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene). برای کسانی که نمی‌توانند به B1 برسند یک استثنا در نظر گرفته می‌شود. هنوز هیچ لایحه قانونی وجود ندارد. تا زمانی که آن قانون تصویب نشده، قوانین بالا اعتبار دارند."
+            "tekst": "دارندگان وضعیت پناهندگی که دو بار اجازه اقامت پناهندگی موقت گرفته‌اند و زبان هلندی را در سطح B1 قبول شوند، ممکن است پس از 6 سال تابعیت هلند را بگیرند، حتی بدون مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene). برای کسانی که نمی‌توانند به B1 برسند یک استثنا در نظر گرفته می‌شود. هنوز هیچ لایحه قانونی وجود ندارد. تا زمانی که آن قانون تصویب نشده، قوانین بالا اعتبار دارند.",
+            "alleenPad": "asiel"
           }
         ],
         "interneLink": {
           "naar": "r_eu_langdurig",
           "tekst": "🇪🇺 ببینید: مقیم بلندمدت اتحادیه اروپا (اقامت دائم پس از 5 سال)"
         },
-        "link": "https://ind.nl/en/asylum-and-family-reunification-the-migration-pact-and-other-developments/new-laws-and-regulations-for-asylum-and-family-reunification",
-        "linkTekst": "→ قوانین جدید پناهندگی 2026 را در ind.nl ببینید"
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ اطلاعات بیشتر در ind.nl"
+      },
+      "r_regulier_tijdelijk": {
+        "type": "wacht",
+        "icoon": "🎓",
+        "titel": "با این اجازه اقامت هنوز نمی‌توانید تابعیت هلند را بگیرید",
+        "sub": "برای تابعیت (naturalisatie) به اجازه اقامت با مدت نامعین نیاز دارید، یا به اجازه‌ای برای هدفی که موقت نیست. اجازه اقامت برای تحصیل یا اقامت موقت دیگر حساب نمی‌شود.",
+        "alternatieven": [
+          {
+            "naam": "وضعیت شما تغییر می‌کند؟",
+            "tekst": "مثلاً می‌خواهید کار کنید، یا با همسر خود زندگی کنید؟ در این صورت می‌توانید اجازه اقامت دیگری درخواست کنید. پس از آن این بررسی را دوباره انجام دهید."
+          },
+          {
+            "naam": "اقامت شما چگونه حساب می‌شود؟",
+            "tekst": "اینکه سال‌ها با اجازه اقامت فعلی شما برای آن 5 سال حساب می‌شوند یا نه، به وضعیت شما بستگی دارد. بگذارید این را بررسی کنند."
+          },
+          {
+            "naam": "از همین حالا روی زبان هلندی کار کنید",
+            "tekst": "برای تابعیت (naturalisatie) باید بعداً دوره ادغام (inburgering) را تمام کرده باشید. یک دوره زبان همین حالا کمک می‌کند."
+          }
+        ],
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ اطلاعات بیشتر در ind.nl"
       },
       "r_bezig_b1": {
         "type": "route",
@@ -6560,9 +6876,9 @@ window._NAT = {
             "tekst": "حداقل ۶۰۰ ساعت سوادآموزی در مؤسسه‌ای با گواهی Blik op Werk و آزمون DUO نشان می‌دهد A2 قابل دستیابی نیست؟ معافیت داده می‌شود. آزمون DUO ۱۵۰ یورو هزینه دارد."
           }
         ],
-        "info": "📞 <strong>مشاوره:</strong> با شهرداری یا VluchtelingenWerk در مورد بهترین مسیر برای وضعیت‌تان مشورت کنید.",
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ کمک از طریق VluchtelingenWerk"
+        "info": "📞 <strong>مشاوره:</strong> با شهرداری در مورد بهترین مسیر برای وضعیت‌تان مشورت کنید.",
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ کمک از طریق Juridisch Loket"
       },
       "r_geen_inburgering": {
         "type": "wacht",
@@ -6602,7 +6918,8 @@ window._NAT = {
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "کمک حقوقی رایگان برای دارندگان وضعیت."
+            "tekst": "کمک حقوقی رایگان برای دارندگان وضعیت.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "دوره انتظار",
@@ -6613,8 +6930,8 @@ window._NAT = {
             "tekst": "جریمه‌های ترافیکی و تخلفات کوچک معمولاً محاسبه نمی‌شوند."
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ با VluchtelingenWerk تماس بگیرید"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ کمک از طریق Juridisch Loket"
       },
       "r_strafblad_check": {
         "type": "wacht",
@@ -6636,7 +6953,7 @@ window._NAT = {
           },
           {
             "naam": "مشاوره حقوقی",
-            "tekst": "در صورت شک: با یک مشاور حقوقی یا VluchtelingenWerk مشورت کنید."
+            "tekst": "در صورت شک: با یک مشاور حقوقی یا دفتر مشوره حقوقی (Juridisch Loket) مشورت کنید."
           }
         ],
         "link": "https://www.justis.nl/producten/vog",
@@ -6676,7 +6993,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "استثنا برای دارندگان وضعیت",
-            "tekst": "به‌عنوان پناهنده شناخته‌شده، مجبور به چشم‌پوشی از تابعیت خود نیستید."
+            "tekst": "به‌عنوان پناهنده شناخته‌شده، مجبور به چشم‌پوشی از تابعیت خود نیستید.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "استثنا: ناممکن",
@@ -6714,7 +7032,7 @@ window._NAT = {
           },
           {
             "type": "amber",
-            "tekst": "⚠️ <strong>شرط درآمد:</strong> باید درآمد شخصی کافی و پایدار و بیمه صحی داشته باشید. با کمک‌هزینه دولتی معمولاً ممکن نیست. توجه: اگر یک اجازه اقامت پناهندگی (verblijfsvergunning asiel) جدید (پس از 12 جون 2026) دارید، برای اینکه بعداً بتوانید تابعیت بگیرید به مقیم بلندمدت اتحادیه اروپا نیاز دارید. پس شرط درآمد برای راه شما به‌سوی تابعیت هلند هم اعتبار دارد."
+            "tekst": "⚠️ <strong>شرط درآمد:</strong> باید درآمد شخصی کافی و پایدار و بیمه صحی داشته باشید. با کمک‌هزینه دولتی معمولاً ممکن نیست. اگر یک اجازه اقامت پناهندگی با مدت معین (verblijfsvergunning asiel) دارید، برای اینکه بعداً بتوانید تابعیت بگیرید به مقیم بلندمدت اتحادیه اروپا نیاز دارید. پس شرط درآمد برای راه شما به‌سوی تابعیت هلند هم اعتبار دارد."
           },
           {
             "type": "info",
@@ -6728,7 +7046,7 @@ window._NAT = {
           },
           {
             "nr": 2,
-            "tekst": "<strong>اجازه اقامت پناهندگی جدید؟</strong> پس این تنها راه به‌سوی اجازه اقامت دائمی و پس از آن به‌سوی تابعیت (naturalisatie) است."
+            "tekst": "<strong>اجازه اقامت پناهندگی با مدت معین؟</strong> پس این تنها راه به‌سوی اجازه اقامت دائمی و پس از آن به‌سوی تابعیت (naturalisatie) است."
           },
           {
             "nr": 3,
@@ -6772,7 +7090,7 @@ window._NAT = {
         "type": "route",
         "icoon": "🪜",
         "titel": "می‌توانید تابعیت هلند را بگیرید — در دو گام",
-        "sub": "با یک اجازه اقامت پناهندگی (verblijfsvergunning asiel) جدید باید اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شوید. پس از آن می‌توانید درخواست تابعیت (naturalisatie) بدهید.",
+        "sub": "با یک اجازه اقامت پناهندگی با مدت معین (verblijfsvergunning asiel) باید اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شوید. پس از آن می‌توانید درخواست تابعیت (naturalisatie) بدهید.",
         "infoBoxen": [
           {
             "type": "amber",
@@ -6900,7 +7218,7 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🧭",
         "titel": "اکنون درآمد شما مانع است",
-        "sub": "با اجازه اقامت پناهندگی (verblijfsvergunning asiel) پس از 12 جون 2026 فقط وقتی می‌توانید تابعیت هلند را بگیرید که اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شوید. برای این کار به درآمد شخصی کافی نیاز دارید. با کمک‌هزینه دولتی این فعلاً ممکن نیست. صادقانه بگوییم، این یک تغییر بزرگ است.",
+        "sub": "با اجازه اقامت پناهندگی با مدت معین (verblijfsvergunning asiel) فقط وقتی می‌توانید تابعیت هلند را بگیرید که اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شوید. برای این کار به درآمد شخصی کافی نیاز دارید. با کمک‌هزینه دولتی این فعلاً هنوز ممکن نیست. صادقانه بگوییم، این یک تغییر بزرگ است.",
         "alternatieven": [
           {
             "naam": "کار یا ساعت‌های بیشتر",
@@ -6956,11 +7274,11 @@ window._NAT = {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "هنوز به‌اندازه کافی در هلند زندگی نکرده‌اید",
-        "sub": "با یک اجازه اقامت پناهندگی (verblijfsvergunning asiel) جدید باید اول 5 سال در هلند زندگی کنید. پس از آن می‌توانید مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شوید، و فقط آن وقت تابعیت هلند را بگیرید. می‌توانید از زمان تا آن موقع به‌خوبی استفاده کنید.",
+        "sub": "با یک اجازه اقامت پناهندگی با مدت معین (verblijfsvergunning asiel) باید اول 5 سال در هلند زندگی کنید. پس از آن می‌توانید مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene) شوید، و فقط آن وقت تابعیت هلند را بگیرید. می‌توانید از زمان تا آن موقع به‌خوبی استفاده کنید.",
         "alternatieven": [
           {
             "naam": "به‌موقع تمدید کنید",
-            "tekst": "اجازه‌های پناهندگی جدید حداکثر 3 سال معتبرند؛ بنابراین به‌موقع تمدید کنید. اگر یک \"شکاف اقامت\" (verblijfsgat) ایجاد شود — دوره‌ای بین دو اجازه که در آن اجازه معتبری ندارید — آن زمان به‌عنوان اقامت قانونی محسوب نمی‌شود و شمارش 5 ساله برای تابعیت ممکن است از نو آغاز شود. بنابراین درخواست تمدید را حداکثر تا 4 هفته پس از انقضا ارائه دهید: در این صورت IND آن را شکاف اقامت تلقی نمی‌کند."
+            "tekst": "اجازه‌های پناهندگی با مدت معین حداکثر 3 سال معتبرند؛ بنابراین به‌موقع تمدید کنید. اگر یک \"شکاف اقامت\" (verblijfsgat) ایجاد شود — دوره‌ای بین دو اجازه که در آن اجازه معتبری ندارید — آن زمان به‌عنوان اقامت قانونی محسوب نمی‌شود و شمارش 5 ساله برای تابعیت ممکن است از نو آغاز شود. بنابراین درخواست تمدید را حداکثر تا 4 هفته پس از انقضا ارائه دهید: در این صورت IND آن را شکاف اقامت تلقی نمی‌کند."
           },
           {
             "naam": "روی درآمد خود کار کنید",
@@ -6988,19 +7306,19 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🔍",
         "titel": "اول بخواهید بررسی شود که کدام اجازه اقامت را دارید",
-        "sub": "مسیر شما به‌سوی تابعیت هلند به اجازه اقامت شما بستگی دارد. با اجازه اقامت پناهندگی از پیش از 12 جون 2026 این مسیر کوتاه‌تر از اجازه جدید است.",
+        "sub": "مسیر شما به‌سوی تابعیت هلند به اجازه اقامت شما بستگی دارد.",
         "alternatieven": [
           {
-            "naam": "اجازه اقامت پناهندگی قدیم",
-            "tekst": "مدت نامعین، یا 5 ساله گرفته‌شده پیش از 12 جون 2026: می‌توانید به روش قدیم تابعیت (naturalisatie) بگیرید."
+            "naam": "پناهندگی با مدت نامعین",
+            "tekst": "اگر شرایط دیگر را داشته باشید، می‌توانید تابعیت (naturalisatie) بگیرید."
           },
           {
-            "naam": "اجازه اقامت پناهندگی جدید",
-            "tekst": "گرفته‌شده یا تمدیدشده در 12 جون 2026 یا پس از آن: اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene)، با شرط درآمد، سپس تابعیت (naturalisatie)."
+            "naam": "پناهندگی با مدت معین (3 یا 5 سال)",
+            "tekst": "اول مقیم بلندمدت اتحادیه اروپا (EU-langdurig ingezetene)، با شرط درآمد، سپس تابعیت (naturalisatie). حتی اگر اجازه را پیش از 12 جون 2026 گرفته باشید."
           },
           {
             "naam": "اجازه اقامت دیگر",
-            "tekst": "برای خانواده، کار یا تحصیل: قوانین قدیم هنوز اعتبار دارند."
+            "tekst": "برای خانواده، همسر یا کار: تابعیت معمولاً پس از 5 سال ممکن است. برای تحصیل یا اقامت موقت دیگر هنوز نه."
           },
           {
             "naam": "چه کسی می‌تواند کمک کند؟",
@@ -7017,9 +7335,11 @@ window._NAT = {
       "badge": "🇳🇱 መርመራ ዜጋነት",
       "titel": "ንናይ ሆላንድ ፓስፖርት ዝምልከት መሰል ኣለኒ ድዩ?",
       "sub": "ንቕሩብ ሕቶታት መልሲ ሃብ፡ ሆላንዳዊ ዜጋ ክትከውን ትኽእል እንተኾንካ ድማ ርአ። ኣብ ሕግታት 2026 ተመርኲሱ፡ ካብ 12 ሰነ 2026 ጀሚሮም ዘለዉ ሓደስቲ ሕግታት ዑቕባ እውን ሓዊሱ።",
-      "disclaimer": "⚠️ እዚ መርመራ ኣንፈት ጥራይ ይህብ፡ ውሳነ ኣይኮነን። ኣብ መስከረም 2026 ተመርሚሩ (IND፡ Stimulansz)። ካብ 12 ሰነ 2026 ጀሚሩ ናይ ዘይውሱን ግዜ ናይ ዑቕባ ፍቓድ የለን። ስለዚ ሓደስቲ ዋናታት ዑቕባ ዜግነት (naturalisatie) ቅድሚ ምሕታቶም ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ክኾኑ ኣለዎም። መንግስቲ ዝኣወጆም ውጥናት ገና ሕጊ ኣይኮነን። ኩሉ ግዜ ካብ ምምሕዳር ወይ VluchtelingenWerk ምኽሪ ሕተት።",
+      "disclaimer": "⚠️ እዚ መርመራ ኣንፈት ጥራይ ይህብ፡ ውሳነ ኣይኮነን። ኣብ መስከረም 2026 ተመርሚሩ (IND፡ Stimulansz)። ካብ 12 ሰነ 2026 ጀሚሩ ናይ ዘይውሱን ግዜ ናይ ዑቕባ ፍቓድ የለን። ስለዚ ናይ ውሱን ግዜ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ዘለዎም ዋናታት ዑቕባ ዜግነት (naturalisatie) ቅድሚ ምሕታቶም ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ክኾኑ ኣለዎም። መንግስቲ ዝኣወጆም ውጥናት ገና ሕጊ ኣይኮነን። ኩሉ ግዜ ካብ ምምሕዳር ወይ VluchtelingenWerk ምኽሪ ሕተት።",
       "vwnLabel": "ብዛዕባ ኩነታትካ/ኪ ርግጽ ዘይኮንካ/ኪ?",
-      "vwnTekst": "ናይ ዜግነት ሕግታት ቀልጢፈን ይቕየራ፡ ኩነታትካ/ኪ ካብ ዘርኢ ዘሎ ፍልይ ክብል ይኽእል። VluchtelingenWerk Nederland ብናጻ ናይ ምኽሪ ሰዓታትን ናብ ዜግነት ምቕራብ ሓገዝን ይህብ — ኣብ <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a> ቀረባ ቦታ ድለዩ።"
+      "vwnTekst": "ናይ ዜግነት ሕግታት ቀልጢፈን ይቕየራ፡ ኩነታትካ/ኪ ካብ ዘርኢ ዘሎ ፍልይ ክብል ይኽእል። VluchtelingenWerk Nederland ብናጻ ናይ ምኽሪ ሰዓታትን ናብ ዜግነት ምቕራብ ሓገዝን ይህብ — ኣብ <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a> ቀረባ ቦታ ድለዩ።",
+      "hulpRegulierLabel": "ብዛዕባ ኩነታትካ/ኪ ርግጽ ዘይኮንካ/ኪ?",
+      "hulpRegulierTekst": "ቤት ጽሕፈት ሕጋዊ ምኽሪ (Juridisch Loket) ብዛዕባ መንበሪ ፍቓድካን ዜግነትን (naturalisatie) ብነጻ ምኽሪ ይህብ። ኣብ <a href=\"https://www.juridischloket.nl\" target=\"_blank\" style=\"color:inherit;\">juridischloket.nl</a> ርአ ወይ ንምምሕዳርካ ሕተት።"
     },
     "ui": {
       "volgendeStappen": "ዝቕጽል ስጉምትታት",
@@ -7059,14 +7379,16 @@ window._NAT = {
             "tekst": "ናይ ዑቕባ መንበሪ ፍቓድ ኣለኒ (ዋና ዑቕባ)",
             "icoon": "🛡️",
             "klasse": "ja",
-            "volgende": "v_asiel"
+            "volgende": "v_asiel",
+            "pad": "asiel"
           },
           {
             "tekst": "ካልእ መንበሪ ፍቓድ ኣለኒ",
             "sub": "ንኣብነት ንስድራ፡ ንስራሕ ወይ ንትምህርቲ",
             "icoon": "📄",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "v_regulier",
+            "pad": "regulier"
           },
           {
             "tekst": "ዜጋ ኤውሮጳ ሕብረት እየ",
@@ -7085,27 +7407,21 @@ window._NAT = {
       },
       "v_asiel": {
         "tekst": "ሕጂ ኣየናይ ናይ ዑቕባ ፍቓድ ኣለካ?",
-        "uitleg": "ካብ 12 ሰነ 2026 ጀሚሩ ሕግታት ተቐይሮም። ንዜግነት (naturalisatie) ነቲ ናይ ሕጂ ፍቓድካ መዓስ ከም ዝረኸብካዮ ኣገዳሲ እዩ።",
+        "uitleg": "ኣብ ካርድ መንበሪኻ ርአ፦ 'ዘይውሱን ግዜ' (onbepaalde tijd) ድዩ ተጻሒፉ፡ ወይስ ዝውድኣሉ ዕለት ኣለዎ?",
         "antwoorden": [
           {
             "tekst": "ናይ ዘይውሱን ግዜ ዑቕባ",
-            "sub": "ቅድሚ 12 ሰነ 2026 ዝተረኽበ",
+            "sub": "ኣብ ካርድካ ንመሰል መንበሪኻ ዝውድኣሉ ዕለት የለን",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v2"
           },
           {
-            "tekst": "ናይ 5 ዓመት ዑቕባ፡ ቅድሚ 12 ሰነ 2026 ዝተረኽበ",
+            "tekst": "ናይ ውሱን ግዜ ዑቕባ",
+            "sub": "ን3 ወይ ን5 ዓመት ቅቡል፡ ቅድሚ 12 ሰነ 2026 እንተረኺብካዮ እውን",
             "icoon": "📅",
-            "klasse": "ja",
-            "volgende": "v_asiel5"
-          },
-          {
-            "tekst": "ኣብ 12 ሰነ 2026 ወይ ድሕሪኡ ዝተረኽበ ወይ ዝተሓደሰ ዑቕባ",
-            "sub": "መብዛሕትኡ ግዜ ን3 ዓመት ዝጸንሕ",
-            "icoon": "🆕",
             "klasse": "anders",
-            "volgende": "e1"
+            "volgende": "v_asiel5"
           },
           {
             "tekst": "ድሮ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ እየ",
@@ -7122,20 +7438,20 @@ window._NAT = {
         ]
       },
       "v_asiel5": {
-        "tekst": "ጽቡቕ ዜና፡ ፍቓድካ ኣብ ትሕቲ ናይ ቀደም ሕግታት እዩ",
-        "uitleg": "ናይ 5 ዓመት ናይ ዑቕባ ፍቓድካ ቅድሚ 12 ሰነ 2026 ረኺብካዮ። በዚ ገና ብናይ ቀደም መንገዲ ዜግነት (naturalisatie) ክትሓትት ትኽእል።<br><br>⚠️ <strong>ኣስተውዕል፡</strong> IND ፍቓድካ ድሕሪ 12 ሰነ 2026 እንተሓዲሱዎ፡ ብሓደስቲ ሕግታት ዝተዋህበ ፍቓድ ክትረክብ ኢኻ። ሽዑ ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ክትከውን ኣለካ። <strong>ነቲ ቅድመ-ኩነታት ተማልእ ዶ? እምበኣር እታ ናይ ሕጂ ካርድካ ገና ቅብልቲ ከላ ዜግነት ሕተት።</strong>",
+        "tekst": "ፍቓድካ ቅቡል ኮይኑ ይቕጽል — ግን ሆላንዳዊ ዜጋ ንምዃን ብማእከላይ ስጉምቲ ይሕለፍ",
+        "uitleg": "ናይ ዑቕባ ፍቓድካ ክሳዕ እቲ ኣብ ካርድካ ዘሎ ዕለት ቅቡል ኮይኑ ይቕጽል። ግን ብናይ ውሱን ግዜ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ዜግነት (naturalisatie) ክትሓትት ኣይትኽእልን። እዚ ነቲ ፍቓድ ቅድሚ 12 ሰነ 2026 እንተረኺብካዮ እውን ይምልከት። ካብ 12 ሰነ 2026 ጀሚሩ ናይ ዘይውሱን ግዜ ናይ ዑቕባ ፍቓድ የለን።<br><br>ስለዚ ፈለማ <strong>ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ</strong> (EU-langdurig ingezetene) ክትከውን ኣለካ። ድሕሪኡ ዜግነት ክትሓትት ትኽእል። እቶም ዝቕጽሉ ሕቶታት እዚ ንዓኻ ሕጂ ይከኣል እንተኾይኑ የርእዩ።",
         "antwoorden": [
           {
             "tekst": "ተረዲኡኒ — ቀጽል",
             "icoon": "→",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "e1"
           }
         ]
       },
       "v_asiel_wn": {
         "tekst": "ኣየናይ ፍቓድ ከም ዘለካ ከምዚ ትፈልጦ",
-        "uitleg": "ኣብ ካርድ መንበሪኻ፡ ኣብቲ 'Type document en bijzonderheden' ዝብል ቦታ (ዓይነት ሰነድን ፍሉይ ሓበሬታን፦ ቁጽሪ ዓይነትን ኣብ ጎኑ ዘሎ ጽሑፍን)፡ ወይ ኣብ ደብዳበ IND ርአ። ንኽልተ ነገራት ኣስተውዕል፦<br><br>1. <strong>ዑቕባ</strong> (asiel) ድዩ ተጻሒፉ ወይስ ካልእ ዕላማ (ከም ስድራ ወይ ስራሕ)?<br>2. ነዛ ካርድ መዓስ ረኺብካያ፦ <strong>ቅድሚ 12 ሰነ 2026 ድዩ ወይስ ድሕሪኡ</strong>? ክሳዕ መዓስከ ቅብልቲ እያ?<br><br>ክትፈልጦ ኣይከኣልካን? ንሓጋዚኻ ኣብ ምምሕዳር ወይ ን VluchtelingenWerk ሕተት።",
+        "uitleg": "ኣብ ካርድ መንበሪኻ፡ ኣብቲ 'Type document en bijzonderheden' ዝብል ቦታ (ዓይነት ሰነድን ፍሉይ ሓበሬታን፦ ቁጽሪ ዓይነትን ኣብ ጎኑ ዘሎ ጽሑፍን)፡ ወይ ኣብ ደብዳበ IND ርአ። ንኽልተ ነገራት ኣስተውዕል፦<br><br>1. <strong>ዑቕባ</strong> (asiel) ድዩ ተጻሒፉ ወይስ ካልእ ዕላማ (ከም ስድራ ወይ ስራሕ)?<br>2. '<strong>ዘይውሱን ግዜ</strong>' (onbepaalde tijd) ድዩ ተጻሒፉ፡ ወይስ <strong>ዝውድኣሉ ዕለት</strong> ኣለዎ?<br><br>ክትፈልጦ ኣይከኣልካን? ንሓጋዚኻ ኣብ ምምሕዳር ወይ ን VluchtelingenWerk ሕተት።",
         "antwoorden": [
           {
             "tekst": "ረኺበዮ — ናብቲ ሕቶ ተመለስ",
@@ -7151,9 +7467,40 @@ window._NAT = {
           }
         ]
       },
+      "v_regulier": {
+        "tekst": "ከመይ ዓይነት መንበሪ ፍቓድ ኣለካ?",
+        "uitleg": "ንዜግነት (naturalisatie) ናይ ዘይውሱን ግዜ ፍቓድ፡ ወይ ግዝያዊ ዘይኮነ ዕላማ ዘለዎ ፍቓድ የድልየካ፡ ከም ምስ መጻምድትኻ ምንባር ወይ ስራሕ። ኣብ ካርድ መንበሪኻ እቲ ዕላማን ዝውድኣሉ ዕለት እንተሎን ተጻሒፉ ኣሎ።",
+        "antwoorden": [
+          {
+            "tekst": "ናይ ዘይውሱን ግዜ",
+            "icoon": "✓",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "ናይ ውሱን ግዜ — ንስድራ፡ ንመጻምድቲ ወይ ንስራሕ",
+            "icoon": "👨‍👩‍👧",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "ናይ ውሱን ግዜ — ንትምህርቲ ወይ ንካልእ ግዝያዊ መንበሪ",
+            "sub": "ንኣብነት ናይ ወቕቲ ስራሕ (seizoenarbeid)፡ ሕክምና፡ ምልውዋጥ (uitwisseling) ወይ ንልዑል ትምህርቲ ዘለዎም ናይ ስራሕ ምድላይ ዓመት (zoekjaar hoogopgeleiden)",
+            "icoon": "🎓",
+            "klasse": "nee",
+            "volgende": "r_regulier_tijdelijk"
+          },
+          {
+            "tekst": "ኣይፈልጥን",
+            "icoon": "❓",
+            "klasse": "anders",
+            "volgende": "v_asiel_wn"
+          }
+        ]
+      },
       "e1": {
         "tekst": "ኣብ ሆላንድ ብቕቡል ፍቓድ 5 ዓመት ወይ ልዕሊኡ ከይተቛረጽካ ትነብር ዶ?",
-        "uitleg": "ብሓድሽ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ሆላንዳዊ ዜጋ ክትከውን ትኽእል ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ምስ ኮንካ ጥራይ እዩ። ንዑ ድማ እንተወሓደ 5 ዓመት ከይተቛረጽካ ብቕቡል ፍቓድ ኣብ ሆላንድ ክትነብር ኣለካ። ምስ ናይ ዑቕባ ፍቓድ ዝሓለፉ ዓመታት ይቑጸሩ። እቲ ኣብ መስርሕ ዑቕባ ዝሓለፈ ግዜ ይቑጸር ድዩ ኣይቑጸርን፡ IND ይውስኖ።",
+        "uitleg": "ብናይ ውሱን ግዜ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ሆላንዳዊ ዜጋ ክትከውን ትኽእል ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ምስ ኮንካ ጥራይ እዩ። ንዑ ድማ እንተወሓደ 5 ዓመት ከይተቛረጽካ ብቕቡል ፍቓድ ኣብ ሆላንድ ክትነብር ኣለካ። ምስ ናይ ዑቕባ ፍቓድ ዝሓለፉ ዓመታት ይቑጸሩ። እቲ ኣብ መስርሕ ዑቕባ ዝሓለፈ ግዜ ይቑጸር ድዩ ኣይቑጸርን፡ IND ይውስኖ።",
         "antwoorden": [
           {
             "tekst": "እወ፡ 5 ዓመት ወይ ልዕሊኡ",
@@ -7242,18 +7589,17 @@ window._NAT = {
         ]
       },
       "v2": {
-        "tekst": "ሕጋዊ ፍቓደ-ምቕማጥ ኣለካ/ኺ ድዩ?",
-        "uitleg": "ግዝያዊ ዘይኮነ ቅቡል መንበሪ ፍቓድ የድልየካ። ንኣብነት ናይ ዘይውሱን ግዜ ፍቓድ፡ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene)፡ ወይ ቅድሚ 12 ሰነ 2026 ዝተዋህበ ናይ ዑቕባ ፍቓድ። መንበሪኻ ከይተቛረጸ ምእንቲ ክቕጽል፡ ፍቓድካ ኩሉ ግዜ ብግዜኡ ኣሕድስ።",
+        "tekst": "መንበሪ ፍቓድካ ሕጂ ቅቡል ድዩ?",
+        "uitleg": "ዜግነት (naturalisatie) ክትሓትት ከለኻ ፍቓድካ ቅቡል ክኸውን ኣለዎ፡ ክሳዕ ውሳነ ዝወሃብ ድማ ቅቡል ኮይኑ ክቕጽል ኣለዎ። መንበሪኻ ከይተቛረጸ ምእንቲ ክቕጽል፡ ኩሉ ግዜ ብግዜኡ ኣሕድሶ።",
         "antwoorden": [
           {
-            "tekst": "እወ፡ ሕጋዊ ፍቓደ-ምቕማጥ ኣለኒ",
-            "sub": "ወይ ናይ ዑቕባ ሃለዋት (IND ዓይነት III፡ IV ወይ V)",
+            "tekst": "እወ፡ ፍቓደይ ቅቡል እዩ",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v3"
           },
           {
-            "tekst": "ኣይፋሉን፡ ሕጋዊ ፍቓደ-ምቕማጥ የብለይን",
+            "tekst": "ኣይፋሉን፡ ግዜ ፍቓደይ ሓሊፉ ወይ ፍቓድ የብለይን",
             "icoon": "✗",
             "klasse": "nee",
             "volgende": "r_geen_vergunning"
@@ -7322,7 +7668,7 @@ window._NAT = {
       },
       "v4a_z": {
         "tekst": "Z-መስርሕ ወዲእካ/ኢኺ — ንዜጋነት ሓደ ተወሳኺ ስጉምቲ ዘድሊ ኣዩ",
-        "uitleg": "መገዲ Z ብናይ መወዳእታ ቃለ-መሕትትን ምስክር ወረቐትን ይዛዘም፡ ግን ንዜግነት IND ተወሳኺ ናይ ቋንቋ ቅድመ-ኩነታት የተግብር። ኮይኑ ግን ንዜግነት ክትበቅዕ ሰለስተ መንገድታት ኣለዉ:<br><br><strong>መንገዲ A — ኮይኑ ግን ፈተና ኣብ A2 ደረጃ ምሕላፍ</strong><br>ኩሎም ናይ ቋንቋ ፈተናታት ኣብ A2 ደረጃ (ምንባብ፡ ምስማዕ፡ ምጽሓፍ፡ ምዝራብ)ን ናይ KNM ፈተናን ሕለፍ። ኣቓልቦ: መገዲ Z ምስ ተወድአ ናይ ፈተና ፈተነታት ብናጻ ኣይኮናን።<br><br><strong>መንገዲ B — 600 ሰዓት ናይ ቋንቋ ትምህርቲ + ኣብ ነፍሲ ወከፍ ክፋል እንተወሓደ 3 ፈተነ</strong><br>ኣብ Blik op Werk ምስክርነት ዘለዎ ትካል እንተወሓደ 600 ሰዓት ናይ A2 ደረጃ ትምህርትን ኣብ ነፍሲ ወከፍ ክፋል 3 ፈተነን? እምበኣር DUO ናይ ናጻ-ምግባር ለበዋ ክህብ ይኽእል።<br><br><strong>መንገዲ C — 600 ሰዓት ፊደል-ምልላይ + ናይ DUO ፈተና (€150)</strong><br>እንተወሓደ 600 ሰዓት ፊደል-ምልላይ ጌርካ A2 ክብጻሕ ዘይከኣል ኮይኑ እንተተረኺቡ? እምበኣር ብናይ DUO ፈተና (€150) ናጻ-ምግባር ይስዕብ።<br><br><em>ኣብ መጻኢ ክኽሰት ዝኽእል:</em> መንግስቲ ናይ ቋንቋ ቅድመ-ኩነት ንዜግነት ካብ A2 ናብ B1 ክብ ከብሎ ይደሊ። እዚ ገና ኣይጸደቐን — ኣብዚ እዋን ገና A2 እዩ ዝሰርሕ።<br><br>💡 ምስ ምምሕዳርካ ወይ ምስ VluchtelingenWerk ኣየናይ መንገዲ ዝበለጸ ከም ዝሰማማዓካ ተዘራረብ።",
+        "uitleg": "መገዲ Z ብናይ መወዳእታ ቃለ-መሕትትን ምስክር ወረቐትን ይዛዘም፡ ግን ንዜግነት IND ተወሳኺ ናይ ቋንቋ ቅድመ-ኩነታት የተግብር። ኮይኑ ግን ንዜግነት ክትበቅዕ ሰለስተ መንገድታት ኣለዉ:<br><br><strong>መንገዲ A — ኮይኑ ግን ፈተና ኣብ A2 ደረጃ ምሕላፍ</strong><br>ኩሎም ናይ ቋንቋ ፈተናታት ኣብ A2 ደረጃ (ምንባብ፡ ምስማዕ፡ ምጽሓፍ፡ ምዝራብ)ን ናይ KNM ፈተናን ሕለፍ። ኣቓልቦ: መገዲ Z ምስ ተወድአ ናይ ፈተና ፈተነታት ብናጻ ኣይኮናን።<br><br><strong>መንገዲ B — 600 ሰዓት ናይ ቋንቋ ትምህርቲ + ኣብ ነፍሲ ወከፍ ክፋል እንተወሓደ 3 ፈተነ</strong><br>ኣብ Blik op Werk ምስክርነት ዘለዎ ትካል እንተወሓደ 600 ሰዓት ናይ A2 ደረጃ ትምህርትን ኣብ ነፍሲ ወከፍ ክፋል 3 ፈተነን? እምበኣር DUO ናይ ናጻ-ምግባር ለበዋ ክህብ ይኽእል።<br><br><strong>መንገዲ C — 600 ሰዓት ፊደል-ምልላይ + ናይ DUO ፈተና (€150)</strong><br>እንተወሓደ 600 ሰዓት ፊደል-ምልላይ ጌርካ A2 ክብጻሕ ዘይከኣል ኮይኑ እንተተረኺቡ? እምበኣር ብናይ DUO ፈተና (€150) ናጻ-ምግባር ይስዕብ።<br><br><em>ኣብ መጻኢ ክኽሰት ዝኽእል:</em> መንግስቲ ናይ ቋንቋ ቅድመ-ኩነት ንዜግነት ካብ A2 ናብ B1 ክብ ከብሎ ይደሊ። እዚ ገና ኣይጸደቐን — ኣብዚ እዋን ገና A2 እዩ ዝሰርሕ።<br><br>💡 ምስ ምምሕዳርካ ኣየናይ መንገዲ ዝበለጸ ከም ዝሰማማዓካ ተዘራረብ።",
         "antwoorden": [
           {
             "tekst": "ተረዲኤ/ኤ — ናብ ዝተረፉ ኩነታት ቀጽሉ",
@@ -7429,7 +7775,7 @@ window._NAT = {
       },
       "v7": {
         "tekst": "ናይ ሕጂ ዜግነትካ/ኺ ንምውጻእ ድሉው/ዊ ዲኻ/ዲኺ?",
-        "uitleg": "ሆላንድ ብዙሕ ዜግነት ዝፈቕድ ኣይኮነን። ናጻ ምፍቓድ፡ ፍሉይ ሃለዋት ዘለዎም ዑቕበኛታት ክልተ ዜግነት ክሕዙ ይኽእሉ።",
+        "uitleg": "ሆላንድ ብመሰረቱ ክልተ ዜግነት ኣይትፈቕድን እያ። ግን ፍሉይ ኩነታት ኣለዉ፡ ንኣብነት ንኣፍልጦ ዝተዋህቦም ዑቕበኛታት።",
         "antwoorden": [
           {
             "tekst": "እወ፡ ዜግነተይ ኣወጽእ",
@@ -7442,7 +7788,8 @@ window._NAT = {
             "sub": "ናይ ሃለዋት ዋናታት ክልተ ዜግነት ክሕዙ ይኽእሉ",
             "icoon": "✓",
             "klasse": "ja",
-            "volgende": "v8"
+            "volgende": "v8",
+            "alleenPad": "asiel"
           },
           {
             "tekst": "ኣይፋሉን፡ ዜግነተይ ክሕዞ/ዞ እደሊ",
@@ -7477,7 +7824,8 @@ window._NAT = {
         "icoon": "🎉",
         "titel": "ምናልባሽ መሰል ኣለካ/ኺ!",
         "sub": "ናብ ሕቶታትካ/ኺ መሰረት ናይ ዜጋነት ቀንዲ ኩነታት ዘማልእ/እ ትኸውን ዘለካ/ኺ። ዝቕጽል ስጉምቲ ናብ ምምሕዳር ከቲ ናይ ወግዓዊ ምልክታ ምቕራብ ኣዩ።",
-        "info": "💡 ናይ ሃለዋት ዋናታት (ዕዉት ዑቕበኛታት) ብዙሕ ኣብ ብዙሕ ሃለዋት ናይ ኦሪጂናሎም ዜጋነት ንምውጻእ ኣይጸናሕዎምን።",
+        "info": "💡 ኣፍልጦ ዝተዋህቦ ዑቕበኛ ዲኻ? እንተኾንካ መብዛሕትኡ ግዜ ናይ መበቆል ዜግነትካ ክትሓድግ ኣየድልየካን።",
+        "infoAlleenPad": "asiel",
         "stappen": [
           {
             "nr": 1,
@@ -7569,7 +7917,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "ናይ ዑቕባ ምልክታ",
-            "tekst": "ሓለዋ ምስ ዘድልየካ/ኺ ናብ IND ናይ ዑቕባ ምልክታ ምቕራብ ይከኣሎ።"
+            "tekst": "ሓለዋ ምስ ዘድልየካ/ኺ ናብ IND ናይ ዑቕባ ምልክታ ምቕራብ ይከኣሎ።",
+            "alleenPad": "asiel"
           },
           {
             "naam": "ናይ ሰርሓ ፍቓደ-ምቕማጥ",
@@ -7577,29 +7926,26 @@ window._NAT = {
           },
           {
             "naam": "ሕጋዊ ሓገዝ",
-            "tekst": "ናይ ዑቕበኛ ትካልን ወይ ጠበቓን ርኸቦ/ቢ።"
+            "tekst": "ንጠበቓ ወይ ንቤት ጽሕፈት ሕጋዊ ምኽሪ (Juridisch Loket) ርኸብ።"
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "ናይ ዑቕባ ሰሪሖምን ናይ ሃለዋት ዋናታትን ናጻ ሕጋዊ ሓገዝ።"
+            "tekst": "ናይ ዑቕባ ሰሪሖምን ናይ ሃለዋት ዋናታትን ናጻ ሕጋዊ ሓገዝ።",
+            "alleenPad": "asiel"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ ምስ VluchtelingenWerk ርኸቦ/ቢ"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ ሓገዝ ብ Juridisch Loket"
       },
       "r_te_kort": {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "ገና እኹል ግዜ ኣብ ሆላንድ ኣይተቐመጥካን",
-        "sub": "ኣብዚ እዋን ኣብ ሆላንድ ብቕቡል መንበሪ እንተወሓደ 5 ዓመት ተኸታታሊ ክትነብር ኣለካ። ካብ ናይ 2026 ሓደስቲ ሕግታት ዑቕባ ጀሚሩ፡ ኣብ እዋን ምጽባይ ከተቕልበሎም ዘለካ ቅሩብ ነገራት ኣለዉ። ነቲ ናይ ምጽባይ ግዜ ጽቡቕ ጌርካ ክትጥቀመሉ ትኽእል።",
+        "sub": "እንተወሓደ 5 ዓመት ከይተቛረጽካ ኣብ ሆላንድ ክትነብር ኣለካ። ነቲ ናይ ምጽባይ ግዜ ጽቡቕ ጌርካ ክትጥቀመሉ ትኽእል።",
         "alternatieven": [
           {
             "naam": "ፍቓድካ ብግዜኡ ኣሕድስ",
-            "tekst": "ሓደስቲ ናይ ዑቕባ ፍቓዳት ዝለዓለ 3 ዓመት ይጸንሑ፤ ስለዚ ብግዜኡ ኣሕድስ። ኣብ መንጎ ክልተ ፍቓዳት ቅቡል ፍቓድ ዘይብልካ \"ናይ መንበሪ ጋግ\" (verblijfsgat) እንተተፈጢሩ — እቲ ግዜ ከም ሕጋዊ መንበሪ ኣይቑጸርን፡ እቲ ናይ 5 ዓመት ቆጸራ ንዜግነት ድማ ካብ ብሓድሽ ክጅምር ይኽእል። ስለዚ ናይ ምሕዳስ ምልክታ ድሕሪ ምውዳቕ ኣብ ውሽጢ 4 ሰሙን ኣብጽሕ: ሽዑ IND ከም ናይ መንበሪ ጋግ ኣይርእዮን።"
-          },
-          {
-            "naam": "ናይ ዑቕባ ፍቓድካ ቀልጢፉ ድዩ ዝውዳእ?",
-            "tekst": "ቅድሚ 12 ሰነ 2026 ዝተዋህበ ናይ 5 ዓመት ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ኣለካ ዶ፡ ኣብ ሆላንድ 5 ዓመት ቅድሚ ምምላእካ ድማ ይውዳእ ዶ? ሽዑ ኣብ ምሕዳስ ብሓደስቲ ሕግታት ዝተዋህበ ፍቓድ ክትረክብ ኢኻ። ሽዑ መንገድካ ብናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ይሓልፍ፡ ንዑ ድማ ናይ እቶት ጠለብ ኣሎ።"
+            "tekst": "ቅቡል ፍቓድ ዘይብልካ ግዜ እንተሃልዩ — \"ናይ መንበሪ ጋግ\" (verblijfsgat) — እቲ ግዜ ኣይቑጸርን። ሽዑ እቲ 5 ዓመት ካብ ብሓድሽ ክቑጸር ይኽእል። ስለዚ ምሕዳስ ብግዜኡ ሕተት፡ እንተደንጐኻ ፍቓድካ ካብ ዝውድእ ኣብ ውሽጢ 4 ሰሙን፦ ሽዑ IND ከም ናይ መንበሪ ጋግ ኣይርእዮን።"
           },
           {
             "naam": "ናይ ዜግነት ግዜ: ምናልባት 10 ዓመት",
@@ -7619,15 +7965,38 @@ window._NAT = {
           },
           {
             "naam": "ውጥን መንግስቲ (ገና ሕጊ ኣይኮነን)",
-            "tekst": "ክልተ ግዜ ግዝያዊ ናይ ዑቕባ ፍቓድ ዝረኸቡን ሆላንድኛ ብደረጃ B1 ዝሓለፉን ዋናታት ዑቕባ፡ ብዘይ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) እውን ድሕሪ 6 ዓመት ሆላንዳውያን ዜጋታት ክኾኑ ምኽኣሉ። ን B1 ክበጽሑ ዘይክእሉ ፍሉይ ኩነታት ክህሉ እዩ። ገና ረቂቕ ሕጊ የለን። እቲ ሕጊ ክሳዕ ዝወጽእ፡ እቶም ኣብ ላዕሊ ዘለዉ ሕግታት ይሰርሑ።"
+            "tekst": "ክልተ ግዜ ግዝያዊ ናይ ዑቕባ ፍቓድ ዝረኸቡን ሆላንድኛ ብደረጃ B1 ዝሓለፉን ዋናታት ዑቕባ፡ ብዘይ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) እውን ድሕሪ 6 ዓመት ሆላንዳውያን ዜጋታት ክኾኑ ምኽኣሉ። ን B1 ክበጽሑ ዘይክእሉ ፍሉይ ኩነታት ክህሉ እዩ። ገና ረቂቕ ሕጊ የለን። እቲ ሕጊ ክሳዕ ዝወጽእ፡ እቶም ኣብ ላዕሊ ዘለዉ ሕግታት ይሰርሑ።",
+            "alleenPad": "asiel"
           }
         ],
         "interneLink": {
           "naar": "r_eu_langdurig",
           "tekst": "🇪🇺 ርአ: ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (ድሕሪ 5 ዓመት ቀዋሚ መንበሪ)"
         },
-        "link": "https://ind.nl/en/asylum-and-family-reunification-the-migration-pact-and-other-developments/new-laws-and-regulations-for-asylum-and-family-reunification",
-        "linkTekst": "→ ናይ 2026 ሓደስቲ ሕግታት ዑቕባ ኣብ ind.nl ርአ"
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ ኣብ ind.nl ዝያዳ ሓበሬታ"
+      },
+      "r_regulier_tijdelijk": {
+        "type": "wacht",
+        "icoon": "🎓",
+        "titel": "በዚ ፍቓድ ገና ሆላንዳዊ ዜጋ ክትከውን ኣይትኽእልን",
+        "sub": "ንዜግነት (naturalisatie) ናይ ዘይውሱን ግዜ ፍቓድ፡ ወይ ግዝያዊ ዘይኮነ ዕላማ ዘለዎ ፍቓድ የድልየካ። ንትምህርቲ ወይ ንካልእ ግዝያዊ መንበሪ ዝተዋህበ ፍቓድ ኣይቑጸርን።",
+        "alternatieven": [
+          {
+            "naam": "ኩነታትካ ይቕየር ድዩ?",
+            "tekst": "ንኣብነት ክትሰርሕ ወይ ምስ መጻምድትኻ ክትነብር ኢኻ? ሽዑ ካልእ ፍቓድ ክትሓትት ትኽእል። ድሕሪኡ ነዚ መርመራ ደጊምካ ግበሮ።"
+          },
+          {
+            "naam": "መንበሪኻ ከመይ ይቑጸር?",
+            "tekst": "እቶም ምስ ናይ ሕጂ ፍቓድካ ዝሓለፉ ዓመታት ን5 ዓመት ይቑጸሩ ድዮም ኣይቑጸሩን፡ ኣብ ኩነታትካ ይምርኮስ። ነዚ ከም ዝምርመር ግበር።"
+          },
+          {
+            "naam": "ሕጂ ጀሚርካ ሆላንድኛኻ ኣመሓይሽ",
+            "tekst": "ንዜግነት (naturalisatie) ደሓር ምውህሃድ (inburgering) ወዲእካ ክትከውን ኣለካ። ትምህርቲ ቋንቋ ሕጂ እውን ይሕግዝ።"
+          }
+        ],
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ ኣብ ind.nl ዝያዳ ሓበሬታ"
       },
       "r_bezig_b1": {
         "type": "route",
@@ -7726,9 +8095,9 @@ window._NAT = {
             "tekst": "ቅናት 600 ሰዓት ምምሃር ኣብ Blik op Werk ምስ ዝተቐበለ ትካል ምስ DUO ፈተና A2 ዘይክስሕ ምዃኑ ምስ ዘርኢ — ናጻነት ይወሃብ። DUO ፈተና €150 ዋጋ ኣለዎ።"
           }
         ],
-        "info": "📞 <strong>ምኽሪ፡</strong> ምስ ምምሕዳር ከቲ ወይ VluchtelingenWerk ናብ ናትካ/ኺ ሃለዋት ዝምጥን መስርሕ ምምርሓ ዘቤ ዛተ/ዪ።",
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ ብ VluchtelingenWerk ሓገዝ"
+        "info": "📞 <strong>ምኽሪ፦</strong> ኣየናይ መንገዲ ንኩነታትካ ዝበለጸ ከም ዝሰማማዕ ምስ ምምሕዳርካ ተዘራረብ።",
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ ሓገዝ ብ Juridisch Loket"
       },
       "r_geen_inburgering": {
         "type": "wacht",
@@ -7768,7 +8137,8 @@ window._NAT = {
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "ናይ ሃለዋት ዋናታት ናጻ ሕጋዊ ሓገዝ።"
+            "tekst": "ናይ ሃለዋት ዋናታት ናጻ ሕጋዊ ሓገዝ።",
+            "alleenPad": "asiel"
           },
           {
             "naam": "ናይ ምጽባይ ዓቐን",
@@ -7779,8 +8149,8 @@ window._NAT = {
             "tekst": "ናይ ትራፊክ ቅጻዓትን ንኣሽቱ ምጥሓሳትን ብዙሕ ኣይሕሰቡን።"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ ምስ VluchtelingenWerk ርኸቦ/ቢ"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ ሓገዝ ብ Juridisch Loket"
       },
       "r_strafblad_check": {
         "type": "wacht",
@@ -7802,7 +8172,7 @@ window._NAT = {
           },
           {
             "naam": "ሕጋዊ ምኽሪ",
-            "tekst": "ርግጸኛ ምስ ዘይኮንካ/ኩኒ፡ ሕጋዊ ሙያ ሰብ ወይ VluchtelingenWerk ምርካብ።"
+            "tekst": "ርግጸኛ እንተዘይኮንካ፦ ሕጋዊ ኣማኻሪ ወይ ቤት ጽሕፈት ሕጋዊ ምኽሪ (Juridisch Loket) ሕተት።"
           }
         ],
         "link": "https://www.justis.nl/producten/vog",
@@ -7842,7 +8212,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "ንዓይነት ዘለዎም ኣግላልነት",
-            "tekst": "ከም ዝተፈልጠ ስደተኛ ካብ ዜግነትካ ክትሓድግ ኣይትግደድን።"
+            "tekst": "ከም ዝተፈልጠ ስደተኛ ካብ ዜግነትካ ክትሓድግ ኣይትግደድን።",
+            "alleenPad": "asiel"
           },
           {
             "naam": "ኣግላልነት: ዘይከኣል",
@@ -7880,7 +8251,7 @@ window._NAT = {
           },
           {
             "type": "amber",
-            "tekst": "⚠️ <strong>ናይ እቶት ጠለብ፦</strong> ዝኣክልን ቀጻልን ናይ ገዛእ ርእስኻ እቶትን ናይ ጥዕና ውሕስነትን ክህልወካ ኣለዎ። ብማሕበራዊ ሓገዝ መብዛሕትኡ ግዜ ኣይከኣልን። ኣስተውዕል፦ ድሕሪ 12 ሰነ 2026 ዝተዋህበ ሓድሽ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) እንተሃልዩካ፡ ደሓር ዜግነት ክትሓትት ምእንቲ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) የድልየካ። ስለዚ ናይ እቶት ጠለብ ነቲ ናብ ሆላንዳዊ ዜግነት ዘሎ መንገድካ እውን ይምልከት።"
+            "tekst": "⚠️ <strong>ናይ እቶት ጠለብ፦</strong> ዝኣክልን ቀጻልን ናይ ገዛእ ርእስኻ እቶትን ናይ ጥዕና ውሕስነትን ክህልወካ ኣለዎ። ብማሕበራዊ ሓገዝ መብዛሕትኡ ግዜ ኣይከኣልን። ናይ ውሱን ግዜ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) እንተሃልዩካ፡ ደሓር ዜግነት ክትሓትት ምእንቲ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) የድልየካ። ስለዚ ናይ እቶት ጠለብ ነቲ ናብ ሆላንዳዊ ዜግነት ዘሎ መንገድካ እውን ይምልከት።"
           },
           {
             "type": "info",
@@ -7894,7 +8265,7 @@ window._NAT = {
           },
           {
             "nr": 2,
-            "tekst": "<strong>ሓድሽ ናይ ዑቕባ ፍቓድ?</strong> እምበኣር እዚ ናብ ቀዋሚ ፍቓድ፡ ድሕሪኡ ድማ ናብ ዜግነት (naturalisatie) ዝወስድ እንኮ መንገዲ እዩ።"
+            "tekst": "<strong>ናይ ውሱን ግዜ ናይ ዑቕባ ፍቓድ?</strong> እምበኣር እዚ ናብ ቀዋሚ ፍቓድ፡ ድሕሪኡ ድማ ናብ ዜግነት (naturalisatie) ዝወስድ እንኮ መንገዲ እዩ።"
           },
           {
             "nr": 3,
@@ -7938,7 +8309,7 @@ window._NAT = {
         "type": "route",
         "icoon": "🪜",
         "titel": "ሆላንዳዊ ዜጋ ክትከውን ትኽእል — ብኽልተ ስጉምትታት",
-        "sub": "ብሓድሽ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ክትከውን ኣለካ። ድሕሪኡ ዜግነት (naturalisatie) ክትሓትት ትኽእል።",
+        "sub": "ብናይ ውሱን ግዜ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ክትከውን ኣለካ። ድሕሪኡ ዜግነት (naturalisatie) ክትሓትት ትኽእል።",
         "infoBoxen": [
           {
             "type": "amber",
@@ -8066,7 +8437,7 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🧭",
         "titel": "ሕጂ እቲ ዕንቅፋት እቶትካ እዩ",
-        "sub": "ድሕሪ 12 ሰነ 2026 ብዝተዋህበ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ሆላንዳዊ ዜጋ ክትከውን ትኽእል ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) እንተኮንካ ጥራይ እዩ። ንዑ ዝኣክል ናይ ገዛእ ርእስኻ እቶት የድልየካ። ብማሕበራዊ ሓገዝ ሕጂ እዚ ኣይከኣልን። ብቕንዕና፡ እዚ ዓቢ ለውጢ እዩ።",
+        "sub": "ብናይ ውሱን ግዜ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ሆላንዳዊ ዜጋ ክትከውን ትኽእል ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) እንተኮንካ ጥራይ እዩ። ንዑ ዝኣክል ናይ ገዛእ ርእስኻ እቶት የድልየካ። ብማሕበራዊ ሓገዝ ሕጂ ገና ኣይከኣልን። ብቕንዕና፡ እዚ ዓቢ ለውጢ እዩ።",
         "alternatieven": [
           {
             "naam": "ስራሕ ወይ ዝያዳ ሰዓታት",
@@ -8122,11 +8493,11 @@ window._NAT = {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "ገና እኹል ግዜ ኣብ ሆላንድ ኣይተቐመጥካን",
-        "sub": "ብሓድሽ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ፈለማ 5 ዓመት ኣብ ሆላንድ ክትነብር ኣለካ። ድሕሪኡ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ክትከውን ትኽእል፡ ሽዑ ጥራይ ድማ ሆላንዳዊ ዜጋ። ነቲ ክሳብ ሽዑ ዘሎ ግዜ ጽቡቕ ጌርካ ክትጥቀመሉ ትኽእል።",
+        "sub": "ብናይ ውሱን ግዜ ናይ ዑቕባ መንበሪ ፍቓድ (verblijfsvergunning asiel) ፈለማ 5 ዓመት ኣብ ሆላንድ ክትነብር ኣለካ። ድሕሪኡ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene) ክትከውን ትኽእል፡ ሽዑ ጥራይ ድማ ሆላንዳዊ ዜጋ። ነቲ ክሳብ ሽዑ ዘሎ ግዜ ጽቡቕ ጌርካ ክትጥቀመሉ ትኽእል።",
         "alternatieven": [
           {
             "naam": "ብግዜኡ ኣሕድስ",
-            "tekst": "ሓደስቲ ናይ ዑቕባ ፍቓዳት ዝለዓለ 3 ዓመት ይጸንሑ፤ ስለዚ ብግዜኡ ኣሕድስ። ኣብ መንጎ ክልተ ፍቓዳት ቅቡል ፍቓድ ዘይብልካ \"ናይ መንበሪ ጋግ\" (verblijfsgat) እንተተፈጢሩ — እቲ ግዜ ከም ሕጋዊ መንበሪ ኣይቑጸርን፡ እቲ ናይ 5 ዓመት ቆጸራ ንዜግነት ድማ ካብ ብሓድሽ ክጅምር ይኽእል። ስለዚ ናይ ምሕዳስ ምልክታ ድሕሪ ምውዳቕ ኣብ ውሽጢ 4 ሰሙን ኣብጽሕ: ሽዑ IND ከም ናይ መንበሪ ጋግ ኣይርእዮን።"
+            "tekst": "ናይ ውሱን ግዜ ናይ ዑቕባ ፍቓዳት ዝለዓለ 3 ዓመት ይጸንሑ፤ ስለዚ ብግዜኡ ኣሕድስ። ኣብ መንጎ ክልተ ፍቓዳት ቅቡል ፍቓድ ዘይብልካ \"ናይ መንበሪ ጋግ\" (verblijfsgat) እንተተፈጢሩ — እቲ ግዜ ከም ሕጋዊ መንበሪ ኣይቑጸርን፡ እቲ ናይ 5 ዓመት ቆጸራ ንዜግነት ድማ ካብ ብሓድሽ ክጅምር ይኽእል። ስለዚ ናይ ምሕዳስ ምልክታ ድሕሪ ምውዳቕ ኣብ ውሽጢ 4 ሰሙን ኣብጽሕ: ሽዑ IND ከም ናይ መንበሪ ጋግ ኣይርእዮን።"
           },
           {
             "naam": "ኣብ እቶትካ ስራሕ",
@@ -8154,19 +8525,19 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🔍",
         "titel": "ፈለማ ኣየናይ ፍቓድ ከም ዘለካ ከም ዝምርመር ግበር",
-        "sub": "ናብ ሆላንዳዊ ዜግነት ዘሎ መንገድካ ኣብ ፍቓድካ ይምርኮስ። ቅድሚ 12 ሰነ 2026 ብዝተዋህበ ናይ ዑቕባ ፍቓድ እቲ መንገዲ ካብ ሓድሽ ፍቓድ ይሓጽር።",
+        "sub": "ናብ ሆላንዳዊ ዜግነት ዘሎ መንገድካ ኣብ ፍቓድካ ይምርኮስ።",
         "alternatieven": [
           {
-            "naam": "ናይ ቀደም ናይ ዑቕባ ፍቓድ",
-            "tekst": "ናይ ዘይውሱን ግዜ፡ ወይ ቅድሚ 12 ሰነ 2026 ዝተረኽበ ናይ 5 ዓመት፦ ብናይ ቀደም መንገዲ ዜግነት (naturalisatie) ክትሓትት ትኽእል።"
+            "naam": "ናይ ዘይውሱን ግዜ ዑቕባ",
+            "tekst": "ነቶም ካልኦት ቅድመ-ኩነታት እንተማሊእካ ዜግነት (naturalisatie) ክትሓትት ትኽእል።"
           },
           {
-            "naam": "ሓድሽ ናይ ዑቕባ ፍቓድ",
-            "tekst": "ኣብ 12 ሰነ 2026 ወይ ድሕሪኡ ዝተረኽበ ወይ ዝተሓደሰ፦ ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene)፡ ምስ ናይ እቶት ጠለብ፡ ድሕሪኡ ዜግነት (naturalisatie)።"
+            "naam": "ናይ ውሱን ግዜ ዑቕባ (3 ወይ 5 ዓመት)",
+            "tekst": "ፈለማ ናይ ኤውሮጳ ሕብረት ነዊሕ-ግዜ ነባሪ (EU-langdurig ingezetene)፡ ምስ ናይ እቶት ጠለብ፡ ድሕሪኡ ዜግነት (naturalisatie)። ነቲ ፍቓድ ቅድሚ 12 ሰነ 2026 እንተረኺብካዮ እውን።"
           },
           {
             "naam": "ካልእ ፍቓድ",
-            "tekst": "ንስድራ፡ ንስራሕ ወይ ንትምህርቲ፦ ናይ ቀደም ሕግታት ገና ይሰርሑ።"
+            "tekst": "ንስድራ፡ ንመጻምድቲ ወይ ንስራሕ፦ ዜግነት መብዛሕትኡ ግዜ ድሕሪ 5 ዓመት ይከኣል። ንትምህርቲ ወይ ንካልእ ግዝያዊ መንበሪ ግን ገና ኣይከኣልን።"
           },
           {
             "naam": "መን ክሕግዝ ይኽእል?",
@@ -8183,9 +8554,11 @@ window._NAT = {
       "badge": "🇳🇱 Verificator Naturalizare",
       "titel": "Am dreptul la un pașaport olandez?",
       "sub": "Răspunde la câteva întrebări și vezi dacă poți deveni cetățean olandez. Pe baza regulilor din 2026, inclusiv noile reguli de azil de la 12 iunie 2026.",
-      "disclaimer": "⚠️ Acest instrument oferă o indicație, nu o decizie. Verificat în septembrie 2026 (IND, Stimulansz). De la 12 iunie 2026 nu mai există permis de azil pe durată nedeterminată. De aceea, noii beneficiari de protecție trebuie să devină mai întâi rezident UE pe termen lung (EU-langdurig ingezetene) înainte de a se putea naturaliza (naturalisatie). Planurile anunțate de guvern încă nu sunt lege. Cere întotdeauna sfatul primăriei sau al VluchtelingenWerk.",
+      "disclaimer": "⚠️ Acest instrument oferă o indicație, nu o decizie. Verificat în septembrie 2026 (IND, Stimulansz). De la 12 iunie 2026 nu mai există permis de azil pe durată nedeterminată. De aceea, beneficiarii de protecție cu permis de ședere pentru azil pe durată determinată (verblijfsvergunning asiel) trebuie să devină mai întâi rezident UE pe termen lung (EU-langdurig ingezetene) înainte de a se putea naturaliza (naturalisatie). Planurile anunțate de guvern încă nu sunt lege. Cere întotdeauna sfatul primăriei sau al VluchtelingenWerk.",
       "vwnLabel": "Nu ești sigur/ă de situația ta?",
-      "vwnTekst": "Regulile de naturalizare se schimbă rapid și situația ta poate fi diferită de ce arată instrumentul. VluchtelingenWerk Nederland oferă consultații gratuite și îndrumare pentru naturalizare — găsește o locație apropiată pe <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>."
+      "vwnTekst": "Regulile de naturalizare se schimbă rapid și situația ta poate fi diferită de ce arată instrumentul. VluchtelingenWerk Nederland oferă consultații gratuite și îndrumare pentru naturalizare — găsește o locație apropiată pe <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>.",
+      "hulpRegulierLabel": "Nu ești sigur/ă de situația ta?",
+      "hulpRegulierTekst": "Biroul de consiliere juridică (Juridisch Loket) oferă sfaturi gratuite despre permisul tău de ședere și despre naturalizare (naturalisatie). Intră pe <a href=\"https://www.juridischloket.nl\" target=\"_blank\" style=\"color:inherit;\">juridischloket.nl</a> sau întreabă la primăria ta."
     },
     "ui": {
       "volgendeStappen": "Pașii următori",
@@ -8225,14 +8598,16 @@ window._NAT = {
             "tekst": "Am un permis de ședere pentru azil (beneficiar de protecție)",
             "icoon": "🛡️",
             "klasse": "ja",
-            "volgende": "v_asiel"
+            "volgende": "v_asiel",
+            "pad": "asiel"
           },
           {
             "tekst": "Am un alt permis de ședere",
             "sub": "De exemplu pentru familie, muncă sau studii",
             "icoon": "📄",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "v_regulier",
+            "pad": "regulier"
           },
           {
             "tekst": "Sunt cetățean UE",
@@ -8251,27 +8626,21 @@ window._NAT = {
       },
       "v_asiel": {
         "tekst": "Ce permis de azil ai acum?",
-        "uitleg": "De la 12 iunie 2026 regulile s-au schimbat. Pentru naturalizare (naturalisatie) contează când ai primit permisul actual.",
+        "uitleg": "Uită-te pe cardul de ședere: scrie 'durată nedeterminată' (onbepaalde tijd) sau apare o dată de expirare?",
         "antwoorden": [
           {
             "tekst": "Azil pe durată nedeterminată",
-            "sub": "Primit înainte de 12 iunie 2026",
+            "sub": "Pe card nu apare nicio dată de expirare pentru dreptul tău de ședere",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v2"
           },
           {
-            "tekst": "Azil pe 5 ani, primit înainte de 12 iunie 2026",
+            "tekst": "Azil pe durată determinată",
+            "sub": "Valabil 3 sau 5 ani, chiar dacă l-ai primit înainte de 12 iunie 2026",
             "icoon": "📅",
-            "klasse": "ja",
-            "volgende": "v_asiel5"
-          },
-          {
-            "tekst": "Azil primit sau reînnoit la 12 iunie 2026 sau după",
-            "sub": "De obicei valabil 3 ani",
-            "icoon": "🆕",
             "klasse": "anders",
-            "volgende": "e1"
+            "volgende": "v_asiel5"
           },
           {
             "tekst": "Sunt deja rezident UE pe termen lung",
@@ -8288,20 +8657,20 @@ window._NAT = {
         ]
       },
       "v_asiel5": {
-        "tekst": "Vești bune: permisul tău intră sub regulile vechi",
-        "uitleg": "Ai primit permisul de azil pe 5 ani înainte de 12 iunie 2026. Cu el te poți naturaliza (naturalisatie) încă pe calea veche.<br><br>⚠️ <strong>Atenție:</strong> dacă IND îți reînnoiește permisul după 12 iunie 2026, primești un permis după regulile noi. Atunci trebuie să devii mai întâi rezident UE pe termen lung (EU-langdurig ingezetene). <strong>Îndeplinești condițiile? Atunci cere naturalizarea cât timp cardul tău actual este încă valabil.</strong>",
+        "tekst": "Permisul tău rămâne valabil — dar drumul spre cetățenia olandeză trece printr-o etapă intermediară",
+        "uitleg": "Permisul tău de azil rămâne valabil până la data de pe card. Dar cu un permis de ședere pentru azil pe durată determinată (verblijfsvergunning asiel) nu poți cere naturalizarea (naturalisatie). Asta este valabil și dacă ai primit permisul înainte de 12 iunie 2026. De la 12 iunie 2026 permisul de azil pe durată nedeterminată nu mai există.<br><br>De aceea trebuie să devii mai întâi <strong>rezident UE pe termen lung</strong> (EU-langdurig ingezetene). După aceea poți cere naturalizarea. Următoarele întrebări arată dacă acest lucru este deja posibil pentru tine.",
         "antwoorden": [
           {
             "tekst": "Am înțeles — continuă",
             "icoon": "→",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "e1"
           }
         ]
       },
       "v_asiel_wn": {
         "tekst": "Așa vezi ce permis ai",
-        "uitleg": "Uită-te pe cardul de ședere, la rubrica 'Type document en bijzonderheden' (tipul documentului și mențiuni: numărul tipului și textul de lângă el), sau în scrisoarea de la IND. Fii atent/ă la două lucruri:<br><br>1. Scrie <strong>azil</strong> (asiel) sau alt scop (cum ar fi familie sau muncă)?<br>2. Când ai primit acest card: <strong>înainte sau după 12 iunie 2026</strong>? Și cât timp este valabil?<br><br>Nu te descurci? Întreabă-ți îndrumătorul de la primărie sau VluchtelingenWerk.",
+        "uitleg": "Uită-te pe cardul de ședere, la rubrica 'Type document en bijzonderheden' (tipul documentului și mențiuni: numărul tipului și textul de lângă el), sau în scrisoarea de la IND. Fii atent/ă la două lucruri:<br><br>1. Scrie <strong>azil</strong> (asiel) sau alt scop (cum ar fi familie sau muncă)?<br>2. Scrie '<strong>durată nedeterminată</strong>' (onbepaalde tijd) sau apare o <strong>dată de expirare</strong>?<br><br>Nu te descurci? Întreabă-ți îndrumătorul de la primărie sau VluchtelingenWerk.",
         "antwoorden": [
           {
             "tekst": "L-am găsit — înapoi la întrebare",
@@ -8317,9 +8686,40 @@ window._NAT = {
           }
         ]
       },
+      "v_regulier": {
+        "tekst": "Ce fel de permis de ședere ai?",
+        "uitleg": "Pentru naturalizare (naturalisatie) ai nevoie de un permis pe durată nedeterminată sau de un permis pentru un scop care nu este temporar, cum ar fi traiul cu partenerul sau munca. Pe cardul de ședere scrie scopul și dacă există o dată de expirare.",
+        "antwoorden": [
+          {
+            "tekst": "Pe durată nedeterminată",
+            "icoon": "✓",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "Pe durată determinată — pentru familie, partener sau muncă",
+            "icoon": "👨‍👩‍👧",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "Pe durată determinată — pentru studii sau altă ședere temporară",
+            "sub": "De exemplu muncă sezonieră, tratament medical, program de schimb sau anul de căutare a unui loc de muncă pentru persoane cu studii superioare",
+            "icoon": "🎓",
+            "klasse": "nee",
+            "volgende": "r_regulier_tijdelijk"
+          },
+          {
+            "tekst": "Nu știu",
+            "icoon": "❓",
+            "klasse": "anders",
+            "volgende": "v_asiel_wn"
+          }
+        ]
+      },
       "e1": {
         "tekst": "Locuiești de 5 ani sau mai mult fără întrerupere în Olanda, cu un permis valabil?",
-        "uitleg": "Cu un nou permis de ședere pentru azil (verblijfsvergunning asiel) poți deveni cetățean olandez doar după ce devii mai întâi rezident UE pe termen lung (EU-langdurig ingezetene). Pentru asta trebuie să fi locuit cel puțin 5 ani fără întrerupere în Olanda, cu un permis valabil. Anii cu permis de azil se socotesc. Dacă se socotește și timpul din procedura de azil decide IND.",
+        "uitleg": "Cu un permis de ședere pentru azil pe durată determinată (verblijfsvergunning asiel) poți deveni cetățean olandez doar după ce devii mai întâi rezident UE pe termen lung (EU-langdurig ingezetene). Pentru asta trebuie să fi locuit cel puțin 5 ani fără întrerupere în Olanda, cu un permis valabil. Anii cu permis de azil se socotesc. Dacă se socotește și timpul din procedura de azil decide IND.",
         "antwoorden": [
           {
             "tekst": "Da, 5 ani sau mai mult",
@@ -8408,18 +8808,17 @@ window._NAT = {
         ]
       },
       "v2": {
-        "tekst": "Ai permis de ședere valabil?",
-        "uitleg": "Ai nevoie de un permis de ședere valabil care să nu fie temporar. De exemplu un permis pe durată nedeterminată, statutul de rezident UE pe termen lung (EU-langdurig ingezetene) sau un permis de azil primit înainte de 12 iunie 2026. Reînnoiește-ți întotdeauna permisul la timp, ca șederea ta să rămână neîntreruptă.",
+        "tekst": "Permisul tău de ședere este valabil acum?",
+        "uitleg": "Permisul tău trebuie să fie valabil când ceri naturalizarea (naturalisatie) și să rămână valabil până la decizie. Reînnoiește-l întotdeauna la timp, ca șederea ta să rămână neîntreruptă.",
         "antwoorden": [
           {
-            "tekst": "Da, am permis de ședere valabil",
-            "sub": "Sau statut de azil (IND tip III, IV sau V)",
+            "tekst": "Da, permisul meu este valabil",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v3"
           },
           {
-            "tekst": "Nu, nu am permis de ședere valabil",
+            "tekst": "Nu, permisul meu a expirat sau nu am permis",
             "icoon": "✗",
             "klasse": "nee",
             "volgende": "r_geen_vergunning"
@@ -8488,7 +8887,7 @@ window._NAT = {
       },
       "v4a_z": {
         "tekst": "Ai finalizat ruta Z — mai este nevoie de un pas suplimentar pentru naturalizare",
-        "uitleg": "Ruta Z se încheie cu un interviu final și un certificat, dar pentru naturalizare IND aplică cerințe lingvistice suplimentare. Există trei căi pentru a te putea totuși naturaliza:<br><br><strong>Calea A — Promovează totuși examenul la nivel A2</strong><br>Promovează toate examenele de limbă la nivel A2 (citit, ascultat, scris, vorbit) și examenul KNM. Atenție: acum că ruta Z s-a încheiat, încercările de examen nu mai sunt gratuite.<br><br><strong>Calea B — 600 de ore de cursuri de limbă + cel puțin 3 încercări per componentă</strong><br>Cel puțin 600 de ore de cursuri de nivel A2 la o instituție certificată Blik op Werk și 3 încercări per componentă? Atunci DUO poate emite o recomandare de exceptare.<br><br><strong>Calea C — 600 de ore de alfabetizare + test DUO (€150)</strong><br>Cel puțin 600 de ore de alfabetizare și se dovedește că A2 nu este realizabil? Atunci urmează o exceptare prin testul DUO (€150).<br><br><em>Posibil în viitor:</em> guvernul vrea să ridice cerința de limbă pentru naturalizare de la A2 la B1. Acest lucru nu a fost încă adoptat — în prezent se aplică încă A2.<br><br>💡 Discută cu primăria ta sau cu VluchtelingenWerk care cale ți se potrivește cel mai bine.",
+        "uitleg": "Ruta Z se încheie cu un interviu final și un certificat, dar pentru naturalizare IND aplică cerințe lingvistice suplimentare. Există trei căi pentru a te putea totuși naturaliza:<br><br><strong>Calea A — Promovează totuși examenul la nivel A2</strong><br>Promovează toate examenele de limbă la nivel A2 (citit, ascultat, scris, vorbit) și examenul KNM. Atenție: acum că ruta Z s-a încheiat, încercările de examen nu mai sunt gratuite.<br><br><strong>Calea B — 600 de ore de cursuri de limbă + cel puțin 3 încercări per componentă</strong><br>Cel puțin 600 de ore de cursuri de nivel A2 la o instituție certificată Blik op Werk și 3 încercări per componentă? Atunci DUO poate emite o recomandare de exceptare.<br><br><strong>Calea C — 600 de ore de alfabetizare + test DUO (€150)</strong><br>Cel puțin 600 de ore de alfabetizare și se dovedește că A2 nu este realizabil? Atunci urmează o exceptare prin testul DUO (€150).<br><br><em>Posibil în viitor:</em> guvernul vrea să ridice cerința de limbă pentru naturalizare de la A2 la B1. Acest lucru nu a fost încă adoptat — în prezent se aplică încă A2.<br><br>💡 Discută cu primăria ta care cale ți se potrivește cel mai bine.",
         "antwoorden": [
           {
             "tekst": "Am înțeles — continuă cu celelalte condiții",
@@ -8595,7 +8994,7 @@ window._NAT = {
       },
       "v7": {
         "tekst": "Ești dispus/ă să renunți la cetățenia actuală?",
-        "uitleg": "Olanda nu permite în general dubla cetățenie. Excepție: refugiații recunoscuți pot păstra ambele cetățenii.",
+        "uitleg": "Olanda nu permite în general dubla cetățenie. Există excepții, de exemplu pentru refugiații recunoscuți.",
         "antwoorden": [
           {
             "tekst": "Da, voi renunța la cetățenia mea",
@@ -8608,7 +9007,8 @@ window._NAT = {
             "sub": "Deținătorii de statut pot păstra dubla cetățenie",
             "icoon": "✓",
             "klasse": "ja",
-            "volgende": "v8"
+            "volgende": "v8",
+            "alleenPad": "asiel"
           },
           {
             "tekst": "Nu, vreau să-mi păstrez cetățenia",
@@ -8643,7 +9043,8 @@ window._NAT = {
         "icoon": "🎉",
         "titel": "Probabil ești eligibil/ă!",
         "sub": "Pe baza răspunsurilor tale îndeplinești condițiile principale pentru naturalizare. Următorul pas este o cerere oficială la primăria ta.",
-        "info": "💡 Deținătorii de statut (refugiații recunoscuți) în general nu trebuie să renunțe la cetățenia originală.",
+        "info": "💡 Ești refugiat/ă recunoscut/ă? Atunci de obicei nu trebuie să renunți la cetățenia ta de origine.",
+        "infoAlleenPad": "asiel",
         "stappen": [
           {
             "nr": 1,
@@ -8735,7 +9136,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Cerere de azil",
-            "tekst": "Dacă ai nevoie de protecție, poți depune o cerere de azil la IND."
+            "tekst": "Dacă ai nevoie de protecție, poți depune o cerere de azil la IND.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Permis obișnuit",
@@ -8743,29 +9145,26 @@ window._NAT = {
           },
           {
             "naam": "Ajutor juridic",
-            "tekst": "Contactează o organizație pentru refugiați sau un avocat."
+            "tekst": "Contactează un avocat sau Biroul de consiliere juridică (Juridisch Loket)."
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Sprijin juridic gratuit pentru solicitanții de azil și deținătorii de statut."
+            "tekst": "Sprijin juridic gratuit pentru solicitanții de azil și deținătorii de statut.",
+            "alleenPad": "asiel"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Contactează VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Ajutor prin Juridisch Loket"
       },
       "r_te_kort": {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Încă nu ai locuit suficient de mult în Olanda",
-        "sub": "În prezent trebuie să fi locuit în Olanda cel puțin 5 ani consecutivi cu ședere valabilă. De la noile reguli de azil din 2026 sunt câteva lucruri de care să ții cont în timpul așteptării. Poți folosi bine perioada de așteptare.",
+        "sub": "Trebuie să locuiești în Olanda cel puțin 5 ani fără întrerupere. Poți folosi bine perioada de așteptare.",
         "alternatieven": [
           {
             "naam": "Reînnoiește permisul la timp",
-            "tekst": "Noile permise de azil sunt valabile maximum 3 ani; așa că reînnoiește la timp. Dacă apare un \"gol de ședere\" (verblijfsgat) — o perioadă între două permise în care nu ai un permis valabil — acel timp nu contează ca ședere legală, iar numărătoarea de 5 ani pentru naturalizare poate reîncepe. Așa că depune cererea de reînnoire cel târziu în 4 săptămâni de la expirare: atunci IND nu o consideră gol de ședere."
-          },
-          {
-            "naam": "Îți expiră permisul de azil mai devreme?",
-            "tekst": "Ai un permis de ședere pentru azil (verblijfsvergunning asiel) pe 5 ani de dinainte de 12 iunie 2026 care expiră înainte să ai 5 ani în Olanda? Atunci la reînnoire primești un permis după regulile noi. Drumul tău trece atunci prin statutul de rezident UE pe termen lung (EU-langdurig ingezetene), iar pentru acesta există o cerință de venit."
+            "tekst": "Dacă apare o perioadă fără permis valabil — un \"gol de ședere\" (verblijfsgat) — acel timp nu se socotește. Cei 5 ani pot începe atunci din nou. De aceea cere reînnoirea la timp, cel târziu în 4 săptămâni de la expirare: atunci IND nu o consideră gol de ședere."
           },
           {
             "naam": "Termen de naturalizare: posibil 10 ani",
@@ -8785,15 +9184,38 @@ window._NAT = {
           },
           {
             "naam": "Planul guvernului (încă nu este lege)",
-            "tekst": "Beneficiarii de protecție care au primit de două ori un permis de azil temporar și ating nivelul B1 la limba olandeză ar putea deveni cetățeni olandezi după 6 ani, chiar și fără statutul de rezident UE pe termen lung (EU-langdurig ingezetene). Pentru cei care nu pot atinge B1 va exista o excepție. Nu există încă un proiect de lege. Până când legea există, se aplică regulile de mai sus."
+            "tekst": "Beneficiarii de protecție care au primit de două ori un permis de azil temporar și ating nivelul B1 la limba olandeză ar putea deveni cetățeni olandezi după 6 ani, chiar și fără statutul de rezident UE pe termen lung (EU-langdurig ingezetene). Pentru cei care nu pot atinge B1 va exista o excepție. Nu există încă un proiect de lege. Până când legea există, se aplică regulile de mai sus.",
+            "alleenPad": "asiel"
           }
         ],
         "interneLink": {
           "naar": "r_eu_langdurig",
           "tekst": "🇪🇺 Vezi: rezident UE pe termen lung (ședere permanentă după 5 ani)"
         },
-        "link": "https://ind.nl/en/asylum-and-family-reunification-the-migration-pact-and-other-developments/new-laws-and-regulations-for-asylum-and-family-reunification",
-        "linkTekst": "→ Vezi noile reguli de azil 2026 pe ind.nl"
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ Mai multe informații pe ind.nl"
+      },
+      "r_regulier_tijdelijk": {
+        "type": "wacht",
+        "icoon": "🎓",
+        "titel": "Cu acest permis nu poți deveni încă cetățean olandez",
+        "sub": "Pentru naturalizare (naturalisatie) ai nevoie de un permis pe durată nedeterminată sau de un permis pentru un scop care nu este temporar. Un permis pentru studii sau altă ședere temporară nu se socotește.",
+        "alternatieven": [
+          {
+            "naam": "Se schimbă situația ta?",
+            "tekst": "Începi de exemplu să lucrezi sau te muți la partenerul tău? Atunci poți cere un alt permis. După aceea, fă din nou această verificare."
+          },
+          {
+            "naam": "Cum se socotește șederea ta?",
+            "tekst": "Dacă anii cu permisul actual se socotesc pentru cei 5 ani depinde de situația ta. Cere să fie verificat acest lucru."
+          },
+          {
+            "naam": "Lucrează de acum la limba olandeză",
+            "tekst": "Pentru naturalizare (naturalisatie) va trebui mai târziu să ai integrarea (inburgering) încheiată. Un curs de limbă te ajută încă de acum."
+          }
+        ],
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ Mai multe informații pe ind.nl"
       },
       "r_bezig_b1": {
         "type": "route",
@@ -8892,9 +9314,9 @@ window._NAT = {
             "tekst": "600 ore de alfabetizare și testul DUO arată că A2 nu este realizabil. Se acordă scutire. Testul costă 150 €."
           }
         ],
-        "info": "📞 <strong>Sfat:</strong> Consultați primăria sau VluchtelingenWerk.",
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Ajutor prin VluchtelingenWerk"
+        "info": "📞 <strong>Sfat:</strong> Discută cu primăria ta care cale se potrivește cel mai bine situației tale.",
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Ajutor prin Juridisch Loket"
       },
       "r_geen_inburgering": {
         "type": "wacht",
@@ -8934,7 +9356,8 @@ window._NAT = {
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Ajutor juridic gratuit pentru deținătorii de statut."
+            "tekst": "Ajutor juridic gratuit pentru deținătorii de statut.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Perioadă de așteptare",
@@ -8945,8 +9368,8 @@ window._NAT = {
             "tekst": "Amenzile de trafic și contravențiile minore de obicei NU se iau în calcul."
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Contactează VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Ajutor prin Juridisch Loket"
       },
       "r_strafblad_check": {
         "type": "wacht",
@@ -8968,7 +9391,7 @@ window._NAT = {
           },
           {
             "naam": "Consiliere juridică",
-            "tekst": "În caz de îndoială consultați un consilier juridic sau VluchtelingenWerk."
+            "tekst": "În caz de îndoială: consultă un consilier juridic sau Biroul de consiliere juridică (Juridisch Loket)."
           }
         ],
         "link": "https://www.justis.nl/producten/vog",
@@ -9008,7 +9431,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Excepție pentru deținătorii de statut",
-            "tekst": "Ca refugiat recunoscut NU trebuie să renunți la cetățenia ta."
+            "tekst": "Ca refugiat recunoscut NU trebuie să renunți la cetățenia ta.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Excepție: imposibil",
@@ -9046,7 +9470,7 @@ window._NAT = {
           },
           {
             "type": "amber",
-            "tekst": "⚠️ <strong>Cerința de venit:</strong> trebuie să ai destul venit propriu și durabil, plus o asigurare de sănătate. Cu ajutor social de obicei nu merge. Atenție: dacă ai un nou permis de ședere pentru azil (verblijfsvergunning asiel) de după 12 iunie 2026, ai nevoie de statutul de rezident UE pe termen lung (EU-langdurig ingezetene) ca să te poți naturaliza mai târziu. Deci cerința de venit se aplică și drumului tău spre cetățenia olandeză."
+            "tekst": "⚠️ <strong>Cerința de venit:</strong> trebuie să ai destul venit propriu și durabil, plus o asigurare de sănătate. Cu ajutor social de obicei nu merge. Dacă ai un permis de ședere pentru azil pe durată determinată (verblijfsvergunning asiel), ai nevoie de statutul de rezident UE pe termen lung (EU-langdurig ingezetene) ca să te poți naturaliza mai târziu. Deci cerința de venit se aplică și drumului tău spre cetățenia olandeză."
           },
           {
             "type": "info",
@@ -9060,7 +9484,7 @@ window._NAT = {
           },
           {
             "nr": 2,
-            "tekst": "<strong>Permis de azil nou?</strong> Atunci acesta este singurul drum spre un permis permanent și apoi spre naturalizare (naturalisatie)."
+            "tekst": "<strong>Permis de azil pe durată determinată?</strong> Atunci acesta este singurul drum spre un permis permanent și apoi spre naturalizare (naturalisatie)."
           },
           {
             "nr": 3,
@@ -9104,7 +9528,7 @@ window._NAT = {
         "type": "route",
         "icoon": "🪜",
         "titel": "Poți deveni cetățean olandez — în doi pași",
-        "sub": "Cu un nou permis de ședere pentru azil (verblijfsvergunning asiel) trebuie să devii mai întâi rezident UE pe termen lung (EU-langdurig ingezetene). După aceea poți cere naturalizarea (naturalisatie).",
+        "sub": "Cu un permis de ședere pentru azil pe durată determinată (verblijfsvergunning asiel) trebuie să devii mai întâi rezident UE pe termen lung (EU-langdurig ingezetene). După aceea poți cere naturalizarea (naturalisatie).",
         "infoBoxen": [
           {
             "type": "amber",
@@ -9232,7 +9656,7 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🧭",
         "titel": "Venitul tău este acum obstacolul",
-        "sub": "Cu un permis de ședere pentru azil (verblijfsvergunning asiel) de după 12 iunie 2026 poți deveni cetățean olandez doar dacă devii mai întâi rezident UE pe termen lung (EU-langdurig ingezetene). Pentru asta ai nevoie de destul venit propriu. Cu ajutor social acum nu se poate. Sincer, aceasta este o schimbare mare.",
+        "sub": "Cu un permis de ședere pentru azil pe durată determinată (verblijfsvergunning asiel) poți deveni cetățean olandez doar dacă devii mai întâi rezident UE pe termen lung (EU-langdurig ingezetene). Pentru asta ai nevoie de destul venit propriu. Cu ajutor social deocamdată nu se poate. Sincer, aceasta este o schimbare mare.",
         "alternatieven": [
           {
             "naam": "Muncă sau mai multe ore",
@@ -9288,11 +9712,11 @@ window._NAT = {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Încă nu ai locuit suficient de mult în Olanda",
-        "sub": "Cu un nou permis de ședere pentru azil (verblijfsvergunning asiel) trebuie să locuiești mai întâi 5 ani în Olanda. După aceea poți deveni rezident UE pe termen lung (EU-langdurig ingezetene), și abia apoi cetățean olandez. Poți folosi bine timpul până atunci.",
+        "sub": "Cu un permis de ședere pentru azil pe durată determinată (verblijfsvergunning asiel) trebuie să locuiești mai întâi 5 ani în Olanda. După aceea poți deveni rezident UE pe termen lung (EU-langdurig ingezetene), și abia apoi cetățean olandez. Poți folosi bine timpul până atunci.",
         "alternatieven": [
           {
             "naam": "Reînnoiește la timp",
-            "tekst": "Noile permise de azil sunt valabile maximum 3 ani; așa că reînnoiește la timp. Dacă apare un \"gol de ședere\" (verblijfsgat) — o perioadă între două permise în care nu ai un permis valabil — acel timp nu contează ca ședere legală, iar numărătoarea de 5 ani pentru naturalizare poate reîncepe. Așa că depune cererea de reînnoire cel târziu în 4 săptămâni de la expirare: atunci IND nu o consideră gol de ședere."
+            "tekst": "Permisele de azil pe durată determinată sunt valabile maximum 3 ani; așa că reînnoiește la timp. Dacă apare un \"gol de ședere\" (verblijfsgat) — o perioadă între două permise în care nu ai un permis valabil — acel timp nu contează ca ședere legală, iar numărătoarea de 5 ani pentru naturalizare poate reîncepe. Așa că depune cererea de reînnoire cel târziu în 4 săptămâni de la expirare: atunci IND nu o consideră gol de ședere."
           },
           {
             "naam": "Lucrează la venitul tău",
@@ -9320,19 +9744,19 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🔍",
         "titel": "Cere mai întâi să se verifice ce permis ai",
-        "sub": "Drumul tău spre cetățenia olandeză depinde de permisul tău. Cu un permis de azil de dinainte de 12 iunie 2026 este mai scurt decât cu unul nou.",
+        "sub": "Drumul tău spre cetățenia olandeză depinde de permisul tău.",
         "alternatieven": [
           {
-            "naam": "Permis de azil vechi",
-            "tekst": "Pe durată nedeterminată sau pe 5 ani, primit înainte de 12 iunie 2026: te poți naturaliza (naturalisatie) pe calea veche."
+            "naam": "Azil pe durată nedeterminată",
+            "tekst": "Te poți naturaliza (naturalisatie) dacă îndeplinești celelalte condiții."
           },
           {
-            "naam": "Permis de azil nou",
-            "tekst": "Primit sau reînnoit la 12 iunie 2026 sau după: mai întâi statutul de rezident UE pe termen lung (EU-langdurig ingezetene), cu cerință de venit, apoi naturalizarea (naturalisatie)."
+            "naam": "Azil pe durată determinată (3 sau 5 ani)",
+            "tekst": "Mai întâi statutul de rezident UE pe termen lung (EU-langdurig ingezetene), cu cerință de venit, apoi naturalizarea (naturalisatie). Și dacă ai primit permisul înainte de 12 iunie 2026."
           },
           {
             "naam": "Alt permis",
-            "tekst": "Pentru familie, muncă sau studii: regulile vechi se aplică în continuare."
+            "tekst": "Pentru familie, partener sau muncă: naturalizarea este de obicei posibilă după 5 ani. Pentru studii sau altă ședere temporară, încă nu."
           },
           {
             "naam": "Cine te poate ajuta?",
@@ -9349,9 +9773,11 @@ window._NAT = {
       "badge": "🇳🇱 Sprawdzanie Naturalizacji",
       "titel": "Czy mam prawo do holenderskiego paszportu?",
       "sub": "Odpowiedz na kilka pytań i sprawdź, czy możesz zostać obywatelem Holandii. Na podstawie przepisów z 2026 roku, w tym nowych przepisów azylowych obowiązujących od 12 czerwca 2026 r.",
-      "disclaimer": "⚠️ To narzędzie daje orientację, a nie decyzję. Sprawdzone we wrześniu 2026 r. (IND, Stimulansz). Od 12 czerwca 2026 r. nie ma już zezwolenia azylowego na czas nieokreślony. Dlatego nowe osoby z ochroną muszą najpierw zostać rezydentem długoterminowym UE (EU-langdurig ingezetene), zanim będą mogły się naturalizować (naturalisatie). Zapowiedziane plany rządu jeszcze nie są prawem. Zawsze proś o radę gminę lub VluchtelingenWerk.",
+      "disclaimer": "⚠️ To narzędzie daje orientację, a nie decyzję. Sprawdzone we wrześniu 2026 r. (IND, Stimulansz). Od 12 czerwca 2026 r. nie ma już zezwolenia azylowego na czas nieokreślony. Dlatego osoby z ochroną, które mają zezwolenie na pobyt azylowy na czas określony (verblijfsvergunning asiel), muszą najpierw zostać rezydentem długoterminowym UE (EU-langdurig ingezetene), zanim będą mogły się naturalizować (naturalisatie). Zapowiedziane plany rządu jeszcze nie są prawem. Zawsze proś o radę gminę lub VluchtelingenWerk.",
       "vwnLabel": "Nie masz pewności co do swojej sytuacji?",
-      "vwnTekst": "Przepisy dotyczące naturalizacji szybko się zmieniają, a Twoja sytuacja może się różnić od tego, co wskazuje narzędzie. VluchtelingenWerk Nederland oferuje bezpłatne dyżury i wsparcie w kwestiach naturalizacji — znajdź pobliskie miejsce na <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>."
+      "vwnTekst": "Przepisy dotyczące naturalizacji szybko się zmieniają, a Twoja sytuacja może się różnić od tego, co wskazuje narzędzie. VluchtelingenWerk Nederland oferuje bezpłatne dyżury i wsparcie w kwestiach naturalizacji — znajdź pobliskie miejsce na <a href=\"https://www.vluchtelingenwerk.nl/over-ons/locaties\" target=\"_blank\" style=\"color:inherit;\">vluchtelingenwerk.nl/over-ons/locaties</a>.",
+      "hulpRegulierLabel": "Nie masz pewności co do swojej sytuacji?",
+      "hulpRegulierTekst": "Punkt porad prawnych (Juridisch Loket) udziela bezpłatnych porad na temat Twojego zezwolenia na pobyt i naturalizacji (naturalisatie). Zajrzyj na <a href=\"https://www.juridischloket.nl\" target=\"_blank\" style=\"color:inherit;\">juridischloket.nl</a> albo zapytaj w swojej gminie."
     },
     "ui": {
       "volgendeStappen": "Następne kroki",
@@ -9391,14 +9817,16 @@ window._NAT = {
             "tekst": "Mam zezwolenie na pobyt azylowy (osoba z ochroną)",
             "icoon": "🛡️",
             "klasse": "ja",
-            "volgende": "v_asiel"
+            "volgende": "v_asiel",
+            "pad": "asiel"
           },
           {
             "tekst": "Mam inne zezwolenie na pobyt",
             "sub": "Na przykład w celu rodzinnym, pracy lub nauki",
             "icoon": "📄",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "v_regulier",
+            "pad": "regulier"
           },
           {
             "tekst": "Jestem obywatelem/ką UE",
@@ -9417,27 +9845,21 @@ window._NAT = {
       },
       "v_asiel": {
         "tekst": "Jakie zezwolenie azylowe masz teraz?",
-        "uitleg": "Od 12 czerwca 2026 r. przepisy się zmieniły. Dla naturalizacji (naturalisatie) ważne jest, kiedy otrzymałeś/aś obecne zezwolenie.",
+        "uitleg": "Zajrzyj na swoją kartę pobytu: czy jest tam napisane 'na czas nieokreślony' (onbepaalde tijd), czy jest data końcowa?",
         "antwoorden": [
           {
             "tekst": "Azyl na czas nieokreślony",
-            "sub": "Otrzymany przed 12 czerwca 2026 r.",
+            "sub": "Na karcie nie ma daty końcowej Twojego prawa pobytu",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v2"
           },
           {
-            "tekst": "Azyl na 5 lat, otrzymany przed 12 czerwca 2026 r.",
+            "tekst": "Azyl na czas określony",
+            "sub": "Ważny 3 lub 5 lat, także jeśli otrzymałeś/aś go przed 12 czerwca 2026 r.",
             "icoon": "📅",
-            "klasse": "ja",
-            "volgende": "v_asiel5"
-          },
-          {
-            "tekst": "Azyl otrzymany lub przedłużony 12 czerwca 2026 r. lub później",
-            "sub": "Zwykle ważny 3 lata",
-            "icoon": "🆕",
             "klasse": "anders",
-            "volgende": "e1"
+            "volgende": "v_asiel5"
           },
           {
             "tekst": "Jestem już rezydentem długoterminowym UE",
@@ -9454,20 +9876,20 @@ window._NAT = {
         ]
       },
       "v_asiel5": {
-        "tekst": "Dobra wiadomość: Twoje zezwolenie podlega starym przepisom",
-        "uitleg": "Otrzymałeś/aś 5-letnie zezwolenie azylowe przed 12 czerwca 2026 r. Dzięki niemu nadal możesz się naturalizować (naturalisatie) na starych zasadach.<br><br>⚠️ <strong>Uwaga:</strong> jeśli IND przedłuży Twoje zezwolenie po 12 czerwca 2026 r., otrzymasz zezwolenie według nowych przepisów. Wtedy musisz najpierw zostać rezydentem długoterminowym UE (EU-langdurig ingezetene). <strong>Spełniasz warunki? To złóż wniosek o naturalizację, dopóki Twoja obecna karta jest jeszcze ważna.</strong>",
+        "tekst": "Twoje zezwolenie pozostaje ważne — ale droga do obywatelstwa holenderskiego prowadzi przez etap pośredni",
+        "uitleg": "Twoje zezwolenie azylowe pozostaje ważne do daty na karcie. Ale z zezwoleniem na pobyt azylowy na czas określony (verblijfsvergunning asiel) nie możesz złożyć wniosku o naturalizację (naturalisatie). Dotyczy to także sytuacji, gdy otrzymałeś/aś zezwolenie przed 12 czerwca 2026 r. Od 12 czerwca 2026 r. zezwolenie azylowe na czas nieokreślony już nie istnieje.<br><br>Dlatego musisz najpierw zostać <strong>rezydentem długoterminowym UE</strong> (EU-langdurig ingezetene). Potem możesz złożyć wniosek o naturalizację. Kolejne pytania pokażą, czy jest to dla Ciebie już możliwe.",
         "antwoorden": [
           {
             "tekst": "Rozumiem — dalej",
             "icoon": "→",
             "klasse": "ja",
-            "volgende": "v2"
+            "volgende": "e1"
           }
         ]
       },
       "v_asiel_wn": {
         "tekst": "Tak sprawdzisz, jakie masz zezwolenie",
-        "uitleg": "Zajrzyj na swoją kartę pobytu, do pola 'Type document en bijzonderheden' (rodzaj dokumentu i uwagi: numer typu i tekst obok niego), albo do listu z IND. Zwróć uwagę na dwie rzeczy:<br><br>1. Czy jest tam napisane <strong>azyl</strong> (asiel), czy inny cel (np. rodzina lub praca)?<br>2. Kiedy dostałeś/aś tę kartę: <strong>przed czy po 12 czerwca 2026 r.</strong>? I jak długo jest ważna?<br><br>Nie wiesz? Zapytaj swojego opiekuna w gminie lub VluchtelingenWerk.",
+        "uitleg": "Zajrzyj na swoją kartę pobytu, do pola 'Type document en bijzonderheden' (rodzaj dokumentu i uwagi: numer typu i tekst obok niego), albo do listu z IND. Zwróć uwagę na dwie rzeczy:<br><br>1. Czy jest tam napisane <strong>azyl</strong> (asiel), czy inny cel (np. rodzina lub praca)?<br>2. Czy jest tam napisane '<strong>na czas nieokreślony</strong>' (onbepaalde tijd), czy jest <strong>data końcowa</strong>?<br><br>Nie wiesz? Zapytaj swojego opiekuna w gminie lub VluchtelingenWerk.",
         "antwoorden": [
           {
             "tekst": "Znalazłem/am — wróć do pytania",
@@ -9483,9 +9905,40 @@ window._NAT = {
           }
         ]
       },
+      "v_regulier": {
+        "tekst": "Jakie masz zezwolenie na pobyt?",
+        "uitleg": "Do naturalizacji (naturalisatie) potrzebujesz zezwolenia na czas nieokreślony albo zezwolenia w celu, który nie jest tymczasowy, np. zamieszkanie z partnerem lub praca. Na karcie pobytu jest podany cel oraz to, czy jest data końcowa.",
+        "antwoorden": [
+          {
+            "tekst": "Na czas nieokreślony",
+            "icoon": "✓",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "Na czas określony — w celu rodzinnym, z partnerem lub do pracy",
+            "icoon": "👨‍👩‍👧",
+            "klasse": "ja",
+            "volgende": "v2"
+          },
+          {
+            "tekst": "Na czas określony — na studia lub inny pobyt tymczasowy",
+            "sub": "Na przykład praca sezonowa, leczenie, wymiana lub rok na poszukiwanie pracy dla osób z wyższym wykształceniem",
+            "icoon": "🎓",
+            "klasse": "nee",
+            "volgende": "r_regulier_tijdelijk"
+          },
+          {
+            "tekst": "Nie wiem",
+            "icoon": "❓",
+            "klasse": "anders",
+            "volgende": "v_asiel_wn"
+          }
+        ]
+      },
       "e1": {
         "tekst": "Czy mieszkasz w Holandii nieprzerwanie od 5 lat lub dłużej z ważnym zezwoleniem?",
-        "uitleg": "Z nowym zezwoleniem na pobyt azylowy (verblijfsvergunning asiel) możesz zostać obywatelem Holandii dopiero wtedy, gdy najpierw zostaniesz rezydentem długoterminowym UE (EU-langdurig ingezetene). W tym celu musisz mieszkać w Holandii nieprzerwanie co najmniej 5 lat z ważnym zezwoleniem. Lata z zezwoleniem azylowym się liczą. O tym, czy liczy się czas procedury azylowej, decyduje IND.",
+        "uitleg": "Z zezwoleniem na pobyt azylowy na czas określony (verblijfsvergunning asiel) możesz zostać obywatelem Holandii dopiero wtedy, gdy najpierw zostaniesz rezydentem długoterminowym UE (EU-langdurig ingezetene). W tym celu musisz mieszkać w Holandii nieprzerwanie co najmniej 5 lat z ważnym zezwoleniem. Lata z zezwoleniem azylowym się liczą. O tym, czy liczy się czas procedury azylowej, decyduje IND.",
         "antwoorden": [
           {
             "tekst": "Tak, 5 lat lub dłużej",
@@ -9574,18 +10027,17 @@ window._NAT = {
         ]
       },
       "v2": {
-        "tekst": "Czy posiadasz ważne zezwolenie na pobyt?",
-        "uitleg": "Potrzebujesz ważnego zezwolenia na pobyt, które nie jest tymczasowe. Na przykład zezwolenia na czas nieokreślony, statusu rezydenta długoterminowego UE (EU-langdurig ingezetene) albo zezwolenia azylowego otrzymanego przed 12 czerwca 2026 r. Zawsze przedłużaj zezwolenie na czas, aby Twój pobyt był nieprzerwany.",
+        "tekst": "Czy Twoje zezwolenie na pobyt jest teraz ważne?",
+        "uitleg": "Twoje zezwolenie musi być ważne, gdy składasz wniosek o naturalizację (naturalisatie), i pozostać ważne aż do decyzji. Zawsze przedłużaj je na czas, aby Twój pobyt był nieprzerwany.",
         "antwoorden": [
           {
-            "tekst": "Tak, posiadam ważne zezwolenie na pobyt",
-            "sub": "Lub status azylanta (IND typ III, IV lub V)",
+            "tekst": "Tak, moje zezwolenie jest ważne",
             "icoon": "✓",
             "klasse": "ja",
             "volgende": "v3"
           },
           {
-            "tekst": "Nie, nie posiadam ważnego zezwolenia na pobyt",
+            "tekst": "Nie, moje zezwolenie wygasło albo go nie mam",
             "icoon": "✗",
             "klasse": "nee",
             "volgende": "r_geen_vergunning"
@@ -9654,7 +10106,7 @@ window._NAT = {
       },
       "v4a_z": {
         "tekst": "Ukończyłeś/aś trasę Z — potrzebny jest jeszcze jeden dodatkowy krok do naturalizacji",
-        "uitleg": "Ścieżka Z kończy się rozmową końcową i certyfikatem, ale do naturalizacji IND stosuje dodatkowe wymogi językowe. Istnieją trzy drogi, aby mimo to się naturalizować:<br><br><strong>Droga A — Mimo to zdać egzamin na poziomie A2</strong><br>Zdaj wszystkie egzaminy językowe na poziomie A2 (czytanie, słuchanie, pisanie, mówienie) oraz egzamin KNM. Uwaga: teraz, gdy ścieżka Z została ukończona, podejścia do egzaminu nie są już bezpłatne.<br><br><strong>Droga B — 600 godzin lekcji języka + co najmniej 3 podejścia na część</strong><br>Co najmniej 600 godzin lekcji na poziomie A2 w placówce z certyfikatem Blik op Werk i 3 podejścia na część? Wtedy DUO może wydać rekomendację wyłączenia.<br><br><strong>Droga C — 600 godzin alfabetyzacji + test DUO (€150)</strong><br>Co najmniej 600 godzin alfabetyzacji i okazuje się, że A2 jest nieosiągalny? Wtedy następuje wyłączenie poprzez test DUO (€150).<br><br><em>Możliwe w przyszłości:</em> rząd chce podnieść wymóg językowy do naturalizacji z A2 do B1. Nie zostało to jeszcze przyjęte — obecnie nadal obowiązuje A2.<br><br>💡 Omów ze swoją gminą lub VluchtelingenWerk, która droga najlepiej Ci odpowiada.",
+        "uitleg": "Ścieżka Z kończy się rozmową końcową i certyfikatem, ale do naturalizacji IND stosuje dodatkowe wymogi językowe. Istnieją trzy drogi, aby mimo to się naturalizować:<br><br><strong>Droga A — Mimo to zdać egzamin na poziomie A2</strong><br>Zdaj wszystkie egzaminy językowe na poziomie A2 (czytanie, słuchanie, pisanie, mówienie) oraz egzamin KNM. Uwaga: teraz, gdy ścieżka Z została ukończona, podejścia do egzaminu nie są już bezpłatne.<br><br><strong>Droga B — 600 godzin lekcji języka + co najmniej 3 podejścia na część</strong><br>Co najmniej 600 godzin lekcji na poziomie A2 w placówce z certyfikatem Blik op Werk i 3 podejścia na część? Wtedy DUO może wydać rekomendację wyłączenia.<br><br><strong>Droga C — 600 godzin alfabetyzacji + test DUO (€150)</strong><br>Co najmniej 600 godzin alfabetyzacji i okazuje się, że A2 jest nieosiągalny? Wtedy następuje wyłączenie poprzez test DUO (€150).<br><br><em>Możliwe w przyszłości:</em> rząd chce podnieść wymóg językowy do naturalizacji z A2 do B1. Nie zostało to jeszcze przyjęte — obecnie nadal obowiązuje A2.<br><br>💡 Omów ze swoją gminą, która droga najlepiej Ci odpowiada.",
         "antwoorden": [
           {
             "tekst": "Rozumiem — kontynuuj do pozostałych warunków",
@@ -9761,7 +10213,7 @@ window._NAT = {
       },
       "v7": {
         "tekst": "Czy jesteś gotowy/a do zrzeczenia się obecnego obywatelstwa?",
-        "uitleg": "Holandia zasadniczo nie zezwala na podwójne obywatelstwo. Wyjątek: uznani uchodźcy mogą zachować oba obywatelstwa.",
+        "uitleg": "Holandia zasadniczo nie zezwala na podwójne obywatelstwo. Są wyjątki, na przykład dla uznanych uchodźców.",
         "antwoorden": [
           {
             "tekst": "Tak, zrzeknę się obywatelstwa",
@@ -9774,7 +10226,8 @@ window._NAT = {
             "sub": "Posiadacze statusu mogą zachować podwójne obywatelstwo",
             "icoon": "✓",
             "klasse": "ja",
-            "volgende": "v8"
+            "volgende": "v8",
+            "alleenPad": "asiel"
           },
           {
             "tekst": "Nie, chcę zachować moje obywatelstwo",
@@ -9809,7 +10262,8 @@ window._NAT = {
         "icoon": "🎉",
         "titel": "Prawdopodobnie spełniasz warunki!",
         "sub": "Na podstawie Twoich odpowiedzi spełniasz główne wymagania naturalizacji. Następnym krokiem jest oficjalny wniosek w Twojej gminie.",
-        "info": "💡 Posiadacze statusu (uznani uchodźcy) zazwyczaj nie muszą zrzekać się pierwotnego obywatelstwa.",
+        "info": "💡 Masz status uznanego uchodźcy? Wtedy zwykle nie musisz zrzekać się pierwotnego obywatelstwa.",
+        "infoAlleenPad": "asiel",
         "stappen": [
           {
             "nr": 1,
@@ -9901,7 +10355,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Wniosek o azyl",
-            "tekst": "Jeśli potrzebujesz ochrony, możesz złożyć wniosek o azyl do IND."
+            "tekst": "Jeśli potrzebujesz ochrony, możesz złożyć wniosek o azyl do IND.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Zwykłe zezwolenie",
@@ -9909,29 +10364,26 @@ window._NAT = {
           },
           {
             "naam": "Pomoc prawna",
-            "tekst": "Skontaktuj się z organizacją ds. uchodźców lub adwokatem."
+            "tekst": "Skontaktuj się z adwokatem lub z punktem porad prawnych (Juridisch Loket)."
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Bezpłatne wsparcie prawne dla wnioskodawców azylowych i posiadaczy statusu."
+            "tekst": "Bezpłatne wsparcie prawne dla wnioskodawców azylowych i posiadaczy statusu.",
+            "alleenPad": "asiel"
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Skontaktuj się z VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Pomoc przez Juridisch Loket"
       },
       "r_te_kort": {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Jeszcze nie mieszkasz wystarczająco długo w Holandii",
-        "sub": "Obecnie musisz mieszkać w Holandii nieprzerwanie co najmniej 5 lat z ważnym pobytem. Od nowych przepisów azylowych z 2026 roku jest kilka rzeczy, na które warto zwrócić uwagę podczas oczekiwania. Czas oczekiwania możesz dobrze wykorzystać.",
+        "sub": "Musisz mieszkać w Holandii nieprzerwanie co najmniej 5 lat. Czas oczekiwania możesz dobrze wykorzystać.",
         "alternatieven": [
           {
             "naam": "Przedłuż zezwolenie na czas",
-            "tekst": "Nowe zezwolenia azylowe są ważne maksymalnie 3 lata; dlatego przedłużaj na czas. Jeśli powstanie \"luka pobytowa\" (verblijfsgat) — okres między dwoma zezwoleniami, w którym nie masz ważnego zezwolenia — ten czas nie liczy się jako legalny pobyt, a odliczanie 5 lat do naturalizacji może zacząć się od nowa. Dlatego złóż wniosek o przedłużenie najpóźniej w ciągu 4 tygodni po wygaśnięciu: wtedy IND nie uzna tego za lukę pobytową."
-          },
-          {
-            "naam": "Czy Twoje zezwolenie azylowe wygasa wcześniej?",
-            "tekst": "Masz 5-letnie zezwolenie na pobyt azylowy (verblijfsvergunning asiel) sprzed 12 czerwca 2026 r., które wygasa, zanim będziesz mieszkać w Holandii 5 lat? Wtedy przy przedłużeniu dostaniesz zezwolenie według nowych przepisów. Twoja droga prowadzi wtedy przez status rezydenta długoterminowego UE (EU-langdurig ingezetene), a do niego obowiązuje wymóg dochodowy."
+            "tekst": "Jeśli pojawi się okres bez ważnego zezwolenia — \"luka pobytowa\" (verblijfsgat) — ten czas się nie liczy. Odliczanie 5 lat może wtedy zacząć się od nowa. Dlatego złóż wniosek o przedłużenie na czas, najpóźniej w ciągu 4 tygodni po wygaśnięciu: wtedy IND nie uzna tego za lukę pobytową."
           },
           {
             "naam": "Okres naturalizacji: możliwe 10 lat",
@@ -9951,15 +10403,38 @@ window._NAT = {
           },
           {
             "naam": "Plan rządu (jeszcze nie jest prawem)",
-            "tekst": "Osoby z ochroną, które dwa razy otrzymały tymczasowe zezwolenie azylowe i osiągną niderlandzki na poziomie B1, mogłyby zostać obywatelami Holandii po 6 latach, nawet bez statusu rezydenta długoterminowego UE (EU-langdurig ingezetene). Dla osób, które nie mogą osiągnąć B1, będzie wyjątek. Nie ma jeszcze projektu ustawy. Dopóki takiej ustawy nie ma, obowiązują powyższe przepisy."
+            "tekst": "Osoby z ochroną, które dwa razy otrzymały tymczasowe zezwolenie azylowe i osiągną niderlandzki na poziomie B1, mogłyby zostać obywatelami Holandii po 6 latach, nawet bez statusu rezydenta długoterminowego UE (EU-langdurig ingezetene). Dla osób, które nie mogą osiągnąć B1, będzie wyjątek. Nie ma jeszcze projektu ustawy. Dopóki takiej ustawy nie ma, obowiązują powyższe przepisy.",
+            "alleenPad": "asiel"
           }
         ],
         "interneLink": {
           "naar": "r_eu_langdurig",
           "tekst": "🇪🇺 Zobacz: rezydent długoterminowy UE (stały pobyt po 5 latach)"
         },
-        "link": "https://ind.nl/en/asylum-and-family-reunification-the-migration-pact-and-other-developments/new-laws-and-regulations-for-asylum-and-family-reunification",
-        "linkTekst": "→ Zobacz nowe przepisy azylowe 2026 na ind.nl"
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ Więcej informacji na ind.nl"
+      },
+      "r_regulier_tijdelijk": {
+        "type": "wacht",
+        "icoon": "🎓",
+        "titel": "Z tym zezwoleniem nie możesz jeszcze zostać obywatelem Holandii",
+        "sub": "Do naturalizacji (naturalisatie) potrzebujesz zezwolenia na czas nieokreślony albo zezwolenia w celu, który nie jest tymczasowy. Zezwolenie na studia lub inny pobyt tymczasowy się nie liczy.",
+        "alternatieven": [
+          {
+            "naam": "Twoja sytuacja się zmienia?",
+            "tekst": "Zaczynasz na przykład pracować albo zamieszkasz z partnerem? Wtedy możesz złożyć wniosek o inne zezwolenie. Potem zrób ten test jeszcze raz."
+          },
+          {
+            "naam": "Jak liczy się Twój pobyt?",
+            "tekst": "To, czy lata z obecnym zezwoleniem liczą się do 5 lat, zależy od Twojej sytuacji. Poproś o sprawdzenie tego."
+          },
+          {
+            "naam": "Już teraz ucz się niderlandzkiego",
+            "tekst": "Do naturalizacji (naturalisatie) musisz później mieć ukończoną integrację obywatelską (inburgering). Kurs językowy pomoże już teraz."
+          }
+        ],
+        "link": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation",
+        "linkTekst": "→ Więcej informacji na ind.nl"
       },
       "r_bezig_b1": {
         "type": "route",
@@ -10058,9 +10533,9 @@ window._NAT = {
             "tekst": "600 godzin alfabetyzacji w instytucji Blik op Werk i test DUO pokazuje, że A2 jest nieosiągalne. Przyznawane jest zwolnienie. Test kosztuje 150 €."
           }
         ],
-        "info": "📞 <strong>Porada:</strong> Skonsultuj się z gminą lub VluchtelingenWerk.",
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Pomoc przez VluchtelingenWerk"
+        "info": "📞 <strong>Porada:</strong> Omów ze swoją gminą, która droga najlepiej pasuje do Twojej sytuacji.",
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Pomoc przez Juridisch Loket"
       },
       "r_geen_inburgering": {
         "type": "wacht",
@@ -10100,7 +10575,8 @@ window._NAT = {
           },
           {
             "naam": "VluchtelingenWerk",
-            "tekst": "Bezpłatna pomoc prawna dla posiadaczy statusu."
+            "tekst": "Bezpłatna pomoc prawna dla posiadaczy statusu.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Okres oczekiwania",
@@ -10111,8 +10587,8 @@ window._NAT = {
             "tekst": "Mandaty drogowe i drobne wykroczenia zazwyczaj NIE są brane pod uwagę."
           }
         ],
-        "link": "https://www.vluchtelingenwerk.nl",
-        "linkTekst": "→ Skontaktuj się z VluchtelingenWerk"
+        "link": "https://www.juridischloket.nl",
+        "linkTekst": "→ Pomoc przez Juridisch Loket"
       },
       "r_strafblad_check": {
         "type": "wacht",
@@ -10134,7 +10610,7 @@ window._NAT = {
           },
           {
             "naam": "Porady prawne",
-            "tekst": "W razie wątpliwości skonsultuj się z doradcą prawnym lub VluchtelingenWerk."
+            "tekst": "W razie wątpliwości: skonsultuj się z doradcą prawnym lub z punktem porad prawnych (Juridisch Loket)."
           }
         ],
         "link": "https://www.justis.nl/producten/vog",
@@ -10174,7 +10650,8 @@ window._NAT = {
         "alternatieven": [
           {
             "naam": "Wyjątek dla posiadaczy statusu",
-            "tekst": "Jako uznany uchodźca NIE musisz rezygnować ze swojego obywatelstwa."
+            "tekst": "Jako uznany uchodźca NIE musisz rezygnować ze swojego obywatelstwa.",
+            "alleenPad": "asiel"
           },
           {
             "naam": "Wyjątek: niemożliwe",
@@ -10212,7 +10689,7 @@ window._NAT = {
           },
           {
             "type": "amber",
-            "tekst": "⚠️ <strong>Wymóg dochodowy:</strong> musisz mieć wystarczający i trwały własny dochód oraz ubezpieczenie zdrowotne. Z zasiłkiem zwykle się to nie udaje. Uwaga: jeśli masz nowe zezwolenie na pobyt azylowy (verblijfsvergunning asiel) wydane po 12 czerwca 2026 r., potrzebujesz statusu rezydenta długoterminowego UE (EU-langdurig ingezetene), aby później móc się naturalizować. Wymóg dochodowy dotyczy więc także Twojej drogi do obywatelstwa holenderskiego."
+            "tekst": "⚠️ <strong>Wymóg dochodowy:</strong> musisz mieć wystarczający i trwały własny dochód oraz ubezpieczenie zdrowotne. Z zasiłkiem zwykle się to nie udaje. Jeśli masz zezwolenie na pobyt azylowy na czas określony (verblijfsvergunning asiel), potrzebujesz statusu rezydenta długoterminowego UE (EU-langdurig ingezetene), aby później móc się naturalizować. Wymóg dochodowy dotyczy więc także Twojej drogi do obywatelstwa holenderskiego."
           },
           {
             "type": "info",
@@ -10226,7 +10703,7 @@ window._NAT = {
           },
           {
             "nr": 2,
-            "tekst": "<strong>Nowe zezwolenie azylowe?</strong> Wtedy to jedyna droga do stałego zezwolenia, a potem do naturalizacji (naturalisatie)."
+            "tekst": "<strong>Zezwolenie azylowe na czas określony?</strong> Wtedy to jedyna droga do stałego zezwolenia, a potem do naturalizacji (naturalisatie)."
           },
           {
             "nr": 3,
@@ -10270,7 +10747,7 @@ window._NAT = {
         "type": "route",
         "icoon": "🪜",
         "titel": "Możesz zostać obywatelem Holandii — w dwóch krokach",
-        "sub": "Z nowym zezwoleniem na pobyt azylowy (verblijfsvergunning asiel) musisz najpierw zostać rezydentem długoterminowym UE (EU-langdurig ingezetene). Potem możesz złożyć wniosek o naturalizację (naturalisatie).",
+        "sub": "Z zezwoleniem na pobyt azylowy na czas określony (verblijfsvergunning asiel) musisz najpierw zostać rezydentem długoterminowym UE (EU-langdurig ingezetene). Potem możesz złożyć wniosek o naturalizację (naturalisatie).",
         "infoBoxen": [
           {
             "type": "amber",
@@ -10398,7 +10875,7 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🧭",
         "titel": "Twoja przeszkoda to teraz dochód",
-        "sub": "Z zezwoleniem na pobyt azylowy (verblijfsvergunning asiel) wydanym po 12 czerwca 2026 r. możesz zostać obywatelem Holandii tylko wtedy, gdy najpierw zostaniesz rezydentem długoterminowym UE (EU-langdurig ingezetene). Do tego potrzebujesz wystarczającego własnego dochodu. Z zasiłkiem teraz to się nie uda. Szczerze mówiąc, to duża zmiana.",
+        "sub": "Z zezwoleniem na pobyt azylowy na czas określony (verblijfsvergunning asiel) możesz zostać obywatelem Holandii tylko wtedy, gdy najpierw zostaniesz rezydentem długoterminowym UE (EU-langdurig ingezetene). Do tego potrzebujesz wystarczającego własnego dochodu. Z zasiłkiem na razie jeszcze się to nie uda. Szczerze mówiąc, to duża zmiana.",
         "alternatieven": [
           {
             "naam": "Praca lub więcej godzin",
@@ -10454,11 +10931,11 @@ window._NAT = {
         "type": "wacht",
         "icoon": "⏳",
         "titel": "Jeszcze nie mieszkasz wystarczająco długo w Holandii",
-        "sub": "Z nowym zezwoleniem na pobyt azylowy (verblijfsvergunning asiel) musisz najpierw mieszkać w Holandii 5 lat. Potem możesz zostać rezydentem długoterminowym UE (EU-langdurig ingezetene), a dopiero wtedy obywatelem Holandii. Możesz dobrze wykorzystać czas do tego momentu.",
+        "sub": "Z zezwoleniem na pobyt azylowy na czas określony (verblijfsvergunning asiel) musisz najpierw mieszkać w Holandii 5 lat. Potem możesz zostać rezydentem długoterminowym UE (EU-langdurig ingezetene), a dopiero wtedy obywatelem Holandii. Możesz dobrze wykorzystać czas do tego momentu.",
         "alternatieven": [
           {
             "naam": "Przedłużaj na czas",
-            "tekst": "Nowe zezwolenia azylowe są ważne maksymalnie 3 lata; dlatego przedłużaj na czas. Jeśli powstanie \"luka pobytowa\" (verblijfsgat) — okres między dwoma zezwoleniami, w którym nie masz ważnego zezwolenia — ten czas nie liczy się jako legalny pobyt, a odliczanie 5 lat do naturalizacji może zacząć się od nowa. Dlatego złóż wniosek o przedłużenie najpóźniej w ciągu 4 tygodni po wygaśnięciu: wtedy IND nie uzna tego za lukę pobytową."
+            "tekst": "Zezwolenia azylowe na czas określony są ważne maksymalnie 3 lata; dlatego przedłużaj na czas. Jeśli powstanie \"luka pobytowa\" (verblijfsgat) — okres między dwoma zezwoleniami, w którym nie masz ważnego zezwolenia — ten czas nie liczy się jako legalny pobyt, a odliczanie 5 lat do naturalizacji może zacząć się od nowa. Dlatego złóż wniosek o przedłużenie najpóźniej w ciągu 4 tygodni po wygaśnięciu: wtedy IND nie uzna tego za lukę pobytową."
           },
           {
             "naam": "Pracuj nad dochodem",
@@ -10486,19 +10963,19 @@ window._NAT = {
         "type": "wacht",
         "icoon": "🔍",
         "titel": "Najpierw poproś o sprawdzenie, jakie masz zezwolenie",
-        "sub": "Twoja droga do obywatelstwa holenderskiego zależy od Twojego zezwolenia. Z zezwoleniem azylowym sprzed 12 czerwca 2026 r. jest krótsza niż z nowym.",
+        "sub": "Twoja droga do obywatelstwa holenderskiego zależy od Twojego zezwolenia.",
         "alternatieven": [
           {
-            "naam": "Stare zezwolenie azylowe",
-            "tekst": "Na czas nieokreślony albo na 5 lat, otrzymane przed 12 czerwca 2026 r.: możesz się naturalizować (naturalisatie) na starych zasadach."
+            "naam": "Azyl na czas nieokreślony",
+            "tekst": "Możesz się naturalizować (naturalisatie), jeśli spełniasz pozostałe warunki."
           },
           {
-            "naam": "Nowe zezwolenie azylowe",
-            "tekst": "Otrzymane lub przedłużone 12 czerwca 2026 r. lub później: najpierw status rezydenta długoterminowego UE (EU-langdurig ingezetene), z wymogiem dochodowym, potem naturalizacja (naturalisatie)."
+            "naam": "Azyl na czas określony (3 lub 5 lat)",
+            "tekst": "Najpierw status rezydenta długoterminowego UE (EU-langdurig ingezetene), z wymogiem dochodowym, potem naturalizacja (naturalisatie). Także jeśli otrzymałeś/aś zezwolenie przed 12 czerwca 2026 r."
           },
           {
             "naam": "Inne zezwolenie",
-            "tekst": "W celu rodzinnym, pracy lub nauki: nadal obowiązują stare przepisy."
+            "tekst": "W celu rodzinnym, z partnerem lub do pracy: naturalizacja jest zwykle możliwa po 5 latach. Na studia lub inny pobyt tymczasowy — jeszcze nie."
           },
           {
             "naam": "Kto może pomóc?",
