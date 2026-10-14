@@ -491,13 +491,11 @@ window.GoedVoorbereidData = {
                 'Since when have you had this problem?',
                 'Where exactly is the pain?',
                 'What have you already tried?',
-                'Do you have any other complaints?',
                 'How are things going otherwise: work, home, sleep?',
               ] },
               { kop: 'How to prepare', type: 'lijst', items: [
                 'Think about when the problem started and what exactly you feel.',
                 'Write your problem down, or ask someone to help you with that.',
-                'Do you have more than one problem? Say so at the start, so the doctor can divide the time.',
                 'Do you take medicines? Bring them with you or write down the names.',
               ] },
               { kop: 'What you can say or ask', type: 'lijst', items: [
@@ -507,7 +505,6 @@ window.GoedVoorbereidData = {
                   eigen: 'What can I do myself?' },
                 { zeg: 'Wanneer moet ik terugkomen?',
                   eigen: 'When should I come back?' },
-                'Ask the doctor to write it down if you cannot remember it.',
               ] },
             ],
           },
@@ -562,7 +559,6 @@ window.GoedVoorbereidData = {
                 'Since when has your child had the problem?',
                 'Does your child have a fever, and how high?',
                 'Is your child eating and drinking normally?',
-                'What have you already done or given?',
               ] },
               { kop: 'How to prepare', type: 'lijst', items: [
                 'Think about when it started and what you notice about your child.',
@@ -635,7 +631,6 @@ window.GoedVoorbereidData = {
               { kop: 'What you can say or ask', type: 'lijst', items: [
                 { zeg: 'Wat kost het?', eigen: 'How much does it cost?' },
                 { zeg: 'Wanneer is het klaar?', eigen: 'When will it be ready?' },
-                { zeg: 'Moet ik een afspraak maken om het op te halen?', eigen: 'Do I need an appointment to collect it?' },
                 { zeg: 'Ik begrijp het niet, kunt u het rustiger uitleggen?', eigen: 'I do not understand, could you explain it more calmly?' },
               ] },
             ],
@@ -648,7 +643,6 @@ window.GoedVoorbereidData = {
               { kop: 'What the gemeente will ask', type: 'lijst', items: [
                 'What is going well at home, and what no longer works?',
                 'Who already helps you? (family, neighbours, people you know)',
-                'How is your health?',
                 'What would you like to be able to do yourself again?',
               ] },
               { kop: 'How to prepare', type: 'lijst', items: [
@@ -676,12 +670,10 @@ window.GoedVoorbereidData = {
                 'How are you doing at the moment?',
                 'Has anything changed in your situation? (housing, family, money, health)',
                 'Are you working, or doing something to find work?',
-                'Are you managing to get by?',
               ] },
               { kop: 'How to prepare', type: 'lijst', items: [
                 'Think about whether anything has changed since last time. Not sure? Mention it anyway.',
                 'Bring: your ID document and your bank card. Sometimes the gemeente asks for bank statements — check your invitation letter.',
-                'Did you receive a letter about this meeting? Bring it with you.',
                 'Do you have problems, such as debts? You may mention them. The gemeente can sometimes help.',
               ] },
               { kop: 'What you can say or ask', type: 'lijst', items: [
@@ -691,7 +683,6 @@ window.GoedVoorbereidData = {
                   eigen: 'What does this mean for my benefit?' },
                 { zeg: 'Wat moet ik nu doen?',
                   eigen: 'What do I need to do now?' },
-                'Ask the gemeente to put agreements on paper, so you can read them again at home.',
               ] },
             ],
           },
@@ -724,13 +715,11 @@ window.GoedVoorbereidData = {
               { kop: 'What the teacher will tell or ask', type: 'lijst', items: [
                 'How reading, maths and other subjects are going.',
                 'How your child joins in in class and gets along with other children.',
-                'Sometimes the teacher shows your child\'s work or test results.',
                 'Does your child enjoy going to school? How are things at home?',
               ] },
               { kop: 'How to prepare', type: 'lijst', items: [
                 'Ask your child beforehand: how is school going? What do you enjoy? What do you find difficult?',
                 'The time is short. Think of one or two things you definitely want to ask and write them down.',
-                'Did you receive a letter or a school report? Bring it with you.',
                 'Are you worried about something? Start with that, so there is enough time for it.',
               ] },
               { kop: 'Examples of questions you can ask', type: 'lijst', items: [
@@ -847,13 +836,11 @@ window.GoedVoorbereidData = {
                 'منذ متى عندك هذه الشكوى؟',
                 'أين يوجد الألم بالضبط؟',
                 'ماذا جرّبت حتى الآن؟',
-                'هل عندك شكاوى أخرى؟',
                 'كيف تسير أمورك عموماً: العمل، البيت، النوم؟',
               ] },
               { kop: 'كيف تستعد', type: 'lijst', items: [
                 'فكّر متى بدأت الشكوى وماذا تشعر بالضبط.',
                 'اكتب شكواك، أو اطلب من شخص أن يساعدك في ذلك.',
-                'هل عندك أكثر من شكوى؟ قل ذلك في البداية، حتى يستطيع الطبيب تقسيم الوقت.',
                 'هل تستعمل أدوية؟ أحضرها معك أو اكتب أسماءها.',
               ] },
               { kop: 'ماذا يمكنك أن تقول أو تسأل', type: 'lijst', items: [
@@ -863,7 +850,6 @@ window.GoedVoorbereidData = {
                   eigen: 'ماذا يمكنني أن أفعل بنفسي؟' },
                 { zeg: 'Wanneer moet ik terugkomen?',
                   eigen: 'متى يجب أن أعود؟' },
-                'اطلب من الطبيب أن يكتب المعلومات إذا لم تستطع حفظها.',
               ] },
             ],
           },
@@ -918,7 +904,6 @@ window.GoedVoorbereidData = {
                 'منذ متى عند طفلك هذه الشكوى؟',
                 'هل عند طفلك حرارة، وكم درجتها؟',
                 'هل يأكل طفلك ويشرب بشكل طبيعي؟',
-                'ماذا فعلت أو أعطيت حتى الآن؟',
               ] },
               { kop: 'كيف تستعد', type: 'lijst', items: [
                 'فكّر متى بدأ الأمر وما الذي تلاحظه على طفلك.',
@@ -991,7 +976,6 @@ window.GoedVoorbereidData = {
               { kop: 'ماذا يمكنك أن تقول أو تسأل', type: 'lijst', items: [
                 { zeg: 'Wat kost het?', eigen: 'كم يكلّف؟' },
                 { zeg: 'Wanneer is het klaar?', eigen: 'متى يكون جاهزاً؟' },
-                { zeg: 'Moet ik een afspraak maken om het op te halen?', eigen: 'هل يجب أن أحجز موعداً لاستلامه؟' },
                 { zeg: 'Ik begrijp het niet, kunt u het rustiger uitleggen?', eigen: 'لا أفهم، هل يمكنك أن تشرح بهدوء أكثر؟' },
               ] },
             ],
@@ -1004,7 +988,6 @@ window.GoedVoorbereidData = {
               { kop: 'ماذا ستسأل الـgemeente', type: 'lijst', items: [
                 'ما الذي يسير جيداً في البيت، وما الذي لم يعد ممكناً؟',
                 'من يساعدك الآن؟ (العائلة، الجيران، المعارف)',
-                'كيف هي صحتك؟',
                 'ما الذي تودّ أن تستطيع فعله بنفسك من جديد؟',
               ] },
               { kop: 'كيف تستعد', type: 'lijst', items: [
@@ -1032,12 +1015,10 @@ window.GoedVoorbereidData = {
                 'كيف حالك في هذه الفترة؟',
                 'هل تغيّر شيء في وضعك؟ (السكن، العائلة، المال، الصحة)',
                 'هل تعمل، أو تفعل شيئاً لإيجاد عمل؟',
-                'هل تستطيع تدبير أمورك المالية؟',
               ] },
               { kop: 'كيف تستعد', type: 'lijst', items: [
                 'فكّر هل تغيّر شيء منذ آخر مرة. غير متأكد؟ قله على أي حال.',
                 'أحضر معك: وثيقة هويتك وبطاقتك البنكية. أحياناً تطلب البلدية كشوف حساب بنكية، انظر في رسالة الدعوة.',
-                'هل وصلتك رسالة عن هذا الموعد؟ أحضرها معك.',
                 'هل عندك مشاكل، مثل ديون؟ يمكنك ذكرها. البلدية تستطيع المساعدة أحياناً.',
               ] },
               { kop: 'ماذا يمكنك أن تقول أو تسأل', type: 'lijst', items: [
@@ -1047,7 +1028,6 @@ window.GoedVoorbereidData = {
                   eigen: 'ماذا يعني هذا لإعانتي؟' },
                 { zeg: 'Wat moet ik nu doen?',
                   eigen: 'ماذا يجب أن أفعل الآن؟' },
-                'اطلب من البلدية أن تكتب الاتفاق على ورقة، حتى تستطيع قراءته في البيت.',
               ] },
             ],
           },
@@ -1080,13 +1060,11 @@ window.GoedVoorbereidData = {
               { kop: 'ماذا سيقول أو يسأل المعلم', type: 'lijst', items: [
                 'كيف تسير القراءة والحساب والمواد الأخرى.',
                 'كيف يشارك طفلك في الصف ويتعامل مع الأطفال الآخرين.',
-                'أحياناً يعرض المعلم أعمال طفلك أو نتائج اختباراته.',
                 'هل يذهب طفلك إلى المدرسة بسرور؟ كيف الأمور في البيت؟',
               ] },
               { kop: 'كيف تستعد', type: 'lijst', items: [
                 'اسأل طفلك مسبقاً: كيف تسير المدرسة؟ ما الذي يعجبك؟ ما الذي تجده صعباً؟',
                 'الوقت قصير. فكّر في أمر أو أمرين تريد بالتأكيد السؤال عنهما واكتبهما.',
-                'هل وصلتك رسالة أو تقرير مدرسي؟ أحضره معك.',
                 'هل أنت قلق من شيء؟ ابدأ به، حتى يكون هناك وقت كافٍ له.',
               ] },
               { kop: 'أمثلة على أسئلة يمكنك طرحها', type: 'lijst', items: [
@@ -1203,13 +1181,11 @@ window.GoedVoorbereidData = {
                 'Bu şikâyetin ne zamandan beri var?',
                 'Ağrı tam olarak nerede?',
                 'Şimdiye kadar ne denedin?',
-                'Başka şikâyetlerin var mı?',
                 'Genel olarak nasılsın: iş, ev, uyku?',
               ] },
               { kop: 'Nasıl hazırlanırsın', type: 'lijst', items: [
                 'Şikâyetin ne zaman başladığını ve tam olarak ne hissettiğini düşün.',
                 'Şikâyetini yaz, veya birinden bu konuda yardım iste.',
-                'Birden fazla şikâyetin mi var? Bunu başta söyle, böylece doktor zamanı bölebilir.',
                 'İlaç kullanıyor musun? Yanında getir veya isimlerini yaz.',
               ] },
               { kop: 'Ne söyleyebilir veya sorabilirsin', type: 'lijst', items: [
@@ -1219,7 +1195,6 @@ window.GoedVoorbereidData = {
                   eigen: 'Kendim ne yapabilirim?' },
                 { zeg: 'Wanneer moet ik terugkomen?',
                   eigen: 'Ne zaman geri gelmeliyim?' },
-                'Aklında tutamayacaksan doktordan yazmasını iste.',
               ] },
             ],
           },
@@ -1274,7 +1249,6 @@ window.GoedVoorbereidData = {
                 'Çocuğunun şikâyeti ne zamandan beri var?',
                 'Çocuğunun ateşi var mı, kaç derece?',
                 'Çocuğun normal yiyip içiyor mu?',
-                'Şimdiye kadar ne yaptın veya ne verdin?',
               ] },
               { kop: 'Nasıl hazırlanırsın', type: 'lijst', items: [
                 'Ne zaman başladığını ve çocuğunda ne fark ettiğini düşün.',
@@ -1347,7 +1321,6 @@ window.GoedVoorbereidData = {
               { kop: 'Ne söyleyebilir veya sorabilirsin', type: 'lijst', items: [
                 { zeg: 'Wat kost het?', eigen: 'Ne kadar tutuyor?' },
                 { zeg: 'Wanneer is het klaar?', eigen: 'Ne zaman hazır olur?' },
-                { zeg: 'Moet ik een afspraak maken om het op te halen?', eigen: 'Almak için randevu almam gerekiyor mu?' },
                 { zeg: 'Ik begrijp het niet, kunt u het rustiger uitleggen?', eigen: 'Anlamıyorum, biraz daha sakin anlatabilir misiniz?' },
               ] },
             ],
@@ -1360,7 +1333,6 @@ window.GoedVoorbereidData = {
               { kop: 'Gemeente ne soracak', type: 'lijst', items: [
                 'Evde ne iyi gidiyor, ne artık olmuyor?',
                 'Sana şu an kimler yardım ediyor? (aile, komşular, tanıdıklar)',
-                'Sağlığın nasıl?',
                 'Neyi tekrar kendin yapabilmek istersin?',
               ] },
               { kop: 'Nasıl hazırlanırsın', type: 'lijst', items: [
@@ -1388,12 +1360,10 @@ window.GoedVoorbereidData = {
                 'Şu anda nasılsın?',
                 'Durumunda bir şey değişti mi? (ev, aile, para, sağlık)',
                 'Çalışıyor musun, veya iş bulmak için bir şey yapıyor musun?',
-                'Geçinebiliyor musun?',
               ] },
               { kop: 'Nasıl hazırlanırsın', type: 'lijst', items: [
                 'Geçen seferden beri bir şey değişti mi düşün. Emin değil misin? Yine de söyle.',
                 'Yanında getir: kimlik belgen ve banka kartın. Bazen belediye hesap dökümü ister, davet mektubuna bak.',
-                'Bu görüşme hakkında bir mektup aldın mı? Yanında getir.',
                 'Borç gibi sorunların mı var? Bunları söyleyebilirsin. Belediye bazen yardım edebilir.',
               ] },
               { kop: 'Ne söyleyebilir veya sorabilirsin', type: 'lijst', items: [
@@ -1403,7 +1373,6 @@ window.GoedVoorbereidData = {
                   eigen: 'Bu benim yardımım için ne anlama geliyor?' },
                 { zeg: 'Wat moet ik nu doen?',
                   eigen: 'Şimdi ne yapmam gerekiyor?' },
-                'Belediyeden anlaşmayı kâğıda yazmasını iste, böylece evde tekrar okuyabilirsin.',
               ] },
             ],
           },
@@ -1436,13 +1405,11 @@ window.GoedVoorbereidData = {
               { kop: 'Öğretmen ne anlatacak veya soracak', type: 'lijst', items: [
                 'Okuma, matematik ve diğer derslerin nasıl gittiği.',
                 'Çocuğunun sınıfa nasıl katıldığı ve diğer çocuklarla nasıl geçindiği.',
-                'Bazen öğretmen çocuğunun çalışmalarını veya sınav sonuçlarını gösterir.',
                 'Çocuğun okula severek mi gidiyor? Evde işler nasıl?',
               ] },
               { kop: 'Nasıl hazırlanırsın', type: 'lijst', items: [
                 'Çocuğuna önceden sor: okul nasıl gidiyor? Neyi seviyorsun? Neyi zor buluyorsun?',
                 'Süre kısa. Mutlaka sormak istediğin bir veya iki şeyi düşün ve yaz.',
-                'Bir mektup veya karne aldın mı? Yanında getir.',
                 'Bir konuda endişeleniyor musun? Onunla başla, böylece ona yeterli zaman kalır.',
               ] },
               { kop: 'Sorabileceğin soru örnekleri', type: 'lijst', items: [
@@ -1904,13 +1871,11 @@ window.GoedVoorbereidData = {
                 'Відколи в тебе ця скарга?',
                 'Де саме болить?',
                 'Що ти вже пробував?',
-                'Чи є в тебе інші скарги?',
                 'Як справи загалом: робота, дім, сон?',
               ] },
               { kop: 'Як підготуватися', type: 'lijst', items: [
                 'Пригадай, коли почалася скарга і що саме ти відчуваєш.',
                 'Запиши свою скаргу, або попроси когось допомогти з цим.',
-                'Маєш більше однієї скарги? Скажи це на початку, щоб лікар міг розподілити час.',
                 'Приймаєш ліки? Візьми їх із собою або запиши назви.',
               ] },
               { kop: 'Що ти можеш сказати або запитати', type: 'lijst', items: [
@@ -1920,7 +1885,6 @@ window.GoedVoorbereidData = {
                   eigen: 'Що я можу зробити сам?' },
                 { zeg: 'Wanneer moet ik terugkomen?',
                   eigen: 'Коли мені прийти знову?' },
-                'Попроси лікаря записати, якщо не можеш запам\'ятати.',
               ] },
             ],
           },
@@ -1975,7 +1939,6 @@ window.GoedVoorbereidData = {
                 'Відколи в дитини ця скарга?',
                 'Чи є в дитини температура, і яка?',
                 'Чи їсть і п\'є дитина нормально?',
-                'Що ти вже робив або давав?',
               ] },
               { kop: 'Як підготуватися', type: 'lijst', items: [
                 'Пригадай, коли це почалося і що тебе непокоїть у дитині.',
@@ -2048,7 +2011,6 @@ window.GoedVoorbereidData = {
               { kop: 'Що ти можеш сказати або запитати', type: 'lijst', items: [
                 { zeg: 'Wat kost het?', eigen: 'Скільки це коштує?' },
                 { zeg: 'Wanneer is het klaar?', eigen: 'Коли буде готово?' },
-                { zeg: 'Moet ik een afspraak maken om het op te halen?', eigen: 'Чи потрібно записуватися, щоб забрати це?' },
                 { zeg: 'Ik begrijp het niet, kunt u het rustiger uitleggen?', eigen: 'Я не розумію, чи можете пояснити спокійніше?' },
               ] },
             ],
@@ -2061,7 +2023,6 @@ window.GoedVoorbereidData = {
               { kop: 'Що запитає gemeente', type: 'lijst', items: [
                 'Що вдома вдається добре, а що вже не виходить?',
                 'Хто вже тобі допомагає? (родина, сусіди, знайомі)',
-                'Як твоє здоров’я?',
                 'Що ти хотів би знову вміти робити сам?',
               ] },
               { kop: 'Як підготуватися', type: 'lijst', items: [
@@ -2089,12 +2050,10 @@ window.GoedVoorbereidData = {
                 'Як у тебе справи зараз?',
                 'Чи щось змінилося у твоїй ситуації? (житло, сім\'я, гроші, здоров\'я)',
                 'Ти працюєш, чи робиш щось, щоб знайти роботу?',
-                'Чи вдається зводити кінці з кінцями?',
               ] },
               { kop: 'Як підготуватися', type: 'lijst', items: [
                 'Подумай, чи щось змінилося з минулого разу. Сумніваєшся? Все одно розкажи.',
                 'Візьми з собою: документ, що посвідчує особу, і банківську картку. Іноді gemeente просить банківські виписки — подивись у листі-запрошенні.',
-                'Отримав листа про цю зустріч? Візьми його з собою.',
                 'Маєш проблеми, наприклад борги? Можеш про них сказати. Gemeente іноді може допомогти.',
               ] },
               { kop: 'Що ти можеш сказати або запитати', type: 'lijst', items: [
@@ -2104,7 +2063,6 @@ window.GoedVoorbereidData = {
                   eigen: 'Що це означає для моєї допомоги?' },
                 { zeg: 'Wat moet ik nu doen?',
                   eigen: 'Що мені тепер робити?' },
-                'Попроси gemeente записати домовленість на папері, щоб ти міг перечитати вдома.',
               ] },
             ],
           },
@@ -2137,13 +2095,11 @@ window.GoedVoorbereidData = {
               { kop: 'Що вчитель розповість або запитає', type: 'lijst', items: [
                 'Як справи з читанням, математикою та іншими предметами.',
                 'Як дитина бере участь у класі та ладнає з іншими дітьми.',
-                'Іноді вчитель показує роботи або результати тестів дитини.',
                 'Чи ходить дитина до школи із задоволенням? Як справи вдома?',
               ] },
               { kop: 'Як підготуватися', type: 'lijst', items: [
                 'Заздалегідь запитай дитину: як справи у школі? Що тобі подобається? Що для тебе складне?',
                 'Часу мало. Придумай одну-дві речі, про які точно хочеш запитати, і запиши їх.',
-                'Отримав листа або табель? Візьми з собою.',
                 'Щось тебе непокоїть? Почни з цього — тоді на це вистачить часу.',
               ] },
               { kop: 'Приклади запитань, які можеш поставити', type: 'lijst', items: [
@@ -2260,13 +2216,11 @@ window.GoedVoorbereidData = {
                 'از چه وقت این شکایت را داری؟',
                 'درد دقیقاً کجاست؟',
                 'تا حالا چه امتحان کرده‌ای؟',
-                'شکایت دیگری هم داری؟',
                 'در کل حالت چطور است: کار، خانه، خواب؟',
               ] },
               { kop: 'چطور آماده شوی', type: 'lijst', items: [
                 'فکر کن شکایت از کی شروع شد و دقیقاً چه احساس می‌کنی.',
                 'شکایتت را بنویس، یا از کسی بخواه در این کار کمکت کند.',
-                'بیشتر از یک شکایت داری؟ در شروع بگو، تا داکتر بتواند وقت را تقسیم کند.',
                 'دوا مصرف می‌کنی؟ با خود ببر یا نام‌هایشان را بنویس.',
               ] },
               { kop: 'چه می‌توانی بگویی یا بپرسی', type: 'lijst', items: [
@@ -2276,7 +2230,6 @@ window.GoedVoorbereidData = {
                   eigen: 'خودم چه می‌توانم بکنم؟' },
                 { zeg: 'Wanneer moet ik terugkomen?',
                   eigen: 'کی باید برگردم؟' },
-                'اگر نمی‌توانی به یاد بسپاری، از داکتر بخواه بنویسد.',
               ] },
             ],
           },
@@ -2331,7 +2284,6 @@ window.GoedVoorbereidData = {
                 'طفلت از چه وقت این شکایت را دارد؟',
                 'طفلت تب دارد، و چقدر بلند؟',
                 'طفلت به‌طور عادی می‌خورد و می‌نوشد؟',
-                'تا حالا چه کرده‌ای یا چه داده‌ای؟',
               ] },
               { kop: 'چطور آماده شوی', type: 'lijst', items: [
                 'فکر کن کی شروع شد و در طفلت چه چیزی به نظرت می‌رسد.',
@@ -2404,7 +2356,6 @@ window.GoedVoorbereidData = {
               { kop: 'چه می‌توانید بگویید یا بپرسید', type: 'lijst', items: [
                 { zeg: 'Wat kost het?', eigen: 'چقدر هزینه دارد؟' },
                 { zeg: 'Wanneer is het klaar?', eigen: 'کِی آماده می‌شود؟' },
-                { zeg: 'Moet ik een afspraak maken om het op te halen?', eigen: 'آیا برای گرفتن آن باید وقت بگیرم؟' },
                 { zeg: 'Ik begrijp het niet, kunt u het rustiger uitleggen?', eigen: 'متوجه نمی‌شوم، می‌شود آرام‌تر توضیح دهید؟' },
               ] },
             ],
@@ -2417,7 +2368,6 @@ window.GoedVoorbereidData = {
               { kop: 'gemeente چه خواهد پرسید', type: 'lijst', items: [
                 'در خانه چه چیزی خوب پیش می‌رود و چه چیزی دیگر نمی‌شود؟',
                 'چه کسانی همین حالا به شما کمک می‌کنند؟ (خانواده، همسایه‌ها، آشناها)',
-                'حال سلامتی‌تان چطور است؟',
                 'دوست دارید چه کاری را دوباره خودتان بتوانید انجام دهید؟',
               ] },
               { kop: 'چطور آماده شوید', type: 'lijst', items: [
@@ -2445,12 +2395,10 @@ window.GoedVoorbereidData = {
                 'در حال حاضر حالت چطور است؟',
                 'چیزی در وضعیتت تغییر کرده؟ (مسکن، خانواده، پول، صحت)',
                 'کار می‌کنی، یا کاری برای پیدا کردن کار انجام می‌دهی؟',
-                'با پولت می‌توانی زندگی را پیش ببری؟',
               ] },
               { kop: 'چطور آماده شوی', type: 'lijst', items: [
                 'فکر کن آیا از دفعه قبل چیزی تغییر کرده. مطمئن نیستی؟ به هر حال بگو.',
                 'با خود ببر: سند هویت و کارت بانکی‌ات. گاهی شاروالی صورت‌حساب بانکی می‌خواهد، در نامه دعوتت ببین.',
-                'نامه‌ای درباره این صحبت گرفته‌ای؟ با خود ببر.',
                 'مشکلی داری، مثل قرض؟ می‌توانی آن را بگویی. شاروالی گاهی می‌تواند کمک کند.',
               ] },
               { kop: 'چه می‌توانی بگویی یا بپرسی', type: 'lijst', items: [
@@ -2460,7 +2408,6 @@ window.GoedVoorbereidData = {
                   eigen: 'این برای کمک اجتماعی من چه معنایی دارد؟' },
                 { zeg: 'Wat moet ik nu doen?',
                   eigen: 'حالا چه باید بکنم؟' },
-                'از شاروالی بخواه توافق را روی کاغذ بنویسد، تا در خانه دوباره بخوانی.',
               ] },
             ],
           },
@@ -2493,13 +2440,11 @@ window.GoedVoorbereidData = {
               { kop: 'معلم چه خواهد گفت یا پرسید', type: 'lijst', items: [
                 'خواندن، ریاضی و مضامین دیگر چطور پیش می‌روند.',
                 'طفلت چطور در صنف اشتراک می‌کند و با اطفال دیگر چطور رفتار می‌کند.',
-                'گاهی معلم کارها یا نتایج امتحان طفلت را نشان می‌دهد.',
                 'طفلت با خوشی به مکتب می‌رود؟ در خانه اوضاع چطور است؟',
               ] },
               { kop: 'چطور آماده شوی', type: 'lijst', items: [
                 'از قبل از طفلت بپرس: مکتب چطور است؟ چه چیزی را دوست داری؟ چه چیزی برایت سخت است؟',
                 'وقت کم است. به یک یا دو چیز فکر کن که حتماً می‌خواهی بپرسی و آنها را بنویس.',
-                'نامه یا کارنامه‌ای گرفته‌ای؟ با خود ببر.',
                 'درباره چیزی نگران هستی؟ با آن شروع کن، تا برایش وقت کافی باشد.',
               ] },
               { kop: 'نمونه پرسش‌هایی که می‌توانی بپرسی', type: 'lijst', items: [
@@ -2616,13 +2561,11 @@ window.GoedVoorbereidData = {
                 'De când ai această problemă?',
                 'Unde exact este durerea?',
                 'Ce ai încercat deja?',
-                'Mai ai și alte probleme?',
                 'Cum îți merge în rest: munca, acasă, somnul?',
               ] },
               { kop: 'Cum te pregătești', type: 'lijst', items: [
                 'Gândește-te când a început problema și ce simți exact.',
                 'Scrie-ți problema, sau roagă pe cineva să te ajute cu asta.',
-                'Ai mai multe probleme? Spune asta la început, ca doctorul să poată împărți timpul.',
                 'Iei medicamente? Ia-le cu tine sau scrie numele lor.',
               ] },
               { kop: 'Ce poți spune sau întreba', type: 'lijst', items: [
@@ -2632,7 +2575,6 @@ window.GoedVoorbereidData = {
                   eigen: 'Ce pot face eu însumi?' },
                 { zeg: 'Wanneer moet ik terugkomen?',
                   eigen: 'Când trebuie să revin?' },
-                'Roagă doctorul să scrie, dacă nu poți ține minte.',
               ] },
             ],
           },
@@ -2687,7 +2629,6 @@ window.GoedVoorbereidData = {
                 'De când are copilul tău problema?',
                 'Are copilul febră, și cât de mare?',
                 'Mănâncă și bea copilul normal?',
-                'Ce ai făcut sau ce i-ai dat deja?',
               ] },
               { kop: 'Cum te pregătești', type: 'lijst', items: [
                 'Gândește-te când a început și ce observi la copilul tău.',
@@ -2760,7 +2701,6 @@ window.GoedVoorbereidData = {
               { kop: 'Ce poți spune sau întreba', type: 'lijst', items: [
                 { zeg: 'Wat kost het?', eigen: 'Cât costă?' },
                 { zeg: 'Wanneer is het klaar?', eigen: 'Când este gata?' },
-                { zeg: 'Moet ik een afspraak maken om het op te halen?', eigen: 'Trebuie să fac o programare ca să îl ridic?' },
                 { zeg: 'Ik begrijp het niet, kunt u het rustiger uitleggen?', eigen: 'Nu înțeleg, puteți explica mai calm?' },
               ] },
             ],
@@ -2773,7 +2713,6 @@ window.GoedVoorbereidData = {
               { kop: 'Ce va întreba gemeente', type: 'lijst', items: [
                 'Ce merge bine acasă și ce nu mai reușești?',
                 'Cine te ajută deja? (familie, vecini, cunoscuți)',
-                'Cum este sănătatea ta?',
                 'Ce ai vrea să poți face din nou singur?',
               ] },
               { kop: 'Cum te pregătești', type: 'lijst', items: [
@@ -2801,12 +2740,10 @@ window.GoedVoorbereidData = {
                 'Cum îți merge în acest moment?',
                 'S-a schimbat ceva în situația ta? (locuință, familie, bani, sănătate)',
                 'Lucrezi, sau faci ceva pentru a găsi de lucru?',
-                'Reușești să te descurci cu banii?',
               ] },
               { kop: 'Cum te pregătești', type: 'lijst', items: [
                 'Gândește-te dacă s-a schimbat ceva de data trecută. Nu ești sigur? Spune oricum.',
                 'Ia cu tine: actul de identitate și cardul bancar. Uneori primăria cere extrase de cont, verifică în scrisoarea de invitație.',
-                'Ai primit o scrisoare despre această discuție? Ia-o cu tine.',
                 'Ai probleme, cum ar fi datorii? Poți să le menționezi. Primăria poate uneori ajuta.',
               ] },
               { kop: 'Ce poți spune sau întreba', type: 'lijst', items: [
@@ -2816,7 +2753,6 @@ window.GoedVoorbereidData = {
                   eigen: 'Ce înseamnă asta pentru ajutorul meu?' },
                 { zeg: 'Wat moet ik nu doen?',
                   eigen: 'Ce trebuie să fac acum?' },
-                'Cere primăriei să pună înțelegerea pe hârtie, ca să o poți reciti acasă.',
               ] },
             ],
           },
@@ -2849,13 +2785,11 @@ window.GoedVoorbereidData = {
               { kop: 'Ce va spune sau întreba învățătorul', type: 'lijst', items: [
                 'Cum merge cititul, matematica și celelalte materii.',
                 'Cum participă copilul în clasă și cum se înțelege cu ceilalți copii.',
-                'Uneori învățătorul arată lucrări sau rezultate la teste ale copilului.',
                 'Merge copilul cu plăcere la școală? Cum e acasă?',
               ] },
               { kop: 'Cum te pregătești', type: 'lijst', items: [
                 'Întreabă-ți copilul dinainte: cum merge la școală? Ce îți place? Ce ți se pare greu?',
                 'Timpul e scurt. Gândește-te la unul sau două lucruri pe care sigur vrei să le întrebi și scrie-le.',
-                'Ai primit o scrisoare sau un carnet de note? Ia-le cu tine.',
                 'Te îngrijorează ceva? Începe cu asta, ca să fie destul timp pentru ea.',
               ] },
               { kop: 'Exemple de întrebări pe care le poți pune', type: 'lijst', items: [
@@ -2972,13 +2906,11 @@ window.GoedVoorbereidData = {
                 'Od kiedy masz tę dolegliwość?',
                 'Gdzie dokładnie boli?',
                 'Czego już próbowałeś?',
-                'Masz jeszcze inne dolegliwości?',
                 'Jak ci idzie poza tym: praca, dom, sen?',
               ] },
               { kop: 'Jak się przygotować', type: 'lijst', items: [
                 'Przypomnij sobie, kiedy dolegliwość się zaczęła i co dokładnie czujesz.',
                 'Zapisz swoją dolegliwość, albo poproś kogoś o pomoc przy tym.',
-                'Masz więcej niż jedną dolegliwość? Powiedz to na początku, żeby lekarz mógł podzielić czas.',
                 'Bierzesz leki? Weź je ze sobą lub zapisz ich nazwy.',
               ] },
               { kop: 'Co możesz powiedzieć lub zapytać', type: 'lijst', items: [
@@ -2988,7 +2920,6 @@ window.GoedVoorbereidData = {
                   eigen: 'Co mogę zrobić sam?' },
                 { zeg: 'Wanneer moet ik terugkomen?',
                   eigen: 'Kiedy mam wrócić?' },
-                'Poproś lekarza, żeby to zapisał, jeśli nie możesz zapamiętać.',
               ] },
             ],
           },
@@ -3043,7 +2974,6 @@ window.GoedVoorbereidData = {
                 'Od kiedy dziecko ma tę dolegliwość?',
                 'Czy dziecko ma gorączkę i jak wysoką?',
                 'Czy dziecko normalnie je i pije?',
-                'Co już zrobiłeś lub co podałeś?',
               ] },
               { kop: 'Jak się przygotować', type: 'lijst', items: [
                 'Przypomnij sobie, kiedy to się zaczęło i co zauważasz u dziecka.',
@@ -3116,7 +3046,6 @@ window.GoedVoorbereidData = {
               { kop: 'Co możesz powiedzieć lub zapytać', type: 'lijst', items: [
                 { zeg: 'Wat kost het?', eigen: 'Ile to kosztuje?' },
                 { zeg: 'Wanneer is het klaar?', eigen: 'Kiedy będzie gotowe?' },
-                { zeg: 'Moet ik een afspraak maken om het op te halen?', eigen: 'Czy muszę umówić się, żeby to odebrać?' },
                 { zeg: 'Ik begrijp het niet, kunt u het rustiger uitleggen?', eigen: 'Nie rozumiem, czy może pan/pani wyjaśnić spokojniej?' },
               ] },
             ],
@@ -3129,7 +3058,6 @@ window.GoedVoorbereidData = {
               { kop: 'O co zapyta gemeente', type: 'lijst', items: [
                 'Co w domu idzie dobrze, a co już się nie udaje?',
                 'Kto już ci pomaga? (rodzina, sąsiedzi, znajomi)',
-                'Jak twoje zdrowie?',
                 'Co chciałbyś znów móc robić sam?',
               ] },
               { kop: 'Jak się przygotować', type: 'lijst', items: [
@@ -3157,12 +3085,10 @@ window.GoedVoorbereidData = {
                 'Jak ci idzie w tej chwili?',
                 'Czy coś się zmieniło w twojej sytuacji? (mieszkanie, rodzina, pieniądze, zdrowie)',
                 'Pracujesz, albo robisz coś, żeby znaleźć pracę?',
-                'Czy udaje ci się związać koniec z końcem?',
               ] },
               { kop: 'Jak się przygotować', type: 'lijst', items: [
                 'Zastanów się, czy coś się zmieniło od ostatniego razu. Masz wątpliwości? I tak powiedz.',
                 'Weź ze sobą: dokument tożsamości i kartę bankową. Czasem gmina prosi o wyciągi bankowe, sprawdź w liście z zaproszeniem.',
-                'Dostałeś list o tej rozmowie? Weź go ze sobą.',
                 'Masz problemy, na przykład długi? Możesz o nich powiedzieć. Gmina czasem może pomóc.',
               ] },
               { kop: 'Co możesz powiedzieć lub zapytać', type: 'lijst', items: [
@@ -3172,7 +3098,6 @@ window.GoedVoorbereidData = {
                   eigen: 'Co to znaczy dla mojego zasiłku?' },
                 { zeg: 'Wat moet ik nu doen?',
                   eigen: 'Co mam teraz zrobić?' },
-                'Poproś gminę o zapisanie ustaleń na papierze, żebyś mógł je przeczytać w domu.',
               ] },
             ],
           },
@@ -3205,13 +3130,11 @@ window.GoedVoorbereidData = {
               { kop: 'Co nauczyciel powie lub o co zapyta', type: 'lijst', items: [
                 'Jak idzie czytanie, matematyka i inne przedmioty.',
                 'Jak dziecko uczestniczy w klasie i dogaduje się z innymi dziećmi.',
-                'Czasem nauczyciel pokazuje prace lub wyniki testów dziecka.',
                 'Czy dziecko chętnie chodzi do szkoły? Jak jest w domu?',
               ] },
               { kop: 'Jak się przygotować', type: 'lijst', items: [
                 'Zapytaj dziecko wcześniej: jak jest w szkole? Co lubisz? Co jest dla ciebie trudne?',
                 'Czasu jest mało. Wymyśl jedną lub dwie rzeczy, o które na pewno chcesz zapytać, i zapisz je.',
-                'Dostałeś list lub świadectwo? Weź je ze sobą.',
                 'Czymś się martwisz? Zacznij od tego, wtedy będzie na to dość czasu.',
               ] },
               { kop: 'Przykłady pytań, które możesz zadać', type: 'lijst', items: [
