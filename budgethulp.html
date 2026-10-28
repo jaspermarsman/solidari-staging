@@ -1623,9 +1623,11 @@ function toonNaamBedrag(id, optioneel, cb){
 // ══════════════════════════════════════════════════════
 // GESPREKSSTROOM
 // ══════════════════════════════════════════════════════
-let _bezig = false;
+let _bezig = false, _opnieuw = false;
 async function start(){
-  if (_bezig) return;
+  // Een taalwissel terwijl de opening nog loopt, gaat niet verloren: na afloop begint de chat
+  // opnieuw in de nieuwe taal, ook de AI-melding (AI Act art. 50 lid 1; PLAN 14, B-5).
+  if (_bezig) { _opnieuw = true; return; }
   _bezig = true;
   const t=T[taal];
   document.body.style.direction=(taal==='ar'||taal==='fa')?'rtl':'ltr';
@@ -1635,6 +1637,7 @@ async function start(){
   await sol('🤖 ' + aiMelding());   // AI Act art. 50 lid 1 — eerste contact
   await sol(t.welkom); await sol(t.start);
   _bezig = false;
+  if (_opnieuw) { _opnieuw = false; return start(); }
   await stap_situatie();
 }
 
@@ -2628,10 +2631,10 @@ async function roepAiAan(gemeente) {
     for (const alinea of alineas) {
       const wrap = document.createElement('div');
       wrap.className = 'bericht-sol';
-      const html = alinea
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/(https?:\/\/[^\s\]<]+)/g, '<a href="$1" target="_blank" rel="noopener">🔗 $1</a>')
-        .replace(/\n/g, '<br>');
+      // Eerst escapen en opmaken (Solidari.opmaak, PLAN 14 B-2), dan pas links: er komt geen HTML
+      // uit het model op de pagina. Een link stopt bij een geëscapet aanhalingsteken.
+      const html = Solidari.opmaak(alinea)
+        .replace(/(https?:\/\/(?:(?!&quot;|&#39;|&lt;|&gt;)[^\s<\]])+)/g, '<a href="$1" target="_blank" rel="noopener">🔗 $1</a>');
       wrap.innerHTML = `<div class="sol-avatar">☀️</div><div class="bel-sol ai-analyse">${html}</div>`;
       b.appendChild(wrap);
       await new Promise(r => setTimeout(r, 100));
