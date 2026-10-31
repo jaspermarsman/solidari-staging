@@ -81,6 +81,9 @@ a[data-lees] > .sol-a11y-knop { bottom: 4px; }
 [dir="rtl"] a[data-lees] > .sol-a11y-knop,
 [dir="rtl"] [data-lees][data-keuze] > .sol-a11y-knop { right: auto; left: 4px; }
 body.sol-a11y-luistermodus [data-lees][data-keuze] { padding-top: 46px; }
+/* De kaart om de categoriekop knipt af (overflow: hidden): het label "Nog een keer" staat daarom niet
+   op de rand maar in die strook bovenaan. */
+[data-lees][data-keuze] > .sol-a11y-tik-hint { top: 12px; transform: translateX(-50%); }
 
 .sol-a11y-knop:hover::before { background: #dcece1; }
 .sol-a11y-knop:active { transform: scale(0.94); }
@@ -330,6 +333,9 @@ body.sol-a11y-luistermodus [data-lees] {
   color: var(--tekst, #1A1A18) !important;
   box-shadow: 0 0 0 7px rgba(232, 160, 32, 0.35) !important;
 }
+/* Een opgelichte link met eigen kleuren erin (de toolkaart op index.html heeft witte tekst op donker,
+   PLAN 17): de tekst erin volgt de donkere kleur, anders staat er wit op het lichte vlak. */
+a.sol-a11y-keuze-gehoord *:not(.sol-a11y-tik-hint):not(.sol-a11y-knop):not(.sol-a11y-knop *) { color: inherit !important; }
 
 /* Label op de bovenrand van de opgelichte knop (PLAN 15, B-1 en W-G): één regel, position:absolute,
    dus de knop houdt zijn maat. Het midden van het label ligt op de rand, zoals een legend; de knoptekst
