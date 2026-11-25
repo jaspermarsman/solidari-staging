@@ -349,17 +349,35 @@ function toonAIInvoer(){
 // situatie en het gesprek. De systeemprompt en de taalregels staan in de Worker
 // (tools/worker/solidari-worker.js), niet meer op de pagina.
 
+// Foutmelding op de code van de Worker (PLAN 21, B-8): te_veel, dagplafond, en de rest "storing".
+function aiTekst(sleutel, terugval) {
+  const v = (window.Solidari && Solidari.i18n && Solidari.i18n.t) ? Solidari.i18n.t(sleutel) : '';
+  return v && v !== sleutel ? v : terugval;
+}
+function aiFoutTekst(code) {
+  if (code === 'te_veel') return aiTekst('ai-fout-te_veel', 'Je hebt vandaag veel vragen gesteld. Probeer het morgen opnieuw.');
+  if (code === 'dagplafond') return aiTekst('ai-fout-dagplafond', 'Solidari heeft vandaag het maximale aantal vragen beantwoord. Probeer het morgen opnieuw.');
+  return aiTekst('ai-fout-storing', 'Het lukt nu niet. Probeer het over een paar minuten opnieuw.');
+}
+
 // ── AI versturen ──────────────────────────────────────────────────────────────
-async function aiVerstuur(){
+function aiVerstuur(){
   const ta = document.getElementById('ai-invoer');
   if(!ta) return;
   const tekst = ta.value.trim();
   if(!tekst || aiBezig) return;
+  ta.value=''; ta.style.height='auto';
+  return aiStuur(tekst);
+}
+
+// toon: wat er in de chat komt te staan als dat iets anders is dan wat naar de AI gaat. Bij
+// "Leg het eenvoudiger uit" is dat de knoptekst; de vaste vervolgvraag gaat mee (PLAN 21, §3.3).
+async function aiStuur(tekst, toon){
+  if(!tekst || aiBezig) return;
   aiBezig=true;
   const stuur=document.getElementById('ai-stuur'); if(stuur)stuur.disabled=true;
-  ta.value=''; ta.style.height='auto';
 
-  userBericht(tekst);
+  userBericht(toon || tekst);
   aiGeschiedenis.push({role:'user', content:tekst});
   typing();
 
@@ -373,15 +391,29 @@ async function aiVerstuur(){
         berichten: aiGeschiedenis
       })
     });
-    if(!resp.ok) throw new Error('Worker '+resp.status);
-    const r = await resp.json();
-    if(r.error) throw new Error(r.error);
+    let r = {};
+    try{ r = await resp.json(); }catch(e){}
+    if(!resp.ok || r.error || !r.tekst){
+      const fout = new Error('Worker '+resp.status);
+      fout.code = r.code || 'storing';
+      throw fout;
+    }
     stopTyping();
     solBericht(window.Solidari && Solidari.opmaak ? Solidari.opmaak(r.tekst) : escapeHTML(r.tekst));   // PLAN 14 B-2
     aiGeschiedenis.push({role:'assistant', content:r.tekst});
+    // PLAN 21, B-6: "Duidelijk" en "Leg het eenvoudiger uit" onder elk AI-antwoord.
+    if(window.Solidari && Solidari.antwoordKnoppen){
+      Solidari.antwoordKnoppen(berichtenEl(), {
+        url: WORKER_URL, tool: 'gv', taal,
+        eenvoudiger: (knoptekst, vraag) => aiStuur(vraag, '🔁 ' + knoptekst),
+      });
+      scrollOnder();
+    }
   }catch(e){
     stopTyping();
-    solBericht(escapeHTML(data().ui.aiFout),'fout');
+    // Mislukt het verzoek, dan hoort de vraag niet in de geschiedenis.
+    aiGeschiedenis.pop();
+    solBericht(escapeHTML(aiFoutTekst(e.code)),'fout');
     console.error(e);
   }
   aiBezig=false;

@@ -661,3 +661,37 @@ main.sol-main-flex { display: flex; flex-direction: column; flex: 1 1 auto; min-
 .sol-a11y-vraag-nee:focus-visible { outline: 3px solid var(--amber, #E8A020); outline-offset: 2px; }
 /* Nog geen toets gebruikt (de focus kwam van het script): geen ring. */
 .sol-a11y-vraag-stil :focus-visible { outline: none; }
+
+/* ── KNOPPEN ONDER EEN AI-ANTWOORD (PLAN 21, B-6; opbouw via components.js) ── */
+.sol-antwoord-knoppen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 2px 0 10px 3rem;
+  align-self: flex-start;
+}
+[dir="rtl"] .sol-antwoord-knoppen { margin: 2px 3rem 10px 0; }
+.sol-antwoord-knop {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--groen);
+  border-radius: 999px;
+  background: var(--wit);
+  color: var(--groen);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+}
+.sol-antwoord-knop:hover { background: var(--groen-licht); }
+.sol-antwoord-knop:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.sol-antwoord-dank {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--groen-licht);
+  color: var(--groen);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}

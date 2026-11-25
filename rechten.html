@@ -394,10 +394,25 @@ async function vraagAI(berichten) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ tool: 'rechten', taal, berichten })
   });
-  if (!resp.ok) throw new Error('Worker fout: ' + resp.status);
-  const data = await resp.json();
-  if (data.error) throw new Error(data.error);
+  let data = {};
+  try { data = await resp.json(); } catch (e) {}
+  if (!resp.ok || data.error || !data.tekst) {
+    const fout = new Error('Worker fout: ' + resp.status);
+    fout.code = data.code || 'storing';
+    throw fout;
+  }
   return { tekst: data.tekst, bronnen: data.bronnen || [] };
+}
+
+// Foutmelding op de code van de Worker (PLAN 21, B-8): te_veel, dagplafond, en de rest "storing".
+function aiTekst(sleutel, terugval) {
+  const v = (window.Solidari && Solidari.i18n && Solidari.i18n.t) ? Solidari.i18n.t(sleutel) : '';
+  return v && v !== sleutel ? v : terugval;
+}
+function aiFoutTekst(code) {
+  if (code === 'te_veel') return aiTekst('ai-fout-te_veel', 'Je hebt vandaag veel vragen gesteld. Probeer het morgen opnieuw.');
+  if (code === 'dagplafond') return aiTekst('ai-fout-dagplafond', 'Solidari heeft vandaag het maximale aantal vragen beantwoord. Probeer het morgen opnieuw.');
+  return aiTekst('ai-fout-storing', 'Het lukt nu niet. Probeer het over een paar minuten opnieuw.');
 }
 
 function toonBronnen(bronnen) {
@@ -406,7 +421,10 @@ function toonBronnen(bronnen) {
   wrap.className = 'bronnen';
   const label = document.createElement('div');
   label.className = 'bronnen-label';
-  label.textContent = '🔍 Bronnen';
+  const lt = document.createElement('span');
+  lt.setAttribute('data-i18n', 'ai-bronnen');
+  lt.textContent = aiTekst('ai-bronnen', 'Bronnen');
+  label.append('🔍 ', lt);
   wrap.appendChild(label);
   bronnen.slice(0, 4).forEach(b => {
     const a = document.createElement('a');
@@ -421,13 +439,15 @@ function toonBronnen(bronnen) {
 }
 
 // ── Stuur bericht ─────────────────────────────────────────────────────────
-async function stuurBericht(tekst) {
+// toon: wat er in de chat komt te staan als dat iets anders is dan wat naar de AI gaat. Bij
+// "Leg het eenvoudiger uit" is dat de knoptekst; de vaste vervolgvraag gaat mee (PLAN 21, §3.3).
+async function stuurBericht(tekst, toon) {
   if (bezig || !tekst.trim()) return;
   bezig = true;
   document.getElementById('stuur-btn').disabled = true;
   document.getElementById('situatie-kaartjes')?.remove();
 
-  voegGebruikerBericht(tekst);
+  voegGebruikerBericht(toon || tekst);
   geschiedenis.push({ role: 'user', content: tekst });
 
   toonTyping();
@@ -442,9 +462,20 @@ async function stuurBericht(tekst) {
     voegAILabel(document.getElementById('berichten') || document.querySelector('.berichten'));   // AI Act art. 50 lid 4
     geschiedenis.push({ role: 'assistant', content: tekst });
     toonBronnen(bronnen);
+    // PLAN 21, B-6: "Duidelijk" en "Leg het eenvoudiger uit" onder elk AI-antwoord.
+    if (window.Solidari && Solidari.antwoordKnoppen) {
+      Solidari.antwoordKnoppen(document.getElementById('berichten'), {
+        url: WORKER_URL, tool: 'rechten', taal,
+        eenvoudiger: (knoptekst, vraag) => stuurBericht(vraag, '🔁 ' + knoptekst),
+      });
+      scrollOnder();
+    }
   } catch (e) {
     verwijderTyping();
-    voegSolBericht(T[taal].fout, 'waarschuwing');
+    // Mislukt het verzoek, dan hoort de vraag niet in de geschiedenis: anders staan er bij de
+    // volgende poging twee gebruikersberichten achter elkaar.
+    geschiedenis.pop();
+    voegSolBericht(aiFoutTekst(e.code), 'waarschuwing');
     console.error(e);
   }
 

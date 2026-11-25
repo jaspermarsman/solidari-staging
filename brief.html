@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="spraak.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* PLAN 21, B-16: --rood en --rood-licht waren nergens gedefinieerd, dus de banner "hoog" was
+       niet rood. --rood is het rood van de testbalk in components.css; --rood-licht is daar een
+       lichte tint van. Contrast van --rood op --rood-licht: 5,6:1. */
+    :root { --rood: #B4231F; --rood-licht: #FBEAE9; }
     html { scroll-behavior: smooth; }
     body {
       background: var(--wit);
@@ -1414,9 +1418,12 @@ function toonResultaat(data, taal) {
 
   // Onderaan: wat niet goed te lezen was
   const onzeker = data.twijfel_code === 'deadline_onzeker';
-  if (onzeker || gevuld(data.twijfel)) {
+  // PLAN 21, B-14: de backend heeft een weggehaald gegeven ("[REKENINGNUMMER]") uit de uitleg gehaald.
+  const gegevenWeg = data.twijfel_code === 'gegeven_weggehaald';
+  if (onzeker || gegevenWeg || gevuld(data.twijfel)) {
     const { sec, body } = maakBlok('twijfel', '❓', 'brief-twijfel', taal);
     if (onzeker) body.appendChild(maakMelding('brief-deadline-onzeker'));
+    if (gegevenWeg) body.appendChild(maakMelding('brief-gegeven-weg'));
     if (gevuld(data.twijfel)) {
       const t = document.createElement('div');
       t.setAttribute('data-lees', '');

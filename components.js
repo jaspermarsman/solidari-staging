@@ -897,8 +897,10 @@
   // ── Eenvoudige opmaak van AI-antwoorden (PLAN 14, B-2) ─────────────────
   // Eerst escapen, dan pas opmaken: er komt nooit HTML uit het model op de pagina.
   // Alleen **vet**, *cursief* (PLAN 15, B-4), regels met "- ", "• " of "* " als lijst, en lege
-  // regels als nieuwe alinea. Geen links en geen koppen. De uitvoer bevat geen regeleinden, want de
-  // chatballonnen hebben white-space:pre-wrap.
+  // regels als nieuwe alinea. Geen links. Een regel die met #, ## of ### begint wordt een vette
+  // regel, en regels die met "1." of "1)" beginnen worden een genummerde lijst (PLAN 21, B-5): het
+  // nummer van het model blijft staan (value), ook als de lijst over alinea's verdeeld is. De
+  // uitvoer bevat geen regeleinden, want de chatballonnen hebben white-space:pre-wrap.
   // In een RTL-pagina (of met opties.dir 'rtl') komt een citaat tussen aanhalingstekens, met de
   // leestekens direct erna, in <bdi>: dan staan punt en aanhalingsteken van een Nederlandse zin aan
   // de goede kant (PLAN 15, B-5). In LTR verandert er niets.
@@ -914,23 +916,92 @@
     const richting = dir === 'rtl' ? s => s.replace(CITAAT, '<bdi>$&</bdi>') : s => s;
     const regel = s => richting(cursief(vet(esc(s))));
     const LIJST = /^[-•*]\s+/;
+    const KOP = /^#{1,3}\s+(.*?)\s*#*$/;
+    const GENUMMERD = /^(\d{1,3})[.)]\s+/;
+    // Een kop is al vet: sterretjes van het model eromheen gaan weg.
+    const kop = s => '<p><strong>' + richting(cursief(esc(s.replace(/\*\*/g, '')))) + '</strong></p>';
     const blokken = String(tekst == null ? '' : tekst).replace(/\r\n?/g, '\n')
       .split(/\n[ \t]*\n/).map(b => b.split('\n').map(r => r.trim()).filter(Boolean)).filter(b => b.length);
     let html = '';
     blokken.forEach((regels, i) => {
       if (i) html += '<span style="display:block;height:.6em" aria-hidden="true"></span>';
-      let tekstRegels = [], items = [];
+      let tekstRegels = [], items = [], nummers = [];
       const sluitTekst = () => { if (tekstRegels.length) html += '<p>' + tekstRegels.join('<br>') + '</p>'; tekstRegels = []; };
       const sluitLijst = () => { if (items.length) html += '<ul style="padding-inline-start:1.3em">' + items.map(x => '<li>' + x + '</li>').join('') + '</ul>'; items = []; };
+      const sluitNummers = () => { if (nummers.length) html += '<ol style="padding-inline-start:1.6em">' + nummers.map(x => '<li value="' + x[0] + '">' + x[1] + '</li>').join('') + '</ol>'; nummers = []; };
       regels.forEach(r => {
-        if (LIJST.test(r)) { sluitTekst(); items.push(regel(r.replace(LIJST, ''))); }
-        else { sluitLijst(); tekstRegels.push(regel(r)); }
+        const k = KOP.exec(r), n = GENUMMERD.exec(r);
+        if (k && k[1]) { sluitTekst(); sluitLijst(); sluitNummers(); html += kop(k[1]); }
+        else if (n) { sluitTekst(); sluitLijst(); nummers.push([Number(n[1]), regel(r.replace(GENUMMERD, ''))]); }
+        else if (LIJST.test(r)) { sluitTekst(); sluitNummers(); items.push(regel(r.replace(LIJST, ''))); }
+        else { sluitLijst(); sluitNummers(); tekstRegels.push(regel(r)); }
       });
-      sluitTekst(); sluitLijst();
+      sluitTekst(); sluitLijst(); sluitNummers();
     });
     return html;
   }
   Solidari.opmaak = opmaak;
+
+  // ── De knoppen onder een AI-antwoord (PLAN 21, B-6 en B-7) ─────────────
+  // Solidari.antwoordKnoppen(ouder, { url, tool, taal, eenvoudiger, nietDuidelijk })
+  //   url:           de Worker (zonder pad); het signaal gaat naar url + '/api/signaal'
+  //   tool, taal:    'rechten' | 'gv' | 'budget' en de taalcode
+  //   eenvoudiger:   functie; dan komt de knop "Leg het eenvoudiger uit" erbij. Eén keer per antwoord.
+  //   nietDuidelijk: true; dan komt de knop "Niet duidelijk" erbij (Budgethulp: daar is geen gesprek)
+  // Het signaal bevat alleen tool, taal en soort: geen tekst en niets over de gebruiker. Mislukt het
+  // versturen, dan merkt de gebruiker daar niets van. De knoppen zijn keuzeknoppen (data-keuze): in
+  // de voorleesstand twee tikken, zoals alle keuzes.
+  function antwoordKnoppen(ouder, opties) {
+    const o = opties || {};
+    if (!ouder) return null;
+    const rij = document.createElement('div');
+    rij.className = 'sol-antwoord-knoppen';
+    const signaal = (soort) => {
+      try {
+        fetch(String(o.url || '').replace(/\/$/, '') + '/api/signaal', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tool: o.tool, taal: o.taal, soort: soort }),
+        }).catch(() => {});
+      } catch (e) {}
+    };
+    const knop = (emoji, sleutel, terugval, soort, klik) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sol-antwoord-knop';
+      b.setAttribute('data-keuze', '');
+      b.setAttribute('data-soort', soort);
+      const e = document.createElement('span');
+      e.textContent = emoji + ' ';
+      const t = document.createElement('span');
+      t.setAttribute('data-i18n', sleutel);
+      t.textContent = tr(sleutel, terugval);
+      b.appendChild(e); b.appendChild(t);
+      b.addEventListener('click', () => { signaal(soort); klik(b, t.textContent); });
+      rij.appendChild(b);
+      return b;
+    };
+    const dank = () => {
+      rij.textContent = '';
+      const d = document.createElement('span');
+      d.className = 'sol-antwoord-dank';
+      d.setAttribute('data-i18n', 'ai-dank');
+      d.setAttribute('role', 'status');
+      d.textContent = tr('ai-dank', 'Dank je.');
+      rij.appendChild(d);
+    };
+    knop('👍', 'ai-duidelijk', 'Duidelijk', 'duidelijk', dank);
+    if (typeof o.eenvoudiger === 'function') {
+      knop('🔁', 'ai-eenvoudiger', 'Leg het eenvoudiger uit', 'eenvoudiger', (b, tekst) => {
+        b.remove();
+        o.eenvoudiger(tekst, tr('ai-eenvoudiger-vraag',
+          'Leg je laatste antwoord opnieuw uit. Eenvoudiger: kortere zinnen, makkelijke woorden, maximaal 80 woorden. Geen nieuwe informatie.'));
+      });
+    }
+    if (o.nietDuidelijk) knop('👎', 'ai-niet-duidelijk', 'Niet duidelijk', 'niet_duidelijk', dank);
+    ouder.appendChild(rij);
+    return rij;
+  }
+  Solidari.antwoordKnoppen = antwoordKnoppen;
 
   // ── Init ───────────────────────────────────────────────────────────────
   function init() {

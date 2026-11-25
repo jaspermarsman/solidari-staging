@@ -194,6 +194,11 @@
     .ai-laden-dots span:nth-child(3){animation-delay:0.4s;}
 
     @media(max-width:480px){.nav-midden{display:none;}.chat-wrap{padding:0 0.6rem;}}
+    /* Bronnen onder het AI-advies (PLAN 21, B-3), zelfde vorm als rechten.html */
+    .bronnen{margin-top:6px;padding:8px 12px;background:var(--groen-licht);border:1px solid rgba(45,90,61,0.15);border-radius:10px;font-size:0.875rem;color:var(--tekst-zacht);align-self:flex-start;max-width:88%;}
+    .bronnen-label{font-weight:600;color:var(--groen);margin-bottom:4px;}
+    .bronnen a{color:var(--groen);text-decoration:none;display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .bronnen a:hover{text-decoration:underline;}
     @media print{nav,.invoer-zone,.res-acties{display:none;}}
   </style>
 </head>
@@ -2395,6 +2400,21 @@ function downloadPDF(){
       });
       y+=4;
       doc.setTextColor(...Li); doc.setFontSize(6.5); doc.setFont('helvetica','italic'); doc.text(t.nibud_bron,W/2,y,{align:'center'}); y+=8;
+      // Bronnen van het AI-advies (PLAN 21, B-3): de adressen, zodat de begeleider ze kan nakijken.
+      // Alleen als de analyse gedaan is. De titel valt weg in een schrift dat jsPDF niet kent.
+      const pdfBronnen = (d.ai_bronnen || []).slice(0, 4);
+      if (pdfBronnen.length) {
+        if (y > 250) { doc.addPage(); y = 20; }
+        doc.setTextColor(...G); doc.setFontSize(8); doc.setFont('helvetica','bold');
+        doc.text(pdfTekst(aiTekst('ai-bronnen','Bronnen')) || 'Bronnen', M, y); y += 5;
+        doc.setFont('helvetica','normal'); doc.setFontSize(7);
+        pdfBronnen.forEach(x => {
+          const titel = pdfTekst(x.titel || '');
+          if (titel) { doc.setTextColor(...Te); doc.text(titel, M, y, {maxWidth:CW}); y += 3.6; }
+          doc.setTextColor(...Za); doc.text(pdfTekst(x.url), M, y, {maxWidth:CW}); y += 5;
+        });
+        y += 3;
+      }
       doc.setTextColor(...Li); doc.setFontSize(6); doc.text('solidari.nl  ·  '+t.disclaimer.replace(/<[^>]*>/g,''),W/2,285,{align:'center',maxWidth:CW});
 
       const pdfData = doc.output('datauristring');
@@ -2447,10 +2467,40 @@ function toonGemeenteInvoer() {
   scrollNaar();
 }
 
+// Hetzelfde patroon als de Worker (leesAiVerzoek): alleen letters, spaties, - ' en ., max 40.
+const GEMEENTE_PATROON = /^[\p{L}\p{M} .'-]+$/u;
+function aiTekst(sleutel, terugval) {
+  const v = (window.Solidari && Solidari.i18n && Solidari.i18n.t) ? Solidari.i18n.t(sleutel) : '';
+  return v && v !== sleutel ? v : terugval;
+}
+// Foutmelding op de code van de Worker (PLAN 21, B-8): te_veel, dagplafond, en de rest "storing".
+function aiFoutTekst(code) {
+  if (code === 'te_veel') return aiTekst('ai-fout-te_veel', 'Je hebt vandaag veel vragen gesteld. Probeer het morgen opnieuw.');
+  if (code === 'dagplafond') return aiTekst('ai-fout-dagplafond', 'Solidari heeft vandaag het maximale aantal vragen beantwoord. Probeer het morgen opnieuw.');
+  return aiTekst('ai-fout-storing', 'Het lukt nu niet. Probeer het over een paar minuten opnieuw.');
+}
+
 async function verwerkGemeente() {
   const inp = document.getElementById('gemeente-inp');
   const gemeente = inp ? inp.value.trim() : '';
   if (!gemeente) return;
+  // B-12: een naam met een komma, cijfer of haakje gaat niet naar de Worker. De melding staat
+  // onder het veld; het veld blijft staan.
+  const oud = document.getElementById('gemeente-fout');
+  if (oud) oud.remove();
+  if (gemeente.length > 40 || !GEMEENTE_PATROON.test(gemeente)) {
+    const fout = document.createElement('p');
+    fout.id = 'gemeente-fout';
+    fout.setAttribute('role', 'alert');
+    fout.setAttribute('data-i18n', 'ai-fout-gemeente');
+    fout.style.cssText = 'margin:8px 2px 0;font-size:0.9375rem;color:#fff;';
+    fout.textContent = aiTekst('ai-fout-gemeente', 'Typ alleen de naam van je gemeente, bijvoorbeeld Apeldoorn.');
+    inp.closest('.gemeente-wrap').parentNode.appendChild(fout);
+    inp.setAttribute('aria-invalid', 'true');
+    inp.setAttribute('aria-describedby', 'gemeente-fout');
+    inp.focus();
+    return;
+  }
   aiGemeente = gemeente;
   verbergInvoer();
   user(gemeente);
@@ -2528,17 +2578,18 @@ async function roepAiAan(gemeente) {
   b.appendChild(laadDiv);
   scrollNaar();
 
-  // Gerichte prompt — max 3 web searches om timeout te vermijden
-  // Knelpunten bepalen welke searches het meest relevant zijn
+  // De zoekfocus (max 3) en of er kinderen zijn gaan mee naar de Worker; die zet ze in de
+  // prompt (PLAN 21, B-2). Knelpunten bepalen welke zoekopdrachten het meest relevant zijn.
   const d = window._pdf || {};
   const knelpunten = [];
   if (d.saldo < -50 || d.schuld > 0) knelpunten.push('schuldhulpverlening');
   if (!d.huurtoesl || d.huurtoesl === 0) knelpunten.push('bijzondere bijstand');
   if (d.bood < 150) knelpunten.push('voedselbank');
 
-  const zoekFocus = knelpunten.length > 0
-    ? knelpunten.join(', ')
-    : 'bijzondere bijstand, voedselbank, minimaregelingen';
+  const zoekfocus = knelpunten.length > 0
+    ? knelpunten.slice(0, 3)
+    : ['bijzondere bijstand', 'voedselbank', 'minimaregelingen'];
+  const kinderen = d.sit === 'eenouder' || d.sit === 'gezin';
 
   // Timeout via Promise.race (AbortController werkt niet in sandboxed iframe)
   // API_BASE en ANALYSE_URL zijn globaal gedefinieerd bovenaan het script (D-27: centrale Worker)
@@ -2547,7 +2598,7 @@ async function roepAiAan(gemeente) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        tool: 'budget', taal, gemeente,
+        tool: 'budget', taal, gemeente, zoekfocus, kinderen,
         bericht: budgetContext
       })
     });
@@ -2561,16 +2612,9 @@ async function roepAiAan(gemeente) {
     laadDiv.remove();
 
     if (!response.ok || data.error) {
-      // De Worker geeft { error: '<tekst>', type } terug; error is een string, geen object.
-      // 429 (te veel verzoeken), 502 (geen antwoord of weigering) en 529 (overbelast) zijn
-      // tijdelijk: dan een rustige "even druk"-melding (PLAN 13 fase 3).
-      const druk = [429, 502, 529].includes(response.status) ||
-                   ['overloaded_error', 'rate_limit_error'].includes(data.type);
-      const fout = typeof data.error === 'string' ? data.error : (data.error && data.error.message);
-      const msg = druk
-        ? 'De AI-dienst is even druk. Probeer het over een minuut opnieuw.'
-        : 'Fout bij AI-analyse: ' + (fout || 'onbekend');
-      await sol(msg, 'waarschuwing');
+      // De Worker geeft { error, code } terug. De melding kiezen we op de code (PLAN 21, B-8),
+      // in de taal van de site; de Nederlandse tekst van de Worker tonen we niet.
+      await sol(aiFoutTekst(data.code), 'waarschuwing');
       return;
     }
 
@@ -2579,7 +2623,7 @@ async function roepAiAan(gemeente) {
       (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
 
     if (!tekst) {
-      await sol('De analyse gaf geen resultaat. Probeer het opnieuw.', 'waarschuwing');
+      await sol(aiFoutTekst('storing'), 'waarschuwing');
       return;
     }
 
@@ -2597,10 +2641,19 @@ async function roepAiAan(gemeente) {
       await new Promise(r => setTimeout(r, 100));
     }
     voegAILabel(b);                       // AI Act art. 50 lid 4
+    // PLAN 21, B-3: maximaal 4 bronnen uit de zoekresultaten, zodat de begeleider het kan nakijken.
+    const bronnen = (Array.isArray(data.bronnen) ? data.bronnen : [])
+      .filter(x => x && typeof x.url === 'string' && /^https?:\/\//i.test(x.url)).slice(0, 4);
+    toonBronnen(b, bronnen);
+    // PLAN 21, B-6: geen gesprek hier, dus alleen "Duidelijk" en "Niet duidelijk".
+    if (window.Solidari && Solidari.antwoordKnoppen) {
+      Solidari.antwoordKnoppen(b, { url: API_BASE, tool: 'budget', taal: taal.toUpperCase(), nietDuidelijk: true });
+    }
     scrollNaar();
 
     window._pdf.gemeente = gemeente;
     window._pdf.ai_tekst = tekst;
+    window._pdf.ai_bronnen = bronnen;
 
     // Excel knop met data-attribuut (geen string-escape issues)
     const updateWrap = document.createElement('div');
@@ -2613,7 +2666,11 @@ async function roepAiAan(gemeente) {
     excelBtn.addEventListener('click', () => downloadExcelMetGemeente(gemeente));
     const inner = document.createElement('div');
     inner.style.cssText = 'background:#0F2318;border-radius:14px;padding:0.8rem 1.2rem;';
-    inner.innerHTML = `<p style="font-size:0.875rem;color:rgba(255,255,255,0.65);margin-bottom:8px;">📊 Hulp in ${gemeente} is toegevoegd als tabblad aan je Excel.</p>`;
+    // De naam gaat als platte tekst de pagina in (B-12), niet als HTML.
+    const regel = document.createElement('p');
+    regel.style.cssText = 'font-size:0.875rem;color:rgba(255,255,255,0.65);margin-bottom:8px;';
+    regel.textContent = '📊 Hulp in ' + gemeente + ' is toegevoegd als tabblad aan je Excel.';
+    inner.appendChild(regel);
     inner.appendChild(excelBtn);
     updateWrap.appendChild(inner);
     b.appendChild(updateWrap);
@@ -2622,13 +2679,31 @@ async function roepAiAan(gemeente) {
   } catch (err) {
     if (laadDiv.parentNode) laadDiv.remove();
     console.error('AI fout:', err);
-    if (err.message === 'TIMEOUT') {
-      await sol('De analyse duurde te lang (45 sec). Probeer opnieuw.', 'waarschuwing');
-    } else {
-      const msg = 'Verbinding met AI-analyse mislukt. Controleer of de API-server actief is (' + API_BASE + ').';
-      await sol(msg, 'waarschuwing');
-    }
+    await sol(aiFoutTekst('storing'), 'waarschuwing');
   }
+}
+
+// Bronnen onder het advies, in dezelfde vorm als toonBronnen in rechten.html (PLAN 21, B-3).
+function toonBronnen(ouder, bronnen) {
+  if (!bronnen || bronnen.length === 0) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'bronnen';
+  const label = document.createElement('div');
+  label.className = 'bronnen-label';
+  const lt = document.createElement('span');
+  lt.setAttribute('data-i18n', 'ai-bronnen');
+  lt.textContent = aiTekst('ai-bronnen', 'Bronnen');
+  label.append('🔍 ', lt);
+  wrap.appendChild(label);
+  bronnen.forEach(x => {
+    const a = document.createElement('a');
+    a.href = x.url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = x.titel || x.url;
+    wrap.appendChild(a);
+  });
+  ouder.appendChild(wrap);
 }
 
 function downloadExcelMetGemeente(gemeente) {
@@ -2700,9 +2775,15 @@ function downloadExcelMetGemeente(gemeente) {
         const schoon = r.replace(/\*\*/g, '').replace(/\[bron:.*?\]/g, '').trim();
         if (schoon.length > 5) hulpData.push({ [t.ai_kolom_regeling]: schoon, [t.ai_kolom_contact]: '' });
       });
+      // Bronnen (PLAN 21, B-3): titel links, adres rechts.
+      if (hulpData.length > 0 && (d.ai_bronnen || []).length > 0) {
+        hulpData.push({ [t.ai_kolom_regeling]: '', [t.ai_kolom_contact]: '' });
+        hulpData.push({ [t.ai_kolom_regeling]: aiTekst('ai-bronnen', 'Bronnen'), [t.ai_kolom_contact]: '' });
+        d.ai_bronnen.forEach(x => hulpData.push({ [t.ai_kolom_regeling]: x.titel || x.url, [t.ai_kolom_contact]: x.url }));
+      }
       if (hulpData.length > 0) {
         const ws3 = XLSX.utils.json_to_sheet(hulpData);
-        ws3['!cols'] = [{ wch: 55 }, { wch: 30 }];
+        ws3['!cols'] = [{ wch: 55 }, { wch: 45 }];
         const tabNaam = (t.ai_tab_hulp + ' ' + gemeente).substring(0, 31);
         XLSX.utils.book_append_sheet(WB, ws3, tabNaam);
       }
